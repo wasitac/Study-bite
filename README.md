@@ -54,3 +54,37 @@ STS3
     mybatis-spring 2.1.2
     
     mysql 8.0.22
+
+## 폴더 구조
+### backend
+```
+─himedia
+    └─project
+        └─studybite
+            ├─controller
+            │      CourseController.java
+            │      UserController.java
+            │
+            ├─domain
+            │      Content.java
+            │      Course.java
+            │      News.java
+            │      Notice.java
+            │      Qna.java
+            │      User.java
+            │      UserCourse.java
+            │
+            ├─repository
+            │      ContentRepository.java
+            │      CourseRepository.java
+            │      NewsRepository.java
+            │      NoticeRepository.java
+            │      QnaRepository.java
+            │      UserCourseRepository.java
+            │      UserRepository.java
+            │
+            └─service
+                    CourseService.java
+                    UserCourseService.java
+                    UserService.java
+```
