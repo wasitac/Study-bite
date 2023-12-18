@@ -1,0 +1,16 @@
+/* Show it's not fixed to the top */
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+  	min-height: 75rem;
+}
+.btn {
+	font-weight: bold;
+	background-color: #CDDCFE;
+}
+.info {
+	color: #2563eb;
+	margin: 40px 0 20px 0;
+}
+.infoImage {
+	text-align: center;
+}
