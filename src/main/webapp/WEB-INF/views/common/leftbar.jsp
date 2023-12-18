@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%@ include file="./url.jsp"%>
+<%-- <link href="${resPath}/css/leftbar.css" rel="stylesheet"> --%>
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
@@ -11,25 +12,25 @@
       <li class="nav-item">
         <a href="#" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Home
+          대시보드
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Dashboard
+          수강과목
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
+          내 정보
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
+          공지사항
         </a>
       </li>
       <li>

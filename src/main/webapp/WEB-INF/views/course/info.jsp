@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/sidebar.jsp"%>
+	<%@ include file="../common/leftbar.jsp"%>
 	<div class="container mt-5 ms-5 ">
 		<%@ include file="../common/courseTitle.jsp" %>
 		<div>

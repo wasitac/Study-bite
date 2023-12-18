@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/sidebar.jsp"%>
+	<%@ include file="../common/leftbar.jsp"%>
 
 </body>
 </html>

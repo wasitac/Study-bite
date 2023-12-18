@@ -39,7 +39,7 @@
 				</p>
 			</div>
 		</div>
-		<%@include file="rightbar.jsp"%>
+		<%@include file="../common/rightbar.jsp"%>
 	</div>
 </body>
 </html>

@@ -7,8 +7,6 @@ import lombok.Setter;
 @Setter
 public class User {
 	private Long userId;
-//	현재 erd에 password 없음
-//	private String password;
 	private String userCategory;
 	private String userName;
 	private String email;

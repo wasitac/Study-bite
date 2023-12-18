@@ -3,22 +3,14 @@
 <!DOCTYPE html>
 
 <html lang="ko" data-bs-theme="auto">
-  <head><script src="/docs/5.3/assets/js/color-modes.js"></script>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>로그인</title>
 	<%@ include file="./common/url.jsp"%>
 	<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="${resPath}/css/sign-in.css" rel="stylesheet">
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 	<main class="form-signin w-100 m-auto">
-	  <form action="">
+	  <form action="${context}" method="post">
 	    <img class="mb-4 cropping" src="${resPath}/img/logo.png" alt="studybite" width="300">
 	    <div class="form-floating">
 	    	<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
