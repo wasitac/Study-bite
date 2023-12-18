@@ -31,6 +31,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/fullstack/program/sts-bundle/sts-3.9.18.RELEASE/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk-11.0.16.1/lombok.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

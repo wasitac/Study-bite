@@ -30,7 +30,7 @@ public class UserController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
 	
 }
