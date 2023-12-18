@@ -12,9 +12,7 @@
     <meta name="generator" content="Hugo 0.118.2">
     <title>Signin Template · Bootstrap v5.3</title>
 	<%@ include file="./common/url.jsp"%>
-<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
-
-    
+	<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${resPath}/css/sign-in.css" rel="stylesheet">
   </head>
@@ -34,7 +32,7 @@
 	  		<button class="btn btn-primary w-50 py-2" type="submit">로그인</button>
 		</div>
 		<div class="text-center">
-			<a href="/">비밀번호를 잊어버렸어요</a>
+			<a href="/">비밀번호를 찾기</a>
 		</div>
 	  </form>
 	</main>
