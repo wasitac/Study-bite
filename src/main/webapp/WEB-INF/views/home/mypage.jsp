@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/Study-bite/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
