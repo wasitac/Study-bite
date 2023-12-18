@@ -31,7 +31,11 @@ public class UserController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+<<<<<<< HEAD
 		return "home/rightbar";
+=======
+		return "index";
+>>>>>>> c16f8a5f4ffdea052419516b8de6123673db9942
 	}
 	
 	@GetMapping("/home")
