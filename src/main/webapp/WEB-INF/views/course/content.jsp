@@ -17,6 +17,11 @@
 </head>
 <body>
 	<%@ include file="../common/leftbar.jsp"%>
-
+	<h2 class= info>강의 목록</h2>
+	<hr>
+	<h3>강의 제목</h3>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/AoMv0SIjZL8?si=ZJqn5fd7im1yyETI" title="YouTube video player" 
+		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	
 </body>
 </html>

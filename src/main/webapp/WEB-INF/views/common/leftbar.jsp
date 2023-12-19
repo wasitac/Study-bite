@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ include file="./url.jsp"%>
 <%-- <link href="${resPath}/css/leftbar.css" rel="stylesheet"> --%>
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 position-fixed top-0 start-0 vh-100 w-100 bg-body-tertiary" style="max-width:280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-4">Sidebar</span>

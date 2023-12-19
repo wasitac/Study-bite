@@ -8,16 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/course")
 public class CourseController {
 	
+	//강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo() {
 		return "course/info";
 	}
 	
+	//강의 목차
 	@GetMapping("/{courseId}/contents")
 	public String contenList() {
 		return "course/contentList";
 	}
 	
+	//강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content() {
 		return "course/content";
@@ -26,19 +29,19 @@ public class CourseController {
 	// URI들은 나중에 {courseId}, {qnaId} 넣어서 수정
 	
 	// 질의 응답 목록
-	@GetMapping("/course/qna")
+	@GetMapping("/qna")
 	public String qna() {
 		return "/course/qna";
 	}
 	
 	// 질의 응답 게시글
-	@GetMapping("/course/qna/qnaid")
+	@GetMapping("/qna/qnaid")
 	public String qnaDesc() {
 		return "/course/qnaDesc";
 	}
 	
 	// 질의 응답 등록 폼
-	@GetMapping("/course/qna/question")
+	@GetMapping("/qna/question")
 	public String qnaQuestion() {
 		return "/course/qnaForm";
 	}
