@@ -3,12 +3,11 @@ package himedia.project.studybite.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Setter @Getter
 public class User {
-	private Long userId;
-	private String userCategory;
-	private String userName;
+	private Long user_id;
+	private String user_category;
+	private String user_name;
 	private String email;
 	private String phone;
 }
