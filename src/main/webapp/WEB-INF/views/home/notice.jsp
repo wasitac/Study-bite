@@ -10,9 +10,6 @@
 <title>공지 사항 목록</title>
 </head>
 <body>
-	<div>
-		<%@ include file="../common/leftbar.jsp"%>
-	</div>
 	<div id="container" class="container mt-5"
 		style="width: 1000px; min-height: 500px">
 		<div class="my-1 text-left">
@@ -32,30 +29,29 @@
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-				<!-- 나중에 forEach로 돌리기 -->
-					<%-- <c:forEach> --%>
+					<c:forEach>
 						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 1</a></td>
+							<td><a href="notices/noticeid">예시 1</a></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
 						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 2</a></td>
+							<td><a href="notices/noticeid">예시 2</a></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
 						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 3</a></td>
+							<td><a href="notices/noticeid">예시 3</a></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -77,9 +73,6 @@
 				</a></li>
 			</ul>
 		</nav>
-	</div>
-		<div>
-		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 
 </body>
