@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="d-flex flex-column flex-shrink-0 p-3 position-fixed top-0 end-0 vh-100 border-start w-100" style="max-width: 400px;">
 	<div class="dropdown d-flex align-items-center" style="height: 100px;">
-		<img src="resources/img/bellIcon.png" alt="" width="32" height="32" class="rounded-circle ms-3 me-auto "> <a href="#"
+		<img src="/studybite/resources/img/bellIcon.png" alt="" width="32" height="32" class="rounded-circle ms-3 me-auto "> <a href="#"
 			class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle ms-auto me-3" data-bs-toggle="dropdown" aria-expanded="false"> <img src="resources/img/userIcon.png" alt=""
 			width="32" height="32" class="rounded-circle me-2"> <strong>userName</strong>
 		</a>
