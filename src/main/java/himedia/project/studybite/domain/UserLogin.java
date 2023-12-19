@@ -1,6 +1,7 @@
 package himedia.project.studybite.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -9,10 +10,10 @@ import lombok.Setter;
  * @author 이지홍
  *
  */
-@Getter
-@Setter
+
+@Setter @Getter
+@NoArgsConstructor
 public class UserLogin {
-	private Long userId;
 	private String email;
 	private String password;
 }

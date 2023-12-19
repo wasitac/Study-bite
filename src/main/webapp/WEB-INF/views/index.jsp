@@ -13,11 +13,11 @@
 	  <form action="${context}" method="post">
 	    <img class="mb-4 cropping" src="${resPath}/img/logo.png" alt="studybite" width="300">
 	    <div class="form-floating">
-	    	<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+	    	<input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
 	    	<label for="floatingInput">Email address</label>
 	    </div>
 	    <div class="form-floating">
-	    	<input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+	    	<input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
 	    	<label for="floatingPassword">Password</label>
 	    </div>
 		<div class="text-center">
