@@ -58,7 +58,7 @@ public class UserController {
 		return "/home/notice";
 	}
 	
-	@GetMapping("/notice/noticeid")
+	@GetMapping("/home/notice/noticeid")
 	public String noticeDesc() {
 		return "/home/noticeDesc";
 	}
