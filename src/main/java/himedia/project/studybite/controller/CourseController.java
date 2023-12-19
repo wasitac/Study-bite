@@ -35,13 +35,12 @@ public class CourseController {
 	}
 	
 	// 질의 응답 게시글
-	@GetMapping("/qna/qnaDesc")
+	@GetMapping("/qna/qnaid")
 	public String qnaDesc() {
 		return "/course/qnaDesc";
 	}
 	
 	// 질의 응답 등록 폼
-	// 
 	@GetMapping("/qna/question")
 	public String qnaQuestion() {
 		return "/course/qnaForm";
@@ -52,16 +51,6 @@ public class CourseController {
 	 * @PostMapping("/course/qna/question") public String qnaQ() { return
 	 * "redirect:/course/qna/{qnaId}"; }
 	 */
-	
-	@GetMapping("/news")
-	public String news() {
-		return "/course/news";
-	}
-	
-	@GetMapping("/news/newsDesc")
-	public String newsDesc() {
-		return "/course/newsDesc";
-	}
 	
 	
 	

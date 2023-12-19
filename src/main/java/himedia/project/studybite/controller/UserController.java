@@ -31,10 +31,7 @@ public class UserController {
 	}
 	
 	// 수강과목
-	@GetMapping("/course")
-	public String course() {
-		return "/home/course";
-	}
+	
 	// 내 정보
 	@GetMapping("/mypage")
 	public String mypage() {
@@ -58,7 +55,7 @@ public class UserController {
 		return "/home/notice";
 	}
 	
-	@GetMapping("/home/notice/noticeid")
+	@GetMapping("/notice/noticeid")
 	public String noticeDesc() {
 		return "/home/noticeDesc";
 	}

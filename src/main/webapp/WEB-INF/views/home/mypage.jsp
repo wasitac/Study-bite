@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <title>내 정보</title>
 </head>
-<body class="container" style="margin: 0; padding: 0;">
+<body class="container">
 	<div class="row">
 		<div class="col ">
 			<%@ include file="../common/leftbar.jsp"%>
