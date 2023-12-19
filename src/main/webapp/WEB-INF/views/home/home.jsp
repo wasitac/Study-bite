@@ -7,15 +7,33 @@
 </head>
 <body>
 	<div>
-		<h1>home.jsp(대시보드)</h1>
-		<h2>수강 과목</h2>
+		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div class="container justify-content-center">
+	<div class="container w-50 justify-content-center my-5">
+		<h3 class="mb-3" style="color: #2563eb">수강과목</h3>
+		<div class="px-4 py-3 rounded mb-3" style="background-color: #EFF4FF;">
+			<input class="btn" type="button" value="Web Development" style="background-color: #dbe6fe">
+			<div class="d-flex">
+				<h2 class="me-auto">Complete React js course</h2>
+				<input class="btn btn-primary" type="button" value="Start Learning" onclick="location.href='/studybite/course/1'">
+			</div>
+				<h5>Minsu Kim</h5>
+		</div>
+		<div class="px-4 py-3 rounded mb-3" style="background-color: #EFF4FF;">
+			<input class="btn" type="button" value="Web Development" style="background-color: #dbe6fe">
+			<div class="d-flex">
+				<h2 class="me-auto">Complete React js course</h2>
+				<input class="btn btn-primary" type="button" value="Start Learning" onclick="location.href='/studybite/course/1'">
+			</div>
+				<h5>Minsu Kim</h5>
+		</div>
+	</div>
+	<div class="container w-50 justify-content-center">
 		<div class="d-flex mb-3">
-			<h3 class="me-auto">공지 사항</h3>
+			<h3 class="me-auto" style="color: #2563eb">공지사항</h3>
 			<a href="">view all</a>
 		</div>
-		<div class="card mb-3 border-0" style="background-color: #eff4ff;">
+		<div class="card mb-3 border-0 px-1" style="background-color: #eff4ff;">
 			<div class="card-body">
 				<h5 class="card-title">공지사항 제목</h5>
 				<p class="card-text">
@@ -23,7 +41,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="card mb-3 border-0" style="background-color: #eff4ff;">
+		<div class="card mb-3 border-0 px-1" style="background-color: #eff4ff;">
 			<div class="card-body">
 				<h5 class="card-title">공지사항 제목</h5>
 				<p class="card-text">
@@ -31,7 +49,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="card mb-3 border-0" style="background-color: #eff4ff;">
+		<div class="card mb-3 border-0 px-1" style="background-color: #eff4ff;">
 			<div class="card-body">
 				<h5 class="card-title">공지사항 제목</h5>
 				<p class="card-text">
@@ -39,6 +57,8 @@
 				</p>
 			</div>
 		</div>
+	</div>
+	<div>
 		<%@include file="../common/rightbar.jsp"%>
 	</div>
 </body>
