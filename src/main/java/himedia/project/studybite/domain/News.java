@@ -1,5 +1,7 @@
 package himedia.project.studybite.domain;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +13,5 @@ public class News {
 	private String title;
 	private String description;
 	private Integer views;
+	private Date date;
 }

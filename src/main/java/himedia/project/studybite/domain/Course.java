@@ -10,6 +10,7 @@ public class Course {
 	private String courseName;
 	private String outline;
 	private String instructor;
+
 	public Long getCourseId() {
 		return courseId;
 	}
@@ -41,5 +42,5 @@ public class Course {
 		this.instructor = instructor;
 	}
 	
-	
+
 }

@@ -22,12 +22,11 @@
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100">
-		<%@ include file="../common/courseTitle.jsp"%>
-	</div>
 
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px;">
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
+		<%@ include file="../common/courseTitle.jsp"%>
+
+		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="#" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/ibellc.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
@@ -37,36 +36,24 @@
 		<hr class="mt-2">
 		<div class="my-1 text-left">
 			<h3 style="color: #2563EB">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/news'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${news.courseId}/news'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				강의 공지 목록
 			</h3>
 		</div>
 
-		<div>
-			<h3>공지 제목</h3>
-			<div>번호 : 작성자 : 작성일 : 조회수 :</div>
+		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
+			<h3>${news.title}</h3>
+			<div>번호 : ${news.newsId} 작성자 : ${news.userName} 작성일 : ${news.date} 조회수 : ${news.views}</div>
 		</div>
 		<hr>
 		<div>
-			<div>공지 내용</div>
+			<div>${news.description}</div>
 		</div>
 		<hr class="my-5">
 
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div>
 		<%@ include file="../common/rightbar.jsp"%>

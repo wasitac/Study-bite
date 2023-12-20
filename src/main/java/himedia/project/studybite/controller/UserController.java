@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
+import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.service.UserCourseService;
@@ -87,31 +89,34 @@ public class UserController {
 		}return "redirect:/";
 	}
 	
-	// 대시보드
-	@GetMapping("/home")
-	public String dashboard(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
-		// 세션확인
-		 log.info("home >> userId >>" + userId);
-		List<Course> courses = userCourseService.findCourse(47L);
-//		List<Course> courses = userCourseService.findCourse(userId);
-		model.addAttribute("courses", courses);
-		
-		List<News> newses = userCourseService.findNews(47L);
-//		List<News> newses = userCourseService.findNews(userId);
-		model.addAttribute("newses", newses);
-		return "/home/home";
-	}
-	
-	// 수강과목
-	@GetMapping("/course")
-	public String course(Model model) {
-		List<Course> courses = userCourseService.findCourse(47L);
-//		List<Course> courses = userCourseService.findCourse(userId);
-		model.addAttribute("courses", courses);
-		
-		return "/home/course";
-	}
-	
+	   // 대시보드
+	   @GetMapping("/home")
+	   public String dashboard(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+	      // 세션확인
+	      // log.info("대시보드 -> userId >>" + userId);
+	      List<Course> courses = userCourseService.findCourse(10L);
+//	      List<Course> courses = userCourseService.findCourse(userId);
+	      model.addAttribute("courses", courses);
+	      
+	      List<News> newses = userCourseService.findNews(10L);
+//	      List<News> newses = userCourseService.findNews(userId);
+	      model.addAttribute("newses", newses);
+	      return "/home/home";
+	   }
+	   
+	   // 수강과목
+	   @GetMapping("/course")
+	   public String course(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+	      List<Course> courses = userCourseService.findCourse(10L);
+//	      List<Course> courses = userCourseService.findCourse(userId);
+	      Integer courseCount = userCourseService.findCount(10L);
+//	      Integer courseCount = userCourseService.findCount(userId);
+	      model.addAttribute("courses", courses);
+	      model.addAttribute("courseCount", courseCount);
+	      
+	      return "/home/course";
+	   }
+
 	// 내 정보
 	@GetMapping("/mypage")
 	public String mypage(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
@@ -139,13 +144,22 @@ public class UserController {
 	
 	// 공지사항
 	// notices -> notice로 변경했습니다
-	@GetMapping("/home/notice")
-	public String notice() {
+	@GetMapping("/notice")
+	public String notice(Model model) {
+		int page = 1;
+		List<Notice> notices = userService.findPage(page);
+		model.addAttribute("notices", notices);
 		return "/home/notice";
 	}
 	
-	@GetMapping("/notice/noticeid")
-	public String noticeDesc() {
+	// 공지사항 상세
+	@GetMapping("/notice/{noticeId}")
+	public String noticeDesc(@PathVariable Long noticeId, Model model) {
+		userService.viewcnt(noticeId);
+		Notice notice = userService.findNoticeDesc(noticeId).get();
+		model.addAttribute("notice", notice);
+		model.addAttribute("prev", userService.prev(noticeId));
+		model.addAttribute("next", userService.next(noticeId));
 		return "/home/noticeDesc";
 	}
 	

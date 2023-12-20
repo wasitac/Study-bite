@@ -8,6 +8,7 @@ public class Content {
 	private Long contentId;
 	private Long courseId;
 	private String contentName;
+
 	public Long getContentId() {
 		return contentId;
 	}
