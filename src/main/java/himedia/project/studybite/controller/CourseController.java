@@ -52,7 +52,15 @@ public class CourseController {
 	 * "redirect:/course/qna/{qnaId}"; }
 	 */
 	
+	@GetMapping("/news")
+	public String news() {
+		return "/course/news";
+	}
 	
+	@GetMapping("/news/newsDesc")
+	public String newsDesc() {
+		return "/course/newsDesc";
+	}
 	
 	
 	
