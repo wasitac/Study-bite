@@ -7,7 +7,25 @@ import lombok.Setter;
 public class Content {
 	private Long contentId;
 	private Long courseId;
-	private String instructor;
 	private String contentName;
-	private String contentData;
+
+	public Long getContentId() {
+		return contentId;
+	}
+	public void setContentId(Long contentId) {
+		this.contentId = contentId;
+	}
+	public Long getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
+	public String getContentName() {
+		return contentName;
+	}
+	public void setContentName(String contentName) {
+		this.contentName = contentName;
+	}
+	
 }

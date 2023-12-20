@@ -30,4 +30,9 @@ public class UserCourseService {
 	public List<UserCourse> findAttendance(Long user_id) {
 		return userCourseRepository.findAttendanceById(user_id);
 	}
+	
+	   public Integer findCount(Long user_id) {
+		      return userCourseRepository.findCourseCount(user_id);
+		   }
+
 }

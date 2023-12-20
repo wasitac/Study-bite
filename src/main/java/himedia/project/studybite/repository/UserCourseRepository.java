@@ -18,4 +18,7 @@ public interface UserCourseRepository {
 	
 	// 유저 아이디로 유저가 수강한 강의의 출결 조회
 	List<UserCourse> findAttendanceById(Long user_id);
+	
+	// 현재 유저가 수강중인 강의 수
+	   Integer findCourseCount(Long user_id);
 }

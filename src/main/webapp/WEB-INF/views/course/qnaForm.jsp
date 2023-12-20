@@ -22,12 +22,10 @@
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
 		<%@ include file="../common/courseTitle.jsp"%>
-	</div>
 
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px;">
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0">
+		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="/studybite/course/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
@@ -45,28 +43,26 @@
 			</h3>
 		</div>
 
-		<h4 style="color: #2563EB" class="mt-4" >질문 작성</h4>
+		<h4 style="color: #2563EB" class="mt-4">질문 작성</h4>
 		<div class="contatiner">
 			<form action="writerAction" method="post">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> 
-					<input type="text" name="bdTitle" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
+					<label class="col-1 mt-2">제목</label> <input type="text" name="bdTitle" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
 					<textarea class="form-control col" rows="10" name="bdContent" placeholder="내용을 입력해주세요" required></textarea>
 				</div>
-		<hr class="my-5">
-		<div class="position-absolute end-0">
-				<button type="submit" class="btn btn-primary">작성하기</button>
-				<button type="button" class="btn btn-primary">취소</button>
-		</div>
+				<hr class="row mt-5">
+				<div class="position-absolute end-0 mt-1">
+					<button type="submit" class="btn btn-primary">작성하기</button>
+					<button type="button" class="btn btn-primary">취소</button>
+				</div>
 			</form>
-
+			<div class="row mt-5">
+				<%@ include file="../common/footer.jsp"%>
+			</div>
 		</div>
-
-
-
 	</div>
 	<div>
 		<%@ include file="../common/rightbar.jsp"%>

@@ -22,16 +22,16 @@
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100">
-		<%@ include file="../common/courseTitle.jsp"%>
-	</div>
 
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px;">
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
+		<%@ include file="../common/courseTitle.jsp"%>
+
+		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="/studybite/course/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15" height="15">질의 응답</a></li>
+			<li><a href="/studybite/course/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15"
+					height="15">질의 응답</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
 		</ul>
 		<hr class="mt-2">
@@ -44,7 +44,7 @@
 			</h3>
 		</div>
 
-		<div>
+		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 			<h3>질문 제목</h3>
 			<div>번호 : 작성자 : 작성일 : 조회수 :</div>
 		</div>
@@ -54,19 +54,7 @@
 		</div>
 		<hr class="my-5">
 
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div>
 		<%@ include file="../common/rightbar.jsp"%>
