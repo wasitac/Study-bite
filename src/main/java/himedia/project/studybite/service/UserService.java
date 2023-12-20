@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
-import himedia.project.studybite.domain.UserLogin;
+import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.repository.NoticeRepository;
 import himedia.project.studybite.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -28,15 +28,17 @@ public class UserService {
 		Optional<User> user = userRepository.login(userLogin);
 //		log.info(user.get().getUser_name());
 		if(user.isEmpty()) {
-			log.info("userService >> null");
+			//log.info("userService >> null");
 			return null;
 			}
 		return user;
 	}
-	public Optional<User> isLogin(Long user_id){
-		Optional<User> user = userRepository.findUserById(user_id);
+	
+	public Optional<User> findUser(Long userId){
+		Optional<User> user = userRepository.findUserById(userId);
 		return user;
 	}
+	
 	// 비밀번호 체크
 	public void checkPassword(Long userId, String password) {
 		userRepository.checkPassword(userId, password);

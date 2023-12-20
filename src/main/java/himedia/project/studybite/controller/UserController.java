@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,7 @@ import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
-import himedia.project.studybite.domain.UserLogin;
+import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.service.UserCourseService;
 import himedia.project.studybite.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -37,17 +36,17 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 
-//	@Autowired
-//	public UserController(UserService userService, UserCourseService userCourseService) {
-//		this.userService = userService;
-//		this.userCourseService = userCourseService;
-//	}
+	@Autowired
+	public UserController(UserService userService, UserCourseService userCourseService) {
+		this.userService = userService;
+		this.userCourseService = userCourseService;
+	}
 	
 	// 유저가 로그인 한 세션이 남아있다면 바로 대시보드로 이동하고, 없으면 로그인 페이지로 이동
 //	@GetMapping("/")
-//	public String index(Model model, @SessionAttribute(name = "user_id", required = false) Long user_id) {
+//	public String index(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
 //		// 로그인 정보를 담을 객체 생성
-//		Optional<User> loginUser = userService.isLogin(user_id);
+//		Optional<User> loginUser = userService.isLogin(userId);
 //		if(loginUser.isEmpty()) {
 //			return "index";
 //		}
@@ -57,7 +56,7 @@ public class UserController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("userLogin", new UserLogin());
-		return "index";
+		return "/index";
 	}
 	
 	// 로그인
@@ -70,13 +69,13 @@ public class UserController {
 		Optional<User> user = userService.login(userLogin);
 		
 		if(user.isEmpty()) {
-			log.info("로그인 실패");		
+			//log.info("로그인 실패");		
 			return "redirect:/";
 		}
 		User userInfo = user.get(); 
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
-		session.setAttribute("user_id", userInfo.getUserId());
+		session.setAttribute("userId", userInfo.getUserId());
 //		log.info("세션 id" + session.getId());
 //		session.setMaxInactiveInterval(1800); 
 		return "redirect:/home";
@@ -92,26 +91,26 @@ public class UserController {
 	
 	   // 대시보드
 	   @GetMapping("/home")
-	   public String dashboard(Model model, @SessionAttribute(name = "user_id", required = false) Long user_id) {
+	   public String dashboard(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
 	      // 세션확인
-	      // log.info("대시보드 -> user_id >>" + user_id);
+	      // log.info("대시보드 -> userId >>" + userId);
 	      List<Course> courses = userCourseService.findCourse(10L);
-//	      List<Course> courses = userCourseService.findCourse(user_id);
+//	      List<Course> courses = userCourseService.findCourse(userId);
 	      model.addAttribute("courses", courses);
 	      
 	      List<News> newses = userCourseService.findNews(10L);
-//	      List<News> newses = userCourseService.findNews(user_id);
+//	      List<News> newses = userCourseService.findNews(userId);
 	      model.addAttribute("newses", newses);
 	      return "/home/home";
 	   }
 	   
 	   // 수강과목
 	   @GetMapping("/course")
-	   public String course(Model model, @SessionAttribute(name = "user_id", required = false) Long user_id) {
+	   public String course(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
 	      List<Course> courses = userCourseService.findCourse(10L);
-//	      List<Course> courses = userCourseService.findCourse(user_id);
+//	      List<Course> courses = userCourseService.findCourse(userId);
 	      Integer courseCount = userCourseService.findCount(10L);
-//	      Integer courseCount = userCourseService.findCount(user_id);
+//	      Integer courseCount = userCourseService.findCount(userId);
 	      model.addAttribute("courses", courses);
 	      model.addAttribute("courseCount", courseCount);
 	      
@@ -120,17 +119,26 @@ public class UserController {
 
 	// 내 정보
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+		Optional<User> user = userService.findUser(userId);
+		
+		if(user.isEmpty()) {
+			log.info("mypage 유저 정보 없음");
+			return "index";
+		}
+		
+		model.addAttribute("user", user.get());
 		return "/home/mypage";
 	}
 	
-	@GetMapping("/mypageUpdate")
+	@GetMapping("/mypage/update")
 	public String mypageUpdate() {
 		return "/home/mypageUpdate";
 	}
 	
-	@PostMapping("/mypageUpdate")
-	public String postMypageUpdate() {
+	@PostMapping("/mypage/update")
+	public String postMypageUpdate(@ModelAttribute String newPassword, Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+//		userService.updatePassword(userId, newPassword);
 		return "redirect:/";
 	}
 	

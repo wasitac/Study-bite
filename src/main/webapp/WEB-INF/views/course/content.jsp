@@ -27,15 +27,15 @@
 	<div class="mainview container ms-5 me-5 position-absolute min-vh-100">
 		<div class="contentList">
 			<h1 class="info" >
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/1/contents'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="history.back()" style="background-color: white">
                		<img src="/studybite/resources/img/back.png" width="50" height="50" alt="뒤로가기">
            		</button>
 				강의 목록
 			</h2>
 		</div>
-		<h3 class="mt-4 mb-5">강의 제목</h3>
+		<h3 class="mt-4 mb-5">${content.contentName}</h3>
 		<p align="middle">
-			<iframe width="960" height="540" src="https://www.youtube.com/embed/AoMv0SIjZL8?si=ZJqn5fd7im1yyETI?controls=0" title="YouTube video player" 
+			<iframe width="960" height="540" src="https://core.ewha.ac.kr/publicview/C0101020170306154617836038" title="kocw" 
 				frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</p>
 		<%@ include file="../common/footer.jsp" %>
