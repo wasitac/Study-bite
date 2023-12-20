@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 
 @Repository
@@ -21,10 +22,10 @@ public interface UserRepository {
 	Optional<User> findUserById(Long userId);
 	
 	// 비밀번호 확인
-	@Select("select user_id from user where userId = #userId and password = password")
-	UserLogin checkPassword(Long userId, String password);
+	@Select("select userId from user where userId = #{userId} and password like #{password}")
+	Optional<Long> checkPassword(PasswordUpdate passwordUpdate);
 	
 	// 비밀번호 변경
-	@Update("update user set password=#{password}, where userId=#{userId}")
-	void updatePassword(Long userId, String password);
+	@Update("update user set password=#{newPassword} where userId=#{userId}")
+	void updatePassword(PasswordUpdate passwordUpdate);
 }
