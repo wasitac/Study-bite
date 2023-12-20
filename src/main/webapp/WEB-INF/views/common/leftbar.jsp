@@ -3,8 +3,8 @@
 <%@ include file="./url.jsp"%>
 
 <div class="d-flex flex-column flex-shrink-0 position-fixed top-0 start-0 vh-100 bg-body-tertiary w-25" style="max-width:280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-      <img  src="${resPath}/img/logo.png" alt="studybite" width="100%">
+    <a href="/studybite/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img class="w-100 p-3" src="${resPath}/img/logoSmall.png" alt="studybite">
     </a>
     <hr>
    <ul class="nav nav-pills flex-column mb-auto">
