@@ -23,7 +23,7 @@ public class UserService {
 		Optional<User> user = userRepository.login(userLogin);
 //		log.info(user.get().getUser_name());
 		if(user.isEmpty()) {
-			log.info("userService >> null");
+			//log.info("userService >> null");
 			return null;
 			}
 		return user;
