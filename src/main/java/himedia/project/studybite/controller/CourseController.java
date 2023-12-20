@@ -2,6 +2,7 @@ package himedia.project.studybite.controller;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-<<<<<<< HEAD
+import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +25,10 @@ public class CourseController {
 	
 	private final CourseService courseService;
 	
-	@Autowired
-	public CourseController(CourseService courseService) {
-		this.courseService = courseService;
-	}
+//	@Autowired
+//	public CourseController(CourseService courseService) {
+//		this.courseService = courseService;
+//	}
 	
 	//강의 개요
 	@GetMapping("/{courseId}")

@@ -24,7 +24,7 @@
 	  		<button class="btn btn-primary w-50 py-2" type="submit">로그인</button>
 		</div>
 		<div class="text-center">
-			<a href="/">비밀번호를 찾기</a>
+			<a href="#">비밀번호를 찾기</a>
 		</div>
 	  </form>
 	</main>

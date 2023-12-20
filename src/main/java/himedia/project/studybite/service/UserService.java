@@ -27,11 +27,6 @@ public class UserService {
 	// 로그인
 	public Optional<User> login(UserLogin userLogin) {
 		Optional<User> user = userRepository.login(userLogin);
-//		log.info(user.get().getUser_name());
-		if(user.isEmpty()) {
-			//log.info("userService >> null");
-			return null;
-			}
 		return user;
 	}
 	
@@ -42,12 +37,11 @@ public class UserService {
 
 	// 비밀번호 변경
 	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
-		if(userRepository.checkPassword(passwordUpdate).isEmpty()) {
-			log.info("false");
+		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
+		if(userRepository.checkPassword(passwordUpdate).isEmpty()) 
 			return false;
-		}
 		userRepository.updatePassword(passwordUpdate);
-		log.info("true");
+		return true;
 	}
 	
 	// 공지사항

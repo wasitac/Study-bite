@@ -7,7 +7,7 @@
 			width="32" height="32" class="rounded-circle me-2"> <strong>userName</strong>
 		</a>
 		<ul class="dropdown-menu text-small shadow">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
+			<li><a class="dropdown-item" href="${context}logout">로그아웃</a></li>
 		</ul>
 	</div>
 	<hr class="mt-0 mx-0">
