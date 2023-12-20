@@ -121,7 +121,7 @@ public class UserController {
 	@GetMapping("/mypage")
 	public String mypage(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
 		Optional<User> user = userService.findUser(userId);
-
+		
 		if (user.isEmpty()) {
 			log.info("mypage 유저 정보 없음");
 			return "index";

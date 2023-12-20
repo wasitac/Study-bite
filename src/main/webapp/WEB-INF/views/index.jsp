@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="./common/url.jsp"%>
 <!DOCTYPE html>
-
 <html lang="ko" data-bs-theme="auto">
     <title>로그인</title>
-	<%@ include file="./common/url.jsp"%>
 	<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${resPath}/css/sign-in.css" rel="stylesheet">
   </head>
