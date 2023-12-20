@@ -1,12 +1,25 @@
 package himedia.project.studybite.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import himedia.project.studybite.domain.News;
+import himedia.project.studybite.service.CourseService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/course")
 public class CourseController {
+	
+	private final CourseService courseService;
 	
 	//강의 개요
 	@GetMapping("/{courseId}")
@@ -35,7 +48,7 @@ public class CourseController {
 	}
 	
 	// 질의 응답 게시글
-	@GetMapping("/qna/qnaid")
+	@GetMapping("/qna/qnaDesc")
 	public String qnaDesc() {
 		return "/course/qnaDesc";
 	}
@@ -52,13 +65,20 @@ public class CourseController {
 	 * "redirect:/course/qna/{qnaId}"; }
 	 */
 	
-	@GetMapping("/news")
-	public String news() {
+	
+	// 강의 공지 목록
+	@GetMapping("/{courseId}/news")
+	public String news(@PathVariable Long courseId, Model model) {
+		List<News> news = courseService.findNewsPage(courseId);
+		model.addAttribute("news", news);
 		return "/course/news";
 	}
 	
-	@GetMapping("/news/newsDesc")
-	public String newsDesc() {
+	// 강의 공지 상세
+	@GetMapping("/{courseId}/news/{newsId}")
+	public String newsDesc(@PathVariable Long newsId, Model model) {
+		News news = courseService.findNewsDesc(newsId).get();
+		model.addAttribute("news", news);
 		return "/course/newsDesc";
 	}
 	

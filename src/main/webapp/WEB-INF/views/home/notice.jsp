@@ -1,20 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>공지 사항 목록</title>
 </head>
 <body>
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="container mt-5"
-		style="width: 1000px; min-height: 500px">
+	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
 		<div class="my-1 text-left">
 			<h1 style="color: #2563EB">공지 사항</h1>
 		</div>
@@ -32,30 +28,16 @@
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-				<!-- 나중에 forEach로 돌리기 -->
-					<%-- <c:forEach> --%>
-						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 1</a></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+					<!-- 나중에 forEach로 돌리기 -->
+					<c:forEach var="notice" items="${notices}">
+						<tr class="table">
+							<td>${notice.noticeId}</td>
+							<td><a href="/studybite/notice/${notice.noticeId}" style="text-decoration: none">${notice.title}</a></td>
+							<td>관리자</td>
+							<td>${notice.date}</td>
+							<td>${notice.views}</td>
 						</tr>
-						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 2</a></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="table-primary">
-							<td><a href="/studybite/home/notice/noticeid">예시 3</a></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -63,22 +45,18 @@
 
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item">
-				<a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				<c:forEach var="cnt" begin="1" end="3" step="1">
+					<li class="page-item"><a class="page-link" href="#">${cnt}</a></li>
+				</c:forEach>
+				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
 		</nav>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
-		<div>
+	<div>
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 

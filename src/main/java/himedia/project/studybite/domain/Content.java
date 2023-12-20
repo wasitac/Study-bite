@@ -7,7 +7,5 @@ import lombok.Setter;
 public class Content {
 	private Long contentId;
 	private Long courseId;
-	private String instructor;
 	private String contentName;
-	private String contentData;
 }

@@ -8,6 +8,7 @@ public class User {
 	private Long userId;
 	private String userCategory;
 	private String userName;
+	private String password;
 	private String email;
 	private String phone;
 }

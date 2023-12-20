@@ -22,12 +22,11 @@
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100">
-		<%@ include file="../common/courseTitle.jsp"%>
-	</div>
 
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px;">
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
+		<%@ include file="../common/courseTitle.jsp"%>
+		
+		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="/studybite/course/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
@@ -95,6 +94,7 @@
 				<button type="button" class="btn btn-primary position-absolute end-0 mt-0" onclick="location.href='/studybite/course/qna/question'">작성하기</button>
 			</ul>
 		</nav>
+				<%@ include file="../common/footer.jsp" %>
 	</div>
 	<div>
 		<%@ include file="../common/rightbar.jsp"%>

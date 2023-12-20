@@ -9,4 +9,5 @@ public class Course {
 	private String sort;
 	private String courseName;
 	private String outline;
+	private String instructor;
 }
