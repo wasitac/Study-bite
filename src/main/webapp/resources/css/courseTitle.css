@@ -6,6 +6,7 @@ body {
 .btn {
 	font-weight: bold;
 	background-color: #CDDCFE;
+	border-radius: 12px;
 }
 .info {
 	color: #2563eb;

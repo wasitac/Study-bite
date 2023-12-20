@@ -9,93 +9,47 @@
 <meta charset="UTF-8">
 <title>수강과목-강의 목차</title>
 <link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
-<link href="${resPath}/css/navbar-static.css" rel="stylesheet">
+<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+   .mainview {
+  	left: 279.9px;
+  	max-width:1100px
+  }
+  .contentsListLi {
+  	background-color: #eff4ff;
+  	border-radius: 18px;
+  }
 </style>
 </head>
 <body>
 	<%@ include file="../common/leftbar.jsp"%>
-	<div class="container mt-5 ms-5 ">
+	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100">
 		<%@ include file="../common/courseTitle.jsp" %>
 		<div>
 			<h2 class="info">강의 목차</h2>
 		</div>
-		<%-- <c:forEach var="" items=""> --%>
 		<div>
 			 <div>
-	          <h4 class="fst-italic">Recent posts</h4>
 	          <ul class="list-unstyled">
-	            <li>
-	              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-	                <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+		<%-- <c:forEach var="" items=""> --%>
+	            <li class="contentsListLi">
+	              <a class="ms-3 d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" 
+	              		href="${context}course/1/contents/1">
+	                <img alt="강의목차 컨텐츠 썸네일" src="/studybite/resources/img/reactLogo.jpeg" width="450" height="200">
 	                <div class="col-lg-8">
-	                  <h3 class="mb-0">강좌명강좌명강좌명</h3>
-	                  <small class="text-body-secondary">January 15, 2023</small>
-	                </div>
-	              </a>
-	            </li>
-	            <li>
-	              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-	                <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-	                <div class="col-lg-8">
-	                  <h3 class="mb-0">강좌명강좌명강좌명</h3>
-	                  <small class="text-body-secondary">January 14, 2023</small>
-	                </div>
-	              </a>
-	            </li>
-	            <li>
-	              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-	                <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-	                <div class="col-lg-8">
-	                  <h3 class="mb-0">강좌명강좌명강좌명</h3>
-	                  <small class="text-body-secondary">January 13, 2023</small>
+	                	<input class="btn bg-primary text-white " type="button" value="강의 분류" style="border-radius: 12px" >
+	               	  <h3 class="my-3">강좌명{}</h3>
+	                  <!-- <small class="text-body-secondary">January 15, 2023</small> -->
 	                </div>
 	              </a>
 	            </li>
 	          </ul>
 	        </div>
 		</div>
-		<%-- </c:forEach> --%>
-		<div class="row mb-2">
-		    <div class="col-12">
-		      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-		        <div class="col-auto d-none d-lg-block">
-		          <svg class="bd-placeholder-img" width="300" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-		        </div>
-		        <div class="col p-4 d-flex flex-column position-static">
-		          <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-		          <h3 class="mb-0">강좌명강좌명강좌명</h3>
-		          <div class="mb-1 text-body-secondary">Nov 11</div>
-		        </div>
-		      </div>
-		    </div>
-		    <div class="col-12">
-		      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-		        <div class="col-auto d-none d-lg-block">
-		          <svg class="bd-placeholder-img" width="300" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-		        </div>
-		        <div class="col p-4 d-flex flex-column position-static">
-		          <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-		          <h3 class="mb-0">Post title</h3>
-		          <div class="mb-1 text-body-secondary">Nov 11</div>
-		        </div>
-		      </div>
-		    </div>
-		    <div class="col-12">
-		      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-		        <div class="col-auto d-none d-lg-block">
-		          <svg class="bd-placeholder-img" width="300" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-		        </div>
-		        <div class="col p-4 d-flex flex-column position-static">
-		          <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-		          <h3 class="mb-0">Post title</h3>
-		          <div class="mb-1 text-body-secondary">Nov 11</div>
-		        </div>
-		      </div>
-		    </div>
-	  	</div>
+		<%@ include file="../common/footer.jsp" %>
 	</div>
+	<%@ include file="../common/rightbar.jsp"%>
 </body>
 </html>
