@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.repository.ContentRepository;
@@ -48,5 +49,9 @@ public class CourseService {
 	public Optional<Content> findContentName(Long contentId) {
 		return contentRepository.findContentName(contentId);
 	}
-
+	
+	// 강의 영상 주소 가져오기
+	public Optional<ContentData> findContentUrl(Long contentId) {
+		return contentRepository.findContentUrl(contentId);
+	}
 }

@@ -41,10 +41,11 @@ public class UserService {
 	}
 
 	// 비밀번호 변경
-	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
+	public void updatePassword(PasswordUpdate passwordUpdate) {
 		if(userRepository.checkPassword(passwordUpdate).isEmpty()) {
 			log.info("false");
-			return false;
+			
+			//return false;
 		}
 		userRepository.updatePassword(passwordUpdate);
 		log.info("true");

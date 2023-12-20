@@ -2,14 +2,16 @@ package himedia.project.studybite.controller;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-<<<<<<< HEAD
+import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.ContentData;
+import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +25,10 @@ public class CourseController {
 	
 	private final CourseService courseService;
 	
-	@Autowired
-	public CourseController(CourseService courseService) {
-		this.courseService = courseService;
-	}
+//	@Autowired
+//	public CourseController(CourseService courseService) {
+//		this.courseService = courseService;
+//	}
 	
 	//강의 개요
 	@GetMapping("/{courseId}")
@@ -52,7 +54,12 @@ public class CourseController {
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content(@PathVariable Long contentsId, Model model) {
 		Optional<Content> content = courseService.findContentName(contentsId);
+		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
+		
+		log.info("Contenturl >>>>>>>> {}", contentData.get().getContentUrl());
+		
 		model.addAttribute("content", content.get());
+		model.addAttribute("contentData", contentData.get());
 		return "course/content";
 	}
 	

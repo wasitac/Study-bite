@@ -37,11 +37,11 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 
-	@Autowired
-	public UserController(UserService userService, UserCourseService userCourseService) {
-		this.userService = userService;
-		this.userCourseService = userCourseService;
-	}
+//	@Autowired
+//	public UserController(UserService userService, UserCourseService userCourseService) {
+//		this.userService = userService;
+//		this.userCourseService = userCourseService;
+//	}
 	
 	// 유저가 로그인 한 세션이 남아있다면 바로 대시보드로 이동하고, 없으면 로그인 페이지로 이동
 //	@GetMapping("/")
