@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Setter @Getter
 public class Course {
-	private Long course_id;
+	private Long courseId;
 	private String sort;
-	private String course_name;
+	private String courseName;
 	private String outline;
 }

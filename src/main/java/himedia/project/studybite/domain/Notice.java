@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter @Getter
 public class Notice {
-	private Long notice_id;
+	private Long noticeId;
 	private String title;
 	private String description;
 	private Integer views;

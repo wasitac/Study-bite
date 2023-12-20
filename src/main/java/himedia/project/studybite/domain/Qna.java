@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @Setter @Getter
 public class Qna {
-	private Long qna_id;
-	private Long course_id;
-	private String user_name;
+	private Long qnaId;
+	private Long courseId;
+	private String userName;
 	private String title;
 	private String description;
 	private Integer views;

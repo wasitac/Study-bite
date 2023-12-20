@@ -74,7 +74,7 @@ public class UserController {
 		User userInfo = user.get(); 
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
-		session.setAttribute("user_id", userInfo.getUser_id());
+		session.setAttribute("user_id", userInfo.getUserId());
 //		log.info("세션 id" + session.getId());
 //		session.setMaxInactiveInterval(1800); 
 		return "redirect:/home";

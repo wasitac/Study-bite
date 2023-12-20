@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter @Getter
 public class UserCourse {
-	private Long user_id;
-	private Long content_id;
+	private Long userId;
+	private Long contentId;
 	private Date date;
 }

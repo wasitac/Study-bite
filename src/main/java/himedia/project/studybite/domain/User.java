@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Setter @Getter
 public class User {
-	private Long user_id;
-	private String user_category;
-	private String user_name;
+	private Long userId;
+	private String userCategory;
+	private String userName;
 	private String email;
 	private String phone;
 }
