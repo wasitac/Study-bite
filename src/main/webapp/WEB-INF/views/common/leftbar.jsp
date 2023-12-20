@@ -8,35 +8,29 @@
       <span class="fs-4">Logo</span>
     </a>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+   <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a href="/studybite/home" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           대시보드
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
+        <a href="/studybite/course" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           수강과목
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
+        <a href="/studybite/mypage" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           내 정보
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
+        <a href="/studybite/home/notice" class="nav-link link-body-emphasis">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           공지사항
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
         </a>
       </li>
     </ul>
