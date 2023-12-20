@@ -35,11 +35,11 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 
-//	@Autowired
-//	public UserController(UserService userService, UserCourseService userCourseService) {
-//		this.userService = userService;
-//		this.userCourseService = userCourseService;
-//	}
+	@Autowired
+	public UserController(UserService userService, UserCourseService userCourseService) {
+		this.userService = userService;
+		this.userCourseService = userCourseService;
+	}
 	
 	// 유저가 로그인 한 세션이 남아있다면 바로 대시보드로 이동하고, 없으면 로그인 페이지로 이동
 //	@GetMapping("/")
@@ -68,13 +68,13 @@ public class UserController {
 		Optional<User> user = userService.login(userLogin);
 		
 		if(user.isEmpty()) {
-			log.info("로그인 실패");		
+			//log.info("로그인 실패");		
 			return "redirect:/";
 		}
 		User userInfo = user.get(); 
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
-		session.setAttribute("user_id", userInfo.getUserId());
+		//session.setAttribute("user_id", userInfo.getUserId());
 //		log.info("세션 id" + session.getId());
 //		session.setMaxInactiveInterval(1800); 
 		return "redirect:/home";
