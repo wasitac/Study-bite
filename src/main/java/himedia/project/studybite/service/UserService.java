@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -33,14 +34,14 @@ public class UserService {
 		Optional<User> user = userRepository.findUserById(userId);
 		return user;
 	}
-	
-	// 비밀번호 체크
-	public void checkPassword(Long userId, String password) {
-		userRepository.checkPassword(userId, password);
-	}
-	
+
 	// 비밀번호 변경
-	public void updatePassword(Long userId, String newPassword) {
-		userRepository.updatePassword(userId, newPassword);
+	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
+		if(userRepository.checkPassword(passwordUpdate).isEmpty()) {
+			log.info("false");
+			return false;
+		}
+		userRepository.updatePassword(passwordUpdate);
+		log.info("true");
 	}
 }

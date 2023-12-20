@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.service.UserCourseService;
 import himedia.project.studybite.service.UserService;
@@ -132,8 +133,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/mypage/update")
-	public String postMypageUpdate(@ModelAttribute String newPassword, Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
-//		userService.updatePassword(userId, newPassword);
+	public String postMypageUpdate(@ModelAttribute PasswordUpdate passwordUpdate, Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+		passwordUpdate.setUserId(userId);		
+		userService.updatePassword(passwordUpdate);
 		return "redirect:/";
 	}
 	
