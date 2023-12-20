@@ -10,7 +10,7 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 	<main class="form-signin w-100 m-auto">
 	  <form action="${context}" method="post">
-	    <img class="mb-4 cropping" src="${resPath}/img/logo.png" alt="studybite" width="300">
+	    <img class="mb-4 cropping" src="${resPath}/img/logoSmall.png" alt="studybite" width="300">
 	    <div class="form-floating">
 	    	<input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
 	    	<label for="floatingInput">Email address</label>
