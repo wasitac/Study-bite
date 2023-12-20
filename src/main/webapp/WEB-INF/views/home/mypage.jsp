@@ -12,17 +12,31 @@
 <meta charset="UTF-8">
 <title>내 정보</title>
 </head>
-<body class="container" style="margin: 0; padding: 0;">
+<body>
 	<div class="row">
-		<div class="col ">
-			<%@ include file="../common/leftbar.jsp"%>
+		<div>
+<%-- 			<%@ include file="../common/leftbar.jsp"%> --%>
 		</div>
-		<div class="col">
-			<h3>송창민</h3>
-			<label>E-mail</label>
+		<div id="mypage body" >
+			<h2>내 정보</h2>
+			<hr>
+			<div>
+				<h3>${user.userName}</h3>
+				<div>
+					<label>E-mail</label>
+					<span>${user.email}</span>
+				</div>
+				<br>
+				<div>
+					<label>연락처</label>
+					<span>${user.phone}</span>
+				</div>
+				<br>
+				<a href="${context}mypage/update">회원 정보 수정</a>
+			</div>
 		</div>
-		<div class="col">
-			<%@ include file="../common/rightbar.jsp"%>
+		<div>
+<%-- 			<%@ include file="../common/rightbar.jsp"%> --%>
 		</div>
 	</div>
 </body>
