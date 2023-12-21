@@ -87,32 +87,25 @@ public class UserController {
 	public String dashboard(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
 		// 세션확인
 		// log.info("대시보드 -> userId >>" + userId);
-//		List<Course> courses = userCourseService.findCourse(10L);
-	      List<Course> courses = userCourseService.findCourse(userId);
+		List<Course> courses = userCourseService.findCourse(10L);
+//	      List<Course> courses = userCourseService.findCourse(userId);
 		model.addAttribute("courses", courses);
 
-//		List<News> newses = userCourseService.findNews(10L);
-	      List<News> newses = userCourseService.findNews(userId);
+		List<News> newses = userCourseService.findNews(10L);
+//	      List<News> newses = userCourseService.findNews(userId);
 		model.addAttribute("newses", newses);
-		
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
 		return "/home/home";
 	}
 
 	// 수강과목
 	@GetMapping("/course")
 	public String course(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
-//		List<Course> courses = userCourseService.findCourse(10L);
-	      List<Course> courses = userCourseService.findCourse(userId);
-//		Integer courseCount = userCourseService.findCount(10L);
-	      Integer courseCount = userCourseService.findCount(userId);
-	      log.info("user.userName = ");
+		List<Course> courses = userCourseService.findCourse(10L);
+//	      List<Course> courses = userCourseService.findCourse(userId);
+		Integer courseCount = userCourseService.findCount(10L);
+//	      Integer courseCount = userCourseService.findCount(userId);
 		model.addAttribute("courses", courses);
 		model.addAttribute("courseCount", courseCount);
-		
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
 
 		return "/home/course";
 	}
@@ -148,28 +141,21 @@ public class UserController {
 
 	// 공지사항
 	@GetMapping("/notice")
-	public String notice(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String notice(Model model) {
 		int page = 1;
 		List<Notice> notices = userService.findPage(page);
 		model.addAttribute("notices", notices);
-
-		
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
-		
+	
 		return "/home/notice";
 	}
 	// 공지사항 상세
 	@GetMapping("/notice/{noticeId}")
-	public String noticeDesc(@PathVariable Long noticeId, @SessionAttribute(name = "userId", required = false) Long userId ,Model model) {
+	public String noticeDesc(@PathVariable Long noticeId, Model model) {
 		userService.viewcnt(noticeId);
 		Notice notice = userService.findNoticeDesc(noticeId).get();
 		model.addAttribute("notice", notice);
 		model.addAttribute("prev", userService.prev(noticeId));
 		model.addAttribute("next", userService.next(noticeId));
-		
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
 		return "/home/noticeDesc";
 	}
 

@@ -19,16 +19,15 @@
 			<div class="card mb-3 border-0" style="background-color: #eff4ff;">
 				<div class="row g-0">
 					<div class="col-md-8">
-						<!-- <div class="card-body">
+						<div class="card-body">
 							<h5 class="card-title">공지사항 제목</h5>
 							<p class="card-text">
 								<small class="text-body-secondary">자료구조</small>
 							</p>
-						</div> -->
+						</div>
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
 </div>
-<script src="${resPath}/js/basic.js"></script>

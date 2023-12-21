@@ -13,25 +13,26 @@ import himedia.project.studybite.repository.UserCourseRepository;
 @Service
 public class UserCourseService {
 	private final UserCourseRepository userCourseRepository;
-
+	
 	@Autowired
 	public UserCourseService(UserCourseRepository userCourseRepository) {
 		this.userCourseRepository = userCourseRepository;
 	}
-
-	public List<Course> findCourse(Long userId) {
-		return userCourseRepository.findCourseById(userId);
+	
+	public List<Course> findCourse(Long user_id) {
+		return userCourseRepository.findCourseById(user_id);
 	}
-
-	public List<News> findNews(Long userId) {
-		return userCourseRepository.findNewsById(userId);
+	
+	public List<News> findNews(Long user_id) {
+		return userCourseRepository.findNewsById(user_id);
 	}
-
-	public List<UserCourse> findAttendance(Long userId) {
-		return userCourseRepository.findAttendanceById(userId);
+	
+	public List<UserCourse> findAttendance(Long user_id) {
+		return userCourseRepository.findAttendanceById(user_id);
 	}
+	
+	   public Integer findCount(Long user_id) {
+		      return userCourseRepository.findCourseCount(user_id);
+		   }
 
-	public Integer findCount(Long userId) {
-		return userCourseRepository.findCourseCount(userId);
-	}
 }

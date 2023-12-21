@@ -47,8 +47,8 @@
 				<c:forEach var="content" items="${contents}">
 		            <li class="contentsListLi mb-2">
 		              <a class="ms-3 d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" 
-		              		href="${context}course/${courseInfo.courseId}/contents/${content.contentId}">
-		                <img alt="강의목차 컨텐츠 썸네일" src="${courseInfo.image}" width="450" height="200">
+		              		href="${context}course/${courseInfo.courseId }/contents/${content.contentId}">
+		                <img alt="강의목차 컨텐츠 썸네일" src="/studybite/resources/img/reactLogo.jpeg" width="450" height="200">
 		                <div class="col-lg-8">
 		                	<input class="btn bg-primary text-white " type="button" value="${courseInfo.sort}" style="border-radius: 12px" >
 		               	  <h3 class="my-3">${content.contentName} </h3>
