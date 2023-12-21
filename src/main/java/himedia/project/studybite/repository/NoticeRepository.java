@@ -12,7 +12,7 @@ import himedia.project.studybite.domain.Notice;
 @Repository
 public interface NoticeRepository {
 	// 공지사항 목록
-	@Select ("select * from notice order by noticeId desc limit 20")
+	@Select ("select * from notice order by noticeId desc")
 	List<Notice> findPage(int page);
 	
 	// 공지사항 상세
@@ -30,4 +30,8 @@ public interface NoticeRepository {
 	// 조회수
 	@Update ("update notice set views = views + 1 where noticeId = #{noticeId}")
 	Long viewcnt(Long noticeId);
+	
+	// 글 개수
+	@Select ("select count(noticeId) from notice")
+	Long cntNotice(Long noticeId);
 }

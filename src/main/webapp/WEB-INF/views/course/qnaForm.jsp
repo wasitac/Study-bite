@@ -36,7 +36,7 @@
 		<hr class="mt-2">
 		<div class="my-1 text-left">
 			<h3 style="color: #2563EB">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/qna'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${course.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
@@ -45,13 +45,13 @@
 
 		<h4 style="color: #2563EB" class="mt-4">질문 작성</h4>
 		<div class="contatiner">
-			<form action="writerAction" method="post">
+			<form action="/studybite/course/${course.courseId}/qna/add" method="post">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" name="bdTitle" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
+					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
-					<textarea class="form-control col" rows="10" name="bdContent" placeholder="내용을 입력해주세요" required></textarea>
+					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 				</div>
 				<hr class="row mt-5">
 				<div class="position-absolute end-0 mt-1">

@@ -12,6 +12,7 @@
 	</div>
 	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
 		<div class="my-1 text-left">
+		
 			<!-- 공지사항 목록으로 돌아가는 버튼 -->
 			<h1 style="color: #2563EB">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notice'" style="background-color: white">
@@ -25,7 +26,7 @@
 		<!-- 게시글 -->
 		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 			<h3>${notice.title}</h3>
-			<div>번호 : ${notice.noticeId} 작성자 : 작성일 : 조회수 : ${notice.views}</div>
+			<div>번호 : ${notice.noticeId} 작성자 : 관리자 작성일 : ${notice.date} 조회수 : ${notice.views}</div>
 		</div>
 		<hr>
 		<div>
@@ -35,6 +36,7 @@
 
 		<hr class="my-5">
 
+		<!-- 이전글 다음글 -->
 		<div class="list-group">
 			<a href="/studybite/notice/${next.noticeId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
 					<c:when test="${empty next}">
