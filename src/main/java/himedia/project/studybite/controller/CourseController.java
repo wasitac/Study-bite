@@ -17,6 +17,7 @@ import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.service.CourseService;
+import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CourseController {
 
 	private final CourseService courseService;
+	private final UserCourseService userCourseService;
+	
+	//강의 개요
+
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -38,11 +43,12 @@ public class CourseController {
 	// 강의 목차
 	@GetMapping("/{courseId}/contents")
 	public String contenList(@PathVariable Long courseId, Model model) {
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Course courseInfo = courseService.courseInfo(courseId).get();
 		List<Content> contents = courseService.contents(courseId);
 
+		model.addAttribute("courseInfo", courseInfo);
+
 		model.addAttribute("contents", contents);
-		model.addAttribute("courseInfo", courseInfo.get());
 		return "course/contentList";
 	}
 
@@ -79,7 +85,14 @@ public class CourseController {
 		model.addAttribute("news", news);
 		return "/course/newsDesc";
 	}
-
+	
+	// 출결 현황
+	@GetMapping("/{courseId}/attendance")
+	public String attendance() {
+		
+		return "/";
+	}
+	
 	// 질의 응답 목록
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, Model model) {
@@ -118,6 +131,4 @@ public class CourseController {
 		courseService.question(qna);
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
-
-
 }
