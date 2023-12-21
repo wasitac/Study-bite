@@ -35,7 +35,8 @@
 		</div>
 		<h3 class="mt-4 mb-5">${content.contentName}</h3>
 		<p align="middle">
-			<iframe width="960" height="540" src="https://core.ewha.ac.kr/publicview/C0101020170306154617836038" title="kocw" 
+			<%-- <iframe width="960" height="540" src="${contentData.contentUrl}" title="kocw"  --%>
+			<iframe width="960" height="540" src="http://www.kocw.net/5c254111-522f-4bca-8eab-778cff6eacd5" title="kocw" 
 				frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 		</p>
 		<%@ include file="../common/footer.jsp" %>

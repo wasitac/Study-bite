@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.ContentData;
 
 @Repository
 public interface ContentRepository {
@@ -20,10 +21,12 @@ public interface ContentRepository {
 	@Select("select * from content where courseId =#{courseId}")
 	List<Content> contents(Long courseId);
 	
-	// 강좌명 조회
+	// 강좌명 조회(content테이블에서)
 	@Select("select * from content where contentId = #{contentId}")
 	Optional<Content> findContentName(Long contentId);
 	
-	//강의 콘텐츠(이미지, 영상) 가져오기
+	//강의 콘텐츠(이미지, 영상) 가져오기(contentData에서)
+	@Select("select contentUrl from contentData where contentId = #{contentId}")
+	Optional<ContentData> findContentUrl(Long contentId);
 	
 }

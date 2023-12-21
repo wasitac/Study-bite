@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.service.CourseService;
@@ -54,7 +55,12 @@ public class CourseController {
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content(@PathVariable Long contentsId, Model model) {
 		Optional<Content> content = courseService.findContentName(contentsId);
+		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
+		
+		log.info("Contenturl >>>>>>>> {}", contentData.get().getContentUrl());
+		
 		model.addAttribute("content", content.get());
+		model.addAttribute("contentData", contentData.get());
 		return "course/content";
 	}
 	

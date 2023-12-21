@@ -36,6 +36,7 @@ public class UserService {
 	}
 
 	// 비밀번호 변경
+
 	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
 		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
 		if(userRepository.checkPassword(passwordUpdate).isEmpty()) 
