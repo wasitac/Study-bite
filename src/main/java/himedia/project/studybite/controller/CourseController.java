@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import himedia.project.studybite.domain.Content;
+import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
@@ -26,8 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 public class CourseController {
 
 	private final CourseService courseService;
-
-	// 강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -51,7 +50,12 @@ public class CourseController {
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content(@PathVariable Long contentsId, Model model) {
 		Optional<Content> content = courseService.findContentName(contentsId);
+		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
+		
+		log.info("Contenturl >>>>>>>> {}", contentData.get().getContentUrl());
+		
 		model.addAttribute("content", content.get());
+		model.addAttribute("contentData", contentData.get());
 		return "course/content";
 	}
 

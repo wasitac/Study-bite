@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.repository.NoticeRepository;
 import himedia.project.studybite.repository.UserRepository;
@@ -26,11 +27,6 @@ public class UserService {
 	// 로그인
 	public Optional<User> login(UserLogin userLogin) {
 		Optional<User> user = userRepository.login(userLogin);
-//		log.info(user.get().getUser_name());
-		if(user.isEmpty()) {
-			//log.info("userService >> null");
-			return null;
-			}
 		return user;
 	}
 	
@@ -38,15 +34,15 @@ public class UserService {
 		Optional<User> user = userRepository.findUserById(userId);
 		return user;
 	}
-	
-	// 비밀번호 체크
-	public void checkPassword(Long userId, String password) {
-		userRepository.checkPassword(userId, password);
-	}
-	
+
 	// 비밀번호 변경
-	public void updatePassword(Long userId, String newPassword) {
-		userRepository.updatePassword(userId, newPassword);
+
+	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
+		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
+		if(userRepository.checkPassword(passwordUpdate).isEmpty()) 
+			return false;
+		userRepository.updatePassword(passwordUpdate);
+		return true;
 	}
 	
 	// 공지사항
