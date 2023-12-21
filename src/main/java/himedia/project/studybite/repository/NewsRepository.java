@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import himedia.project.studybite.domain.News;
@@ -18,6 +19,8 @@ public interface NewsRepository {
 	@Select ("select * from news where newsId = #{newsId}")
 	Optional<News> findNewsDesc(Long newsId);
 	
+	// 조회수
+	@Update ("update news set views = views + 1 where newsId = #{newsId}")
+	Long newsViewCnt(Long newsId);
 	
-
 }

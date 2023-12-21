@@ -28,9 +28,9 @@
 		
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
-			<li><a href="/studybite/course/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
+			<li><a href="/studybite/course/${course.courseId}/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15"
+			<li><a href="/studybite/course/${course.courseId}/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15"
 					height="15">질의 응답</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
 		</ul>
@@ -52,29 +52,15 @@
 				</thead>
 				<tbody class="table-group-divider">
 					<!-- 나중에 forEach로 돌리기 -->
-					<%-- <c:forEach> --%>
-					<tr class="table-primary">
-						<td><a href="/studybite/course/qna/qnaDesc">예시 1</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+					<c:forEach var="qna" items="${qna}">
+					<tr class="table">
+						<td>${qna.qnaId}</td>
+						<td><a href="/studybite/course/${course.courseId}/qna/${qna.qnaId}">${qna.title}</a></td>
+						<td>${qna.userName}</td>
+						<td>${qna.date}</td>
+						<td>${qna.views}</td>
 					</tr>
-					<tr class="table-primary">
-						<td><a href="/studybite/course/qna/qnaDesc">예시 2</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="table-primary">
-						<td><a href="/studybite/course/qna/qnaDesc">예시 3</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -91,7 +77,7 @@
 				<li class="page-item"><a class="page-link" href="#">10</a></li>
 				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
-				<button type="button" class="btn btn-primary position-absolute end-0 mt-0" onclick="location.href='/studybite/course/qna/question'">작성하기</button>
+				<button type="button" class="btn btn-primary position-absolute end-0 mt-0" onclick="location.href='/studybite/course/${course. courseId}/qna/add'">작성하기</button>
 			</ul>
 		</nav>
 				<%@ include file="../common/footer.jsp" %>

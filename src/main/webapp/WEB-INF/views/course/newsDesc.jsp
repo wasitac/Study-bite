@@ -30,7 +30,7 @@
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="#" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/ibellc.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/qna" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/inote.png" class="me-2" width="15" height="15">질의 응답</a></li>
+			<li><a href="/studybite/course/${course.courseId}/qna" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/inote.png" class="me-2" width="15" height="15">질의 응답</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
 		</ul>
 		<hr class="mt-2">
@@ -45,7 +45,7 @@
 
 		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 			<h3>${news.title}</h3>
-			<div>번호 : ${news.newsId} 작성자 : ${news.userName} 작성일 : ${news.date} 조회수 : ${news.views}</div>
+			<div>번호 : ${news.newsId} &emsp; 작성자 : ${news.userName} &emsp; 작성일 : ${news.date} &emsp; 조회수 : ${news.views}</div>
 		</div>
 		<hr>
 		<div>
