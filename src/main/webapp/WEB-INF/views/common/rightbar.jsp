@@ -4,7 +4,7 @@
 		<img src="/studybite/resources/img/bellIcon.png" alt="" width="32" height="32" class="rounded-circle ms-3 me-auto "> <a href="#"
 			class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle ms-auto me-3" data-bs-toggle="dropdown" aria-expanded="false"> 
 			<img src="/studybite/resources/img/userIcon.png" alt=""
-			width="32" height="32" class="rounded-circle me-2"> <strong>userName</strong>
+			width="32" height="32" class="rounded-circle me-2"> <strong>${user.userName}</strong>
 		</a>
 		<ul class="dropdown-menu text-small shadow">
 			<li><a class="dropdown-item" href="${context}logout">로그아웃</a></li>
@@ -19,15 +19,16 @@
 			<div class="card mb-3 border-0" style="background-color: #eff4ff;">
 				<div class="row g-0">
 					<div class="col-md-8">
-						<div class="card-body">
+						<!-- <div class="card-body">
 							<h5 class="card-title">공지사항 제목</h5>
 							<p class="card-text">
 								<small class="text-body-secondary">자료구조</small>
 							</p>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
 </div>
+<script src="${resPath}/js/basic.js"></script>
