@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@ include file="../common/config.jsp"%>
 <title>공지 사항 상세</title>
 </head>
 <body>

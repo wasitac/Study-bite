@@ -3,21 +3,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@ include file="../common/config.jsp"%>
 <title>공지 사항 목록</title>
 </head>
 <body>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
-		<div class="my-1 text-left">
-			<h1 style="color: #2563EB">공지 사항</h1>
+	<div id="container" class="container mt-5 w-50" style="width: 1000px; min-height: 500px">
+		<div class="py-1 text-left">
+			<h2 style="color: #2563EB">공지 사항</h2>
 		</div>
 		<hr class="my-5">
 
 		<div>
-			<table class="table table-hover" style="width: 1000px">
+			<table class="table table-hover" style="width: 100%;">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -54,7 +54,9 @@
 				</a></li>
 			</ul>
 		</nav>
-		<%@ include file="../common/footer.jsp"%>
+		<div class="w-25">
+			<%@ include file="../common/footer.jsp"%>
+		</div>
 	</div>
 	<div>
 		<%@ include file="../common/rightbar.jsp"%>

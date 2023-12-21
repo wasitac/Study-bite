@@ -4,25 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>수강과목-질의 응답 상세</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap')
-	;
-
-.mainview {
-	left: 279.9px;
-	max-width: 1100px
-}
-</style>
+<%@ include file="../common/config.jsp"%>
 </head>
-
 <body>
 	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-
 	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
 		<%@ include file="../common/courseTitle.jsp"%>
 

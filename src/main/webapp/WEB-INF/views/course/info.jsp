@@ -1,26 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ include file="../common/url.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="../common/config.jsp"%>
 <title>수강과목-강의 개요</title>
-<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${resPath}/css/courseTitle.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
-  .mainview {
-  	left: 279.9px;
-  	max-width:1100px
-  }
-  .nav {
-  	border-bottom: 1px solid #ccc;
-  }
-</style>
 </head>
 <body>
 	<%@ include file="../common/leftbar.jsp"%>
@@ -38,7 +25,7 @@
 			<h2 class="info ms-3">강의 개요</h2>
 		</div>
 		<div class="infoImage">
-			<img alt="강의 개요" src="/studybite/resources/img/outline.png">
+			<img alt="강의 개요" src="${courseInfo.outline}">
 		</div>
 		<%@ include file="../common/footer.jsp" %>
 	</div>

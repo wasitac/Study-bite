@@ -3,19 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="../common/config.jsp"%>
 <title>수강과목-질의 응답 상세</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap')
-	;
-
-.mainview {
-	left: 279.9px;
-	max-width: 1100px
-}
-</style>
 </head>
 
 <body>

@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="./common/url.jsp"%>
 <!DOCTYPE html>
-<html lang="ko" data-bs-theme="auto">
+<html lang="ko">
+<meta charset="UTF-8">
+<%@ include file="./common/config.jsp"%>
     <title>로그인</title>
-	<link href="${resPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${resPath}/css/sign-in.css" rel="stylesheet">
   </head>
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
-	<main class="form-signin w-100 m-auto">
+  <body class="d-flex align-items-center justify-content-center py-4 bg-blue50">
 	  <form action="${context}" method="post">
 	    <img class="mb-4 cropping" src="${resPath}/img/logoSmall.png" alt="studybite" width="300">
 	    <div class="form-floating">
@@ -26,6 +25,5 @@
 			<a href="#">비밀번호를 찾기</a>
 		</div>
 	  </form>
-	</main>
     </body>
 </html>
