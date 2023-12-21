@@ -28,16 +28,16 @@
 
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
-			<li><a href="/studybite/course/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
+			<li><a href="/studybite/course/${course.courseId}/news" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibell.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15"
+			<li><a href="/studybite/course/${course.courseId}/qna" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/inotec.png" class="me-2" width="15"
 					height="15">질의 응답</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
 		</ul>
 		<hr class="mt-2">
 		<div class="my-1 text-left">
 			<h3 style="color: #2563EB">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/qna'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${course.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
@@ -45,12 +45,12 @@
 		</div>
 
 		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
-			<h3>질문 제목</h3>
-			<div>번호 : 작성자 : 작성일 : 조회수 :</div>
+			<h3>${qna.title}</h3>
+			<div>번호 : ${qna.qnaId} &emsp; 작성자 : ${qna.userName} &emsp; 작성일 : ${qna.date} &emsp; 조회수 : ${qna.views}</div>
 		</div>
 		<hr>
 		<div>
-			<div>질문 내용</div>
+			<div>${qna.description}</div>
 		</div>
 		<hr class="my-5">
 

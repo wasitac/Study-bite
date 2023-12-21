@@ -30,7 +30,7 @@
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
 			<li><a href="#" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/ibellc.png" class="me-2" width="15" height="15">강의 공지</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/qna" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/inote.png" class="me-2" width="15" height="15">질의 응답</a></li>
+			<li><a href="/studybite/course/${course.courseId}/qna" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/inote.png" class="me-2" width="15" height="15">질의 응답</a></li>
 			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
 		</ul>
 		<hr class="mt-2">
@@ -50,10 +50,9 @@
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<!-- 나중에 forEach로 돌리기 -->
 					<c:forEach var="news" items="${news}">
 					<tr class="table">
-						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.newsId}</a></td>
+						<td>${news.newsId}</td>
 						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
 						<td>${news.userName}</td>
 						<td>${news.date}</td>

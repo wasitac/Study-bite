@@ -53,7 +53,7 @@ public class UserService {
 	public List<Notice> findPage(int page) {
 		return noticeRepository.findPage(page);
 	}
-	
+		
 	// 공지사항 상세
 	public Optional<Notice> findNoticeDesc(Long noticeId) {
 		return noticeRepository.findNoticeDesc(noticeId);
@@ -73,4 +73,12 @@ public class UserService {
 	public Long viewcnt(Long noticeId) {
 		return noticeRepository.viewcnt(noticeId);
 	}
+	
+	// 공지사항 총 개수
+	public Long cntNotice(Long noticeId) {
+		return noticeRepository.cntNotice(noticeId);
+	}
+	
+
+	
 }
