@@ -20,5 +20,5 @@ public interface UserCourseRepository {
 	List<UserCourse> findAttendanceById(Long user_id);
 	
 	// 현재 유저가 수강중인 강의 수
-	   Integer findCourseCount(Long user_id);
+	Integer findCourseCount(Long user_id);
 }
