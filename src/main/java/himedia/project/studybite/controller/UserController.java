@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
-	// 송창민
+
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		model.addAttribute("userLogin", new UserLogin());

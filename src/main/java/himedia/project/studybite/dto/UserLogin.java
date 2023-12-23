@@ -9,7 +9,6 @@ import lombok.Setter;
  * @author 이지홍
  *
  */
-
 @Setter @Getter
 @NoArgsConstructor
 public class UserLogin {

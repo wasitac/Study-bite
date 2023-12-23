@@ -24,5 +24,4 @@ public class WebConfig implements WebMvcConfigurer {
 	public LoginInterceptor loginInterceptor() {
 		return new LoginInterceptor();
 	}
-
 }
