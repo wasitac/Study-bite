@@ -31,13 +31,13 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
-
+	// 송창민
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
-//테스트용주석
+
 	// 로그인
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
