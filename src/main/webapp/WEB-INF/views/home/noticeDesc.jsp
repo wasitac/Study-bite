@@ -12,7 +12,7 @@
 	</div>
 	<div id="container" class="container mt-5 w-50">
 		<div class="my-1 text-left">
-		
+
 			<!-- 공지사항 목록으로 돌아가는 버튼 -->
 			<h2 class="blue600">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notice'" style="background-color: white">

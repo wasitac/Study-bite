@@ -32,7 +32,9 @@
 					<c:forEach var="notice" items="${notices}">
 						<tr class="table">
 							<td>${notice.noticeId}</td>
-							<td><a href="/studybite/notice/${notice.noticeId}" style="text-decoration: none">${notice.title}</a></td>
+							<td>
+								<a href="/studybite/notice/${notice.noticeId}" style="text-decoration: none">${notice.title}</a>
+							</td>
 							<td>관리자</td>
 							<td>${notice.date}</td>
 							<td>${notice.views}</td>

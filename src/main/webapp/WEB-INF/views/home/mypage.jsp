@@ -22,11 +22,15 @@
 			</div>
 			<div>
 				<div>
-					<h5><span class="badge bg-blue50 blue600 me-3">E-mail</span><span class="white600">${user.email}</span></h5>
+					<h5>
+						<span class="badge bg-blue50 blue600 me-3">E-mail</span><span class="white600">${user.email}</span>
+					</h5>
 				</div>
 				<br>
 				<div>
-					<h5><span class="badge bg-blue50 blue600 me-3">연락처</span><span class="white600">${user.phone}</span></h5>
+					<h5>
+						<span class="badge bg-blue50 blue600 me-3">연락처</span><span class="white600">${user.phone}</span>
+					</h5>
 				</div>
 				<br> <a href="${context}mypage/update">회원 정보 수정</a>
 			</div>
