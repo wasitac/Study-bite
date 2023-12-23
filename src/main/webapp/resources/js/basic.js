@@ -6,6 +6,14 @@ document.querySelectorAll(".nav-link").forEach((link) => {
         link.classList.add("active");
         link.classList.remove("link-body-emphasis");
         link.setAttribute("aria-current", "page");
-        console.log("location.pathname = " + window.location.pathname);
+        
+        const parent = document.querySelector(".active img");
+        var image = parent.src;
+        console.log("image : " + image);
+        
+        var srcSplit = image.split(".");
+        var srcConcated = srcSplit[0] + "c." + srcSplit[1];
+        console.log("srcConcated : " + srcConcated);   
+        parent.src = srcConcated;
     }
 });

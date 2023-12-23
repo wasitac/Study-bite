@@ -4,29 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
+<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <title>수강과목-강의 공지 목록</title>
 </head>
 <body>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-
-	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100" style="">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
 		<%@ include file="../common/courseTitle.jsp"%>
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-left mb-md-0 mt-5">
-			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 정보</a></li>
-			<li><a href="#" class="nav-link px-2 border-bottom border-primary border-2"><img src="/studybite/resources/img/courseIcon/ibellc.png" class="me-2" width="15" height="15">강의 공지</a></li>
-			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/ibook.png" class="me-2" width="15" height="15">강의 목차</a></li>
-			<li><a href="/studybite/course/${course.courseId}/qna" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/inote.png" class="me-2" width="15" height="15">질의 응답</a></li>
-			<li><a href="#" class="nav-link px-2 link-secondary"><img src="/studybite/resources/img/courseIcon/iattendance.png" class="me-2" width="15" height="15">출결 현황</a></li>
-		</ul>
-		<hr class="mt-2">
+		<%@ include file="../common/courseBar.jsp" %>
 		<div class="my-1 text-left">
-			<h3 style="color: #2563EB">강의 공지</h3>
+			<h3 class="blue600 info">강의 공지</h3>
 		</div>
-
 		<div>
-			<table class="table table-hover" style="width: 1000px">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -50,7 +42,6 @@
 			</table>
 		</div>
 		<hr class="my-5">
-
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -66,8 +57,9 @@
 		</nav>
 			<%@ include file="../common/footer.jsp" %>
 	</div>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 </body>
+<script src="${resPath}/js/courseBar.js"></script>
 </html>

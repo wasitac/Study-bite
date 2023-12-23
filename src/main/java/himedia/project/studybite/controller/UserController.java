@@ -60,6 +60,8 @@ public class UserController {
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userId", userInfo.getUserId());
+		// 코스 컨트롤러에서 rightbar에 이름 표시하기 위해 넣었습니다
+		session.setAttribute("userName", userInfo.getUserName());
 		return "redirect:/home";
 	}
 

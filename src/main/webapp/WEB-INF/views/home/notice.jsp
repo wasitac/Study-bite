@@ -10,9 +10,9 @@
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="container mt-5 w-50" style="width: 1000px; min-height: 500px">
+	<div id="container" class="container mt-5 w-50">
 		<div class="py-1 text-left">
-			<h2 style="color: #2563EB">공지 사항</h2>
+			<h2 class="blue600">공지 사항</h2>
 		</div>
 		<hr class="my-5">
 

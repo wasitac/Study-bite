@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
-<title>course.jsp</title>
+<title>수강과목</title>
 </head>
 <body>
    <div class="w-25">
@@ -37,7 +37,7 @@
             <div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='/studybite/course/${course.courseId}'">
                <div class="row g-0">
                   <div class="col-md-4 d-flex align-items-center">
-                     <img src="/studybite/resources/img/reactLogo.jpeg" class="img-fluid rounded w-100" alt="...">
+                     <img src="${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
                   </div>
                   <div class="col-md-8">
                      <div class="card-body">

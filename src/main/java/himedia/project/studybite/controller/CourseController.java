@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import himedia.project.studybite.domain.Content;
 import himedia.project.studybite.domain.ContentData;
@@ -52,8 +53,6 @@ public class CourseController {
 		Optional<Content> content = courseService.findContentName(contentsId);
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
 		
-		log.info("Contenturl >>>>>>>> {}", contentData.get().getContentUrl());
-		
 		model.addAttribute("content", content.get());
 		model.addAttribute("contentData", contentData.get());
 		return "course/content";
@@ -65,7 +64,7 @@ public class CourseController {
 		List<News> news = courseService.findNewsPage(courseId);
 		model.addAttribute("news", news);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/news";
 	}
 
@@ -74,7 +73,7 @@ public class CourseController {
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		News news = courseService.findNewsDesc(newsId).get();
 		model.addAttribute("news", news);
 		return "/course/newsDesc";
@@ -86,7 +85,7 @@ public class CourseController {
 		List<Qna> qna = courseService.findQnaPage(courseId);
 		model.addAttribute("qna", qna);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qna";
 	}
 
@@ -95,7 +94,7 @@ public class CourseController {
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
 		courseService.qnaViewCnt(qnaId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		model.addAttribute("qna", qna);
 		return "/course/qnaDesc";
@@ -105,7 +104,7 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna/add")
 	public String qnaQuestion(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaForm";
 	}
 
@@ -113,7 +112,7 @@ public class CourseController {
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, Qna qna, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("course", courseInfo.get());
+		model.addAttribute("courseInfo", courseInfo.get());
 		qna.setCourseId(courseId);
 		courseService.question(qna);
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();

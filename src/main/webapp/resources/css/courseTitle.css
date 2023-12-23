@@ -3,11 +3,14 @@ body {
 	font-family: 'Noto Sans KR', sans-serif;
   	min-height: 75rem;
 }
-.btn {
+.sort {
 	font-weight: bold;
 	background-color: #CDDCFE;
 	border-radius: 12px;
 }
+
+btn:hover:not(.sort){}
+
 .info {
 	color: #2563eb;
 	margin: 40px 0 20px 0;

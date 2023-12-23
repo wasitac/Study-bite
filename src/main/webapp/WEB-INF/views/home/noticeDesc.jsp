@@ -7,19 +7,19 @@
 <title>공지 사항 상세</title>
 </head>
 <body>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
+	<div id="container" class="container mt-5 w-50">
 		<div class="my-1 text-left">
 		
 			<!-- 공지사항 목록으로 돌아가는 버튼 -->
-			<h1 style="color: #2563EB">
+			<h2 class="blue600">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notice'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="50" height="50">
 				</button>
 				공지 사항
-			</h1>
+			</h2>
 		</div>
 		<hr class="mt-3">
 
@@ -58,7 +58,7 @@
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 

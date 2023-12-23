@@ -52,6 +52,24 @@
 				 <hr class="my-4">
 				<button class="w-75 btn btn-primary btn-lg" type="submit" id="confirmButton">비밀번호 변경</button>
 			</form>
+<%-- 			<form action="${context}mypage/update" style="max-width: 500px;" method="post" onsubmit="return confirm('비밀번호를 변경하시겠습니까?');"> --%>
+<!-- 				<h3 class="white600 py-5">비밀번호 변경</h3> -->
+<!-- 				<div> -->
+<!-- 					<label class="form-label white600">현재 비밀번호</label> <input type="password" class="form-control" name="password" id="password" placeholder="Password" /> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<label class="form-label white600">새로운 비밀번호</label> <input type="password" class="form-control" name="newPassword" id="newPassword" onkeyup="inputCheck()" -->
+<!-- 						placeholder="new Password" -->
+<!-- 					/> -->
+<!-- 				</div> -->
+<!-- 				<div> -->
+<!-- 					<label class="form-label white600">비밀번호 확인</label> <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" onkeyup="inputCheck()" -->
+<!-- 						placeholder="Confirm new Password" -->
+<!-- 					/> -->
+<!-- 				</div> -->
+<!-- 				 <hr class="my-4"> -->
+<!-- 				<button class="w-75 btn btn-primary btn-lg" type="submit" id="confirmButton">비밀번호 변경</button> -->
+<%-- 			</form> --%>
 	</div>
 	<div class="w-25">
 		<%@include file="../common/rightbar.jsp"%>
