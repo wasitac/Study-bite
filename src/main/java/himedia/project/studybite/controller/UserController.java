@@ -26,11 +26,6 @@ import himedia.project.studybite.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-/*
- * 메서드를 흐름이 맞는 위치에 넣어주세요
- * 
- */
-
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -38,7 +33,7 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 	
-
+	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		model.addAttribute("userLogin", new UserLogin());
@@ -49,7 +44,7 @@ public class UserController {
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		Optional<User> user = userService.login(userLogin);
-		// 로그인 실패 시
+		
 		if (user.isEmpty()) {			
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
@@ -77,31 +72,31 @@ public class UserController {
 	}
 
 	// 대시보드
-		@GetMapping("/home")
-		public String dashboard(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-		    List<Course> courses = userCourseService.findCourse(userId);
-			model.addAttribute("courses", courses);
-			
-		    List<News> newses = userCourseService.findNews(userId);
-			model.addAttribute("newses", newses);
-			
-			Optional<User> user = userService.findUser(userId);
-			model.addAttribute("user", user.get());
-			return "/home/home";
-		}
+	@GetMapping("/home")
+	public String dashboard(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	    List<Course> courses = userCourseService.findCourse(userId);
+		model.addAttribute("courses", courses);
+		
+	    List<News> newses = userCourseService.findNews(userId);
+		model.addAttribute("newses", newses);
+		
+		Optional<User> user = userService.findUser(userId);
+		model.addAttribute("user", user.get());
+		return "/home/home";
+	}
 
-		// 수강과목
-		@GetMapping("/course")
-		public String course(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
-		    List<Course> courses = userCourseService.findCourse(userId);
-		    Integer courseCount = userCourseService.findCount(userId);
-			model.addAttribute("courses", courses);
-			model.addAttribute("courseCount", courseCount);
+	// 수강과목
+	@GetMapping("/course")
+	public String course(Model model, @SessionAttribute(name = "userId", required = false) Long userId) {
+	    List<Course> courses = userCourseService.findCourse(userId);
+	    Integer courseCount = userCourseService.findCount(userId);
+		model.addAttribute("courses", courses);
+		model.addAttribute("courseCount", courseCount);
 
-			Optional<User> user = userService.findUser(userId);
-			model.addAttribute("user", user.get());
-			return "/home/course";
-		}
+		Optional<User> user = userService.findUser(userId);
+		model.addAttribute("user", user.get());
+		return "/home/course";
+	}
 
 	// 내 정보
 	@GetMapping("/mypage")
