@@ -26,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RequestMapping("/course")
 public class CourseController {
-
 	private final CourseService courseService;
+	
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
