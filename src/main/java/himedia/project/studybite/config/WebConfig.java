@@ -7,6 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import himedia.project.studybite.interceptor.LoginInterceptor;
 
 public class WebConfig implements WebMvcConfigurer {
+	/**
+	 * 모든 요청에 대한 인터셉터생성
+	 * @author 이지홍
+	 *
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor())
