@@ -27,6 +27,6 @@ public interface QnaRepository {
 	void question(Qna qna);
 	
 	// 조회수
-	@Update ("update qna set views = views + 1 where qnaId = #{qnaId}")
+	@Update("update qna set views = views + 1 where qnaId = #{qnaId}")
 	Long qnaViewCnt(Long qnaId);
 }

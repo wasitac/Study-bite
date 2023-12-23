@@ -22,5 +22,4 @@ public interface NewsRepository {
 	// 조회수
 	@Update ("update news set views = views + 1 where newsId = #{newsId}")
 	Long newsViewCnt(Long newsId);
-	
 }

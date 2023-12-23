@@ -74,7 +74,6 @@ public class CourseService {
 		return qnaRepository.qnaViewCnt(qnaId);
 	}
 	
-
 	// 강의 영상 주소 가져오기
 	public Optional<ContentData> findContentUrl(Long contentId) {
 		return contentRepository.findContentUrl(contentId);

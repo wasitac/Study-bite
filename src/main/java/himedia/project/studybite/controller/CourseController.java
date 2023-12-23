@@ -3,14 +3,13 @@ package himedia.project.studybite.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import himedia.project.studybite.domain.Content;
 import himedia.project.studybite.domain.ContentData;
@@ -22,12 +21,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/course")
 public class CourseController {
 	private final CourseService courseService;
 	
+	// 강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -42,8 +42,8 @@ public class CourseController {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		List<Content> contents = courseService.contents(courseId);
 
-		model.addAttribute("contents", contents);
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("contents", contents);
 		return "course/contentList";
 	}
 
@@ -62,8 +62,9 @@ public class CourseController {
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, Model model) {
 		List<News> news = courseService.findNewsPage(courseId);
-		model.addAttribute("news", news);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
+		model.addAttribute("news", news);
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/news";
 	}
@@ -73,8 +74,9 @@ public class CourseController {
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("courseInfo", courseInfo.get());
 		News news = courseService.findNewsDesc(newsId).get();
+		
+		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
 		return "/course/newsDesc";
 	}
@@ -83,8 +85,9 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, Model model) {
 		List<Qna> qna = courseService.findQnaPage(courseId);
-		model.addAttribute("qna", qna);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
+		model.addAttribute("qna", qna);
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qna";
 	}
@@ -93,10 +96,11 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
 		courseService.qnaViewCnt(qnaId);
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("courseInfo", courseInfo.get());
 		Qna qna = courseService.findQnaDesc(qnaId).get();
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
 		model.addAttribute("qna", qna);
+		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaDesc";
 	}
 
@@ -104,19 +108,20 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna/add")
 	public String qnaQuestion(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaForm";
 	}
 
 	// 질의 응답 등록
 	@PostMapping("/{courseId}/qna/add")
-	public String postQnaQuestion(@PathVariable Long courseId, Qna qna, Model model) {
+	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("courseInfo", courseInfo.get());
+		
 		qna.setCourseId(courseId);
 		courseService.question(qna);
+		
+		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
-
-
 }
