@@ -82,5 +82,4 @@ public class Qna {
 	public void setQnaId(Long qnaId) {
 		this.qnaId = qnaId;
 	}
-	
 }

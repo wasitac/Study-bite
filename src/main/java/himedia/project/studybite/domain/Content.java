@@ -27,5 +27,4 @@ public class Content {
 	public void setContentName(String contentName) {
 		this.contentName = contentName;
 	}
-	
 }
