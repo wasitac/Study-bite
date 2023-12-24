@@ -24,7 +24,6 @@ import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.service.UserCourseService;
 import himedia.project.studybite.service.UserService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
