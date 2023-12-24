@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,7 @@ public class UserController {
 
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
+		request.getSession().invalidate();
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
@@ -41,8 +43,8 @@ public class UserController {
 	// 로그인
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
+		User userInfo = null;
 		Optional<User> user = userService.login(userLogin);
-		User userInfo = user.get();
 
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
@@ -50,9 +52,11 @@ public class UserController {
 			return "/common/alert";
 		}
 
+		userInfo = user.get();
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("userId", userInfo.getUserId());
+		session.setAttribute("role", userInfo.getUserCategory());
 		// 코스 컨트롤러에서 rightbar에 이름 표시하기 위해 넣었습니다
 		session.setAttribute("userName", userInfo.getUserName());
 		return "redirect:/home";
@@ -73,12 +77,11 @@ public class UserController {
 	@GetMapping("/home")
 	public String dashboard(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
 		List<Course> courses = userCourseService.findCourse(userId);
-		model.addAttribute("courses", courses);
-
 		List<News> newses = userCourseService.findNews(userId);
-		model.addAttribute("newses", newses);
-
 		Optional<User> user = userService.findUser(userId);
+
+		model.addAttribute("courses", courses);
+		model.addAttribute("newses", newses);
 		model.addAttribute("user", user.get());
 		return "/home/home";
 	}
@@ -129,8 +132,10 @@ public class UserController {
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동
-		if (userService.updatePassword(passwordUpdate))
+		if (userService.updatePassword(passwordUpdate)) {
+			request.getSession().invalidate();
 			return "redirect:/";
+		}
 
 		request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
 		request.setAttribute("url", "mypage/update");

@@ -27,6 +27,8 @@
 		<!-- 모든 요청에 대한 로그인 상태 확인 인터셉터 빈 생성 @이지홍 -->
 		<interceptor>
 			<mapping path="/**"/>
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/resources/css/**" />
 				<beans:bean id="loginInterceptor" class="himedia.project.studybite.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
