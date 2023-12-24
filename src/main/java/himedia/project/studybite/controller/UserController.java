@@ -42,13 +42,14 @@ public class UserController {
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		Optional<User> user = userService.login(userLogin);
-		User userInfo = user.get();
 
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
 			return "/common/alert";
 		}
+		
+		User userInfo = user.get();
 
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
