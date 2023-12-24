@@ -1,5 +1,7 @@
 package himedia.project.studybite.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import himedia.project.studybite.domain.Content;
 import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
+import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/course")
 public class CourseController {
 	private final CourseService courseService;
+	private final UserCourseService userCourseService;
 	
 	// 강의 개요
 	@GetMapping("/{courseId}")
@@ -38,20 +44,28 @@ public class CourseController {
 
 	// 강의 목차
 	@GetMapping("/{courseId}/contents")
-	public String contenList(@PathVariable Long courseId, Model model) {
+	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		List<Content> contents = courseService.contents(courseId);
+		List<UserCourse> userCourses = userCourseService.findUserCourse(userId, courseId);
+		Integer attCount = userCourseService.findAttendanceCount(userId, courseId);
+		Integer attPercentage = Math.round(((float) attCount / 7F) * 100);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("contents", contents);
+		model.addAttribute("userCourses", userCourses);
+		model.addAttribute("attPercentage", attPercentage);
 		return "course/contentList";
 	}
 
 	// 강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
-	public String content(@PathVariable Long contentsId, Model model) {
+	public String content(@PathVariable Long contentsId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
 		Optional<Content> content = courseService.findContentName(contentsId);
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
+		LocalDate now = LocalDate.now();
+		Date date = Date.valueOf(now);
+		userCourseService.updateDate(date, contentsId, userId);
 		
 		model.addAttribute("content", content.get());
 		model.addAttribute("contentData", contentData.get());
@@ -123,5 +137,11 @@ public class CourseController {
 		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
+	}
+	
+	// 출결 확인
+	@GetMapping("/{courseId}/attendance")
+	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+		return "/course/attendance";
 	}
 }

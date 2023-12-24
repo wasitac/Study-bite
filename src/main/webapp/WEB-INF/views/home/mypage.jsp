@@ -8,7 +8,7 @@
 <title>내 정보</title>
 </head>
 <body>
-	<div class="w-25">
+	<div>
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
 	<div class="container justify-content-center w-50">
@@ -35,7 +35,7 @@
 				<br> <a href="${context}mypage/update">회원 정보 수정</a>
 			</div>
 		</div>
-		<div class="w-25">
+		<div>
 			<%@include file="../common/rightbar.jsp"%>
 		</div>
 	</div>
