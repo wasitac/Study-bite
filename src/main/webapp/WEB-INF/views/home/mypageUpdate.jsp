@@ -33,6 +33,21 @@
 	<div class="container justify-content-center w-50">
 		<h4 class="blue600 py-3">내 정보</h4>
 		<hr class="my-4">
+		<%-- <form:form modelAttribute="passwordUpdate" style="max-width: 500px;" onsubmit="return confirm('비밀번호를 변경하시겠습니까?');">
+			<h3 class="white600 py-5">비밀번호 변경</h3>
+			<div>
+<!-- 				<label class="form-label white600">현재 비밀번호</label> <input type="password" class="form-control" name="password" id="password" placeholder="Password" /> -->
+				<label class="form-label white600">현재 비밀번호</label> <form:input path="password"  type="password" id="password"  class="form-control" placeholder="Password" />
+			</div>
+			<div>
+				<label class="form-label white600">새로운 비밀번호</label> <form:input path="newPassword" type="password" id="newPassword" class="form-control" onkeyup="inputCheck()" placeholder="new Password" />
+			</div>
+			<div>
+				<label class="form-label white600">비밀번호 확인</label> <input type="password" id="confirmPassword" class="form-control" onkeyup="inputCheck()" placeholder="Confirm new Password" />
+			</div>
+			<hr class="my-4">
+			<form:button class="w-75 btn bg-blue600 btn-lg">비밀번호 변경</form:button>
+		</form:form> --%>
 		<form action="${context}mypage/update" style="max-width: 500px;" method="post" onsubmit="return confirm('비밀번호를 변경하시겠습니까?');">
 			<h3 class="white600 py-5">비밀번호 변경</h3>
 			<div>
@@ -47,24 +62,6 @@
 			<hr class="my-4">
 			<button class="w-75 btn btn-primary btn-lg" type="submit" id="confirmButton">비밀번호 변경</button>
 		</form>
-		<%-- 			<form action="${context}mypage/update" style="max-width: 500px;" method="post" onsubmit="return confirm('비밀번호를 변경하시겠습니까?');"> --%>
-		<!-- 				<h3 class="white600 py-5">비밀번호 변경</h3> -->
-		<!-- 				<div> -->
-		<!-- 					<label class="form-label white600">현재 비밀번호</label> <input type="password" class="form-control" name="password" id="password" placeholder="Password" /> -->
-		<!-- 				</div> -->
-		<!-- 				<div> -->
-		<!-- 					<label class="form-label white600">새로운 비밀번호</label> <input type="password" class="form-control" name="newPassword" id="newPassword" onkeyup="inputCheck()" -->
-		<!-- 						placeholder="new Password" -->
-		<!-- 					/> -->
-		<!-- 				</div> -->
-		<!-- 				<div> -->
-		<!-- 					<label class="form-label white600">비밀번호 확인</label> <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" onkeyup="inputCheck()" -->
-		<!-- 						placeholder="Confirm new Password" -->
-		<!-- 					/> -->
-		<!-- 				</div> -->
-		<!-- 				 <hr class="my-4"> -->
-		<!-- 				<button class="w-75 btn btn-primary btn-lg" type="submit" id="confirmButton">비밀번호 변경</button> -->
-		<%-- 			</form> --%>
 	</div>
 	<div class="w-25">
 		<%@include file="../common/rightbar.jsp"%>
