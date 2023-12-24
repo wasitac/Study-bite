@@ -17,3 +17,7 @@ document.querySelectorAll(".nav-link").forEach((link) => {
         parent.src = srcConcated;
     }
 });
+
+function logout() {
+	window.location.replace("/studybite/logout");
+}
