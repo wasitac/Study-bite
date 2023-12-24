@@ -3,6 +3,7 @@ package himedia.project.studybite.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notice;
@@ -19,6 +20,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final NoticeRepository noticeRepository;
 	
+	@Autowired
 	public UserService(UserRepository userRepository, NoticeRepository noticeRepository) {
 		this.userRepository = userRepository;
 		this.noticeRepository = noticeRepository;
@@ -71,7 +73,7 @@ public class UserService {
 	}
 	
 	// 공지사항 총 개수
-	public Long cntNotice(Long noticeId) {
-		return noticeRepository.cntNotice(noticeId);
-	}	
+	public int cntNotice() {
+		return noticeRepository.cntNotice();
+	}
 }

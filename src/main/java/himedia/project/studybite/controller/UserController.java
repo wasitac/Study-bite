@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequiredArgsConstructor
 @Slf4j
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
+	
+	@Autowired
+	public UserController(UserService userService, UserCourseService userCourseService) {
+		this.userService = userService;
+		this.userCourseService = userCourseService;
+	}
 
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
@@ -132,14 +138,23 @@ public class UserController {
 	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
 		Long userId = user.getUserId();
+
 //		int page = 1;
 		if (pageNum == null) {
 			pageNum = 0;
 		}
 		List<Notice> notices = userService.findPage(pageNum);
 		model.addAttribute("notices", notices);
-		model.addAttribute("notices", notices);
 		model.addAttribute("user", user);
+
+
+		int noticeCnt = userService.cntNotice();
+		int num = userService.cntNotice() / 10;
+
+		if (noticeCnt % 10 != 0)
+			num = num + 1;
+
+		model.addAttribute("num", num);
 		return "/home/notice";
 	}
 
