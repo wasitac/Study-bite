@@ -5,30 +5,32 @@
 
 <mapper namespace="himedia.project.studybite.repository.UserCourseRepository">
 	<select id="findCourseById" parameterType="Long" resultType="Course">
-		SELECT * FROM course where courseId IN (
-		SELECT courseId FROM content where contentId IN (
-		SELECT contentId FROM userCourse WHERE userId = #{userId}
-		)
+		SELECT * FROM course WHERE courseId IN (
+		SELECT courseId FROM userCourse WHERE userId = #{userId}
 		)
 	</select>
 
 	<select id="findNewsById" parameterType="Long" resultType="News">
-		SELECT * from news where courseId in (
-		SELECT courseId FROM content WHERE contentId IN (
-		SELECT contentId FROM userCourse WHERE userId = #{userId}
-		)
+		SELECT * FROM news WHERE courseId IN (
+		SELECT courseId FROM userCourse WHERE userId = #{userId}
 		)
 	</select>
 
-	<select id="findAttendanceById" parameterType="Long" resultType="UserCourse">
-		SELECT * FROM userCourse WHERE userId = #{userId}
+	<select id="findUserCourseById" parameterType="Long" resultType="UserCourse">
+		SELECT * FROM userCourse WHERE userId = #{userId} AND courseId = #{courseId}
 	</select>
 
 	<select id="findCourseCount" parameterType="Long" resultType="Integer">
 		SELECT count(distinct courseId) from news where courseId in (
-		SELECT courseId FROM content WHERE contentId IN (
-		SELECT contentId FROM userCourse WHERE userId = #{userId}
+		SELECT courseId FROM userCourse WHERE userId = #{userId}
 		)
-		)
+	</select>
+	
+	<update id="updateDate" parameterType="UserCourse">
+		UPDATE userCourse set date = #{date} where contentId = #{contentId} and userId = #{userId}
+	</update>
+	
+	<select id="findAttendanceCount" parameterType="Long" resultType="Integer">
+		SELECT count(*) FROM userCourse WHERE userId = #{userId} AND courseId = #{courseId} AND date IS NOT NULL
 	</select>
 </mapper>
