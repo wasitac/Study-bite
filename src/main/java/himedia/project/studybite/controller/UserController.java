@@ -118,6 +118,7 @@ public class UserController {
 			return "index";
 
 		model.addAttribute("user", user.get());
+		model.addAttribute("passwordUpdate", new PasswordUpdate());
 		return "/home/mypageUpdate";
 	}
 
