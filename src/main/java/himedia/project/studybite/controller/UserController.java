@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import himedia.project.studybite.domain.Course;
@@ -27,11 +29,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequiredArgsConstructor
 @Slf4j
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
+	
+	@Autowired
+	public UserController(UserService userService, UserCourseService userCourseService) {
+		this.userService = userService;
+		this.userCourseService = userCourseService;
+	}
 
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
@@ -105,7 +112,6 @@ public class UserController {
 		Optional<User> user = userService.findUser(userId);
 
 		if (user.isEmpty()) {
-			log.info("mypage 유저 정보 없음");
 			return "index";
 		}
 
@@ -144,13 +150,26 @@ public class UserController {
 
 	// 공지사항
 	@GetMapping("/notice")
-	public String notice(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-		int page = 1;
-		List<Notice> notices = userService.findPage(page);
-		Optional<User> user = userService.findUser(userId);
-
+	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
+			@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+//		int page = 1;
+		if (pageNum == null) {
+			pageNum = 0;
+		}
+		List<Notice> notices = userService.findPage(pageNum);
 		model.addAttribute("notices", notices);
+
+		Optional<User> user = userService.findUser(userId);
 		model.addAttribute("user", user.get());
+
+		int noticeCnt = userService.cntNotice();
+		int num = userService.cntNotice() / 10;
+
+		if (noticeCnt % 10 != 0)
+			num = num + 1;
+
+		model.addAttribute("num", num);
+
 		return "/home/notice";
 	}
 
