@@ -7,10 +7,10 @@
  */
  function path(category, courseId, id){
  	if(category == 1)
- 		location.href("/studybite/course/" + courseId + "/qna/" + id);
+ 		location.href = "http://localhost:8080/studybite/course/" + courseId + "/qna/" + id;
  	else if(category == 2)
- 		location.href("/studybite/course/" + courseId + "/news/" + id); 	
+ 		location.href = "http://localhost:8080/studybite/course/" + courseId + "/news/" + id; 	
  	else
- 		location.href("/studybite/notice/" + id);
+ 		location.href = "http://localhost:8080/studybite/notice/" + id;
  	
- }
+}
