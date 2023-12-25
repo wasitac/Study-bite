@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +30,7 @@ public class CourseService {
 	private final ContentRepository contentRepository;
 	private final NewsRepository newsRepository;
 	private final QnaRepository qnaRepository;
+	private final BoardRepository boardRepository;
 	
 	// 강의 타이틀 강의 분류, 강의명, 교육자 조회
 	public Optional<Course> courseInfo(Long courseId) {

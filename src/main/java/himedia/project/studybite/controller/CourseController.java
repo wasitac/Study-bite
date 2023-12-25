@@ -1,6 +1,5 @@
 package himedia.project.studybite.controller;
 
-import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import himedia.project.studybite.domain.Content;
@@ -22,7 +22,11 @@ import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.domain.User;
+import himedia.project.studybite.domain.UserCourse;
+import himedia.project.studybite.repository.UserCourseRepository;
 import himedia.project.studybite.service.CourseService;
+import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +36,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CourseController {
 	private final CourseService courseService;
+	private final UserCourseService userCourseService;
+	
 	/**
 	 * @author 신지은
 	 */
