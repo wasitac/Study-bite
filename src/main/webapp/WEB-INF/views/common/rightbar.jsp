@@ -6,7 +6,7 @@
 	<div class="dropdown d-flex align-items-center" style="height: 60px;">
 		<div>
 			<img src="/studybite/resources/img/bellIcon.png" alt="" width="32" height="32" class="rounded-circle ms-3 me-auto ">
-			<span class="badge bg-blue600">${notifications.size()}</span>
+			<%-- <span class="badge bg-blue600">${notifications.size()}</span> --%>
 		</div>
 		 <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle ms-auto me-3" data-bs-toggle="dropdown" aria-expanded="false"> <img src="/studybite/resources/img/userIcon.png" alt="" width="32" height="32" class="rounded-circle me-2"> <strong>${user.userName}</strong>
 		</a>

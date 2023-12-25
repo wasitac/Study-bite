@@ -145,6 +145,14 @@ public class CourseController {
 	// 출결 확인
 	@GetMapping("/{courseId}/attendance")
 	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		List<UserCourse> userCourses = userCourseService.findUserCourse(user.getUserId(), courseId);
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Integer attCount = userCourseService.findAttendanceCount(user.getUserId(), courseId);
+		Integer attPercentage = Math.round(((float) attCount / 7F) * 100);
+		
+		model.addAttribute("userCourses", userCourses);
+		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("attPercentage", attPercentage);
 		return "/course/attendance";
 	}
 }

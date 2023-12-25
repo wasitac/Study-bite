@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
-import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
@@ -33,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
-
+	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		request.getSession().invalidate();
