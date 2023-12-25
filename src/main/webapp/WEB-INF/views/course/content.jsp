@@ -16,7 +16,7 @@
 	<div class="mainview container ms-5 me-5 position-absolute min-vh-100 w-75">
 		<div class="contentList">
 			<h2 class="info" >
-				<button class="btn border-0" type="submit" onclick="history.back()" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/contents'" style="background-color: white">
                		<img src="/studybite/resources/img/back.png" width="50" height="50" alt="뒤로가기">
            		</button>
 				강의 목록

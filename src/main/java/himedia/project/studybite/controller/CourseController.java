@@ -62,14 +62,16 @@ public class CourseController {
 
 	// 강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
-	public String content(@PathVariable Long contentsId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+	public String content(@PathVariable Long courseId, @PathVariable Long contentsId, @SessionAttribute(name = "user", required = false) User user, Model model) {
 		Long userId = user.getUserId();
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Optional<Content> content = courseService.findContentName(contentsId);
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
 		LocalDate now = LocalDate.now();
 		Date date = Date.valueOf(now);
 		userCourseService.updateDate(date, contentsId, userId);
 		
+		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("content", content.get());
 		model.addAttribute("contentData", contentData.get());
 		return "course/content";
