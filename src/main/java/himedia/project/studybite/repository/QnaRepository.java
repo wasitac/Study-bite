@@ -22,7 +22,7 @@ public interface QnaRepository {
 	Optional<Qna> findQnaDesc(Long qnaId);
 	
 	// 질의 응답 등록
-	@Insert ("insert into qna(courseId, userName, title, description, views, date) values (#{courseId}, '익명', #{title}, #{description}, 0 , '2023-12-21')")
+	@Insert ("insert into qna(courseId, userName, title, description, views, date) values (#{courseId}, '익명', #{title}, #{description}, 0 , now())")
 	@Options(useGeneratedKeys = true, keyProperty = "qnaId")
 	void question(Qna qna);
 	
