@@ -49,6 +49,6 @@
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 </body>
-<script src="${resPath}/js/courseBar.js"></script>
 </html>

@@ -76,10 +76,7 @@ public class UserController {
 		List<News> newses = userCourseService.findNews(userId);
 
 		model.addAttribute("courses", courses);
-
-		List<News> newses = userCourseService.findNews(userId);
 		model.addAttribute("newses", newses);
-
 		model.addAttribute("user", user);
 		return "/home/home";
 	}
