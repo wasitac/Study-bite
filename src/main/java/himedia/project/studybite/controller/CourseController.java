@@ -16,14 +16,16 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.domain.User;
+import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/course")
+@Slf4j
 public class CourseController {
 	private final CourseService courseService;
 	
@@ -38,7 +40,8 @@ public class CourseController {
 
 	// 강의 목차
 	@GetMapping("/{courseId}/contents")
-	public String contenList(@PathVariable Long courseId, Model model) {
+	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		List<Content> contents = courseService.contents(courseId);
 
@@ -49,10 +52,13 @@ public class CourseController {
 
 	// 강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
-	public String content(@PathVariable Long contentsId, Model model) {
+	public String content(@PathVariable Long courseId, @PathVariable Long contentsId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Optional<Content> content = courseService.findContentName(contentsId);
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
 		
+		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("content", content.get());
 		model.addAttribute("contentData", contentData.get());
 		return "course/content";
@@ -123,5 +129,19 @@ public class CourseController {
 		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
+	}
+	
+	// 출결 확인
+	@GetMapping("/{courseId}/attendance")
+	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		List<UserCourse> userCourses = userCourseService.findUserCourse(user.getUserId(), courseId);
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Integer attCount = userCourseService.findAttendanceCount(user.getUserId(), courseId);
+		Integer attPercentage = Math.round(((float) attCount / 7F) * 100);
+		
+		model.addAttribute("userCourses", userCourses);
+		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("attPercentage", attPercentage);
+		return "/course/attendance";
 	}
 }

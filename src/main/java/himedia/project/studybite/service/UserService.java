@@ -3,6 +3,7 @@ package himedia.project.studybite.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notice;
@@ -11,18 +12,15 @@ import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.repository.NoticeRepository;
 import himedia.project.studybite.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class UserService {
 	private final UserRepository userRepository;
 	private final NoticeRepository noticeRepository;
-	
-	public UserService(UserRepository userRepository, NoticeRepository noticeRepository) {
-		this.userRepository = userRepository;
-		this.noticeRepository = noticeRepository;
-	}
 	
 	// 로그인
 	public Optional<User> login(UserLogin userLogin) {
@@ -71,7 +69,7 @@ public class UserService {
 	}
 	
 	// 공지사항 총 개수
-	public Long cntNotice(Long noticeId) {
-		return noticeRepository.cntNotice(noticeId);
-	}	
+	public int cntNotice() {
+		return noticeRepository.cntNotice();
+	}
 }

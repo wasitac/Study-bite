@@ -40,27 +40,33 @@
 		<div>
 			<table class="table table-hover" style="width: 1000px">
 				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
+					<tr class="bg-white500">
+						<th>주차</th>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>5</th>
+						<th>6</th>
+						<th>7</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<!-- 나중에 forEach로 돌리기 -->
-					<c:forEach var="news" items="${news}">
-					<tr class="table">
-						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.newsId}</a></td>
-						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
-						<td>${news.userName}</td>
-						<td>${news.date}</td>
-						<td>${news.views}</td>
+					<tr>
+						<td>출석</td>
+						<c:forEach var="userCourse" items="${userCourses}">
+							<td><c:choose>
+									<c:when test="${not empty userCourse.date}"> O </c:when>
+									<c:otherwise> - </c:otherwise>
+								</c:choose></td>
+						</c:forEach>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<div class="my-1 text-end">
+				<h4 class="blue600 info">출석률 : ${attPercentage}%</h4>
+			</div>
 		</div>
 		<hr class="my-5">
 
