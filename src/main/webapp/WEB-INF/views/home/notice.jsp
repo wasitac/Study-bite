@@ -44,7 +44,6 @@
 			</table>
 		</div>
 		<hr class="my-5">
-
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link" href="/studybite/notice?page=0" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -56,11 +55,11 @@
 				</a></li>
 			</ul>
 		</nav>
-		<div class="w-25">
+		<div>
 			<%@ include file="../common/footer.jsp"%>
 		</div>
 	</div>
-	<div>
+		<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 

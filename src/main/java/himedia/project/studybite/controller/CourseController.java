@@ -19,6 +19,7 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.domain.User;
 import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
 import himedia.project.studybite.service.UserCourseService;
@@ -27,8 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/course")
+@Slf4j
 public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;
@@ -44,7 +45,8 @@ public class CourseController {
 
 	// 강의 목차
 	@GetMapping("/{courseId}/contents")
-	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		List<Content> contents = courseService.contents(courseId);
 		List<UserCourse> userCourses = userCourseService.findUserCourse(userId, courseId);
@@ -60,7 +62,8 @@ public class CourseController {
 
 	// 강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
-	public String content(@PathVariable Long contentsId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String content(@PathVariable Long contentsId, @SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
 		Optional<Content> content = courseService.findContentName(contentsId);
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
 		LocalDate now = LocalDate.now();
@@ -141,7 +144,7 @@ public class CourseController {
 	
 	// 출결 확인
 	@GetMapping("/{courseId}/attendance")
-	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
 		List<UserCourse> userCourses = userCourseService.findUserCourse(userId, courseId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Integer attCount = userCourseService.findAttendanceCount(userId, courseId);

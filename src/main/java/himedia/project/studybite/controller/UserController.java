@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
+import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
@@ -45,7 +46,6 @@ public class UserController {
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		User userInfo = null;
 		Optional<User> user = userService.login(userLogin);
-
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
@@ -55,10 +55,7 @@ public class UserController {
 		userInfo = user.get();
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
-		session.setAttribute("userId", userInfo.getUserId());
-		session.setAttribute("role", userInfo.getRole());
-		// 코스 컨트롤러에서 rightbar에 이름 표시하기 위해 넣었습니다
-		session.setAttribute("userName", userInfo.getUserName());
+		session.setAttribute("user", userInfo);
 		return "redirect:/home";
 	}
 
@@ -75,59 +72,48 @@ public class UserController {
 
 	// 대시보드
 	@GetMapping("/home")
-	public String dashboard(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String dashboard(@SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		List<News> newses = userCourseService.findNews(userId);
-		Optional<User> user = userService.findUser(userId);
 
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
-		model.addAttribute("user", user.get());
+		model.addAttribute("user", user);
 		return "/home/home";
 	}
 
 	// 수강과목
 	@GetMapping("/course")
-	public String course(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String course(@SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		Integer courseCount = userCourseService.findCount(userId);
-		Optional<User> user = userService.findUser(userId);
 
 		model.addAttribute("courses", courses);
 		model.addAttribute("courseCount", courseCount);
-		model.addAttribute("user", user.get());
+		model.addAttribute("user", user);
 		return "/home/course";
 	}
 
 	// 내 정보
 	@GetMapping("/mypage")
-	public String mypage(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-		Optional<User> user = userService.findUser(userId);
-
-		if (user.isEmpty()) {
-			return "index";
-		}
-
-		model.addAttribute("user", user.get());
+	public String mypage(@SessionAttribute(name = "user", required = false) User user, Model model) {
+		model.addAttribute("user", user);
 		return "/home/mypage";
 	}
 
 	@GetMapping("/mypage/update")
-	public String mypageUpdate(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-		Optional<User> user = userService.findUser(userId);
-
-		if (user.isEmpty())
-			return "index";
-
-		model.addAttribute("user", user.get());
+	public String mypageUpdate(@SessionAttribute(name = "user", required = false) User user, Model model) {
+		model.addAttribute("user", user);
 		model.addAttribute("passwordUpdate", new PasswordUpdate());
 		return "/home/mypageUpdate";
 	}
 
 	@PostMapping("/mypage/update")
-	public String postMypageUpdate(@SessionAttribute(name = "userId", required = false) Long userId,
+	public String postMypageUpdate(@SessionAttribute(name = "user", required = false) User user,
 			@ModelAttribute PasswordUpdate passwordUpdate, HttpServletRequest request, Model model) {
-
+		Long userId = user.getUserId();
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동
@@ -144,16 +130,16 @@ public class UserController {
 	// 공지사항
 	@GetMapping("/notice")
 	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
-			@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+		Long userId = user.getUserId();
+
 //		int page = 1;
 		if (pageNum == null) {
 			pageNum = 0;
 		}
 		List<Notice> notices = userService.findPage(pageNum);
 		model.addAttribute("notices", notices);
-
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
+		model.addAttribute("user", user);
 
 		int noticeCnt = userService.cntNotice();
 		int num = userService.cntNotice() / 10;
@@ -162,22 +148,20 @@ public class UserController {
 			num = num + 1;
 
 		model.addAttribute("num", num);
-
 		return "/home/notice";
 	}
 
 	// 공지사항 상세
 	@GetMapping("/notice/{noticeId}")
-	public String noticeDesc(@PathVariable Long noticeId,
-			@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+	public String noticeDesc(@PathVariable Long noticeId, @SessionAttribute(name = "user", required = false) User user,
+			Model model) {
 		userService.viewcnt(noticeId);
 		Notice notice = userService.findNoticeDesc(noticeId).get();
-		Optional<User> user = userService.findUser(userId);
 
 		model.addAttribute("notice", notice);
 		model.addAttribute("prev", userService.prev(noticeId));
 		model.addAttribute("next", userService.next(noticeId));
-		model.addAttribute("user", user.get());
+		model.addAttribute("user", user);
 		return "/home/noticeDesc";
 	}
 }
