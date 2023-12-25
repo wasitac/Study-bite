@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +50,7 @@ public class CourseController {
 	@GetMapping("/{courseId}/contents")
 	public String contenList(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		List<Content> contents = courseService.contents(courseId);
+		List<Content> contents = courseService.contentsInfo(courseId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("contents", contents);
@@ -107,7 +109,6 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna/add")
 	public String qnaQuestion(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaForm";
 	}
@@ -118,32 +119,34 @@ public class CourseController {
 	// 질의 응답 등록
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, 
-								@RequestParam MultipartFile file, FileBoard fileBoard, Model model) 
+								@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model) 
 									throws Exception{
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		
 		qna.setCourseId(courseId);
-		
 		courseService.question(qna);
-		fileBoard.setQnaId(qna.getQnaId());
-		courseService.upload(fileBoard, file);
 		
-		model.addAttribute("fileBoard", fileBoard);
+		fileBoard.setId(qna.getQnaId());
+		courseService.upload(request, fileBoard, file);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
+	
 	/**
 	 * @author 김민혜(), 신지은(파일 다운로드 기능)
 	 */
 	// 질의 응답 상세
 	@GetMapping("/{courseId}/qna/{qnaId}")
-	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, @ModelAttribute FileBoard fileBoard ,Model model) {
+	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
 		courseService.qnaViewCnt(qnaId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(2,qnaId);
 		
 		model.addAttribute("qna", qna);
-		//model.addAttribute("fileBoard", fileBoard);
+		if(!fileBoardInfo.isEmpty())
+			model.addAttribute("fileBoard", fileBoardInfo.get());
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaDesc";
 	}

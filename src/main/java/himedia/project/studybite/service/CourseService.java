@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,11 +40,11 @@ public class CourseService {
 		return courseRepository.courseInfo(courseId);
 	}
 	/**
+	 * 강의의 강좌 목록 가져오기
 	 * @author 신지은
 	 */
-	// 강의의 강좌 목록 가져오기
-	public List<Content> contents(Long courseId) {
-		return contentRepository.contents(courseId);
+	public List<Content> contentsInfo(Long courseId) {
+		return contentRepository.contentsInfo(courseId);
 	}
 	/**
 	 * @author 신지은
@@ -92,12 +94,12 @@ public class CourseService {
 //	}
 	
 	/**
+	 * 질의응답 파일 저장
 	 * @author 신지은
 	 */
-	// 질문 파일 저장
-	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
+	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
 		//1. 파일 저장 경로 설정 : 
-		String filePath = "C:\\upload" ;
+		String filePath = request.getSession().getServletContext().getRealPath("/resources/files");
 		//랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();		
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
@@ -109,9 +111,13 @@ public class CourseService {
 		
 		fileBoard.setCategory(2);
 		fileBoard.setFilename(fileName);
-		fileBoard.setFilepath("C:\\upload\\" + fileName);
+		fileBoard.setFilepath(filePath + fileName);
 		
 		boardRepository.save(fileBoard);
+	}
+	
+	public Optional<FileBoard> findFile(int category, Long qnaId) {
+		return boardRepository.findFile(category, qnaId);
 	}
 	
 	// 강의 공지 조회수
