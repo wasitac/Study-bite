@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.scroll{
+	overflow-y: auto;
+   -ms-overflow-style: none;
+}
+.scroll::-webkit-scrollbar{
+  display:none;
+}

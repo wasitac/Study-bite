@@ -31,10 +31,7 @@ public class CourseService {
 	private final ContentRepository contentRepository;
 	private final NewsRepository newsRepository;
 	private final QnaRepository qnaRepository;
-	private final BoardRepository boardRepository;
-	/**
-	 * @author 신지은
-	 */
+	
 	// 강의 타이틀 강의 분류, 강의명, 교육자 조회
 	public Optional<Course> courseInfo(Long courseId) {
 		return courseRepository.courseInfo(courseId);

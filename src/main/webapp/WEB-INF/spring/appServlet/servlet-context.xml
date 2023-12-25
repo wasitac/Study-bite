@@ -25,13 +25,24 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<!-- MultipartResolver -->
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="1000000000"></beans:property>
-		<beans:property name="maxInMemorySize" value="1000000000"></beans:property>
-	</beans:bean>
-	<context:component-scan
-		base-package="himedia.project.studybite" />
-
+	
+	<context:component-scan base-package="himedia.project.studybite" />
+	
+	<interceptors>
+		<!-- 모든 요청에 대한 로그인 상태 확인 인터셉터 빈 생성 @author 이지홍 -->
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/resources/css/**" />
+				<beans:bean id="loginInterceptor" class="himedia.project.studybite.interceptor.LoginInterceptor"/>
+		</interceptor>
+		<!-- 새로운 알림이 있는지 확인하는 인터셉터 빈 생성 @author 이지홍 -->
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/resources/css/**" />
+			<beans:bean id="notificationInterceptor" class="himedia.project.studybite.interceptor.NotificationInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
