@@ -20,4 +20,7 @@ public interface NotificationRepository {
 	@Insert("insert into notification values(#{notification.userId}, #{notification.category}, #{notification.courseId}, #{notification.id}, #{notification.isChecked});")
 	@Options(useGeneratedKeys = true, keyProperty = "notificationId")
 	void addNotification(Notification notification);
+	
+	@Select("select title from #{table} where '${table}Id' = #{id} #{course}")
+	String getTitle(Long id, String table, String course);
 }
