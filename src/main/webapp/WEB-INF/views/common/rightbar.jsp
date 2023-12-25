@@ -20,7 +20,7 @@
 	</div>
 	<ul class="nav scroll">
 		<!-- for문 돌리기  -->
-		<%-- <c:forEach var="notification" items="${notifications}">
+		<c:forEach var="notification" items="${notifications}">
 			<li class="card mb-3 border-0 bg-blue50 mb-3 w-100" onclick="path(${notification.category},${notification.courseId}, ${notification.id})" style="cursor:pointer;">
 				<div class="card-body row g-0">
 					<h5 class="card-title">${notification.title}</h5>
@@ -29,7 +29,7 @@
 					</p>
 				</div>
 			</li>
-		</c:forEach> --%>
+		</c:forEach>
 		<li class="card mb-3 border-0 mb-3 w-100">
 			<span class="container text-center">알림이 없습니다</span>
 		</li>
