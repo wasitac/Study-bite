@@ -34,8 +34,6 @@ public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;
 	
-	// 알림
-	
 	// 강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {

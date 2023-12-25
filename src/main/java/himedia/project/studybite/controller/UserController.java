@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
+import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
@@ -45,7 +46,6 @@ public class UserController {
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		User userInfo = null;
 		Optional<User> user = userService.login(userLogin);
-
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
