@@ -24,7 +24,6 @@ import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.domain.UserCourse;
-import himedia.project.studybite.repository.UserCourseRepository;
 import himedia.project.studybite.service.CourseService;
 import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;

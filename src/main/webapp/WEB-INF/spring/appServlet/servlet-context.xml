@@ -22,6 +22,7 @@
 		<beans:property name="maxUploadSize" value="1000000000" />
 		<beans:property name="maxInMemorySize" value="1000000000" />
 	</beans:bean>
+	
 	<context:component-scan base-package="himedia.project.studybite" />
 
 	<interceptors>
