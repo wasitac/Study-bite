@@ -28,8 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/course")
+@Slf4j
 public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;

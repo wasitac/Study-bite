@@ -36,7 +36,7 @@
 			<mapping path="/**"/>
 			<exclude-mapping path="/" />
 			<exclude-mapping path="/resources/css/**" />
-			<beans:bean id="notificationInterceptor" class="himedia.project.studybite.interceptor.notificationInterceptor"/>
+			<beans:bean id="notificationInterceptor" class="himedia.project.studybite.interceptor.NotificationInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
