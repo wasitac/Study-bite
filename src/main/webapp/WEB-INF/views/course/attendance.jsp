@@ -20,24 +20,34 @@
 		<div>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr class="bg-white500">
 						<th>주차</th>
 						<th>1</th>
 						<th>2</th>
 						<th>3</th>
 						<th>4</th>
+						<th>5</th>
+						<th>6</th>
+						<th>7</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
 					<tr>
 						<td>출석</td>
-						<td> - </td>
-						<td> - </td>
-						<td> - </td>
-						<td> - </td>
+						<c:forEach var="userCourse" items="${userCourses}">
+							<td>
+								<c:choose>
+									<c:when test="${not empty userCourse.date}"> O </c:when>
+									<c:otherwise> - </c:otherwise>
+								</c:choose>
+							</td>
+						</c:forEach>
 					</tr>
 				</tbody>
 			</table>
+			<div class="my-1 text-end">
+				<h4 class="blue600 info">출석률 : ${attPercentage}%</h4>
+			</div>
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>

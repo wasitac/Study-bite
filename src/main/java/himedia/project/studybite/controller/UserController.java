@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +27,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@RequiredArgsConstructor
 @Slf4j
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 	
-	@Autowired
-	public UserController(UserService userService, UserCourseService userCourseService) {
-		this.userService = userService;
-		this.userCourseService = userCourseService;
-	}
-
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		request.getSession().invalidate();
