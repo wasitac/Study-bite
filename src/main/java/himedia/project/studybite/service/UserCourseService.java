@@ -3,24 +3,22 @@ package himedia.project.studybite.service;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.repository.UserCourseRepository;
-import lombok.RequiredArgsConstructor;
-
-/**
- * UserCourseRepository를 사용하는 서비스
- * @author 송창민
- *
- */
 
 @Service
-@RequiredArgsConstructor
 public class UserCourseService {
 	private final UserCourseRepository userCourseRepository;
+
+	@Autowired
+	public UserCourseService(UserCourseRepository userCourseRepository) {
+		this.userCourseRepository = userCourseRepository;
+	}
 
 	public List<Course> findCourse(Long userId) {
 		return userCourseRepository.findCourseById(userId);
