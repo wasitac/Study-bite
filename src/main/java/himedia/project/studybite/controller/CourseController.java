@@ -58,6 +58,12 @@ public class CourseController {
 	public String contenList(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		List<Content> contents = courseService.contentsInfo(courseId);
+<<<<<<< Updated upstream
+=======
+		List<UserCourse> userCourses = userCourseService.findUserCourse(userId, courseId);
+		Integer attCount = userCourseService.findAttendanceCount(userId, courseId);
+		Integer attPercentage = Math.round(((float) attCount / 7F) * 100);
+>>>>>>> Stashed changes
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("contents", contents);
@@ -83,25 +89,76 @@ public class CourseController {
         return "course/content";
     }
 
-	// 강의 공지 목록
+	/**
+	 * 강사 : 강의 공지 등록 폼
+	 * 
+	 * @author 신지은
+	 */
+	@GetMapping("/{courseId}/news/add")
+	public String NewsForm(@PathVariable Long courseId, Model model) {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		model.addAttribute("courseInfo", courseInfo.get());
+		return "course/newsForm";
+	}
+
+	/**
+	 * 강사 : 강의 공지 등록
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/add")
+	public String postNewsAdd(@PathVariable Long courseId, @ModelAttribute News news,	
+			@RequestParam MultipartFile file, @SessionAttribute(name = "user", required = false) User user,
+			HttpServletRequest request, FileBoard fileBoard, Model model)throws Exception {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+<<<<<<< Updated upstream
+=======
+
+		news.setCourseId(courseId);
+		news.setUserName(user.getUserName());
+		courseService.newsAdd(news);
+
+		fileBoard.setId(news.getNewsId());
+		fileBoard.setCategory(1);
+		courseService.upload(request, fileBoard, file);
+
+		model.addAttribute("courseInfo", courseInfo.get());
+		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
+	}
+
+	/**
+	 * 강사 : 유저 확인 후 공지 등록버튼 활성화
+	 * @author 신지은
+	 */
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, Model model) {
+	public String news(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user, Model model) {
 		List<News> news = courseService.findNewsPage(courseId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+>>>>>>> Stashed changes
 		
 		model.addAttribute("news", news);
+		model.addAttribute("user", user);
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/news";
 	}
 
 	// 강의 공지 상세
+	/**
+	 * @author 신지은(강의 공지 첨부파일 조회)
+	 */
 	@GetMapping("/{courseId}/news/{newsId}")
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
+<<<<<<< Updated upstream
 		
+=======
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(1, newsId);
+
+>>>>>>> Stashed changes
 		model.addAttribute("courseInfo", courseInfo.get());
+		if (!fileBoardInfo.isEmpty())
+			model.addAttribute("fileBoard", fileBoardInfo.get());
 		model.addAttribute("news", news);
 		return "/course/newsDesc";
 	}
@@ -140,6 +197,7 @@ public class CourseController {
 		courseService.question(qna);
 		
 		fileBoard.setId(qna.getQnaId());
+		fileBoard.setCategory(2);
 		courseService.upload(request, fileBoard, file);
 		
 		model.addAttribute("courseInfo", courseInfo.get());

@@ -54,6 +54,9 @@
 				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
+			<c:if test="${user.role eq 2}">
+				<button type="button" class="btn btn-primary position-absolute end-0 mt-0" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+			</c:if>
 		</nav>
 			<%@ include file="../common/footer.jsp" %>
 	</div>

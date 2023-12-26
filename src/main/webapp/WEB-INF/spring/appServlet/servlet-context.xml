@@ -24,7 +24,11 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="himedia.project.studybite" />
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	<interceptors>
 		<!-- 모든 요청에 대한 로그인 상태 확인 인터셉터 빈 생성 @author 이지홍 -->
 		<interceptor>

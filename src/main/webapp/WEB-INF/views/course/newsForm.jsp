@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <link href="${resPath}/css/courseTitle.css" rel="stylesheet">
-<title>수강과목-질의 응답 상세</title>
+<title>강의 공지 등록</title>
 </head>
 <body>
 	<div class="w-25">
@@ -19,12 +19,12 @@
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
-				질의 응답 목록
+				강의 공지 목록
 			</h3>
 		</div>
-		<h4 style="color: #2563EB" class="mt-4">질문 작성</h4>
+		<h4 style="color: #2563EB" class="mt-4">강의 공지 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseInfo.courseId}/qna/add" method="post" enctype="multipart/form-data">
+			<form action="/studybite/course/${courseInfo.courseId}/news/add" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 				</div>

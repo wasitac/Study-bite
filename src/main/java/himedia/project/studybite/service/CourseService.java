@@ -62,6 +62,13 @@ public class CourseService {
 	public List<News> findNewsPage(Long courseId) {
 		return newsRepository.findNewsPage(courseId);
 	}
+	/**
+	 * 강사 : 강의 공지 등록
+	 * @author 신지은
+	 */
+	public void newsAdd(News news) {
+		newsRepository.newsAdd(news);
+	}
 	
 	// 강의 공지 상세
 	public Optional<News> findNewsDesc(Long newsId) {
@@ -96,7 +103,7 @@ public class CourseService {
 	 */
 	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
 		//1. 파일 저장 경로 설정 : 
-		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		//랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();		
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
@@ -106,7 +113,6 @@ public class CourseService {
 		// 5. 서버로 전송
 		file.transferTo(saveFile);					//예외 처리 필요
 		
-		fileBoard.setCategory(2);
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
