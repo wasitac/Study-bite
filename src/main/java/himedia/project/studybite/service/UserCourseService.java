@@ -12,37 +12,37 @@ import himedia.project.studybite.repository.UserCourseRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- * UserCourseRepository를 사용하는 서비스
- * @author 송창민
- *
- */
+ 
+UserCourseRepository를 사용하는 서비스
+@author 송창민
+**/
 
 @Service
 @RequiredArgsConstructor
 public class UserCourseService {
-	private final UserCourseRepository userCourseRepository;
+    private final UserCourseRepository userCourseRepository;
 
-	public List<Course> findCourse(Long userId) {
-		return userCourseRepository.findCourseById(userId);
-	}
+    public List<Course> findCourse(Long userId) {
+        return userCourseRepository.findCourseById(userId);
+    }
 
-	public List<News> findNews(Long userId) {
-		return userCourseRepository.findNewsById(userId);
-	}
+    public List<News> findNews(Long userId) {
+        return userCourseRepository.findNewsById(userId);
+    }
 
-	public List<UserCourse> findUserCourse(Long userId, Long courseId) {
-		return userCourseRepository.findUserCourseById(userId, courseId);
-	}
+    public List<UserCourse> findUserCourse(Long userId, Long courseId) {
+        return userCourseRepository.findUserCourseById(userId, courseId);
+    }
 
-	public Integer findCount(Long userId) {
-		return userCourseRepository.findCourseCount(userId);
-	}
+    public Integer findCount(Long userId) {
+        return userCourseRepository.findCourseCount(userId);
+    }
 
-	public int updateDate(Date date, Long contentId, Long userId) {
-		return userCourseRepository.updateDate(date, contentId, userId);
-	}
-	
-	public Integer findAttendanceCount(Long userId, Long courseId) {
-		return userCourseRepository.findAttendanceCount(userId, courseId);
-	}
+    public int updateDate(Date date, Long contentId, Long userId) {
+        return userCourseRepository.updateDate(date, contentId, userId);
+    }
+
+    public Integer findAttendanceCount(Long userId, Long courseId) {
+        return userCourseRepository.findAttendanceCount(userId, courseId);
+    }
 }

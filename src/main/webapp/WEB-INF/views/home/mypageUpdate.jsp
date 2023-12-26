@@ -27,7 +27,7 @@
 </script>
 </head>
 <body>
-	<div>
+	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
 	<div class="container justify-content-center w-50">
@@ -63,7 +63,7 @@
 			<button class="w-75 btn btn-primary btn-lg" type="submit" id="confirmButton">비밀번호 변경</button>
 		</form>
 	</div>
-	<div>
+	<div class="w-25">
 		<%@include file="../common/rightbar.jsp"%>
 	</div>
 </body>

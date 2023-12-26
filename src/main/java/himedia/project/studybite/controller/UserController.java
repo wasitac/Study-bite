@@ -36,7 +36,6 @@ public class UserController {
 	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
-		request.getSession().invalidate();
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
@@ -48,15 +47,15 @@ public class UserController {
 	 */
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
-		User userInfo = null;
 		Optional<User> user = userService.login(userLogin);
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
 			return "/common/alert";
 		}
+		
+		User userInfo = user.get();
 
-		userInfo = user.get();
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", userInfo);
@@ -121,10 +120,8 @@ public class UserController {
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동
-		if (userService.updatePassword(passwordUpdate)) {
-			request.getSession().invalidate();
+		if (userService.updatePassword(passwordUpdate))
 			return "redirect:/";
-		}
 
 		request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
 		request.setAttribute("url", "mypage/update");

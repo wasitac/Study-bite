@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../common/config.jsp"%>
-<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
-<title>수강과목-질의 응답 상세</title>
+<title>질문 수정</title>
 </head>
 <body>
 	<div class="w-25">
@@ -31,7 +30,6 @@
 			<div>${qna.description}</div>
 		</div>
 		<hr class="my-5">
-		<img alt="첨부파일" src="${fileBoard.filepath}">
 		<a href="${fileBoard.filepath}">첨부파일 다운받기</a>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
