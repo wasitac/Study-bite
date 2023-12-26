@@ -32,7 +32,7 @@ public class NotificationInterceptor implements HandlerInterceptor {
 		List<Notification> notifications = notificationService.getNotification(user.get().getUserId());
 		
 		session.setAttribute("notifications", notifications);
-		log.info("알림 인터셉터" + notifications.get(1).getUserId());
+//		log.info("알림 인터셉터" + notifications.get(1).getUserId());
 		return true;
 	}
 }

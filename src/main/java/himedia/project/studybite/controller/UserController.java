@@ -33,14 +33,19 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 	
+	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
 		request.getSession().invalidate();
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
-
-	// 로그인
+	
+	/**
+	 * 로그인
+	 * 
+	 * @author 이지홍
+	 */
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		User userInfo = null;

@@ -4,8 +4,11 @@
  	1: 강의공지
  	2: 질의응답
  	3: 전체공지
+ 	이지홍
  */
  function path(category, courseId, id){
+    var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+ 
  	if(category == 1)
  		location.href = "http://localhost:8080/studybite/course/" + courseId + "/qna/" + id;
  	else if(category == 2)
