@@ -52,9 +52,9 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 신지은
+	 * 강의 목차
+	 * @author 신지은(강의 목차 조회), 송창민(수강한 날짜, 퍼센트 표시)
 	 */
-	// 강의 목차
 	@GetMapping("/{courseId}/contents")
 	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user,
 			Model model) {
@@ -73,9 +73,9 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 신지은
+	 * 강의 콘텐츠 시청
+	 * @author 신지은(강의 콘텐츠 데이터 조회), 송창민(콘텐츠 수강 시 현재 날짜 저장)
 	 */
-	// 강의 콘텐츠 시청
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content(@PathVariable Long courseId, @PathVariable Long contentsId,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
@@ -93,7 +93,10 @@ public class CourseController {
 		return "course/content";
 	}
 
-	// 강의 공지 목록
+	/**
+	 * 강의 공지 목록
+	 * @author 김민혜
+	 */
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, Model model) {
 		List<News> news = courseService.findNewsPage(courseId);
@@ -104,7 +107,10 @@ public class CourseController {
 		return "/course/news";
 	}
 
-	// 강의 공지 상세
+	/**
+	 * 강의 공지 상세
+	 * @author 김민혜
+	 */
 	@GetMapping("/{courseId}/news/{newsId}")
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
 		courseService.newsViewCnt(newsId);
@@ -116,7 +122,10 @@ public class CourseController {
 		return "/course/newsDesc";
 	}
 
-	// 질의 응답 목록
+	/**
+	 * 질의 응답 목록
+	 * @author 김민혜
+	 */
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, Model model) {
 		List<Qna> qna = courseService.findQnaPage(courseId);
@@ -127,7 +136,10 @@ public class CourseController {
 		return "/course/qna";
 	}
 
-	// 질의 응답 등록 폼
+	/**
+	 * 질의 응답 등록 폼
+	 * @author 김민혜
+	 */
 	@GetMapping("/{courseId}/qna/add")
 	public String qnaQuestion(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -136,9 +148,8 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(), 신지은(파일 업로드 기능)
+	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
 	 */
-	// 질의 응답 등록
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
 			@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
@@ -156,9 +167,8 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(), 신지은(파일 다운로드 기능)
+	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능)
 	 */
-	// 질의 응답 상세
 	@GetMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
 		courseService.qnaViewCnt(qnaId);
@@ -174,20 +184,23 @@ public class CourseController {
 	}
 
 	/**
+	 * 질의 응답 수정
 	 * @author 신지은
 	 */
-	// 질의 응답 수정
 	@PostMapping("/{courseId}/qna/{qnaId}/edit")
 	public String qnaEdit(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		// Qna qna = courseService.qnaInfo(qnaId);
-
+		
 		// model.addAttribute("qna", qna);
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "course/qnaEdit";
 	}
 
-	// 출결 확인
+	/**
+	 *  출결 확인
+	 * @author 송창민
+	 */
 	@GetMapping("/{courseId}/attendance")
 	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user,
 			Model model) {
