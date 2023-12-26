@@ -9,6 +9,9 @@ import org.apache.ibatis.annotations.Update;
 
 import himedia.project.studybite.domain.Notification;
 
+/**
+ * @author 이지홍
+ */
 public interface NotificationRepository {
 
 	@Select("select * from notification where userId = #{userId} and isChecked = 1 order by notificationId desc")

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -7,22 +8,28 @@
   						http://mybatis.org/schema/mybatis-spring.xsd
   						http://www.springframework.org/schema/context 
   						https://www.springframework.org/schema/context/spring-context.xsd"
-	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-	>
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/studybite?useSSL=false&amp;serverTimezone=UTC" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/studybite?useSSL=false&amp;serverTimezone=UTC" />
 		<property name="username" value="root" />
 		<property name="password" value="1111" />
 	</bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/studybite/config/studybite-config.xml" />
-		<property name="mapperLocations" value="classpath:/studybite/mapper/*.xml" />
+		<property name="configLocation"
+			value="classpath:/studybite/config/studybite-config.xml" />
+		<property name="mapperLocations"
+			value="classpath:/studybite/mapper/*.xml" />
 	</bean>
-	
-	<mybatis:scan base-package="himedia.project.studybite.repository"/>
+
+	<mybatis:scan
+		base-package="himedia.project.studybite.repository" />
 </beans>

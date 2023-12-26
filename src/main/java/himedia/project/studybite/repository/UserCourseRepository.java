@@ -11,10 +11,9 @@ import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.UserCourse;
 
 /**
- 
-UserCourse 테이블을 사용하는 Repository입니다.
-@author 송창민
-**/
+* UserCourse 테이블을 사용하는 Repository입니다.
+* @author 송창민
+*/
 
 @Repository
 public interface UserCourseRepository {

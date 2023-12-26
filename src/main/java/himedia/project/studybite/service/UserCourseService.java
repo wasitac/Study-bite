@@ -12,11 +12,9 @@ import himedia.project.studybite.repository.UserCourseRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- 
-UserCourseRepository를 사용하는 서비스
-@author 송창민
-**/
-
+* UserCourseRepository를 사용하는 서비스
+* @author 송창민
+*/
 @Service
 @RequiredArgsConstructor
 public class UserCourseService {

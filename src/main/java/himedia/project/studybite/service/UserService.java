@@ -22,7 +22,10 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final NoticeRepository noticeRepository;
 	
-	// 로그인
+	/**
+	 * 로그인
+	 * @author 이지홍
+	 */
 	public Optional<User> login(UserLogin userLogin) {
 		Optional<User> user = userRepository.login(userLogin);
 		return user;
@@ -32,8 +35,10 @@ public class UserService {
 		Optional<User> user = userRepository.findUserById(userId);
 		return user;
 	}
-
-	// 비밀번호 변경
+	/**
+	 * 비밀번호 변경
+	 * @author 이지홍
+	 */
 	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
 		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
 		if(userRepository.checkPassword(passwordUpdate).isEmpty()) 
@@ -43,32 +48,50 @@ public class UserService {
 		return true;
 	}
 	
-	// 공지사항
+	/**
+	 * 공지사항 목록
+	 * @author 김민혜
+	 */
 	public List<Notice> findPage(int page) {
 		return noticeRepository.findPage(page);
 	}
 		
-	// 공지사항 상세
+	/**
+	 * 공지사항 상세
+	 * @author 김민혜
+	 */
 	public Optional<Notice> findNoticeDesc(Long noticeId) {
 		return noticeRepository.findNoticeDesc(noticeId);
 	}
 	
-	// 이전글
+	/**
+	 * 이전글 표시 및 이동
+	 * @author 김민혜
+	 */
 	public Notice prev(Long noticeId) {
 		return noticeRepository.prev(noticeId);
 	}
 	
-	// 다음글
+	/**
+	 * 다음글 표시 및 이동
+	 * @author 김민혜
+	 */
 	public Notice next(Long noticeId) {
 		return noticeRepository.next(noticeId);
 	}
 	
-	// 조회수
+	/**
+	 * 조회수 증가
+	 * @author 김민혜
+	 */
 	public Long viewcnt(Long noticeId) {
 		return noticeRepository.viewcnt(noticeId);
 	}
 	
-	// 공지사항 총 개수
+	/**
+	 * 공지사항 글 개수
+	 * @author 김민혜
+	 */
 	public int cntNotice() {
 		return noticeRepository.cntNotice();
 	}

@@ -33,6 +33,10 @@ public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 	
+	/**
+	 * 로그인 화면
+	 * @author 이지홍
+	 */
 	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
@@ -41,8 +45,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 로그인
-	 * 
+	 * 로그인 post 요청 
 	 * @author 이지홍
 	 */
 	@PostMapping("/")
@@ -62,7 +65,11 @@ public class UserController {
 		return "redirect:/home";
 	}
 
-	// 로그아웃
+/**
+ * 	로그아웃
+ * @author 이지홍
+ */
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
@@ -72,8 +79,11 @@ public class UserController {
 
 		return "redirect:/";
 	}
-
-	// 대시보드
+	
+	/**
+	 * 	대시보드
+	 * @author 송창민
+	 */
 	@GetMapping("/home")
 	public String dashboard(@SessionAttribute(name = "user", required = false) User user, Model model) {
 		Long userId = user.getUserId();
@@ -86,7 +96,10 @@ public class UserController {
 		return "/home/home";
 	}
 
-	// 수강과목
+	/**
+	 * 	수강과목
+	 * @author 송창민
+	 */
 	@GetMapping("/course")
 	public String course(@SessionAttribute(name = "user", required = false) User user, Model model) {
 		Long userId = user.getUserId();
@@ -99,7 +112,10 @@ public class UserController {
 		return "/home/course";
 	}
 
-	// 내 정보
+	/**
+	 * 내 정보
+	 * @author 이지홍
+	 */
 	@GetMapping("/mypage")
 	public String mypage(@SessionAttribute(name = "user", required = false) User user, Model model) {
 		model.addAttribute("user", user);
@@ -128,7 +144,10 @@ public class UserController {
 		return "/common/alert";
 	}
 
-	// 공지사항
+	/**
+	 * 공지사항 목록
+	 * @author 김민혜
+	 */
 	@GetMapping("/notice")
 	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
@@ -152,7 +171,10 @@ public class UserController {
 		return "/home/notice";
 	}
 
-	// 공지사항 상세
+	/**
+	 * 공지사항 상세
+	 * @author 김민혜
+	 */
 	@GetMapping("/notice/{noticeId}")
 	public String noticeDesc(@PathVariable Long noticeId, @SessionAttribute(name = "user", required = false) User user,
 			Model model) {

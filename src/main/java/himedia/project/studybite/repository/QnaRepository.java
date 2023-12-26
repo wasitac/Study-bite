@@ -13,30 +13,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 import himedia.project.studybite.domain.Qna;
 
+/**
+ * @author 김민혜
+ */
 @Repository
 public interface QnaRepository {
-	// 질의 응답 목록
+	/* 질의 응답 목록 */
 	@Select ("select * from qna where courseId = #{courseId} order by qnaId desc limit 10")
 	List<Qna> findQnaPage(Long courseId);
 	
-	// 질의 응답 상세
+	/* 질의 응답 상세 */
 	@Select ("select * from qna where qnaId = #{qnaId}")
 	Optional<Qna> findQnaDesc(Long qnaId);
 	
-	// 질의 응답 등록
+	/* 질의 응답 등록 */
 	@Insert ("insert into qna(courseId, userName, title, description, views, date) values (#{courseId}, '익명', #{title}, #{description}, 0 , now())")
 	@Options(useGeneratedKeys = true, keyProperty = "qnaId")
 	void question(Qna qna);
 	
-	/**
-	 * @author 신지은 
-	 */
-	//질의 응답 조회
-	//@Select("select * from qna where qnaId = #{}")
-	//Qna selectQna(Long qnaId);
-	
-	
-	// 조회수
+	/* 조회수 증가 */
 	@Update("update qna set views = views + 1 where qnaId = #{qnaId}")
 	Long qnaViewCnt(Long qnaId);
 }
