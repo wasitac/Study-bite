@@ -12,6 +12,7 @@ import himedia.project.studybite.repository.QnaRepository;
 import himedia.project.studybite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
