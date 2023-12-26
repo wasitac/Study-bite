@@ -5,16 +5,17 @@
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <link href="${resPath}/css/courseTitle.css" rel="stylesheet">
-<title>수강과목-질의 응답 상세</title>
+<title>강의 공지 등록</title>
 </head>
 <body>
+	<h1>강의 공지 등록</h1>
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
 	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp" %>
-		<div class="my-3 text-left">
+		<div class="my-1 text-left">
 			<h3 style="color: #2563EB">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">

@@ -17,8 +17,8 @@ public interface NoticeRepository {
 	/* 공지사항 목록 */
 	@Select("select * from notice order by noticeId desc limit #{pageNum}, 10")
 	List<Notice> findPage(Integer pageNum);
-
-	/* 공지사항 상세 */
+	
+	// 공지사항 상세
 	@Select("select * from notice where noticeId = #{noticeId}")
 	Optional<Notice> findNoticeDesc(Long noticeId);
 
