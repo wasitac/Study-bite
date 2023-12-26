@@ -48,8 +48,8 @@ public class UserService {
 	}
 	
 	// 공지사항
-	public List<Notice> findPage(int page) {
-		return noticeRepository.findPage(page);
+	public List<Notice> findPage(Integer pageNum) {
+		return noticeRepository.findPage(pageNum);
 	}
 		
 	// 공지사항 상세
@@ -75,5 +75,15 @@ public class UserService {
 	// 공지사항 총 개수
 	public int cntNotice() {
 		return noticeRepository.cntNotice();
+	}
+	
+	// 글 검색
+	public List<Notice> search(String search, Integer pageNum) {
+		return noticeRepository.search(search, pageNum);
+	}
+	
+	// 검색된 글 개수
+	public int cntSearchNotice(String search) {
+		return noticeRepository.cntSearchNotice(search);
 	}
 }

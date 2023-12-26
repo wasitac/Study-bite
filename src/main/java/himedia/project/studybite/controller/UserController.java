@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
-	
+
 	@Autowired
 	public UserController(UserService userService, UserCourseService userCourseService) {
 		this.userService = userService;
@@ -171,6 +171,34 @@ public class UserController {
 		model.addAttribute("num", num);
 
 		return "/home/notice";
+	}
+
+	// 공지사항 검색
+	@GetMapping("/notice/search")
+	public String search(@RequestParam(name = "page", required = false) Integer pageNum,
+			@RequestParam(name = "search", required = false) String search,
+			@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
+
+		if (pageNum == null) {
+			pageNum = 0;
+		}
+
+		List<Notice> notices = userService.search(search, pageNum);
+		model.addAttribute("notices", notices);
+
+		Optional<User> user = userService.findUser(userId);
+		model.addAttribute("user", user.get());
+
+		int noticeCnt = userService.cntSearchNotice(search);
+		int num = userService.cntSearchNotice(search) / 10;
+
+		if (noticeCnt % 10 != 0)
+			num = num + 1;
+
+		model.addAttribute("num", num);
+
+		return "/home/notice";
+
 	}
 
 	// 공지사항 상세

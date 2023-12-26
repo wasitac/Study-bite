@@ -17,6 +17,14 @@
 		<hr class="my-5">
 
 		<div>
+			<form action="/studybite/notice/search" method="get" id="search" class="d-flex mb-2" style="width: 40%; float: right">
+				<input name="search" class="form-control me-2" type="text" placeholder="제목으로 검색">
+				<button type="submit" class="btn btn-outline-primary">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+</svg>
+				</button>
+			</form>
 			<table class="table table-hover" style="width: 100%;">
 				<thead>
 					<tr>
@@ -32,9 +40,7 @@
 					<c:forEach var="notice" items="${notices}">
 						<tr class="table">
 							<td>${notice.noticeId}</td>
-							<td>
-								<a href="/studybite/notice/${notice.noticeId}" style="text-decoration: none">${notice.title}</a>
-							</td>
+							<td><a href="/studybite/notice/${notice.noticeId}" style="text-decoration: none">${notice.title}</a></td>
 							<td>관리자</td>
 							<td>${notice.date}</td>
 							<td>${notice.views}</td>
@@ -49,9 +55,9 @@
 			<ul class="pagination justify-content-center">
 				<li class="page-item"><a class="page-link" href="/studybite/notice?page=0" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a></li>
-					<c:forEach var="cnt" begin="1" end="${num}" step="1">
-						<li class="page-item"><a class="page-link" href="/studybite/notice?page=${(cnt-1) * 10}">${cnt}</a></li>
-					</c:forEach>
+				<c:forEach var="cnt" begin="1" end="${num}" step="1">
+					<li class="page-item"><a class="page-link" href="/studybite/notice?page=${(cnt-1) * 10}">${cnt}</a></li>
+				</c:forEach>
 				<li class="page-item"><a class="page-link" href="/studybite/notice?page=${(num-1) * 10}" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
