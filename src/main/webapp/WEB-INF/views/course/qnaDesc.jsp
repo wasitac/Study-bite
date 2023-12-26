@@ -39,11 +39,13 @@
 
 		</form>
 		<hr class="my-5">
+		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
+		<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 </body>
-<script src="${resPath}/js/courseBar.js"></script>
 </html>

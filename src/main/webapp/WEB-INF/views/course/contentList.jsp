@@ -26,7 +26,7 @@
 		<%@ include file="../common/courseBar.jsp" %>
 		<div class="d-flex">
 			<h3 class="blue600 info">강의 목차</h3>
-			<h4 class="ms-auto white950 info">수강 진도 현황 : <span id="percentage">${attPercentage}%</span></h4>
+			<h5 class="ms-auto white950 info">수강 진도 현황 : <span id="percentage">${attPercentage}%</span></h5>
 		</div>
 		<div>
 			 <div>
