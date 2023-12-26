@@ -31,8 +31,8 @@
 			<div>${qna.description}</div>
 		</div>
 		<hr class="my-5">
-		<img alt="첨부파일" src="${fileBoard.filepath}">
-		<a href="${fileBoard.filepath}">첨부파일 다운받기</a>
+		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
+		<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">
