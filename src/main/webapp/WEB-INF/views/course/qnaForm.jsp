@@ -24,7 +24,7 @@
 		</div>
 		<h4 style="color: #2563EB" class="mt-4">질문 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseInfo.courseId}/qna/add" method="post">
+			<form action="/studybite/course/${courseInfo.courseId}/qna/add" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 				</div>
@@ -32,6 +32,9 @@
 					<label class="col-1">내용</label>
 					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 				</div>
+				
+				<input type="file" name="file" id="file" multiple="multiple">
+				
 				<hr class="row mt-5">
 				<div class="position-absolute end-0 mt-1">
 					<button type="submit" class="btn btn-primary">작성하기</button>
@@ -46,6 +49,6 @@
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 </body>
-<script src="${resPath}/js/courseBar.js"></script>
 </html>

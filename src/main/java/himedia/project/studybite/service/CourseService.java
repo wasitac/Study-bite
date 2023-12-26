@@ -1,15 +1,22 @@
 package himedia.project.studybite.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import himedia.project.studybite.domain.Content;
 import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
+import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.repository.BoardRepository;
 import himedia.project.studybite.repository.ContentRepository;
 import himedia.project.studybite.repository.CourseRepository;
 import himedia.project.studybite.repository.NewsRepository;
@@ -23,22 +30,34 @@ public class CourseService {
 	private final ContentRepository contentRepository;
 	private final NewsRepository newsRepository;
 	private final QnaRepository qnaRepository;
+	private final BoardRepository boardRepository;
 	
 	// 강의 타이틀 강의 분류, 강의명, 교육자 조회
 	public Optional<Course> courseInfo(Long courseId) {
 		return courseRepository.courseInfo(courseId);
 	}
-
-	// 강의의 강좌 목록 가져오기
-	public List<Content> contents(Long courseId) {
-		return contentRepository.contents(courseId);
+	/**
+	 * 강의의 강좌 목록 가져오기
+	 * @author 신지은
+	 */
+	public List<Content> contentsInfo(Long courseId) {
+		return contentRepository.contentsInfo(courseId);
 	}
-
+	/**
+	 * @author 신지은
+	 */
 	// 강좌명 가져오기
 	public Optional<Content> findContentName(Long contentId) {
 		return contentRepository.findContentName(contentId);
 	}
-	
+	/**
+	 * @author 신지은
+	 */
+	// 강의 영상 주소 가져오기
+	public Optional<ContentData> findContentUrl(Long contentId) {
+		return contentRepository.findContentUrl(contentId);
+	}
+
 	// 강의 공지 목록
 	public List<News> findNewsPage(Long courseId) {
 		return newsRepository.findNewsPage(courseId);
@@ -58,10 +77,44 @@ public class CourseService {
 	public Optional<Qna> findQnaDesc(Long qnaId) {
 		return qnaRepository.findQnaDesc(qnaId);
 	}
-	
 	// 질의 응답 등록
 	public void question(Qna qna) {
 		qnaRepository.question(qna);
+	}
+	
+	/**
+	 * @author 신지은
+	 */
+	// 질의 응답 조회
+//	public Qna qnaInfo(Long qnaId) {
+//		return qnaRepository.selectQna(qnaId);
+//	}
+	
+	/**
+	 * 질의응답 파일 저장
+	 * @author 신지은
+	 */
+	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
+		//1. 파일 저장 경로 설정 : 
+		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		//랜덤으로 이름 생성
+		UUID uuid = UUID.randomUUID();		
+		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
+		String fileName = uuid + "_" + file.getOriginalFilename();
+		// 3. 파일 생성
+		File saveFile = new File(filePath, fileName);	//파일을 생성하면 경로는 filePath, 이름은 name으로 저장
+		// 5. 서버로 전송
+		file.transferTo(saveFile);					//예외 처리 필요
+		
+		fileBoard.setCategory(2);
+		fileBoard.setFilename(fileName);
+		fileBoard.setFilepath(filePath + fileName);
+		
+		boardRepository.save(fileBoard);
+	}
+	
+	public Optional<FileBoard> findFile(int category, Long qnaId) {
+		return boardRepository.findFile(category, qnaId);
 	}
 	
 	// 강의 공지 조회수
@@ -74,8 +127,4 @@ public class CourseService {
 		return qnaRepository.qnaViewCnt(qnaId);
 	}
 	
-	// 강의 영상 주소 가져오기
-	public Optional<ContentData> findContentUrl(Long contentId) {
-		return contentRepository.findContentUrl(contentId);
-	}
 }

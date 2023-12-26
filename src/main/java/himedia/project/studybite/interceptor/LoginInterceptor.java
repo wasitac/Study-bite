@@ -1,11 +1,13 @@
 package himedia.project.studybite.interceptor;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,12 +17,15 @@ import lombok.extern.slf4j.Slf4j;
  * @author 이지홍
  *
  */
+@Slf4j
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession(false);
-		Optional<User> user = Optional.ofNullable((User)(session.getAttribute("user")));
+		Optional<User> user = null;
+		if(session != null)
+			user = Optional.ofNullable((User)(session.getAttribute("user")));
 
 		/**
 		 * 로그인 세션이 없으면 로그인 화면으로 이동하게 만듭니다. session을 파기한 후의 요청에 값이 안들어있는 session이 생겨있습니다.
@@ -32,21 +37,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(request.getContextPath() + "/");
 			return false;
 		}
-
-		log.info("preHandler: userId >>" + user.get().getUserId());
-		
+//		log.info("preHandler: userId >>" + user.get().getUserId());
 		return true;
 	}
 
-//	@Override
-//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-//			ModelAndView modelAndView) throws Exception {
-//
-//	}
-//
-//	@Override
-//	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-//			throws Exception {
-//
-//	}
 }

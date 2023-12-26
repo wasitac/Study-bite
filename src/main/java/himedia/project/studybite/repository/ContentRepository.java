@@ -11,12 +11,10 @@ import himedia.project.studybite.domain.ContentData;
 
 @Repository
 public interface ContentRepository {
-	//강의 개요 조회
-	//ContentData courseOutline();
 		
 	//강의 강좌 목록 조회 (이미지(보류), 강좌명 리스트)
 	@Select("select * from content where courseId =#{courseId}")
-	List<Content> contents(Long courseId);
+	List<Content> contentsInfo(Long courseId);
 	
 	// 강좌명 조회(content테이블에서)
 	@Select("select * from content where contentId = #{contentId}")
