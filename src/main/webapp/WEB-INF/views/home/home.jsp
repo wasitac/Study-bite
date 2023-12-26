@@ -14,7 +14,7 @@
 		<div>
 			<h3 class="mb-3 blue600">수강과목</h3>
 			<c:forEach var="course" items="${courses}">
-				<div class="px-4 py-3 rounded mb-3" style="background-color: #EFF4FF;">
+				<div class="px-4 py-3 rounded mb-3 bg-blue50">
 					<input class="btn blue600" type="button" value="${course.sort}" style="cursor: default;">
 					<div class="d-flex">
 						<h2 class="me-auto">${course.courseName}</h2>
@@ -29,7 +29,7 @@
 				<h3 class="me-auto" style="color: #2563eb">새 소식</h3>
 			</div>
 			<c:forEach var="news" items="${newses}">
-				<div class="card mb-3 border-0 px-1" style="background-color: #eff4ff; cursor: pointer;" onclick="location.href='/studybite/course/${news.courseId}/news/${news.newsId}'">
+				<div class="card mb-3 border-0 px-1 bg-blue50" style="cursor: pointer;" onclick="location.href='/studybite/course/${news.courseId}/news/${news.newsId}'">
 					<div class="card-body">
 						<h5 class="card-title">${news.title}</h5>
 						<p class="card-text">

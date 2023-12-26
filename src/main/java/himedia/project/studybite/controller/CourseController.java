@@ -152,11 +152,12 @@ public class CourseController {
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
-			@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
+			@RequestParam MultipartFile file, @SessionAttribute(name = "user", required = false) User user, HttpServletRequest request, FileBoard fileBoard, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-
+		String userName = user.getUserName();
 		qna.setCourseId(courseId);
+		qna.setUserName(userName);
 		courseService.question(qna);
 
 		fileBoard.setId(qna.getQnaId());
