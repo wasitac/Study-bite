@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -264,10 +263,10 @@ public class CourseController {
 	 * 질의 응답 삭제
 	 * @author 신지은
 	 */
-	@postMapping("/{courseId}/qna/{qnaId}/delete")
+	@DeleteMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDelete(@PathVariable Long courseId, @PathVariable Long qnaId) {
-		
-		return "course/qna";
+		log.info("삭제 메서드 실행됨");
+		return "redirect:/course/{courseId}/qna";
 	}
 
 	/**

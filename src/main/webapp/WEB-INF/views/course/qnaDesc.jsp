@@ -11,7 +11,7 @@
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50">
+	<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
@@ -23,7 +23,7 @@
 			</h4>
 		</div>
 
-		<form:form modelAttribute="qna" id="qnaDesc" >
+		<form:form modelAttribute="qna" id="qnaDesc" method="delete" >
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
@@ -44,17 +44,6 @@
 					<form:button type="button" class="delete btn btn-primary" id="${qna.qnaId}">삭제</form:button>
 				</div>
 			</c:if>
-			<!-- Your form fields go here -->
-
-			<!-- Hidden input to store the actual method -->
-			<input type="hidden" name="_method" value="POST">
-
-			<!-- Delete 버튼 -->
-			<button type="button" onclick="submitForm('DELETE')">Delete</button>
-
-			<!-- Submit 버튼 -->
-			<button type="submit">Submit</button>
-
 		</form:form>
 		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-50 h-50">
 		<div>
@@ -67,19 +56,10 @@
 	</div>
 	<script src="${resPath}/js/courseBar.js"></script>
 	<script type="text/javascript">
-	
-		function submitForm(method) {
-			// 폼의 method를 동적으로 변경
-			document.getElementById('qnaDesc').setAttribute('method', method);
-			// 폼 전송
-			document.getElementById('qnaDesc').submit();
-		}
-
+		var courseId = '${courseInfo.courseId}';
+		console.log("courseId = " + courseId);
 		$(".delete").click(function() {
-			console.log('삭제 버튼 클릭');
-
 			var id = $(this).attr('id');
-			console.log(id);
 
 			// 확인창
 			var choice = confirm("질문을 삭제하겠습니까?");
@@ -87,13 +67,8 @@
 
 			//확인창에서 확인을 클릭하면,
 			 if (choice) {
-				$('#qnaDesc').attr('method', 'delete');
-				$('#qnaDesc').attr('action',
-						'${context}course/${courseId}/qna/' + id)
-						.submit();
-				console.log('submit 버튼 클릭함');
+				$('#qnaDesc').attr('action', '/studybite/course/' + courseId + '/qna/' + id).submit();
 			} 
-
 		});
 	</script>
 </body>
