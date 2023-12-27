@@ -41,23 +41,15 @@
 			</table>
 		</div>
 		<hr class="my-5">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-			<c:if test="${user.role eq 2}">
-				<button type="button" class="btn btn-primary position-absolute end-0 mt-0" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
-			</c:if>
-		</nav>
-			<%@ include file="../common/footer.jsp" %>
+		<div>
+			<%@ include file="../common/pagination.jsp" %>
+		</div>
+		<c:if test="${user.role eq 2}">
+			<div class="d-flex justify-content-end mt-1">
+				<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+			</div>
+		</c:if>
+		<%@ include file="../common/footer.jsp" %>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
