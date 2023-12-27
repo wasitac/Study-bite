@@ -95,12 +95,28 @@ public class CourseController {
 
 	// 강의 공지 목록
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, Model model) {
-		List<News> news = courseService.findNewsPage(courseId);
+	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
+		
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
+		if (pageNum == null) {
+			pageNum = 0;
+		}
+		
+		List<News> news = courseService.findNewsPage(courseId, pageNum);
+		
+		String location = "course/" + courseId + "/news";
+		
+		int newsCnt = courseService.cntNews(courseId);
+		int num = courseService.cntNews(courseId) / 10;
+		
+		if (newsCnt % 10 != 0)
+			num = num + 1;
 
 		model.addAttribute("news", news);
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("num", num);
+		model.addAttribute("location", location);
 		return "/course/news";
 	}
 
@@ -118,12 +134,27 @@ public class CourseController {
 
 	// 질의 응답 목록
 	@GetMapping("/{courseId}/qna")
-	public String qna(@PathVariable Long courseId, Model model) {
-		List<Qna> qna = courseService.findQnaPage(courseId);
+	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
+		if (pageNum == null) {
+			pageNum = 0;
+		}
+		
+		List<Qna> qna = courseService.findQnaPage(courseId, pageNum);
+		
+		String location = "course/" + courseId + "/qna";
+		
+		int qnaCnt = courseService.cntQna(courseId);
+		int num = courseService.cntQna(courseId) / 10;
+		
+		if (qnaCnt % 10 != 0)
+			num = num + 1;
 
 		model.addAttribute("qna", qna);
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("num", num);
+		model.addAttribute("location", location);
 		return "/course/qna";
 	}
 
@@ -141,7 +172,7 @@ public class CourseController {
 	// 질의 응답 등록
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
-			@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
+			@RequestParam(name = "file", required = false)  MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
@@ -151,6 +182,18 @@ public class CourseController {
 		fileBoard.setId(qna.getQnaId());
 		courseService.upload(request, fileBoard, file);
 
+		model.addAttribute("courseInfo", courseInfo.get());
+		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
+	}
+	
+	// 질의 응답 답변 등록
+	@PostMapping("/{courseId}/qna/answer")
+	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request, Model model) {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+
+		qna.setCourseId(courseId);
+		courseService.answer(qna);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}

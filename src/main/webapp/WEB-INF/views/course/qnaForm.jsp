@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <link href="${resPath}/css/courseTitle.css" rel="stylesheet">
-<title>수강과목-질의 응답 상세</title>
+<title>수강과목-질의 응답 등록</title>
 </head>
 <body>
 	<div class="w-25">

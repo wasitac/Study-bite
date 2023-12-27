@@ -13,7 +13,7 @@
 	</div>
 	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
 		<%@ include file="../common/courseTitle.jsp"%>
-		<%@ include file="../common/courseBar.jsp" %>
+		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h3 class="blue600 info">강의 공지</h3>
 		</div>
@@ -30,36 +30,27 @@
 				</thead>
 				<tbody class="table-group-divider">
 					<c:forEach var="news" items="${news}">
-					<tr class="table">
-						<td>${news.newsId}</td>
-						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
-						<td>${news.userName}</td>
-						<td>${news.date}</td>
-						<td>${news.views}</td>
-					</tr>
+						<tr class="table">
+							<td>${news.newsId}</td>
+							<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
+							<td>${news.userName}</td>
+							<td>${news.date}</td>
+							<td>${news.views}</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 		<hr class="my-5">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">...</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
-			<%@ include file="../common/footer.jsp" %>
+		<div>
+			<%@ include file="../common/pagination.jsp"%>
+		</div>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 </body>
+<script src="${resPath}/js/pagination.js"></script>
 <script src="${resPath}/js/courseBar.js"></script>
 </html>

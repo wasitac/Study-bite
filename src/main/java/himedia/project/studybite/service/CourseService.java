@@ -59,8 +59,8 @@ public class CourseService {
 	}
 
 	// 강의 공지 목록
-	public List<News> findNewsPage(Long courseId) {
-		return newsRepository.findNewsPage(courseId);
+	public List<News> findNewsPage(Long courseId, Integer pageNum) {
+		return newsRepository.findNewsPage(courseId, pageNum);
 	}
 	
 	// 강의 공지 상세
@@ -69,17 +69,23 @@ public class CourseService {
 	}
 	
 	// 질의 응답 목록
-	public List<Qna> findQnaPage(Long courseId) {
-		return qnaRepository.findQnaPage(courseId);
+	public List<Qna> findQnaPage(Long courseId, Integer pageNum) {
+		return qnaRepository.findQnaPage(courseId, pageNum);
 	}
 	
 	// 질의 응답 상세
 	public Optional<Qna> findQnaDesc(Long qnaId) {
 		return qnaRepository.findQnaDesc(qnaId);
 	}
+	
 	// 질의 응답 등록
 	public void question(Qna qna) {
 		qnaRepository.question(qna);
+	}
+	
+	// 질의 응답 답변 등록
+	public void answer(Qna qna) {
+		qnaRepository.answer(qna);
 	}
 	
 	/**
@@ -122,9 +128,19 @@ public class CourseService {
 		return newsRepository.newsViewCnt(newsId);
 	}
 	
+	// 강의 공지 글 개수
+	public int cntNews(Long courseId) {
+		return newsRepository.cntNews(courseId);
+	}
+	
 	// 질의 응답 조회수
 	public Long qnaViewCnt(Long qnaId) {
 		return qnaRepository.qnaViewCnt(qnaId);
+	}
+	
+	// 질의 응답 글 개수
+	public int cntQna(Long courseId) {
+		return qnaRepository.cntQna(courseId);
 	}
 	
 }

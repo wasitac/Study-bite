@@ -141,6 +141,9 @@ public class UserController {
 		List<Notice> notices = userService.findPage(pageNum);
 		model.addAttribute("notices", notices);
 		model.addAttribute("user", user);
+		
+		String location = "notice";
+		model.addAttribute("location", location);
 
 		int noticeCnt = userService.cntNotice();
 		int num = userService.cntNotice() / 10;
@@ -156,8 +159,8 @@ public class UserController {
 	@GetMapping("/notice/search")
 	public String search(@RequestParam(name = "page", required = false) Integer pageNum,
 			@RequestParam(name = "search", required = false) String search,
-			@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+     
 		if (pageNum == null) {
 			pageNum = 0;
 		}
@@ -165,8 +168,7 @@ public class UserController {
 		List<Notice> notices = userService.search(search, pageNum);
 		model.addAttribute("notices", notices);
 
-		Optional<User> user = userService.findUser(userId);
-		model.addAttribute("user", user.get());
+		model.addAttribute("user", user);
 
 		int noticeCnt = userService.cntSearchNotice(search);
 		int num = userService.cntSearchNotice(search) / 10;
