@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,13 +65,6 @@ public class CourseService {
 	 */
 	public List<News> findNewsPage(Long courseId) {
 		return newsRepository.findNewsPage(courseId);
-	}
-	/**
-	 * 강사 : 강의 공지 등록
-	 * @author 신지은
-	 */
-	public void newsAdd(News news) {
-		newsRepository.newsAdd(news);
 	}
 	
 	/**

@@ -129,41 +129,6 @@ public class CourseController {
 	}
 
 	/**
-
-	 * 강사 : 강의 공지 등록 폼
-	 * 
-	 * @author 신지은
-	 */
-	@GetMapping("/{courseId}/news/add")
-	public String NewsForm(@PathVariable Long courseId, Model model) {
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		model.addAttribute("courseInfo", courseInfo.get());
-		return "course/newsForm";
-	}
-
-	/**
-	 * 강사 : 강의 공지 등록
-	 * @author 신지은
-	 */
-	@PostMapping("/{courseId}/news/add")
-	public String postNewsAdd(@PathVariable Long courseId, @ModelAttribute News news,	
-			@RequestParam MultipartFile file, @SessionAttribute(name = "user", required = false) User user,
-			HttpServletRequest request, FileBoard fileBoard, Model model)throws Exception {
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-
-		news.setCourseId(courseId);
-		news.setUserName(user.getUserName());
-		courseService.newsAdd(news);
-
-		fileBoard.setId(news.getNewsId());
-		fileBoard.setCategory(1);
-		courseService.upload(request, fileBoard, file);
-
-		model.addAttribute("courseInfo", courseInfo.get());
-		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
-	}
-
-	/**
 	 * 강사 : 유저 확인 후 공지 등록버튼 활성화
 	 * @author 신지은
 	 */
