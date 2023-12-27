@@ -15,7 +15,6 @@
 			<h2 class="blue600">공지 사항</h2>
 		</div>
 		<hr class="my-5">
-
 		<div>
 			<table class="table table-hover" style="width: 100%;">
 				<thead>
@@ -62,6 +61,5 @@
 		<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
-
 </body>
 </html>

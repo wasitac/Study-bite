@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
-<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <title>수강과목-강의 개요</title>
 </head>
 <body>
@@ -25,6 +22,6 @@
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 </body>
-<script src="${resPath}/js/courseBar.js"></script>
 </html>
