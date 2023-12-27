@@ -43,4 +43,8 @@ public class UserCourseService {
     public Integer findAttendanceCount(Long userId, Long courseId) {
         return userCourseRepository.findAttendanceCount(userId, courseId);
     }
+    
+    public Long findInstructor(Long courseId) {
+    	return userCourseRepository.findUserByCourse(courseId);
+    }
 }

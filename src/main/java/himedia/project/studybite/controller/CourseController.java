@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +23,12 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
+import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
+import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;
+	private final NotificationService notificationService;
 
 	/**
 	 * @author 신지은
@@ -241,7 +243,9 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
+	 * @author 김민혜(질의 응답 등록)
+	 * @author 신지은(파일 업로드 기능)
+	 * @author 이지홍(알림 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
@@ -254,6 +258,10 @@ public class CourseController {
 
 		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file);
+		
+		Long instructorId = userCourseService.findInstructor(courseId);
+		Notification notification = new Notification(instructorId, courseId, qna.getQnaId(), 3, qna.getTitle());
+		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();

@@ -35,7 +35,7 @@ public interface QnaRepository {
 	 * @author 김민혜
 	 */
 	/* 질의 응답 등록 */
-	@Insert("insert into qna(courseId, userName, title, description, views, date) values (#{courseId}, #{userName}, #{title}, #{description}, 0 , now())")
+	@Insert("insert into qna(courseId, userId, userName, title, description, views, date, answer) values (#{courseId}, #{userId}, #{userName}, #{title}, #{description}, 0, now(), #{answer})")
 	@Options(useGeneratedKeys = true, keyProperty = "qnaId")
 	void question(Qna qna);
 

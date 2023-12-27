@@ -25,6 +25,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession(false);
 
+//		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//		log.info(classpath);
+//		String projectPath = new File(classpath).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath();
+//		log.info(projectPath);
+//		String context = request.getContextPath();
+//		log.info(context);
+//		String realPath = request.getRealPath("/");
+//		log.info(realPath);
+		
 		Optional<User> user = Optional.empty();
 		if (session != null)
 			user = Optional.ofNullable((User) (session.getAttribute("user")));
