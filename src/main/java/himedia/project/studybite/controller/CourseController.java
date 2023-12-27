@@ -121,7 +121,7 @@ public class CourseController {
 
 		fileBoard.setId(news.getNewsId());
 		fileBoard.setCategory(1);
-		courseService.upload(request, fileBoard, file);
+		courseService.upload(fileBoard, file);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
@@ -145,10 +145,11 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 상세
-	 * @author 김민혜, 신지은(강의 공지 첨부파일 조회)
+	 * @author 김민혜, 신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
-	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
+	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, 
+							@SessionAttribute(name = "user", required = false) User user, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
@@ -190,36 +191,39 @@ public class CourseController {
 	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
-	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
-			@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
+	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
+									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		qna.setCourseId(courseId);
+		qna.setUserName(user.getUserName());
 		courseService.question(qna);
 
 		fileBoard.setCategory(2);
 		fileBoard.setId(qna.getQnaId());
-		courseService.upload(request, fileBoard, file);
+		courseService.upload(fileBoard, file);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능)
+	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
-	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, 
+							@SessionAttribute(name = "user", required = false) User user, Model model) {
 		courseService.qnaViewCnt(qnaId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Optional<FileBoard> fileBoardInfo = courseService.findFile(2, qnaId);
 
+		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
+		model.addAttribute("user", user);
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaDesc";
 	}
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,23 +11,19 @@
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container"
-		class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50">
+	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h4 class="blue600 info">
-				<button class="btn border-0" type="submit"
-					onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'"
-					style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
 			</h4>
 		</div>
 		<form>
-			<div class="card mb-2 border-0 p-4 "
-				style="background-color: rgba(239, 244, 255, 0.5);">
+			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
 					<div class="me-3">번호 : ${qna.qnaId}</div>
@@ -41,11 +36,15 @@
 			<div class="mt-3">
 				<div>${qna.description}</div>
 			</div>
+			<c:if test="${user.userName}='${qna.userName}'">
+				<div class="position-absolute end-0 mt-1">
+					<button type="submit" class="btn btn-primary">작성하기</button>
+					<button type="button" class="btn btn-primary">취소</button>
+				</div>
+			</c:if>
 		</form>
 		<hr class="my-5">
-		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}"
-			class="w-100"> <a
-			href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
+		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100"> <a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">

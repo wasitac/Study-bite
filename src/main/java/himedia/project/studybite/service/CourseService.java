@@ -112,9 +112,9 @@ public class CourseService {
 	 * 질의응답 파일 업로드 
 	 * @author 신지은
 	 */
-	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
+	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
 		//1. 파일 저장 경로 설정 : 
-		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		//랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();		
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
