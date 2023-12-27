@@ -23,8 +23,13 @@
 		<hr class="mt-3">
 		<!-- 게시글 -->
 		<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
-			<h3>${notice.title}</h3>
-			<div>번호 : ${notice.noticeId} 작성자 : 관리자 작성일 : ${notice.date} 조회수 : ${notice.views}</div>
+			<h3 style="text-align : center">${notice.title}</h3>
+			<div class="d-flex mt-2">
+				<div class="ms-2 me-3">번호 : ${notice.noticeId}</div>
+				<div>작성자 : 관리자</div>
+				<div class="ms-auto me-3">작성일 : ${notice.date}</div>
+				<div class="me-2">조회수 : ${notice.views}</div>
+			</div>
 		</div>
 		<hr>
 		<div>

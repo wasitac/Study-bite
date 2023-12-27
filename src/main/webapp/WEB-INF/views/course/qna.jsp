@@ -31,7 +31,7 @@
 							</thead>
 							<tbody class="table-group-divider">
 								<!-- 나중에 forEach로 돌리기 -->
-								<c:forEach var="qna" items="${qna}">
+								<c:forEach var="qna" items="${qna}" varStatus="status">
 									<tr class="table">
 										<td>${qna.qnaId}</td>
 										<td><a href="/studybite/course/${courseInfo.courseId}/qna/${qna.qnaId}">${qna.title}</a></td>

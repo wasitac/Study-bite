@@ -129,12 +129,11 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
-	 * @author 김민혜, 신지은(유저 확인 후 공지 등록버튼 활성화)
+	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화)
 	 */
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
+	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, @SessionAttribute(name = "user", required = false) User user, Model model) {
 		
-		List<News> news = courseService.findNewsPage(courseId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		
 		if (pageNum == null) {
@@ -143,7 +142,7 @@ public class CourseController {
 		
 		List<News> news = courseService.findNewsPage(courseId, pageNum);
 		
-		String location = "course/" + courseId + "/news";
+		String location = "course/" + courseId + "/news?";
 		
 		int newsCnt = courseService.cntNews(courseId);
 		int num = courseService.cntNews(courseId) / 10;
@@ -161,7 +160,7 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 상세
-	 * @author 김민혜, 신지은(강의 공지 첨부파일 조회, 수정 삭제)
+	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, 
@@ -192,7 +191,7 @@ public class CourseController {
 		
 		List<Qna> qna = courseService.findQnaPage(courseId, pageNum);
 		
-		String location = "course/" + courseId + "/qna";
+		String location = "course/" + courseId + "/qna?";
 		
 		int qnaCnt = courseService.cntQna(courseId);
 		int num = courseService.cntQna(courseId) / 10;
@@ -239,7 +238,10 @@ public class CourseController {
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
 	
-	// 질의 응답 답변 등록
+	/**
+	 * 질의 응답 답변 등록
+	 * @author 김민혜
+	 */
 	@PostMapping("/{courseId}/qna/answer")
 	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -252,7 +254,7 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능, 수정 삭제)
+	 * @author 김민혜(질의 응답 상세, 조회수 증가), 신지은(저장한 파일 조회 기능, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, 
