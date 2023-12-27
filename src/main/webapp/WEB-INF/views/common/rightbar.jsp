@@ -2,7 +2,7 @@
 <link href="${resPath}/css/rightbar.css" rel="stylesheet">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div class="d-flex flex-column flex-shrink-0 p-3 position-fixed top-0 end-0 vh-100 border-start w-25" style="max-width: 400px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 position-fixed top-0 end-0 vh-100 border-start w-25" style="max-width: 330px;">
 	<div class="dropdown d-flex align-items-center" style="height: 60px;">
 		<div>
 			<img src="/studybite/resources/img/bellIcon.png" alt="" width="32" height="32" class="rounded-circle ms-3 me-auto ">

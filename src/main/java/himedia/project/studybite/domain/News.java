@@ -5,6 +5,10 @@ import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * news 테이블의 DAO
+ * @author 김민혜
+ */
 @Setter @Getter
 public class News {
 	private Long newsId;

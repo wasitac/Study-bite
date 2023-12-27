@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 요청때 마다 알림을 갱신하기 위한 인터셉터
- * 
  * @author 이지홍
  */
 @RequiredArgsConstructor

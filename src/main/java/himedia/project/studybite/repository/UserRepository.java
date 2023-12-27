@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
+/**
+ * @author 이지홍
+ */
 
 @Repository
 public interface UserRepository {

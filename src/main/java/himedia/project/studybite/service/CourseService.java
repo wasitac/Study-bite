@@ -36,6 +36,7 @@ public class CourseService {
 	public Optional<Course> courseInfo(Long courseId) {
 		return courseRepository.courseInfo(courseId);
 	}
+	
 	/**
 	 * 강의의 강좌 목록 가져오기
 	 * @author 신지은
@@ -43,42 +44,66 @@ public class CourseService {
 	public List<Content> contentsInfo(Long courseId) {
 		return contentRepository.contentsInfo(courseId);
 	}
+	
 	/**
+	 * 강좌명 가져오기
 	 * @author 신지은
 	 */
-	// 강좌명 가져오기
 	public Optional<Content> findContentName(Long contentId) {
 		return contentRepository.findContentName(contentId);
 	}
+	
 	/**
+	 * 강의 영상 주소 가져오기
 	 * @author 신지은
 	 */
-	// 강의 영상 주소 가져오기
 	public Optional<ContentData> findContentUrl(Long contentId) {
 		return contentRepository.findContentUrl(contentId);
 	}
 
-	// 강의 공지 목록
+	/**
+	 * 강의 공지 목록
+	 * @author 김민혜
+	 */
 	public List<News> findNewsPage(Long courseId, Integer pageNum) {
 		return newsRepository.findNewsPage(courseId, pageNum);
 	}
 	
-	// 강의 공지 상세
+	/**
+	 * 강사 : 강의 공지 등록
+	 * @author 신지은
+	 */
+	public void newsAdd(News news) {
+		newsRepository.newsAdd(news);
+	}
+	
+	/**
+	 * 강의 공지 상세
+	 * @author 김민혜
+	 */
 	public Optional<News> findNewsDesc(Long newsId) {
 		return newsRepository.findNewsDesc(newsId);
 	}
-	
-	// 질의 응답 목록
+
+	/**
+	 * 질의 응답 목록
+	 * @author 김민혜
+	 */
 	public List<Qna> findQnaPage(Long courseId, Integer pageNum) {
 		return qnaRepository.findQnaPage(courseId, pageNum);
 	}
 	
-	// 질의 응답 상세
+	/**
+	 * 질의 응답 상세
+	 * @author 김민혜
+	 */
 	public Optional<Qna> findQnaDesc(Long qnaId) {
 		return qnaRepository.findQnaDesc(qnaId);
 	}
-	
-	// 질의 응답 등록
+	/**
+	 * 질의 응답 등록
+	 * @author 김민혜
+	 */
 	public void question(Qna qna) {
 		qnaRepository.question(qna);
 	}
@@ -89,18 +114,10 @@ public class CourseService {
 	}
 	
 	/**
+	 * 질의응답 파일 업로드 
 	 * @author 신지은
 	 */
-	// 질의 응답 조회
-//	public Qna qnaInfo(Long qnaId) {
-//		return qnaRepository.selectQna(qnaId);
-//	}
-	
-	/**
-	 * 질의응답 파일 저장
-	 * @author 신지은
-	 */
-	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
+	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
 		//1. 파일 저장 경로 설정 : 
 		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		//랜덤으로 이름 생성
@@ -112,13 +129,16 @@ public class CourseService {
 		// 5. 서버로 전송
 		file.transferTo(saveFile);					//예외 처리 필요
 		
-		fileBoard.setCategory(2);
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
 		boardRepository.save(fileBoard);
 	}
 	
+	/**
+	 * 질의응답 파일 조회 
+	 * @author 신지은
+	 */
 	public Optional<FileBoard> findFile(int category, Long qnaId) {
 		return boardRepository.findFile(category, qnaId);
 	}

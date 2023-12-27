@@ -15,7 +15,6 @@
 			<h2 class="blue600">공지 사항</h2>
 		</div>
 		<hr class="my-5">
-
 		<div>
 			<form action="/studybite/notice/search" method="get" id="search" class="d-flex mb-2" style="width: 40%; float: right">
 				<input name="search" class="form-control me-2" type="text" placeholder="제목으로 검색">
@@ -62,6 +61,5 @@
 		<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
-
 </body>
 </html>

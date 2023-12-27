@@ -12,7 +12,10 @@ import himedia.project.studybite.repository.QnaRepository;
 import himedia.project.studybite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
-
+/**
+ * notificationInterceptor에서 주입받아 사용하는 service
+ * @author 이지홍
+ */
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
