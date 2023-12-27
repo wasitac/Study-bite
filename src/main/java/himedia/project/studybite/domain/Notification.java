@@ -1,15 +1,19 @@
 package himedia.project.studybite.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @author 이지홍
+ */
 @Setter @Getter
+@AllArgsConstructor
 public class Notification {
 	private Long notificationId;
 	private Long userId;
-	private int category;
-	private String title;
 	private Long courseId;
 	private Long id;
-	private int isChecked;
+	private Integer category;
+	private String title;
 }

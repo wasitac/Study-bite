@@ -13,6 +13,8 @@ import lombok.Setter;
 public class Qna {
 	private Long qnaId;
 	private Long courseId;
+	private Long toId;	
+	private Long fromId;
 	private String userName;
 	private String title;
 	private String description;

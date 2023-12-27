@@ -14,14 +14,20 @@ import himedia.project.studybite.domain.FileBoard;
 @Repository
 public interface BoardRepository {
 	/**
-	 * 파일 저장
+	 * 질문 파일 저장
 	 */
-	@Insert("insert into fileBoard(category, id, filename, filepath) values(#{category}, #{id}, #{filename}, #{filepath} )")
+	@Insert("insert into fileBoard(filename, filepath, qnaId, newsId) values(#{filename}, #{filepath}, #{qnaId}, #{newsId});")
 	void save(FileBoard fileBoard);
 	
 	/**
-	 * 저장한 파일 조회
+	 * Qna 저장한 파일 조회
 	 */
-	@Select("select * from fileBoard where category=#{category} and id = #{qnaId}")
-	Optional<FileBoard> findFile(@Param("category") int category, @Param("qnaId")Long qnaId);
+	@Select("select * from fileBoard where qnaId = #{qnaId}")
+	Optional<FileBoard> findQnaFile(@Param("qnaId")Long qnaId);
+	
+	/**
+	 * News(강의 공지) 저장한 파일 조회
+	 */
+	@Select("select * from fileBoard where newsId = #{newsId}")
+	Optional<FileBoard> findNewsFile(@Param("newsId")Long newsId);
 }

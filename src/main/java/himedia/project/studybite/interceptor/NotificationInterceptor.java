@@ -28,8 +28,13 @@ public class NotificationInterceptor implements HandlerInterceptor {
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		Optional<User> user = Optional.ofNullable((User)(session.getAttribute("user")));
-		List<Notification> notifications = notificationService.getNotification(user.get().getUserId());
-		
+
+		if(user.isEmpty()) {
+			log.info("notification >> user없음");
+			return false;
+			}
+
+		List<Notification> notifications = notificationService.getNotification(user.get());
 		session.setAttribute("notifications", notifications);
 //		log.info("알림 인터셉터" + notifications.get(1).getUserId());
 		return true;

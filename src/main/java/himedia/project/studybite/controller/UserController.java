@@ -1,5 +1,7 @@
 package himedia.project.studybite.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,6 +91,13 @@ public class UserController {
 		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		List<News> newses = userCourseService.findNews(userId);
+		Iterator<Course> iter = courses.iterator();
+		
+		while(iter.hasNext()) {
+			Course iterCourse = iter.next();
+			if(userCourseService.findAttendanceCount(userId, iterCourse.getCourseId()) == 7)
+				iter.remove();
+		}
 
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
@@ -105,9 +114,24 @@ public class UserController {
 		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		Integer courseCount = userCourseService.findCount(userId);
-
+		List<Course> finishedCourse = new ArrayList<Course>();
+		Iterator<Course> iter = courses.iterator();
+		Integer finishedCount = 0;
+		
+		while(iter.hasNext()) {
+			Course iterCourse = iter.next();
+			if(userCourseService.findAttendanceCount(userId, iterCourse.getCourseId()) == 7) {
+				finishedCourse.add(iterCourse);
+				iter.remove();
+				finishedCount++;
+				courseCount--;
+			}
+		}
+		
 		model.addAttribute("courses", courses);
 		model.addAttribute("courseCount", courseCount);
+		model.addAttribute("finishedCourse", finishedCourse);
+		model.addAttribute("finishedCount", finishedCount);
 		model.addAttribute("user", user);
 		return "/home/course";
 	}
@@ -151,15 +175,13 @@ public class UserController {
 	@GetMapping("/notice")
 	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
-		Long userId = user.getUserId();
 
-//		int page = 1;
 		if (pageNum == null) {
 			pageNum = 0;
 		}
 		List<Notice> notices = userService.findPage(pageNum);
-		model.addAttribute("notices", notices);
-		model.addAttribute("user", user);
+
+		String location = "notice?";
 
 		int noticeCnt = userService.cntNotice();
 		int num = userService.cntNotice() / 10;
@@ -167,6 +189,39 @@ public class UserController {
 		if (noticeCnt % 10 != 0)
 			num = num + 1;
 
+		model.addAttribute("notices", notices);
+		model.addAttribute("user", user);
+		model.addAttribute("location", location);
+		model.addAttribute("num", num);
+		return "/home/notice";
+	}
+
+	/**
+	 * 공지사항 검색
+	 * @author 김민혜
+	 */
+	@GetMapping("/notice/search")
+	public String search(@RequestParam(name = "page", required = false) Integer pageNum,
+			@RequestParam(name = "search", required = false) String search,
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+
+		if (pageNum == null) {
+			pageNum = 0;
+		}
+
+		List<Notice> notices = userService.search(search, pageNum);
+
+		String location = "notice/search?search=" + search + "&";
+
+		int noticeCnt = userService.cntSearchNotice(search);
+		int num = userService.cntSearchNotice(search) / 10;
+
+		if (noticeCnt % 10 != 0)
+			num = num + 1;
+
+		model.addAttribute("notices", notices);
+		model.addAttribute("user", user);
+		model.addAttribute("location", location);
 		model.addAttribute("num", num);
 		return "/home/notice";
 	}

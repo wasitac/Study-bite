@@ -1,5 +1,6 @@
 package himedia.project.studybite.interceptor;
 
+import java.io.File;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession(false);
-		Optional<User> user = null;
+
+		Optional<User> user = Optional.empty();
 		if (session != null)
 			user = Optional.ofNullable((User) (session.getAttribute("user")));
 
@@ -34,5 +36,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 //		log.info("preHandler: userId >>" + user.get().getUserId());
 		return true;
 	}
-
 }

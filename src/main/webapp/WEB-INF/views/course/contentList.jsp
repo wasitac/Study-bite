@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
-<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <title>수강과목-강의 목차</title>
 <style>
   .contentsListLi {
@@ -21,7 +20,7 @@
 <div class="w-25">
 	<%@ include file="../common/leftbar.jsp"%>
 </div>
-	<div class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50">
+	<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp" %>
 		<%@ include file="../common/courseBar.jsp" %>
 		<div class="d-flex">
@@ -54,6 +53,6 @@
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 </body>
-<script src="${resPath}/js/courseBar.js"></script>
 </html>
