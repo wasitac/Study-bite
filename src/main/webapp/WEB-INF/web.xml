@@ -33,6 +33,18 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Delete 요청 -->
+	<filter>
+		<filter-name>httpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>httpMethodFilter</filter-name>
+		<servlet-name>*</servlet-name>
+	</filter-mapping>
+	
 	<!-- 한글 처리 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
