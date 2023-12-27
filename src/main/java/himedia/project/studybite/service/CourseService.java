@@ -70,6 +70,14 @@ public class CourseService {
 	}
 	
 	/**
+	 * 강사 : 강의 공지 등록
+	 * @author 신지은
+	 */
+	public void newsAdd(News news) {
+		newsRepository.newsAdd(news);
+	}
+	
+	/**
 	 * 강의 공지 상세
 	 * @author 김민혜
 	 */
@@ -104,7 +112,7 @@ public class CourseService {
 	 * 질의응답 파일 업로드 
 	 * @author 신지은
 	 */
-	public void upload(HttpServletRequest request, FileBoard fileBoard, MultipartFile file) throws Exception {
+	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
 		//1. 파일 저장 경로 설정 : 
 		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		//랜덤으로 이름 생성
@@ -116,7 +124,6 @@ public class CourseService {
 		// 5. 서버로 전송
 		file.transferTo(saveFile);					//예외 처리 필요
 		
-		fileBoard.setCategory(2);
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
