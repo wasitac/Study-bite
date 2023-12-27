@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <title>수강과목-질의 응답 상세</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
+
 <body>
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
@@ -17,9 +17,7 @@
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h4 class="blue600 info">
-				<button class="btn border-0" type="submit"
-					onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'"
-					style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
@@ -54,6 +52,48 @@
 		</div>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
+	<div>
+		<c:choose>
+			<c:when test="${user.role == 3 and not empty qna.answer}">
+				<h4 class="blue600 info">답변</h4>
+				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
+					<div>${qna.answer}</div>
+				</div>
+			</c:when>
+
+			<c:when test="${user.role == 3 and empty qna.answer}">
+				<h4 class="blue600 info">답변</h4>
+				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
+					<div>등록된 답변이 없습니다</div>
+				</div>
+			</c:when>
+
+			<c:when test="${user.role == 2 and not empty qna.answer}">
+				<h4 class="blue600 info">답변</h4>
+				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
+					<div>${qna.answer}</div>
+				</div>
+			</c:when>
+
+			<c:when test="${user.role == 2 and empty qna.answer}">
+				<form action="/studybite/course/${courseInfo.courseId}/qna/answer" method="post" enctype="multipart/form-data">
+					<div class="my-3">
+						<label for="answer" class="form-label">답변 입력</label>
+						<textarea name="answer" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<input type="hidden" id="qnaId" name="qnaId" value="${qna.qnaId}">
+						<button type="submit" class="btn btn-primary mt-2" style="float: right">답변하기</button>
+					</div>
+				</form>
+			</c:when>
+		</c:choose>
+		<c:if test="${user.userName}='${qna.userName}'">
+			<div class="position-absolute end-0 mt-1">
+				<button type="submit" class="btn btn-primary">작성하기</button>
+				<button type="button" class="btn btn-primary">취소</button>
+			</div>
+		</c:if>
+	</div>
+
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>

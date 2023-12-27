@@ -15,11 +15,10 @@ import himedia.project.studybite.domain.Qna;
 @Repository
 public interface NewsRepository {
 	/**
-	 *  강의 공지 목록
-	 *  @author 김민혜
+	 * 강의 공지 목록
+	 * @author 김민혜
 	 */
-	@Select ("select * from news where courseId = #{courseId} order by newsId desc limit 10")
-	List<News> findNewsPage(Long courseId);
+	List<News> findNewsPage(@Param("courseId") Long courseId, @Param("pageNum") Integer pageNum);
 	
 	/**
 	 * 강사 : 강의 공지 등록
@@ -52,5 +51,12 @@ public interface NewsRepository {
 	 */
 	@Update ("update news set views = views + 1 where newsId = #{newsId}")
 	Long newsViewCnt(Long newsId);
+	
+	/**
+	 *  강의 공지 글 개수
+	 *  @author 김민혜
+	 */
+	@Select("select count(newsId) from news where courseId = #{courseId}")
+	int cntNews(Long courseId);
 	
 }
