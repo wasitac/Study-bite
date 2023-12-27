@@ -16,7 +16,7 @@ public interface BoardRepository {
 	/**
 	 * 질문 파일 저장
 	 */
-	@Insert("insert into fileBoard(filename, filepath, qnaId, newsId, noticeId) values(#{filename}, #{filepath}, #{qnaId}, #{newsId}, #{noticeId});")
+	@Insert("insert into fileBoard(filename, filepath, qnaId, newsId) values(#{filename}, #{filepath}, #{qnaId}, #{newsId});")
 	void save(FileBoard fileBoard);
 	
 	/**
@@ -30,10 +30,4 @@ public interface BoardRepository {
 	 */
 	@Select("select * from fileBoard where newsId = #{newsId}")
 	Optional<FileBoard> findNewsFile(@Param("newsId")Long newsId);
-	
-	/**
-	 * Notice 저장한 파일 조회
-	 */
-	@Select("select * from fileBoard where noticeId = #{noticeId}")
-	Optional<FileBoard> findNoticeFile(@Param("noticeId")Long noticeId);
 }

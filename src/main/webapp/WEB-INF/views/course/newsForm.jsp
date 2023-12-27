@@ -15,7 +15,7 @@
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp" %>
 		<div class="my-3 text-left">
-			<h3 style="color: #2563EB">
+			<h3 style="color: #2563EB" id="smallTitle">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>

@@ -34,8 +34,8 @@
 			value="1000000000" />
 	</beans:bean>
 
-	
-	<context:component-scan base-package="himedia.project.studybite" />
+	<context:component-scan
+		base-package="himedia.project.studybite" />
 
 	<interceptors>
 		<!-- 모든 요청에 대한 로그인 상태 확인 인터셉터 빈 생성 @author 이지홍 -->

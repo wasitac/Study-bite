@@ -14,7 +14,7 @@
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp" %>
 		<div class="my-3 text-left">
-			<h3 class="blue600">
+			<h3 style="color: #2563EB" id="smallTitle">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
@@ -23,9 +23,9 @@
 		</div>
 		<h4 style="color: #2563EB" class="mt-4">질문 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseInfo.courseId}/qna/add" method="post" enctype="multipart/form-data">
+			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
+					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" value="" placeholder="제목을 입력해주세요." required>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>

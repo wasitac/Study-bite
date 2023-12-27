@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notification;
-import himedia.project.studybite.repository.NewsRepository;
-import himedia.project.studybite.repository.NoticeRepository;
+import himedia.project.studybite.domain.User;
 import himedia.project.studybite.repository.NotificationRepository;
-import himedia.project.studybite.repository.QnaRepository;
-import himedia.project.studybite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -20,8 +17,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NotificationService {
 	private final NotificationRepository notificationRepository;
-	
-	public List<Notification> getNotification(Long userId) {
-		return notificationRepository.getNotification(userId);
+
+	public List<Notification> getNotification(User user) {
+		Long userId = user.getUserId();
+		return notificationRepository.findNotification(userId);
+	}
+
+	public void sendNotification(Notification notification) {
+		notificationRepository.addNotification(notification);
+	}
+
+	public void readNotification(Long notificationId) {
+		notificationRepository.deleteNotification(notificationId);
 	}
 }
