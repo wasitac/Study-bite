@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
+<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <title>수강과목-질의 응답 상세</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 	</div>
 	<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
-		<%@ include file="../common/courseBar.jsp" %>
+		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-3 text-left">
 			<h3 style="color: #2563EB" id="smallTitle">
 				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
@@ -31,10 +32,12 @@
 					<label class="col-1">내용</label>
 					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 				</div>
+
 				<input type="file" name="file" id="file" multiple="multiple">
+
 				<hr class="row mt-5">
-				<div class="position-absolute end-0 mt-1">
-					<button type="submit" class="btn btn-primary">작성하기</button>
+				<div class="d-flex justify-content-end mt-1">
+					<button type="submit" class="btn btn-primary me-1">작성하기</button>
 					<button type="button" class="btn btn-primary">취소</button>
 				</div>
 			</form>

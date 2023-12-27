@@ -41,11 +41,14 @@
 						</table>
 					</div>
 					<hr class="my-5">
-				<button type="button" class="btn btn-primary ms-auto mt-0" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
 					<div>
 						<%@ include file="../common/pagination.jsp" %>
-			</div>
+					</div>
+					<div class="d-flex justify-content-end mt-1">
+						<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+					</div>
 					<%@ include file="../common/footer.jsp" %>
+		</div>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>

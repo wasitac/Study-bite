@@ -44,13 +44,14 @@
 		</div>
 		<hr class="my-5">
 		<div>
-			<%@ include file="../common/pagination.jsp"%>
-		<c:if test="${user.role eq 2}">
-			<button type="button" class="btn btn-primary end-0 mt-0" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
-		</c:if>
+			<%@ include file="../common/pagination.jsp" %>
 		</div>
-
-		<%@ include file="../common/footer.jsp"%>
+		<c:if test="${user.role eq 2}">
+			<div class="d-flex justify-content-end mt-1">
+				<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+			</div>
+		</c:if>
+		<%@ include file="../common/footer.jsp" %>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>
