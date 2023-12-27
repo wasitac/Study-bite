@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -93,6 +94,39 @@ public class CourseController {
 		model.addAttribute("contentData", contentData.get());
 		return "course/content";
 	}
+	/**
+	 * 강사 : 강의 공지 등록 폼
+	 * 
+	 * @author 신지은
+	 */
+	@GetMapping("/{courseId}/news/add")
+	public String NewsForm(@PathVariable Long courseId, Model model) {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		model.addAttribute("courseInfo", courseInfo.get());
+		return "course/newsForm";
+	}
+
+	/**
+	 * 강사 : 강의 공지 등록
+	 * 
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/add")
+	public String postNewsAdd(@PathVariable Long courseId, @ModelAttribute News news, @RequestParam MultipartFile file,
+			@SessionAttribute(name = "user", required = false) User user, HttpServletRequest request,
+			FileBoard fileBoard, Model model) throws Exception {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+
+		news.setCourseId(courseId);
+		news.setUserName(user.getUserName());
+		courseService.newsAdd(news);
+
+		fileBoard.setNewsId(news.getNewsId());
+		courseService.upload(fileBoard, file);
+
+		model.addAttribute("courseInfo", courseInfo.get());
+		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
+	}
 
 	/**
 
@@ -146,14 +180,16 @@ public class CourseController {
 
 	// 강의 공지 상세
 	/**
-	 * @author 신지은(강의 공지 첨부파일 조회)
+	 * 강의 공지 상세
+	 * @author 김민혜, 신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
-	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, Model model) {
+	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, 
+							@SessionAttribute(name = "user", required = false) User user, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
-		Optional<FileBoard> fileBoardInfo = courseService.findFile(1, newsId);
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(newsId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		if (!fileBoardInfo.isEmpty())
@@ -191,51 +227,82 @@ public class CourseController {
 	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
-	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
-			@RequestParam MultipartFile file, HttpServletRequest request, FileBoard fileBoard, Model model)
+	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
+									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-
+		String userName = user.getUserName();
 		qna.setCourseId(courseId);
+		qna.setUserName(user.getUserName());
 		courseService.question(qna);
 
-		fileBoard.setId(qna.getQnaId());
-		fileBoard.setCategory(2);
-		courseService.upload(request, fileBoard, file);
+		fileBoard.setQnaId(qna.getQnaId());;
+		courseService.upload(fileBoard, file);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능)
+	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능, 질문 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
-	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, 
+							@SessionAttribute(name = "user", required = false) User user, Model model) {
 		courseService.qnaViewCnt(qnaId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		Optional<FileBoard> fileBoardInfo = courseService.findFile(2, qnaId);
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(qnaId);
 
+		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
+		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
+		model.addAttribute("user", user);		
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		model.addAttribute("courseInfo", courseInfo.get());
 		return "/course/qnaDesc";
 	}
 
 	/**
+	 * 질의 응답 수정 Form
+	 * @author 신지은
+	 */
+	@GetMapping("/{courseId}/qna/{qnaId}/editForm")
+	public String qnaEditForm(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Qna qna = courseService.findQnaDesc(qnaId).get();
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(qnaId);
+		
+		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("qna", qna);
+		if (!fileBoardInfo.isEmpty())
+			model.addAttribute("fileBoard", fileBoardInfo.get());
+		return "course/qnaEditForm";
+	}
+	
+	/**
 	 * 질의 응답 수정
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/qna/{qnaId}/edit")
-	public String qnaEdit(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+	@PostMapping("/{courseId}/qna/{qnaId}")
+	public String qnaEdit(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		// Qna qna = courseService.qnaInfo(qnaId);
 		
-		// model.addAttribute("qna", qna);
+		courseService.qnaUpdate(qna);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
-		return "course/qnaEdit";
+		model.addAttribute("qna", qna);
+		return "redirect:/course/{courseId}/qna/{qnaId}";
+	}
+	
+	/**
+	 * 질의 응답 삭제
+	 * @author 신지은
+	 */
+	@DeleteMapping("/{courseId}/qna/{qnaId}")
+	public String qnaDelete(@PathVariable Long courseId, @PathVariable Long qnaId) {
+		log.info("삭제 메서드 실행됨");
+		return "redirect:/course/{courseId}/qna";
 	}
 
 	/**

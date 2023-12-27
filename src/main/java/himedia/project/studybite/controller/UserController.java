@@ -1,5 +1,7 @@
 package himedia.project.studybite.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,6 +91,13 @@ public class UserController {
 		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		List<News> newses = userCourseService.findNews(userId);
+		Iterator<Course> iter = courses.iterator();
+		
+		while(iter.hasNext()) {
+			Course iterCourse = iter.next();
+			if(userCourseService.findAttendanceCount(userId, iterCourse.getCourseId()) == 7)
+				iter.remove();
+		}
 
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
@@ -105,9 +114,24 @@ public class UserController {
 		Long userId = user.getUserId();
 		List<Course> courses = userCourseService.findCourse(userId);
 		Integer courseCount = userCourseService.findCount(userId);
-
+		List<Course> finishedCourse = new ArrayList<Course>();
+		Iterator<Course> iter = courses.iterator();
+		Integer finishedCount = 0;
+		
+		while(iter.hasNext()) {
+			Course iterCourse = iter.next();
+			if(userCourseService.findAttendanceCount(userId, iterCourse.getCourseId()) == 7) {
+				finishedCourse.add(iterCourse);
+				iter.remove();
+				finishedCount++;
+				courseCount--;
+			}
+		}
+		
 		model.addAttribute("courses", courses);
 		model.addAttribute("courseCount", courseCount);
+		model.addAttribute("finishedCourse", finishedCourse);
+		model.addAttribute("finishedCount", finishedCount);
 		model.addAttribute("user", user);
 		return "/home/course";
 	}

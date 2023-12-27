@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Qna;
 
-/**
- * @author 김민혜
- */
 @Repository
 public interface NewsRepository {
-	/* 강의 공지 목록 */
-	@Select("select * from news where courseId = #{courseId} order by newsId desc limit 10")
+	/**
+	 *  강의 공지 목록
+	 *  @author 김민혜
+	 */
+	@Select ("select * from news where courseId = #{courseId} order by newsId desc limit 10")
 	List<News> findNewsPage(Long courseId);
 	
 	/**
@@ -39,13 +39,18 @@ public interface NewsRepository {
 	 * @author 신지은
 	 */
 	
-	
-	// 강의 공지 상세
+	/**
+	 *  강의 공지 상세
+	 *  @author 김민혜
+	 */
 	@Select ("select * from news where newsId = #{newsId}")
 	Optional<News> findNewsDesc(Long newsId);
-
-	/* 조회수 증가*/
-	@Update("update news set views = views + 1 where newsId = #{newsId}")
+	
+	/**
+	 *  조회수
+	 *  @author 김민혜
+	 */
+	@Update ("update news set views = views + 1 where newsId = #{newsId}")
 	Long newsViewCnt(Long newsId);
-
+	
 }

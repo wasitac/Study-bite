@@ -21,7 +21,7 @@
     </select>
 
     <select id="findCourseCount" parameterType="Long" resultType="Integer">
-        SELECT count(distinct courseId) from news where courseId in (
+        SELECT count(*) from course where courseId in (
         SELECT courseId FROM userCourse WHERE userId = #{userId}
         )
     </select>

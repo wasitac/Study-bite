@@ -5,23 +5,12 @@
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <title>출결 현황</title>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap')
-	;
-
-.mainview {
-	left: 279.9px;
-	max-width: 1100px
-}
-</style>
 </head>
-
 <body>
 	<div class="w-25">
         <%@ include file="../common/leftbar.jsp"%>
     </div>
-    <div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
+    <div id="container" class="mainview container mt-5 min-vh-100 w-50">
         <%@ include file="../common/courseTitle.jsp"%>
         <%@ include file="../common/courseBar.jsp"%>
         <div class="my-1 text-left">
@@ -62,5 +51,6 @@
     <div class="w-25">
         <%@ include file="../common/rightbar.jsp"%>
     </div>
+    <script src="${resPath}/js/courseBar.js"></script>
 </body>
 </html>
