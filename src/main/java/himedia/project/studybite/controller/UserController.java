@@ -175,13 +175,12 @@ public class UserController {
 	@GetMapping("/notice")
 	public String notice(@RequestParam(name = "page", required = false) Integer pageNum,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
-		Long userId = user.getUserId();
 
 		if (pageNum == null) {
 			pageNum = 0;
 		}
 		List<Notice> notices = userService.findPage(pageNum);
-		
+
 		String location = "notice?";
 
 		int noticeCnt = userService.cntNotice();
@@ -189,7 +188,7 @@ public class UserController {
 
 		if (noticeCnt % 10 != 0)
 			num = num + 1;
-		
+
 		model.addAttribute("notices", notices);
 		model.addAttribute("user", user);
 		model.addAttribute("location", location);
@@ -205,7 +204,7 @@ public class UserController {
 	public String search(@RequestParam(name = "page", required = false) Integer pageNum,
 			@RequestParam(name = "search", required = false) String search,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
-     
+
 		if (pageNum == null) {
 			pageNum = 0;
 		}
@@ -225,7 +224,6 @@ public class UserController {
 		model.addAttribute("location", location);
 		model.addAttribute("num", num);
 		return "/home/notice";
-
 	}
 
 	/**

@@ -1,4 +1,3 @@
-
 <nav aria-label="Page navigation example">
 	<ul class="pagination justify-content-center">
 		<li class="page-item"><a id="pagination" class="page-link" href="/studybite/${location}page=0" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>

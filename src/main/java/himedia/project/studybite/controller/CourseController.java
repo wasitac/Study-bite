@@ -134,30 +134,31 @@ public class CourseController {
 	 */
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, @SessionAttribute(name = "user", required = false) User user, Model model) {
-		
+
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		
+
 		if (pageNum == null) {
 			pageNum = 0;
 		}
-		
+
 		List<News> news = courseService.findNewsPage(courseId, pageNum);
-		
+
 		String location = "course/" + courseId + "/news?";
-		
+
 		int newsCnt = courseService.cntNews(courseId);
 		int num = courseService.cntNews(courseId) / 10;
-		
+
 		if (newsCnt % 10 != 0)
 			num = num + 1;
 
 		model.addAttribute("news", news);
 		model.addAttribute("user", user);
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("num", num);
+		model.addAttribute("location", location);
 		return "/course/news";
 	}
 
-	// 강의 공지 상세
 	/**
 	 * 강의 공지 상세
 	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
@@ -182,26 +183,27 @@ public class CourseController {
 	 * @author 김민혜
 	 */
 	@GetMapping("/{courseId}/qna")
-	public String qna(@PathVariable Long courseId, Model model) {
-		List<Qna> qna = courseService.findQnaPage(courseId);
+	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		
+
 		if (pageNum == null) {
 			pageNum = 0;
 		}
-		
+
 		List<Qna> qna = courseService.findQnaPage(courseId, pageNum);
-		
+
 		String location = "course/" + courseId + "/qna?";
-		
+
 		int qnaCnt = courseService.cntQna(courseId);
 		int num = courseService.cntQna(courseId) / 10;
-		
+
 		if (qnaCnt % 10 != 0)
 			num = num + 1;
 
 		model.addAttribute("qna", qna);
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("num", num);
+		model.addAttribute("location", location);
 		return "/course/qna";
 	}
 
@@ -224,7 +226,6 @@ public class CourseController {
 									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		String userName = user.getUserName();
 		qna.setCourseId(courseId);
 		qna.setUserName(user.getUserName());
 		courseService.question(qna);
@@ -246,7 +247,7 @@ public class CourseController {
 
 		qna.setCourseId(courseId);
 		courseService.answer(qna);
-		
+
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
