@@ -8,9 +8,10 @@ import lombok.Setter;
  */
 @Setter @Getter
 public class FileBoard {
-	private int category;
 	private Long id;
 	private String filename;
 	private String filepath;
-
+	private Long qnaId;
+	private Long newsId;
+	private Long noticeId;
 }

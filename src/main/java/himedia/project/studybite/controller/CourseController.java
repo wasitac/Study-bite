@@ -7,8 +7,10 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,8 +121,7 @@ public class CourseController {
 		news.setUserName(user.getUserName());
 		courseService.newsAdd(news);
 
-		fileBoard.setId(news.getNewsId());
-		fileBoard.setCategory(1);
+		fileBoard.setNewsId(news.getNewsId());
 		courseService.upload(fileBoard, file);
 
 		model.addAttribute("courseInfo", courseInfo.get());
@@ -153,7 +154,7 @@ public class CourseController {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
-		Optional<FileBoard> fileBoardInfo = courseService.findFile(1, newsId);
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(newsId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		if (!fileBoardInfo.isEmpty())
@@ -200,8 +201,7 @@ public class CourseController {
 		qna.setUserName(user.getUserName());
 		courseService.question(qna);
 
-		fileBoard.setCategory(2);
-		fileBoard.setId(qna.getQnaId());
+		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file);
 
 		model.addAttribute("courseInfo", courseInfo.get());
@@ -209,7 +209,7 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능, 수정 삭제)
+	 * @author 김민혜(질의 응답 상세), 신지은(저장한 파일 조회 기능, 질문 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, 
@@ -217,28 +217,57 @@ public class CourseController {
 		courseService.qnaViewCnt(qnaId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		Optional<FileBoard> fileBoardInfo = courseService.findFile(2, qnaId);
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(qnaId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
-		model.addAttribute("user", user);
+		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
+		model.addAttribute("user", user);		
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "/course/qnaDesc";
 	}
 
 	/**
+	 * 질의 응답 수정 Form
+	 * @author 신지은
+	 */
+	@GetMapping("/{courseId}/qna/{qnaId}/editForm")
+	public String qnaEditForm(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		Qna qna = courseService.findQnaDesc(qnaId).get();
+		Optional<FileBoard> fileBoardInfo = courseService.findFile(qnaId);
+		
+		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("qna", qna);
+		if (!fileBoardInfo.isEmpty())
+			model.addAttribute("fileBoard", fileBoardInfo.get());
+		return "course/qnaEditForm";
+	}
+	
+	/**
 	 * 질의 응답 수정
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/qna/{qnaId}/edit")
-	public String qnaEdit(@PathVariable Long courseId, @PathVariable Long qnaId, Model model) {
+	@PostMapping("/{courseId}/qna/{qnaId}")
+	public String qnaEdit(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		// Qna qna = courseService.qnaInfo(qnaId);
 		
-		// model.addAttribute("qna", qna);
+		courseService.qnaUpdate(qna);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
-		return "course/qnaEdit";
+		model.addAttribute("qna", qna);
+		return "redirect:/course/{courseId}/qna/{qnaId}";
+	}
+	
+	/**
+	 * 질의 응답 삭제
+	 * @author 신지은
+	 */
+	@postMapping("/{courseId}/qna/{qnaId}/delete")
+	public String qnaDelete(@PathVariable Long courseId, @PathVariable Long qnaId) {
+		
+		return "course/qna";
 	}
 
 	/**
