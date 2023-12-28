@@ -11,7 +11,9 @@ document.querySelectorAll(".courseBar").forEach((link) => {
     console.log("image : " + image);
        
     var srcSplit = image.split(".");
-    var concated = srcSplit[0] + "c." + srcSplit[1];
+    if(srcSplit[0].slice(-1) !== "c")
+    	 srcConcated = srcSplit[0] + "c." + srcSplit[1];
+  
     console.log("concated : " + concated);      
     parent.src = concated;          
     }

@@ -103,11 +103,13 @@ public class UserController {
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
 		model.addAttribute("user", user);
-		
-		if(user.getRole() == 2)
-			return "/home/instructor";
 
+		if(user.getRole() == 2)
+			return "/home/course";
+		
 		return "/home/home";
+		
+		
 
 	}
 	

@@ -46,7 +46,7 @@
 								<p class="card-text">
 									<div class="d-flex ">
 										<small class="text-body-secondary p-2 flex-grow-1" >${course.instructor}</small>
-										<button class="btn bg-primary mx-1 p-2" type="button">
+										<button class="btn bg-primary mx-1 p-2" type="button"  onclick="location.href='/studybite/home'">
 											<img src="${resPath}/img/homeIcon/ibellc.png" style="width: 20px;">
 										</button>
 										<button class="btn bg-primary mx-1 p-2" type="button">
@@ -61,6 +61,7 @@
 			</c:forEach>
 		</div>
 	</div>
+		
 	<div class="w-25">
 		<%@include file="../common/rightbar.jsp"%>
 	</div>
