@@ -24,7 +24,10 @@ public class NotificationService {
 	}
 
 	public void sendNotification(Notification notification) {
-		notificationRepository.addNotification(notification);
+			notificationRepository.addQnaNotification(notification);
+	}
+	public void sendNotification(List<Notification> notifications) {
+			notificationRepository.addNewsNotification(notifications);
 	}
 
 	public void readNotification(Long notificationId) {

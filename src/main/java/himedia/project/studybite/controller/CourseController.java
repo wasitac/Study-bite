@@ -2,6 +2,7 @@ package himedia.project.studybite.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,6 +114,7 @@ public class CourseController {
 	 * 강사 : 강의 공지 등록
 	 * 
 	 * @author 신지은
+	 * @author 이지홍(강의 공지 알림)
 	 */
 	@PostMapping("/{courseId}/news/add")
 	public String postNewsAdd(@PathVariable Long courseId, @ModelAttribute News news, @RequestParam MultipartFile file,
@@ -128,6 +130,13 @@ public class CourseController {
 			fileBoard.setNewsId(news.getNewsId());
 			courseService.upload(fileBoard, file);
 		}
+
+		List<Long> toId = userCourseService.findInstructor(courseId);
+		List<Notification> notifications = new ArrayList<Notification>();
+		for (Long id : toId) {
+			notifications.add(new Notification(id, courseId, news.getNewsId(), 2, news.getTitle()));
+		}
+		notificationService.sendNotification(notifications);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
@@ -281,6 +290,8 @@ public class CourseController {
 	}
 
 	/**
+	 * 질의 응답 질문 등록
+	 * 
 	 * @author 김민혜(질의 응답 등록)
 	 * @author 신지은(파일 업로드 기능)
 	 * @author 이지홍(알림 기능)
@@ -297,8 +308,8 @@ public class CourseController {
 		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file);
 		
-		Long instructorId = userCourseService.findInstructor(courseId);
-		Notification notification = new Notification(instructorId, courseId, qna.getQnaId(), 3, qna.getTitle());
+		List<Long> toId = userCourseService.findInstructor(courseId);
+		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
 		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
