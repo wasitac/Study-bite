@@ -32,5 +32,4 @@
 
 	</ul>
 </div>
-<script src="${resPath}/js/acitve.js"></script>
 <script src="${resPath}/js/notification.js"></script>
