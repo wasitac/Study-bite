@@ -42,6 +42,7 @@ public class UserController {
 	
 	@GetMapping("/")
 	public String index(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
@@ -60,10 +61,10 @@ public class UserController {
 		}
 		
 		User userInfo = user.get();
-
 		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", userInfo);
+		
 		return "redirect:/home";
 	}
 
@@ -102,8 +103,14 @@ public class UserController {
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
 		model.addAttribute("user", user);
+		
+		if(user.getRole() == 2)
+			return "/home/instructor";
+
 		return "/home/home";
+
 	}
+	
 
 	/**
 	 * 	수강과목
