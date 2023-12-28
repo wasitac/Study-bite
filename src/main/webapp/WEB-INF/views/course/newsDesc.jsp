@@ -21,7 +21,7 @@
 				강의 공지 목록
 			</h3>
 		</div>
-		<form:form modelAttribute="news" action="">
+		<form:form modelAttribute="news" action="${context}course/${courseId}/news/${newsId}/delete">
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${news.title}</h3>
 				<div class="d-flex mt-2">
@@ -38,12 +38,12 @@
 			<hr class="my-5">
 			<c:if test="${user.userName eq news.userName}">
 				<div class="position-absolute end-0 mt-1">
-					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>
+					<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
 					<form:button type="submit" class="delete btn btn-primary">삭제</form:button>
 				</div>
 			</c:if>
 		</form:form>
-		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
+		<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-100">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">

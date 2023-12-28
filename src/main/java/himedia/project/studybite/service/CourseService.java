@@ -90,6 +90,22 @@ public class CourseService {
 	public Optional<News> findNewsDesc(Long newsId) {
 		return newsRepository.findNewsDesc(newsId);
 	}
+	
+	/**
+	 * 강사 : 강의 공지 수정
+	 * @author 신지은
+	 */
+	public int newsUpdate(News news) {
+		return newsRepository.newsUpdate(news);
+	}
+	
+	/**
+	 * 강사 : 강의 공지 삭제
+	 * @author 신지은
+	 */
+	public void newsDelete(News news) {
+		newsRepository.newsDelete(news);
+	}
 
 	/**
 	 * 질의 응답 목록

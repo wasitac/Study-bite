@@ -195,9 +195,30 @@ public class CourseController {
 		model.addAttribute("requestURI", request.getRequestURI());
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
+		model.addAttribute("select", news);
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		return "course/qnaEditForm";
+		return "course/editForm";
+	}
+	
+	/**
+	 * 강사 : 강의 공지 수정
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/{newsId}")
+	public String newsEdit(@PathVariable Long courseId, @ModelAttribute News news, Model model) {
+		courseService.newsUpdate(news);
+		return "redirect:/course/{courseId}/news/{newsId}";
+	}
+	
+	/**
+	 * 강사 : 강의 공지 삭제
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/{newsId}/delete")
+	public String newsDelete(@ModelAttribute News news) {
+		courseService.newsDelete(news);
+		return "redirect:/course/{courseId}/news";
 	}
 
 	/**
@@ -317,9 +338,10 @@ public class CourseController {
 		model.addAttribute("requestURI", request.getRequestURI());
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
-		if (!fileBoardInfo.isEmpty())
+		model.addAttribute("select", qna);
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		return "course/qnaEditForm";
+		return "course/editForm";
 	}
 	
 	/**
@@ -328,12 +350,7 @@ public class CourseController {
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}")
 	public String qnaEdit(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		
 		courseService.qnaUpdate(qna);
-		
-		model.addAttribute("courseInfo", courseInfo.get());
-		model.addAttribute("qna", qna);
 		return "redirect:/course/{courseId}/qna/{qnaId}";
 	}
 	
@@ -342,7 +359,7 @@ public class CourseController {
 	 * @author 신지은
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}/delete")
-	public String qnaDelete(@PathVariable Long courseId, @ModelAttribute Qna qna, @PathVariable Long qnaId) {
+	public String qnaDelete(@ModelAttribute Qna qna) {
 		courseService.qnaDelete(qna);
 		return "redirect:/course/{courseId}/qna";
 	}
