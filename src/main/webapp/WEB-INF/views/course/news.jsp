@@ -48,7 +48,7 @@
 		</div>
 		<c:if test="${user.role eq 2}">
 			<div class="d-flex justify-content-end mt-1">
-				<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/news/add'">작성하기</button>
 			</div>
 		</c:if>
 		<%@ include file="../common/footer.jsp" %>
