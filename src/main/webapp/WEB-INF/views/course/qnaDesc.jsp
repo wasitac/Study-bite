@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <title>수강과목-질의 응답 상세</title>
 </head>
-
 <body>
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
@@ -23,7 +22,7 @@
 				질의 응답 목록
 			</h4>
 		</div>
-		<form:form modelAttribute="qna" action="${context}course/${courseId}/qna/${qnaId}/delete" onsubmit="return confirm('삭제하시겠습니까?');">
+		<form:form modelAttribute="qna"  method="delete" id="deleteForm">
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
@@ -46,7 +45,7 @@
 			<c:if test="${user.userName eq qna.userName}">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>
-					<form:button type="submit" class="delete btn btn-primary mx-1">삭제</form:button>
+					<form:button type="button" class="delete btn btn-primary mx-1" id="${qnaId}">삭제</form:button>
 				</div>
 			</c:if>
 		</form:form>
@@ -56,17 +55,6 @@
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 	<script src="${resPath}/js/courseBar.js"></script>
-	<!-- 	<script type="text/javascript">
-		$(".delete").click(function() {
-			console.log('삭제 버튼 클릭');
-			var choice = confirm("질문을 삭제하겠습니까?");
-			console.log('choice  ' + choice);
-			
-			if(choice) {
-				
-			}
-		});
-	</script> -->
 	<script type="text/javascript">
 		var courseId = '${courseInfo.courseId}';
 		console.log("courseId = " + courseId);
@@ -78,9 +66,7 @@
 					console.log('choice  ' + choice);
 					//확인창에서 확인을 클릭하면,
 					if (choice) {
-						$('#qnaDesc').attr('action',
-								'/studybite/course/' + courseId + '/qna/' + id)
-								.submit();
+						$('#deleteForm').attr('action', '/studybite/course/' + courseId + '/qna/' + id).submit();
 					}
 				});
 	</script>

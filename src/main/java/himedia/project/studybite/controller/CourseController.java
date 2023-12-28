@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -217,11 +218,16 @@ public class CourseController {
 	 * 강사 : 강의 공지 삭제
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/news/{newsId}/delete")
+	@DeleteMapping("/{courseId}/news/{newsId}")
 	public String newsDelete(@ModelAttribute News news) {
 		courseService.newsDelete(news);
 		return "redirect:/course/{courseId}/news";
 	}
+//	@PostMapping("/{courseId}/news/{newsId}/delete")
+//	public String newsDelete(@ModelAttribute News news) {
+//		courseService.newsDelete(news);
+//		return "redirect:/course/{courseId}/news";
+//	}
 
 	/**
 	 * 질의 응답 목록
@@ -279,12 +285,6 @@ public class CourseController {
 		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file);
 		
-        File filet = new File(".");
-        File rootPath = filet.getAbsoluteFile();
-        System.out.println("현재 프로젝트의 경로 : "+rootPath );
-
-
-
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
 	}
@@ -361,11 +361,16 @@ public class CourseController {
 	 * 질의 응답 삭제
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/qna/{qnaId}/delete")
+	@DeleteMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDelete(@ModelAttribute Qna qna) {
 		courseService.qnaDelete(qna);
 		return "redirect:/course/{courseId}/qna";
 	}
+//	@PostMapping("/{courseId}/qna/{qnaId}/delete")
+//	public String qnaDelete(@ModelAttribute Qna qna) {
+//		courseService.qnaDelete(qna);
+//		return "redirect:/course/{courseId}/qna";
+//	}
 
 	/**
 	 *  출결 확인
