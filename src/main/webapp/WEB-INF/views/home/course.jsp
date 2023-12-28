@@ -42,9 +42,9 @@
 		<p class="my-3 blue600">수강중인 강의</p>
 		<div class="row mb-2">
 			<c:forEach var="course" items="${courses}">
-				<div class="col-md-6">
+				<div class="col-md-6" >
 					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-blue50" onclick="location.href='/studybite/course/${course.courseId}'" style="cursor: pointer;">
-						<div class="col p-2 d-flex flex-column position-static">
+						<div class="col p-2 d-flex flex-column position-static ">
 							<div class="d-flex">
 								<button class="btn bg-primary text-white me-auto p-2" type="button" style="border-radius: 12px">${course.sort}</button>
 								<c:if test="${user.role == 2}">
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 						<div class="d-flex flex-row mb-2">
-							<div class="w-50 p-2">
+							<div class="w-50 h-50 p-2" >
 								<img src="${course.thumbnail}" class="img-fluid rounded" alt="...">
 							</div>
 							<div class="p-2">
