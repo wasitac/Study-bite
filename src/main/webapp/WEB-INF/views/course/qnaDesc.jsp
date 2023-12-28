@@ -50,7 +50,6 @@
 				</div>
 			</c:if>
 		</form:form>
-
 		<c:choose>
 			<c:when test="${user.role == 3 and not empty qna.answer}">
 				<h4 class="blue600 info">답변</h4>
@@ -58,21 +57,18 @@
 					<div>${qna.answer}</div>
 				</div>
 			</c:when>
-
 			<c:when test="${user.role == 3 and empty qna.answer}">
 				<h4 class="blue600 info">답변</h4>
 				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 					<div>등록된 답변이 없습니다</div>
 				</div>
 			</c:when>
-
 			<c:when test="${user.role == 2 and not empty qna.answer}">
 				<h4 class="blue600 info">답변</h4>
 				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 					<div>${qna.answer}</div>
 				</div>
 			</c:when>
-
 			<c:when test="${user.role == 2 and empty qna.answer}">
 				<form action="/studybite/course/${courseInfo.courseId}/qna/answer" method="post" enctype="multipart/form-data">
 					<div class="my-3">
