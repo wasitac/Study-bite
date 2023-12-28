@@ -124,7 +124,7 @@ public class UserController {
 		List<Course> finishedCourse = new ArrayList<Course>();
 		Iterator<Course> iter = courses.iterator();
 		Integer finishedCount = 0;
-		
+	
 		while(iter.hasNext()) {
 			Course iterCourse = iter.next();
 			if(userCourseService.findAttendanceCount(userId, iterCourse.getCourseId()) == 7) {

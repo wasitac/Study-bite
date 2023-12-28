@@ -150,8 +150,10 @@ public class CourseController {
 
 		if (newsCnt % 10 != 0)
 			num = num + 1;
-
+		
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("news", news);
+		model.addAttribute("newsCnt", newsCnt);
 		model.addAttribute("user", user);
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("num", num);
@@ -234,7 +236,6 @@ public class CourseController {
 		}
 
 		List<Qna> qna = courseService.findQnaPage(courseId, pageNum);
-
 		String location = "course/" + courseId + "/qna?";
 
 		int qnaCnt = courseService.cntQna(courseId);
@@ -243,7 +244,9 @@ public class CourseController {
 		if (qnaCnt % 10 != 0)
 			num = num + 1;
 
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("qna", qna);
+		model.addAttribute("qnaCnt", qnaCnt);
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("num", num);
 		model.addAttribute("location", location);
