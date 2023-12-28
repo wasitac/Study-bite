@@ -133,7 +133,7 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
-	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화)
+	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, @SessionAttribute(name = "user", required = false) User user, Model model) {
@@ -239,7 +239,7 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 목록
-	 * @author 김민혜
+	 * @author 김민혜, 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
