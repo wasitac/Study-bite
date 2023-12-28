@@ -27,7 +27,6 @@
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
-					<div class="me-3">번호 : ${qna.qnaId}</div>
 					<div>작성자 : ${qna.userName}</div>
 					<div class="ms-auto me-3">작성일 : ${qna.date}</div>
 					<div>조회수 : ${qna.views}</div>
@@ -38,10 +37,12 @@
 				<div>${qna.description}</div>
 			</div>
 			<hr class="my-5">
-			<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
-			<div>
-				<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
-			</div>
+			<c:if test="${not empty fileBoard}">
+				<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+				<div>
+					<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
+				</div>
+			</c:if>
 			<c:if test="${user.userName eq qna.userName}">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>

@@ -28,9 +28,9 @@
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<c:forEach var="news" items="${news}">
+					<c:forEach var="news" items="${news}" varStatus="status">
 						<tr class="table">
-							<td>${news.newsId}</td>
+							<td>${newsCnt - (pageNum) - status.index}</td>
 							<td>
 								<a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a>
 							</td>

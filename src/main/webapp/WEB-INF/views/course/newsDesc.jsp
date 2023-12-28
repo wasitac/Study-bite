@@ -10,7 +10,7 @@
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
+	<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
@@ -25,7 +25,6 @@
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${news.title}</h3>
 				<div class="d-flex mt-2">
-					<div class="me-3">번호 : ${news.newsId}</div>
 					<div>작성자 : ${news.userName}</div>
 					<div class="ms-auto me-3">작성일 : ${news.date}</div>
 					<div>조회수 : ${news.views}</div>
@@ -43,7 +42,9 @@
 				</div>
 			</c:if>
 		</form:form>
-		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
+		<c:if test="${not empty fileBoard}">
+			<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
+		</c:if>
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">

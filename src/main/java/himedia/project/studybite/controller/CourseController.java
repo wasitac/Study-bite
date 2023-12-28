@@ -152,8 +152,10 @@ public class CourseController {
 
 		if (newsCnt % 10 != 0)
 			num = num + 1;
-
+		
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("news", news);
+		model.addAttribute("newsCnt", newsCnt);
 		model.addAttribute("user", user);
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("num", num);
@@ -174,7 +176,7 @@ public class CourseController {
 		Optional<FileBoard> fileBoardInfo = courseService.findNewsFile(newsId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
-		if (!fileBoardInfo.isEmpty())
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		model.addAttribute("news", news);
 		return "/course/newsDesc";
@@ -215,7 +217,6 @@ public class CourseController {
 		}
 
 		List<Qna> qna = courseService.findQnaPage(courseId, pageNum);
-
 		String location = "course/" + courseId + "/qna?";
 
 		int qnaCnt = courseService.cntQna(courseId);
@@ -224,7 +225,9 @@ public class CourseController {
 		if (qnaCnt % 10 != 0)
 			num = num + 1;
 
+		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("qna", qna);
+		model.addAttribute("qnaCnt", qnaCnt);
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("num", num);
 		model.addAttribute("location", location);
@@ -297,7 +300,7 @@ public class CourseController {
 		model.addAttribute("qna", qna);
 		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
 		model.addAttribute("user", user);		
-		if (!fileBoardInfo.isEmpty())
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "/course/qnaDesc";
 	}
