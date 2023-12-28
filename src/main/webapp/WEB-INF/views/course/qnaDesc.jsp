@@ -23,8 +23,7 @@
 				질의 응답 목록
 			</h4>
 		</div>
-
-		<form:form modelAttribute="qna" action="${context}course/${courseId}/qna/${qnaId}/delete">
+		<form:form modelAttribute="qna" action="${context}course/${courseId}/qna/${qnaId}/delete" onsubmit="return confirm('삭제하시겠습니까?');">
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
@@ -40,13 +39,13 @@
 			</div>
 			<hr class="my-5">
 			<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
-		<div>
-			<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
-		</div>
+			<div>
+				<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
+			</div>
 			<c:if test="${user.userName eq qna.userName}">
-				<div class="position-absolute end-0 mt-1">
+				<div class="d-flex justify-content-end mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>
-					<form:button type="submit" class="delete btn btn-primary">삭제</form:button>
+					<form:button type="submit" class="delete btn btn-primary mx-1">삭제</form:button>
 				</div>
 			</c:if>
 		</form:form>
@@ -56,7 +55,7 @@
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 	<script src="${resPath}/js/courseBar.js"></script>
-<!-- 	<script type="text/javascript">
+	<!-- 	<script type="text/javascript">
 		$(".delete").click(function() {
 			console.log('삭제 버튼 클릭');
 			var choice = confirm("질문을 삭제하겠습니까?");
@@ -68,18 +67,21 @@
 		});
 	</script> -->
 	<script type="text/javascript">
-      var courseId = '${courseInfo.courseId}';
-      console.log("courseId = " + courseId);
-      $(".delete").click(function() {
-         var id = $(this).attr('id');
-         // 확인창
-         var choice = confirm("질문을 삭제하겠습니까?");
-         console.log('choice  ' + choice);
-         //확인창에서 확인을 클릭하면,
-          if (choice) {
-            $('#qnaDesc').attr('action', '/studybite/course/' + courseId + '/qna/' + id).submit();
-         } 
-      });
-   </script>
+		var courseId = '${courseInfo.courseId}';
+		console.log("courseId = " + courseId);
+		$(".delete").click(
+				function() {
+					var id = $(this).attr('id');
+					// 확인창
+					var choice = confirm("질문을 삭제하겠습니까?");
+					console.log('choice  ' + choice);
+					//확인창에서 확인을 클릭하면,
+					if (choice) {
+						$('#qnaDesc').attr('action',
+								'/studybite/course/' + courseId + '/qna/' + id)
+								.submit();
+					}
+				});
+	</script>
 </body>
 </html>

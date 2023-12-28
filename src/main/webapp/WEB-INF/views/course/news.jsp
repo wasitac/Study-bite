@@ -12,7 +12,7 @@
 	</div>
 	<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 		<%@ include file="../common/courseTitle.jsp"%>
-		<%@ include file="../common/courseBar.jsp" %>
+		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h3 class="blue600 info">강의 공지</h3>
 		</div>
@@ -29,13 +29,15 @@
 				</thead>
 				<tbody class="table-group-divider">
 					<c:forEach var="news" items="${news}">
-					<tr class="table">
-						<td>${news.newsId}</td>
-						<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
-						<td>${news.userName}</td>
-						<td>${news.date}</td>
-						<td>${news.views}</td>
-					</tr>
+						<tr class="table">
+							<td>${news.newsId}</td>
+							<td>
+								<a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a>
+							</td>
+							<td>${news.userName}</td>
+							<td>${news.date}</td>
+							<td>${news.views}</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>

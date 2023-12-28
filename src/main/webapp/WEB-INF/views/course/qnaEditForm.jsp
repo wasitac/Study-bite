@@ -16,7 +16,7 @@
 		<%@ include file="../common/courseTitle.jsp"%>
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-3 text-left">
-			<h3 style="color: #2563EB" id="bigTitle">
+			<h3 class="blue600" id="bigTitle">
 				<button class="btn border-0" type="submit" onclick="history.back()" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
@@ -38,8 +38,8 @@
 				<input type="file" name="file" id="file">
 
 				<hr class="row mt-5">
-				<div class="position-absolute end-0 mt-1">
-					<button type="submit" class="update btn btn-primary">수정하기</button>
+				<div class="d-flex justify-content-end mt-1">
+					<button type="submit" class="update btn btn-primary me-1">수정하기</button>
 					<button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
 				</div>
 			</form:form>
@@ -54,31 +54,40 @@
 	<script src="${resPath}/js/courseBar.js"></script>
 	<script type="text/javascript">
 		function changeText() {
-			  var title = document.getElementById("title");
-			  var bigTitle = document.getElementById("bigTitle");
-			  var smallTitle = document.getElementById("smallTitle");
-	
-			  // 조건에 따라 텍스트 변경
-			  if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}") {
-			    title.innerHTML = "질문 수정";
-			    bigTitle.innerHTML = "질의 응답 목록";
-			    smallTitle.innerHTML = "질문 수정";
-			    
-				$(".update").click(function() {
-					$('#itemTable').attr('action', '${context}course/${courseId}/qna/${qnaId}').submit();
-					console.log('submit 버튼 클릭함');
-				});
-				
-			  } else {
-			    title.innerHTML = "강의 공지 수정";
+			var title = document.getElementById("title");
+			var bigTitle = document.getElementById("bigTitle");
+			var smallTitle = document.getElementById("smallTitle");
+
+			// 조건에 따라 텍스트 변경
+			if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}") {
+				title.innerHTML = "질문 수정";
+				bigTitle.innerHTML = "질의 응답 목록";
+				smallTitle.innerHTML = "질문 수정";
+
+				$(".update")
+						.click(
+								function() {
+									$('#itemTable')
+											.attr('action',
+													'${context}course/${courseId}/qna/${qnaId}')
+											.submit();
+									console.log('submit 버튼 클릭함');
+								});
+			} else {
+				title.innerHTML = "강의 공지 수정";
 				bigTitle.innerHTML = "강의 공지 목록";
 				smallTitle.innerHTML = "강의 공지 수정";
-				
-				$(".update").click(function() {
-					$('#itemTable').attr('action', '${context}course/${courseId}/qna/${qnaId}').submit();
-					console.log('submit 버튼 클릭함');
-				});
-			  }
+
+				$(".update")
+						.click(
+								function() {
+									$('#itemTable')
+											.attr('action',
+													'${context}course/${courseId}/qna/${qnaId}')
+											.submit();
+									console.log('submit 버튼 클릭함');
+								});
 			}
+		}
 	</script>
 </html>
