@@ -163,6 +163,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
+		
 		// 1. 파일 저장 경로 설정 :
 //		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 //		String projectPath = new File(classpath).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath();

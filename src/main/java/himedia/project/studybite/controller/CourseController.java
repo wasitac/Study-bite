@@ -121,9 +121,11 @@ public class CourseController {
 		news.setCourseId(courseId);
 		news.setUserName(user.getUserName());
 		courseService.newsAdd(news);
-
-		fileBoard.setNewsId(news.getNewsId());
-		courseService.upload(fileBoard, file);
+		
+		if(!file.isEmpty()) {
+			fileBoard.setNewsId(news.getNewsId());
+			courseService.upload(fileBoard, file);
+		}
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
@@ -207,10 +209,20 @@ public class CourseController {
 	/**
 	 * 강사 : 강의 공지 수정
 	 * @author 신지은
+	 * @throws Exception 
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @ModelAttribute News news, Model model) {
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, 
+			@ModelAttribute News news, FileBoard fileBoard, Model model) throws Exception {
+		
 		courseService.newsUpdate(news);
+		
+		//fileBoard.setNewsId(news.getNewsId());
+		
+		//courseService.findNewsFile(55L);
+		
+		//courseService.upload(fileBoard, file);
+		
 		return "redirect:/course/{courseId}/news/{newsId}";
 	}
 	
@@ -281,9 +293,11 @@ public class CourseController {
 		qna.setCourseId(courseId);
 		qna.setUserName(user.getUserName());
 		courseService.question(qna);
-
-		fileBoard.setQnaId(qna.getQnaId());;
-		courseService.upload(fileBoard, file);
+		
+		if(!file.isEmpty()) {
+			fileBoard.setQnaId(qna.getQnaId());;
+			courseService.upload(fileBoard, file);
+		}
 		
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
