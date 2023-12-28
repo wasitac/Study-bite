@@ -32,9 +32,7 @@
 							<c:forEach var="qna" items="${qna}" varStatus="status">
 								<tr class="table">
 									<td>${qnaCnt - pageNum - status.index}</td>
-									<td>
-										<a href="/studybite/course/${courseInfo.courseId}/qna/${qna.qnaId}">${qna.title}</a>
-									</td>
+									<td><a href="/studybite/course/${courseInfo.courseId}/qna/${qna.qnaId}">${qna.title}</a></td>
 									<td>${qna.userName}</td>
 									<td>${qna.date}</td>
 									<td>${qna.views}</td>
@@ -47,9 +45,11 @@
 				<div>
 					<%@ include file="../common/pagination.jsp"%>
 				</div>
-				<div class="d-flex justify-content-end mt-1">
-					<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
-				</div>
+				<c:if test="${user.role == 3}">
+					<div class="d-flex justify-content-end mt-1">
+						<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna/add'">작성하기</button>
+					</div>
+				</c:if>
 			</div>
 			<%@ include file="../common/footer.jsp"%>
 		</div>

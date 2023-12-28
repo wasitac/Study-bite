@@ -186,6 +186,7 @@ public class UserController {
 		if (pageNum == null) {
 			pageNum = 0;
 		}
+		
 		List<Notice> notices = userService.findPage(pageNum);
 
 		String location = "notice?";
