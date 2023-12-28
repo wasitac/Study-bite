@@ -36,6 +36,7 @@
 				<div>${news.description}</div>
 			</div>
 			<hr class="my-5">
+		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-50 h-50">
 			<c:if test="${user.userName eq news.userName}">
 				<div class="position-absolute end-0 mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>
@@ -43,7 +44,6 @@
 				</div>
 			</c:if>
 		</form:form>
-		<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-100">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	<div class="w-25">
