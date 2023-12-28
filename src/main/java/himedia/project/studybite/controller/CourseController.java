@@ -235,11 +235,7 @@ public class CourseController {
 		courseService.newsDelete(news);
 		return "redirect:/course/{courseId}/news";
 	}
-//	@PostMapping("/{courseId}/news/{newsId}/delete")
-//	public String newsDelete(@ModelAttribute News news) {
-//		courseService.newsDelete(news);
-//		return "redirect:/course/{courseId}/news";
-//	}
+
 
 	/**
 	 * 질의 응답 목록
