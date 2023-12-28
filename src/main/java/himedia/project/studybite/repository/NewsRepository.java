@@ -3,6 +3,7 @@ package himedia.project.studybite.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -32,11 +33,15 @@ public interface NewsRepository {
 	 * 강사 : 강의 공지 수정
 	 * @author 신지은
 	 */
+	@Insert("update news set title = #{title}, description = #{description} where newsId = #{newsId}")
+	int newsUpdate(News news);
 	
 	/**
 	 * 강사 : 강의 공지 삭제
 	 * @author 신지은
 	 */
+	@Delete("delete from news where newsId = #{newsId} ")
+	void newsDelete(News news);
 	
 	/**
 	 *  강의 공지 상세

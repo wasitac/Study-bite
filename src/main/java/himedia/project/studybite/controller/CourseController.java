@@ -1,5 +1,6 @@
 package himedia.project.studybite.controller;
 
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,12 +24,10 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
-import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +39,6 @@ import lombok.extern.slf4j.Slf4j;
 public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;
-	private final NotificationService notificationService;
 
 	/**
 	 * @author 신지은
@@ -174,9 +172,9 @@ public class CourseController {
 		Optional<FileBoard> fileBoardInfo = courseService.findNewsFile(newsId);
 
 		model.addAttribute("courseInfo", courseInfo.get());
+		model.addAttribute("news", news);
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		model.addAttribute("news", news);
 		return "/course/newsDesc";
 	}
 	
@@ -197,9 +195,30 @@ public class CourseController {
 		model.addAttribute("requestURI", request.getRequestURI());
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
+		model.addAttribute("select", news);
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		return "course/qnaEditForm";
+		return "course/editForm";
+	}
+	
+	/**
+	 * 강사 : 강의 공지 수정
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/{newsId}")
+	public String newsEdit(@PathVariable Long courseId, @ModelAttribute News news, Model model) {
+		courseService.newsUpdate(news);
+		return "redirect:/course/{courseId}/news/{newsId}";
+	}
+	
+	/**
+	 * 강사 : 강의 공지 삭제
+	 * @author 신지은
+	 */
+	@PostMapping("/{courseId}/news/{newsId}/delete")
+	public String newsDelete(@ModelAttribute News news) {
+		courseService.newsDelete(news);
+		return "redirect:/course/{courseId}/news";
 	}
 
 	/**
@@ -243,9 +262,7 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 등록)
-	 * @author 신지은(파일 업로드 기능)
-	 * @author 이지홍(알림 기능)
+	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
@@ -259,9 +276,11 @@ public class CourseController {
 		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file);
 		
-		Long instructorId = userCourseService.findInstructor(courseId);
-		Notification notification = new Notification(instructorId, courseId, qna.getQnaId(), 3, qna.getTitle());
-		notificationService.sendNotification(notification);
+        File filet = new File(".");
+        File rootPath = filet.getAbsoluteFile();
+        System.out.println("현재 프로젝트의 경로 : "+rootPath );
+
+
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
@@ -295,10 +314,10 @@ public class CourseController {
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
-		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
-		model.addAttribute("user", user);		
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
+		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
+		model.addAttribute("user", user);		
 		return "/course/qnaDesc";
 	}
 
@@ -319,9 +338,10 @@ public class CourseController {
 		model.addAttribute("requestURI", request.getRequestURI());
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("qna", qna);
-		if (!fileBoardInfo.isEmpty())
+		model.addAttribute("select", qna);
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		return "course/qnaEditForm";
+		return "course/editForm";
 	}
 	
 	/**
@@ -330,12 +350,7 @@ public class CourseController {
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}")
 	public String qnaEdit(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
-		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		
 		courseService.qnaUpdate(qna);
-		
-		model.addAttribute("courseInfo", courseInfo.get());
-		model.addAttribute("qna", qna);
 		return "redirect:/course/{courseId}/qna/{qnaId}";
 	}
 	
@@ -344,7 +359,7 @@ public class CourseController {
 	 * @author 신지은
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}/delete")
-	public String qnaDelete(@PathVariable Long courseId, @ModelAttribute Qna qna, @PathVariable Long qnaId) {
+	public String qnaDelete(@ModelAttribute Qna qna) {
 		courseService.qnaDelete(qna);
 		return "redirect:/course/{courseId}/qna";
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
@@ -8,6 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <title id="title">질문 수정</title>
 </head>
+
 <body>
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
@@ -25,7 +27,8 @@
 		</div>
 		<h4 style="color: #2563EB" class="mt-4" id="smallTitle">질문 수정</h4>
 		<div class="contatiner">
-			<form:form modelAttribute="qna" action="${context}course/${courseId}/qna/${qnaId}" method="post" enctype="multipart/form-data">
+
+			<form:form modelAttribute="select" action="${context}course/${courseId}/qna/${qnaId}" method="post" enctype="multipart/form-data" id="editForm">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label>
 					<form:input path="title" class="form-control mt-1 mb-2 col" value="${title}" required="true" />
@@ -53,41 +56,42 @@
 	</div>
 	<script src="${resPath}/js/courseBar.js"></script>
 	<script type="text/javascript">
-		function changeText() {
-			var title = document.getElementById("title");
-			var bigTitle = document.getElementById("bigTitle");
-			var smallTitle = document.getElementById("smallTitle");
+		var title = document.getElementById("title");
+		var bigTitle = document.getElementById("bigTitle");
+		var smallTitle = document.getElementById("smallTitle");
 
-			// 조건에 따라 텍스트 변경
-			if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}") {
-				title.innerHTML = "질문 수정";
-				bigTitle.innerHTML = "질의 응답 목록";
-				smallTitle.innerHTML = "질문 수정";
+		console.log("자바스크립트 실행 됨 ");
 
-				$(".update")
-						.click(
-								function() {
-									$('#itemTable')
-											.attr('action',
-													'${context}course/${courseId}/qna/${qnaId}')
-											.submit();
-									console.log('submit 버튼 클릭함');
-								});
-			} else {
-				title.innerHTML = "강의 공지 수정";
-				bigTitle.innerHTML = "강의 공지 목록";
-				smallTitle.innerHTML = "강의 공지 수정";
+		// 조건에 따라 텍스트 변경
+		if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}/editForm") {
+			title.innerHTML = "질문 수정";
+			bigTitle.innerHTML = "질의 응답 목록";
+			smallTitle.innerHTML = "질문 수정";
 
-				$(".update")
-						.click(
-								function() {
-									$('#itemTable')
-											.attr('action',
-													'${context}course/${courseId}/qna/${qnaId}')
-											.submit();
-									console.log('submit 버튼 클릭함');
-								});
-			}
+			$(".update").click(
+					function() {
+						$('#editForm').attr('action',
+								'${context}course/${courseId}/qna/${qnaId}')
+								.submit();
+						console.log('submit 버튼 클릭함');
+					});
+		} else {
+			title.innerHTML = "강의 공지 수정";
+			bigTitle.innerHTML = "강의 공지 목록";
+			smallTitle.innerHTML = "강의 공지 수정";
+
+			$('#editForm').attr('modelAttribute', 'news');
+
+			$(".update").click(
+					function() {
+						$('#editForm').attr('action',
+								'${context}course/${courseId}/news/${newsId}')
+								.submit();
+						console.log('submit 버튼 클릭함');
+					});
 		}
 	</script>
+
+</body>
+
 </html>
