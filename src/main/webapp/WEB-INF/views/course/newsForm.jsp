@@ -36,7 +36,7 @@
 				<input type="file" name="file" id="file" multiple="multiple">
 				
 				<hr class="row mt-5">
-				<div class="position-absolute end-0 mt-1">
+				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary">작성하기</button>
 					<button type="button" class="btn btn-primary">취소</button>
 				</div>

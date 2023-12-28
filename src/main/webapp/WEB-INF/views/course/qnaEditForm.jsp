@@ -83,7 +83,7 @@
 								function() {
 									$('#itemTable')
 											.attr('action',
-													'${context}course/${courseId}/qna/${qnaId}')
+													'${context}course/${courseId}/news/${newsId}')
 											.submit();
 									console.log('submit 버튼 클릭함');
 								});
