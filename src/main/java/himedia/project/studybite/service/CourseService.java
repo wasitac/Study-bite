@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -146,6 +148,9 @@ public class CourseService {
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
 		// 1. 파일 저장 경로 설정 :
+//		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//		String projectPath = new File(classpath).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath();
+
 		String filePath = "C:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		// 랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();

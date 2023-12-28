@@ -22,7 +22,7 @@ public interface NotificationRepository {
 	void deleteNotification(Long notificationId);
 
 	// 알림 전송
-	@Insert("insert into notification values(#{notification.userId}, #{notification.courseId}, #{notification.id}, #{notification.category}, #{notification.title}")
+	@Insert("insert into notification(userId, courseId, id, category, title) values(#{userId}, #{courseId}, #{id}, #{category}, #{title})")
 	@Options(useGeneratedKeys = true, keyProperty = "notificationId")
 	void addNotification(Notification notification);
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import himedia.project.studybite.domain.Course;
@@ -34,4 +35,8 @@ public interface UserCourseRepository {
 
     // 출석한 컨텐츠 개수
     Integer findAttendanceCount(@Param("userId") Long userId, @Param("courseId") Long courseId);
+    
+    // 코스아이디로 유저아이디 조회 - 이지홍
+    @Select("select userId from userCourse where courseId = #{courseId} limit 1")
+    Long findUserByCourse(Long courseId);
 }
