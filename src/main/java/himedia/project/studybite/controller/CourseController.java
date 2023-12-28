@@ -42,9 +42,9 @@ public class CourseController {
 	private final UserCourseService userCourseService;
 
 	/**
+	 * 강의 개요
 	 * @author 신지은
 	 */
-	// 강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -235,11 +235,6 @@ public class CourseController {
 		courseService.newsDelete(news);
 		return "redirect:/course/{courseId}/news";
 	}
-//	@PostMapping("/{courseId}/news/{newsId}/delete")
-//	public String newsDelete(@ModelAttribute News news) {
-//		courseService.newsDelete(news);
-//		return "redirect:/course/{courseId}/news";
-//	}
 
 	/**
 	 * 질의 응답 목록
@@ -380,11 +375,6 @@ public class CourseController {
 		courseService.qnaDelete(qna);
 		return "redirect:/course/{courseId}/qna";
 	}
-//	@PostMapping("/{courseId}/qna/{qnaId}/delete")
-//	public String qnaDelete(@ModelAttribute Qna qna) {
-//		courseService.qnaDelete(qna);
-//		return "redirect:/course/{courseId}/qna";
-//	}
 
 	/**
 	 *  출결 확인
