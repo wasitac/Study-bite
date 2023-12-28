@@ -67,11 +67,10 @@ public class UserController {
 		return "redirect:/home";
 	}
 
-/**
- * 	로그아웃
- * @author 이지홍
- */
-
+	/**
+ 	* 로그아웃
+ 	* @author 이지홍
+ 	*/
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
