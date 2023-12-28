@@ -29,7 +29,7 @@
 							<h3 class="text-center my-4">${news.title}</h3>
 							<div class="d-flex mt-2">
 								<div class="me-3">번호 : ${news.newsId}</div>
-								<div>작성자 : ${news.userName}</div>
+								<div>작성자 : ${courseInfo.instructor}</div>
 								<div class="ms-auto me-3">작성일 : ${news.date}</div>
 								<div>조회수 : ${news.views}</div>
 							</div>

@@ -34,7 +34,7 @@
 						<tr class="table">
 							<td>${newsCnt - (pageNum) - status.index}</td>
 							<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
-							<td>${news.userName}</td>
+							<td>${courseInfo.instructor}</td>
 							<td>${news.date}</td>
 							<td>${news.views}</td>
 						</tr>
