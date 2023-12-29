@@ -1,6 +1,7 @@
 package himedia.project.studybite.service;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -165,9 +166,13 @@ public class CourseService {
 	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
 		
 		// 1. 파일 저장 경로 설정 :
-//		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-//		String projectPath = new File(classpath).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath();
-		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+		String projectPath = new File(classpath).getAbsolutePath();
+		String[] path = projectPath.split("\\\\");
+		String filePath = path[0] + "\\" + path[1] + "\\" + path[2] + "\\Study-bite\\src\\main\\webapp\\resources\\files";
+		
+		
+//		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		// 랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
