@@ -20,9 +20,8 @@ public interface BoardRepository {
 	/**
 	 * 파일 저장
 	 */
-	@Insert("insert into fileBoard(filename, filepath, qnaId, newsId) values(#{filename}, #{filepath}, #{qnaId}, #{newsId});")
-	@Options(useGeneratedKeys = true, keyProperty = "id")
-	void save(FileBoard fileBoard);
+	@Insert("insert into fileBoard(filename, originName, filepath, qnaId, newsId) values(#{filename}, #{originName}, #{filepath}, #{qnaId}, #{newsId})")
+	void fileSave(FileBoard fileBoard);
 	
 	/**
 	 * Qna 저장한 파일 조회
@@ -39,8 +38,8 @@ public interface BoardRepository {
 	/**
 	 * 저장한 파일 수정
 	 */
-	@Update("update fileBoard set filename=#{filename}, filepath=#{filepath}, "
-			+ "qnaId =#{qnaId}, newsId=#{newsId} where id=#{id}")
+	@Update("update fileBoard set filename=#{filename}, originName = #{originName}, "
+			+ "filepath=#{filepath}, qnaId =#{qnaId}, newsId=#{newsId} where id=#{id}")
 	int fileUpdate(FileBoard fileBoard);
 	
 	/**

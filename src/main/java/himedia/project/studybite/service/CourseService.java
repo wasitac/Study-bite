@@ -199,15 +199,6 @@ public class CourseService {
 	};
 	
 	/**
-	 * 파일 삭제
-	 * 
-	 * @author 신지은
-	 */
-	public int fileDelete(FileBoard fileBoard) {
-		return boardRepository.fileDelete(fileBoard);
-	}
-	
-	/**
 	 * 파일 업로드
 	 * 
 	 * @author 신지은
@@ -224,14 +215,15 @@ public class CourseService {
 		File saveFile = new File(filePath, fileName); // 파일을 생성하면 경로는 filePath, 이름은 name으로 저장
 		// 5. 서버로 전송
 		file.transferTo(saveFile); // 예외 처리 필요
-
+		
+		fileBoard.setOriginName(file.getOriginalFilename());
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
 		if(fileBoard.getId()!=null) 
 			boardRepository.fileUpdate(fileBoard);
 		else
-			boardRepository.save(fileBoard);
+			boardRepository.fileSave(fileBoard);
 	}
 	
 	/**
@@ -251,6 +243,14 @@ public class CourseService {
 		return boardRepository.findQnaFile(qnaId);
 	}
 
+	/**
+	 * 파일 삭제
+	 * 
+	 * @author 신지은
+	 */
+	public int fileDelete(FileBoard fileBoard) {
+		return boardRepository.fileDelete(fileBoard);
+	}
 	
 	// 강의 공지 조회수
 	public Long newsViewCnt(Long newsId) {
