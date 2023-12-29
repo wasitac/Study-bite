@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,7 @@ import himedia.project.studybite.domain.Notice;
  * @author 김민혜
  */
 @Repository
-public interface NoticeRepository {
+public interface NoticeMapper {
 	/* 공지사항 목록 */
 	@Select("select * from notice order by noticeId desc limit #{pageNum}, 10")
 	List<Notice> findPage(Integer pageNum);

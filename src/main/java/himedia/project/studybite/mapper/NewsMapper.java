@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
 
 @Repository
-public interface NewsRepository {
+public interface NewsMapper {
 	/**
 	 * 강의 공지 목록
 	 * @author 김민혜

@@ -8,43 +8,43 @@ import org.springframework.stereotype.Service;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.UserCourse;
-import himedia.project.studybite.repository.UserCourseRepository;
+import himedia.project.studybite.mapper.UsercourseMapper;
 import lombok.RequiredArgsConstructor;
 
 /**
-* UserCourseRepository를 사용하는 서비스
+* UsercourseMapper를 사용하는 서비스
 * @author 송창민
 */
 @Service
 @RequiredArgsConstructor
 public class UserCourseService {
-    private final UserCourseRepository userCourseRepository;
+    private final UsercourseMapper usercourseMapper;
 
     public List<Course> findCourse(Long userId) {
-        return userCourseRepository.findCourseById(userId);
+        return usercourseMapper.findCourseById(userId);
     }
 
     public List<News> findNews(Long userId) {
-        return userCourseRepository.findNewsById(userId);
+        return usercourseMapper.findNewsById(userId);
     }
 
     public List<UserCourse> findUserCourse(Long userId, Long courseId) {
-        return userCourseRepository.findUserCourseById(userId, courseId);
+        return usercourseMapper.findUserCourseById(userId, courseId);
     }
 
     public Integer findCount(Long userId) {
-        return userCourseRepository.findCourseCount(userId);
+        return usercourseMapper.findCourseCount(userId);
     }
 
     public int updateDate(Date date, Long contentId, Long userId) {
-        return userCourseRepository.updateDate(date, contentId, userId);
+        return usercourseMapper.updateDate(date, contentId, userId);
     }
 
     public Integer findAttendanceCount(Long userId, Long courseId) {
-        return userCourseRepository.findAttendanceCount(userId, courseId);
+        return usercourseMapper.findAttendanceCount(userId, courseId);
     }
     
     public List<Long> findInstructor(Long courseId) {
-    	return userCourseRepository.findUserByCourse(courseId);
+    	return usercourseMapper.findUserByCourse(courseId);
     }
 }

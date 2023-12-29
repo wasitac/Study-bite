@@ -75,13 +75,13 @@ STS3
             │      UserCourse.java
             │
             ├─repository
-            │      ContentRepository.java
-            │      CourseRepository.java
-            │      NewsRepository.java
-            │      NoticeRepository.java
-            │      QnaRepository.java
-            │      UserCourseRepository.java
-            │      UserRepository.java
+            │      contentMapper.java
+            │      courseMapper.java
+            │      NewsMapper.java
+            │      NoticeMapper.java
+            │      QnaMapper.java
+            │      UsercourseMapper.java
+            │      UserMapper.java
             │
             └─service
                     CourseService.java

@@ -88,15 +88,15 @@ STS3
 |               |       NotificationInterceptor.java
 |               |
 |               +---repository
-|               |       BoardRepository.java
-|               |       ContentRepository.java
-|               |       CourseRepository.java
-|               |       NewsRepository.java
-|               |       NoticeRepository.java
-|               |       NotificationRepository.java
-|               |       QnaRepository.java
-|               |       UserCourseRepository.java
-|               |       UserRepository.java
+|               |       BoardMapper.java
+|               |       contentMapper.java
+|               |       courseMapper.java
+|               |       NewsMapper.java
+|               |       NoticeMapper.java
+|               |       NotificationMapper.java
+|               |       QnaMapper.java
+|               |       UsercourseMapper.java
+|               |       UserMapper.java
 |               |
 |               \---service
 |                       CourseService.java

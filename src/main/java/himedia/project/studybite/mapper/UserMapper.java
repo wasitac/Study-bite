@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import himedia.project.studybite.dto.UserLogin;
  */
 
 @Repository
-public interface UserRepository {
+public interface UserMapper {
 	//컬럼명하고 도메인 필드명이 달라서 자동으로 연결이 안되는것 같음
 	// 로그인
 	@Select ("select * from user where email like #{email} and password like #{password}")

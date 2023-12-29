@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,7 @@ import himedia.project.studybite.domain.Qna;
  * @author 김민혜
  */
 @Repository
-public interface QnaRepository {
+public interface QnaMapper {
 	/**
 	 * @author 김민혜
 	 */

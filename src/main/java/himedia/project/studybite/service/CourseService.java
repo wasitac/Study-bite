@@ -1,7 +1,6 @@
 package himedia.project.studybite.service;
 
 import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -17,13 +16,12 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.Qna;
-import himedia.project.studybite.repository.BoardRepository;
-import himedia.project.studybite.repository.ContentRepository;
-import himedia.project.studybite.repository.CourseRepository;
-import himedia.project.studybite.repository.NewsRepository;
-import himedia.project.studybite.repository.QnaRepository;
+import himedia.project.studybite.mapper.BoardMapper;
+import himedia.project.studybite.mapper.ContentMapper;
+import himedia.project.studybite.mapper.CourseMapper;
+import himedia.project.studybite.mapper.NewsMapper;
+import himedia.project.studybite.mapper.QnaMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,15 +29,15 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class CourseService {
-	private final CourseRepository courseRepository;
-	private final ContentRepository contentRepository;
-	private final NewsRepository newsRepository;
-	private final QnaRepository qnaRepository;
-	private final BoardRepository boardRepository;
+	private final CourseMapper courseMapper;
+	private final ContentMapper contentMapper;
+	private final NewsMapper newsMapper;
+	private final QnaMapper qnaMapper;
+	private final BoardMapper boardMapper;
 
 	// 강의 타이틀 강의 분류, 강의명, 교육자 조회
 	public Optional<Course> courseInfo(Long courseId) {
-		return courseRepository.courseInfo(courseId);
+		return courseMapper.courseInfo(courseId);
 	}
 
 	/**
@@ -48,7 +46,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public List<Content> contentsInfo(Long courseId) {
-		return contentRepository.contentsInfo(courseId);
+		return contentMapper.contentsInfo(courseId);
 	}
 
 	/**
@@ -57,7 +55,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public Optional<Content> findContentName(Long contentId) {
-		return contentRepository.findContentName(contentId);
+		return contentMapper.findContentName(contentId);
 	}
 
 	/**
@@ -66,7 +64,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public Optional<ContentData> findContentUrl(Long contentId) {
-		return contentRepository.findContentUrl(contentId);
+		return contentMapper.findContentUrl(contentId);
 	}
 
 	/**
@@ -75,7 +73,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public List<News> findNewsPage(Long courseId, Integer pageNum) {
-		return newsRepository.findNewsPage(courseId, pageNum);
+		return newsMapper.findNewsPage(courseId, pageNum);
 	}
 
 	/**
@@ -84,7 +82,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void newsAdd(News news) {
-		newsRepository.newsAdd(news);
+		newsMapper.newsAdd(news);
 	}
 
 	/**
@@ -93,7 +91,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public Optional<News> findNewsDesc(Long newsId) {
-		return newsRepository.findNewsDesc(newsId);
+		return newsMapper.findNewsDesc(newsId);
 	}
 	
 	/**
@@ -101,7 +99,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public int newsUpdate(News news) {
-		return newsRepository.newsUpdate(news);
+		return newsMapper.newsUpdate(news);
 	}
 	
 	/**
@@ -111,7 +109,7 @@ public class CourseService {
 	public void newsDelete(News news) {
 		
 		try {
-			FileBoard fileboard = boardRepository.findNewsFile(news.getNewsId()).get();		
+			FileBoard fileboard = boardMapper.findNewsFile(news.getNewsId()).get();		
 			File file = new File(fileboard.getFilepath());
 			
 			if(file.exists()) {
@@ -128,7 +126,7 @@ public class CourseService {
 		}
 		
 		
-		newsRepository.newsDelete(news);
+		newsMapper.newsDelete(news);
 	}
 	
 	/**
@@ -136,7 +134,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public News prev(Long courseId, Long newsId) {
-		return newsRepository.prev(courseId, newsId);
+		return newsMapper.prev(courseId, newsId);
 	}
 
 	/**
@@ -144,7 +142,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public News next(Long courseId, Long newsId) {
-		return newsRepository.next(courseId, newsId);
+		return newsMapper.next(courseId, newsId);
 	}
 
 	/**
@@ -153,7 +151,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public List<Qna> findQnaPage(Long courseId, Integer pageNum) {
-		return qnaRepository.findQnaPage(courseId, pageNum);
+		return qnaMapper.findQnaPage(courseId, pageNum);
 	}
 
 	/**
@@ -162,7 +160,7 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public Optional<Qna> findQnaDesc(Long qnaId) {
-		return qnaRepository.findQnaDesc(qnaId);
+		return qnaMapper.findQnaDesc(qnaId);
 	}
 
 	/**
@@ -171,12 +169,12 @@ public class CourseService {
 	 * @author 김민혜
 	 */
 	public void question(Qna qna) {
-		qnaRepository.question(qna);
+		qnaMapper.question(qna);
 	}
 
 	// 질의 응답 답변 등록
 	public void answer(Qna qna) {
-		qnaRepository.answer(qna);
+		qnaMapper.answer(qna);
 	}
 
 	/**
@@ -185,7 +183,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public int qnaUpdate(Qna qna) {
-		return qnaRepository.qnaUpdate(qna);
+		return qnaMapper.qnaUpdate(qna);
 	}
 
 	/**
@@ -194,7 +192,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void qnaDelete(Qna qna) {
-		qnaRepository.qnaDelete(qna);
+		qnaMapper.qnaDelete(qna);
 	};
 
 	/**
@@ -224,7 +222,7 @@ public class CourseService {
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 
-		boardRepository.save(fileBoard);
+		boardMapper.save(fileBoard);
 	}
 
 	/**
@@ -233,7 +231,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findQnaFile(Long qnaId) {
-		return boardRepository.findQnaFile(qnaId);
+		return boardMapper.findQnaFile(qnaId);
 	}
 
 	/**
@@ -241,26 +239,26 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findNewsFile(Long newsId) {
-		return boardRepository.findNewsFile(newsId);
+		return boardMapper.findNewsFile(newsId);
 	}
 	
 	// 강의 공지 조회수
 	public Long newsViewCnt(Long newsId) {
-		return newsRepository.newsViewCnt(newsId);
+		return newsMapper.newsViewCnt(newsId);
 	}
 
 	// 강의 공지 글 개수
 	public int cntNews(Long courseId) {
-		return newsRepository.cntNews(courseId);
+		return newsMapper.cntNews(courseId);
 	}
 
 	// 질의 응답 조회수
 	public Long qnaViewCnt(Long qnaId) {
-		return qnaRepository.qnaViewCnt(qnaId);
+		return qnaMapper.qnaViewCnt(qnaId);
 	}
 
 	// 질의 응답 글 개수
 	public int cntQna(Long courseId) {
-		return qnaRepository.cntQna(courseId);
+		return qnaMapper.cntQna(courseId);
 	}
 }

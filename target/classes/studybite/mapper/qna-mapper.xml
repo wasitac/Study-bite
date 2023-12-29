@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="himedia.project.studybite.repository.QnaRepository">
+<mapper namespace="himedia.project.studybite.mapper.QnaMapper">
  	<select id="findQnaPage" parameterType="map" resultType="Qna">
 		SELECT * FROM qna WHERE courseId = #{courseId} ORDER BY qnaId DESC LIMIT #{pageNum},10
 	</select>

@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import himedia.project.studybite.domain.Notification;
  * @author 이지홍
  */
 @Repository
-public interface NotificationRepository {
+public interface NotificationMapper {
 
 	// 알림목록 조회
 	@Select("select * from notification where userId = #{userId} order by notificationId desc")

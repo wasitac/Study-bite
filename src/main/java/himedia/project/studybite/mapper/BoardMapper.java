@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ import himedia.project.studybite.domain.FileBoard;
  * @author 신지은
  */
 @Repository
-public interface BoardRepository {
+public interface BoardMapper {
 	/**
 	 * 질문 파일 저장
 	 */

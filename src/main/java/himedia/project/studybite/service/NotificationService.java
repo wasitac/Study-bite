@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
-import himedia.project.studybite.repository.NotificationRepository;
+import himedia.project.studybite.mapper.NotificationMapper;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -16,27 +16,27 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class NotificationService {
-	private final NotificationRepository notificationRepository;
+	private final NotificationMapper notificationMapper;
 
 	public List<Notification> getNotifications(User user) {
 		Long userId = user.getUserId();
-		return notificationRepository.findNotifications(userId);
+		return notificationMapper.findNotifications(userId);
 	}
 
 	public void sendNotification(Notification notification) {
-		notificationRepository.addQnaNotification(notification);
+		notificationMapper.addQnaNotification(notification);
 	}
 
 	public void sendNotification(List<Notification> notifications) {
-		notificationRepository.addNewsNotification(notifications);
+		notificationMapper.addNewsNotification(notifications);
 	}
 
 	public void readNotification(Long notificationId) {
-		notificationRepository.deleteNotification(notificationId);
+		notificationMapper.deleteNotification(notificationId);
 	} 
 	
 	public String getNotification(Long notificationId) {
-		Notification n = notificationRepository.findNotificationById(notificationId);
+		Notification n = notificationMapper.findNotificationById(notificationId);
 		Integer category = n.getCategory();
 		Long id = n.getId();
 		Long courseId = n.getCourseId();

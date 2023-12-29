@@ -1,4 +1,4 @@
-package himedia.project.studybite.repository;
+package himedia.project.studybite.mapper;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +17,7 @@ import himedia.project.studybite.domain.UserCourse;
 */
 
 @Repository
-public interface UserCourseRepository {
+public interface UsercourseMapper {
     // 유저 아이디로 유저가 수강한 수강목록 전체 조회
     List<Course> findCourseById(Long userId);
 

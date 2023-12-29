@@ -10,8 +10,8 @@ import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
-import himedia.project.studybite.repository.NoticeRepository;
-import himedia.project.studybite.repository.UserRepository;
+import himedia.project.studybite.mapper.NoticeMapper;
+import himedia.project.studybite.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
-	private final UserRepository userRepository;
-	private final NoticeRepository noticeRepository;
+	private final UserMapper userMapper;
+	private final NoticeMapper noticeMapper;
 
 	/**
 	 * 로그인
@@ -28,12 +28,12 @@ public class UserService {
 	 * @author 이지홍
 	 */
 	public Optional<User> login(UserLogin userLogin) {
-		Optional<User> user = userRepository.login(userLogin);
+		Optional<User> user = userMapper.login(userLogin);
 		return user;
 	}
 
 	public Optional<User> findUser(Long userId) {
-		Optional<User> user = userRepository.findUserById(userId);
+		Optional<User> user = userMapper.findUserById(userId);
 		return user;
 	}
 
@@ -44,10 +44,10 @@ public class UserService {
 	 */
 	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
 		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
-		if (userRepository.checkPassword(passwordUpdate).isEmpty())
+		if (userMapper.checkPassword(passwordUpdate).isEmpty())
 			return false;
 
-		userRepository.updatePassword(passwordUpdate);
+		userMapper.updatePassword(passwordUpdate);
 		return true;
 	}
 
@@ -56,7 +56,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public List<Notice> findPage(Integer pageNum) {
-		return noticeRepository.findPage(pageNum);
+		return noticeMapper.findPage(pageNum);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public Optional<Notice> findNoticeDesc(Long noticeId) {
-		return noticeRepository.findNoticeDesc(noticeId);
+		return noticeMapper.findNoticeDesc(noticeId);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public Notice prev(Long noticeId) {
-		return noticeRepository.prev(noticeId);
+		return noticeMapper.prev(noticeId);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public Notice next(Long noticeId) {
-		return noticeRepository.next(noticeId);
+		return noticeMapper.next(noticeId);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public Long viewcnt(Long noticeId) {
-		return noticeRepository.viewcnt(noticeId);
+		return noticeMapper.viewcnt(noticeId);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public int cntNotice() {
-		return noticeRepository.cntNotice();
+		return noticeMapper.cntNotice();
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public List<Notice> search(String search, Integer pageNum) {
-		return noticeRepository.search(search, pageNum);
+		return noticeMapper.search(search, pageNum);
 	}
 
 	/**
@@ -112,6 +112,6 @@ public class UserService {
 	 * @author 김민혜
 	 */
 	public int cntSearchNotice(String search) {
-		return noticeRepository.cntSearchNotice(search);
+		return noticeMapper.cntSearchNotice(search);
 	}
 }
