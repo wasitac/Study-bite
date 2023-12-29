@@ -23,11 +23,11 @@ public interface NoticeRepository {
 	@Select("select * from notice where noticeId = #{noticeId}")
 	Optional<Notice> findNoticeDesc(Long noticeId);
 
-	/* 이전 글 표시 및 이동 */
+	/* 이전 글 */
 	@Select("select * from notice where noticeId < #{noticeId} order by noticeId desc limit 1")
 	Notice prev(Long noticeId);
 
-	/* 다음 글 표시 및 이동 */
+	/* 다음 글 */
 	@Select("select * from notice where noticeId > #{noticeId} order by noticeId asc limit 1")
 	Notice next(Long noticeId);
 

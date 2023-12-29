@@ -68,7 +68,7 @@ public class UserService {
 	}
 
 	/**
-	 * 이전글 표시 및 이동
+	 * 이전글
 	 * @author 김민혜
 	 */
 	public Notice prev(Long noticeId) {
@@ -76,7 +76,7 @@ public class UserService {
 	}
 
 	/**
-	 * 다음글 표시 및 이동
+	 * 다음글
 	 * @author 김민혜
 	 */
 	public Notice next(Long noticeId) {

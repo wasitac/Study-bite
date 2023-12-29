@@ -17,6 +17,7 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
+import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.repository.BoardRepository;
 import himedia.project.studybite.repository.ContentRepository;
@@ -128,6 +129,22 @@ public class CourseService {
 		
 		
 		newsRepository.newsDelete(news);
+	}
+	
+	/**
+	 * 이전글
+	 * @author 김민혜
+	 */
+	public News prev(Long courseId, Long newsId) {
+		return newsRepository.prev(courseId, newsId);
+	}
+
+	/**
+	 * 다음글
+	 * @author 김민혜
+	 */
+	public News next(Long courseId, Long newsId) {
+		return newsRepository.next(courseId, newsId);
 	}
 
 	/**

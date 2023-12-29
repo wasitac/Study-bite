@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * notice 테이블의 DAO
  * @author 김민혜
  */
 @Setter @Getter
