@@ -22,7 +22,7 @@
 				질의 응답 목록
 			</h4>
 		</div>
-		<form:form modelAttribute="qna"  method="delete" id="deleteForm">
+		<form:form modelAttribute="qna" method="delete" id="deleteForm">
 			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
 				<h3 class="text-center my-4">${qna.title}</h3>
 				<div class="d-flex mt-2">
@@ -72,21 +72,19 @@
 					<div class="my-3">
 						<label for="answer" class="form-label">답변 입력</label>
 						<form:textarea path="answer" class="form-control" id="exampleFormControlTextarea1" rows="3" />
-						<form:input path="qnaId" type="hidden"/>
+						<form:input path="qnaId" type="hidden" />
 						<div class="d-flex">
 							<form:button type="submit" class="btn btn-primary mt-2 ms-auto">수정 완료</form:button>
 						</div>
 					</div>
 				</form:form>
-				<c:if test="${true}">
-					<div class="d-flex justify-content-end mt-1">
-						<button type="button" class="btn btn-primary" id="editBtn" onclick="editClick()">답변 수정</button>
-						<form:form modelAttribute="qna" action="/studybite/course/${courseInfo.courseId}/qna/answer" id="deleteAnswer">
-							<form:hidden path="qnaId" value="${qna.qnaId}" />
-							<form:button type="button" class="btn btn-primary ms-1" id="deleteBtn" onclick="delClick()">답변 삭제</form:button>
-						</form:form>
-					</div>
-				</c:if>
+				<div class="d-flex justify-content-end mt-1">
+					<button type="button" class="btn btn-primary" id="editBtn" onclick="editClick()">답변 수정</button>
+					<form:form modelAttribute="qna" action="/studybite/course/${courseInfo.courseId}/qna/answer" id="deleteAnswer">
+						<form:hidden path="qnaId" value="${qna.qnaId}" />
+						<form:button type="button" class="btn btn-primary ms-1" id="deleteBtn" onclick="delClick()">답변 삭제</form:button>
+					</form:form>
+				</div>
 			</c:when>
 			<c:when test="${user.role == 2 and empty qna.answer}">
 				<form:form modelAttribute="qna" action="/studybite/course/${courseInfo.courseId}/qna/answer">
@@ -118,17 +116,19 @@
 					console.log('choice  ' + choice);
 					//확인창에서 확인을 클릭하면,
 					if (choice) {
-						$('#deleteForm').attr('action', '/studybite/course/' + courseId + '/qna/' + id).submit();
+						$('#deleteForm').attr('action',
+								'/studybite/course/' + courseId + '/qna/' + id)
+								.submit();
 					}
 				});
-		
+
 		function editClick() {
 			$('#editAnswer').show();
 			$('#editBtn').hide();
 		};
-		
+
 		function delClick() {
-			if(confirm("답변을 삭제하겠습니까?")) {
+			if (confirm("답변을 삭제하겠습니까?")) {
 				$('#deleteAnswer').submit();
 			}
 		}
