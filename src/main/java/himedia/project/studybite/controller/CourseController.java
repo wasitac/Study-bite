@@ -128,7 +128,7 @@ public class CourseController {
 		
 		if(!file.isEmpty()) {
 			fileBoard.setNewsId(news.getNewsId());
-			courseService.upload(fileBoard, file);
+			courseService.upload(fileBoard, file, request);
 		}
 
 		List<Long> toId = userCourseService.findInstructor(courseId);
@@ -147,8 +147,9 @@ public class CourseController {
 	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, @SessionAttribute(name = "user", required = false) User user, Model model) {
-
+	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, 
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+		
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		if (pageNum == null) {
@@ -297,7 +298,7 @@ public class CourseController {
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
-									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, Model model)
+									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, HttpServletRequest request, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		qna.setCourseId(courseId);
@@ -305,7 +306,7 @@ public class CourseController {
 		courseService.question(qna);
 
 		fileBoard.setQnaId(qna.getQnaId());;
-		courseService.upload(fileBoard, file);
+		courseService.upload(fileBoard, file, request);
 		
 		List<Long> toId = userCourseService.findInstructor(courseId);
 		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
