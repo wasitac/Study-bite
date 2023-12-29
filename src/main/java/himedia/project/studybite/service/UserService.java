@@ -53,7 +53,6 @@ public class UserService {
 
 	/**
 	 * 공지사항 목록
-	 * 
 	 * @author 김민혜
 	 */
 	public List<Notice> findPage(Integer pageNum) {
@@ -62,7 +61,6 @@ public class UserService {
 
 	/**
 	 * 공지사항 상세
-	 * 
 	 * @author 김민혜
 	 */
 	public Optional<Notice> findNoticeDesc(Long noticeId) {
@@ -70,8 +68,7 @@ public class UserService {
 	}
 
 	/**
-	 * 이전글 표시 및 이동
-	 * 
+	 * 이전글
 	 * @author 김민혜
 	 */
 	public Notice prev(Long noticeId) {
@@ -79,8 +76,7 @@ public class UserService {
 	}
 
 	/**
-	 * 다음글 표시 및 이동
-	 * 
+	 * 다음글
 	 * @author 김민혜
 	 */
 	public Notice next(Long noticeId) {
@@ -89,7 +85,6 @@ public class UserService {
 
 	/**
 	 * 조회수 증가
-	 * 
 	 * @author 김민혜
 	 */
 	public Long viewcnt(Long noticeId) {
@@ -98,19 +93,24 @@ public class UserService {
 
 	/**
 	 * 공지사항 글 개수
-	 * 
 	 * @author 김민혜
 	 */
 	public int cntNotice() {
 		return noticeRepository.cntNotice();
 	}
 
-	// 글 검색
+	/**
+	 * 글 검색
+	 * @author 김민혜
+	 */
 	public List<Notice> search(String search, Integer pageNum) {
 		return noticeRepository.search(search, pageNum);
 	}
 
-	// 검색된 글 개수
+	/**
+	 * 검색된 글 개수
+	 * @author 김민혜
+	 */
 	public int cntSearchNotice(String search) {
 		return noticeRepository.cntSearchNotice(search);
 	}

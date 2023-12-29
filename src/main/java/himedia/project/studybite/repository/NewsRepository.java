@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import himedia.project.studybite.domain.News;
+import himedia.project.studybite.domain.Notice;
 
 @Repository
 public interface NewsRepository {
@@ -63,4 +64,18 @@ public interface NewsRepository {
 	 */
 	@Select("select count(newsId) from news where courseId = #{courseId}")
 	int cntNews(Long courseId);
+	
+	/**
+	 *  이전 글
+	 *  @author 김민혜
+	 */
+	@Select("select * from news where courseId = #{courseId} and newsId < #{newsId} order by newsId desc limit 1")
+	News prev(@Param("courseId") Long courseId, @Param("newsId") Long newsId);
+
+	/**
+	 *  다음 글
+	 *  @author 김민혜
+	 */
+	@Select("select * from news where courseId = #{courseId} and newsId > #{newsId} order by newsId asc limit 1")
+	News next(@Param("courseId") Long courseId, @Param("newsId") Long newsId);
 }

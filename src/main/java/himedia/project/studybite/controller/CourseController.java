@@ -145,7 +145,7 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
-	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
+	 * @author 김민혜(공지 목록 조회, 페이지네이션), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, 
@@ -179,7 +179,7 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 상세
-	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
+	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가, 이전글/다음글), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, 
@@ -191,6 +191,8 @@ public class CourseController {
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
+		model.addAttribute("prev", courseService.prev(courseId, newsId));
+		model.addAttribute("next", courseService.next(courseId, newsId));
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "/course/newsDesc";
@@ -251,7 +253,7 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 목록
-	 * @author 김민혜, 송창민(목록 번호 일정하게 표시)
+	 * @author 김민혜(목록 조회, 페이지네이션), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
