@@ -16,9 +16,14 @@ import himedia.project.studybite.domain.Notification;
  */
 @Repository
 public interface NotificationRepository {
-	// 알림 조회
+
+	// 알림목록 조회
 	@Select("select * from notification where userId = #{userId} order by notificationId desc")
-	List<Notification> findNotification(Long userId);
+	List<Notification> findNotifications(Long userId);
+
+	// 특정 알림 찾기
+	@Select("select * from notification where notificationId = #{notificationId}")
+	Notification findNotificationById(Long notificationId);
 
 	// 알림 확인 시 삭제
 	@Delete("delete from notification where notificationId = #{notificationId}")
@@ -43,4 +48,5 @@ public interface NotificationRepository {
 //	@Insert("insert into notification(userId, courseId, id, category, title) values(#{userId}, #{courseId}, #{id}, #{category}, #{title})")
 //	@Options(useGeneratedKeys = true, keyProperty = "notificationId")
 //	void addNoticeNotification(Notification notification);
+	
 }

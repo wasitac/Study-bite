@@ -1,6 +1,5 @@
 package himedia.project.studybite.interceptor;
 
-import java.io.File;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import himedia.project.studybite.domain.User;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 모든 요청마다 로그인 여부를 확인하기 위한 인터셉터입니다. 로그인 세션이 없으면 로그인 화면으로 이동하게 만듭니다. session을 파기한
@@ -18,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
  * 판별했습니다.
  * @author 이지홍
  */
-@Slf4j
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

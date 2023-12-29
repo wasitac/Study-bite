@@ -133,8 +133,9 @@ public class CourseController {
 
 		List<Long> toId = userCourseService.findInstructor(courseId);
 		List<Notification> notifications = new ArrayList<Notification>();
-		for (Long id : toId) {
-			notifications.add(new Notification(id, courseId, news.getNewsId(), 2, news.getTitle()));
+//		for (Long id : toId) {
+		for (int i = 1; i < toId.size(); i++) {
+			notifications.add(new Notification(toId.get(i), courseId, news.getNewsId(), 2, news.getTitle()));
 		}
 		notificationService.sendNotification(notifications);
 

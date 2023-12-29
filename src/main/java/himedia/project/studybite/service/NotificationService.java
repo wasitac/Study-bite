@@ -18,20 +18,37 @@ import lombok.RequiredArgsConstructor;
 public class NotificationService {
 	private final NotificationRepository notificationRepository;
 
-	public List<Notification> getNotification(User user) {
+	public List<Notification> getNotifications(User user) {
 		Long userId = user.getUserId();
-		return notificationRepository.findNotification(userId);
+		return notificationRepository.findNotifications(userId);
 	}
 
 	public void sendNotification(Notification notification) {
-			notificationRepository.addQnaNotification(notification);
+		notificationRepository.addQnaNotification(notification);
 	}
 
 	public void sendNotification(List<Notification> notifications) {
-			notificationRepository.addNewsNotification(notifications);
+		notificationRepository.addNewsNotification(notifications);
 	}
 
 	public void readNotification(Long notificationId) {
 		notificationRepository.deleteNotification(notificationId);
 	} 
+	
+	public String getNotification(Long notificationId) {
+		Notification n = notificationRepository.findNotificationById(notificationId);
+		Integer category = n.getCategory();
+		Long id = n.getId();
+		Long courseId = n.getCourseId();
+		String path = "";
+		
+		if(category == 3)
+			path = "/course/" + courseId + "/qna/" + id;
+		else if(category == 2)
+			path = "/course/" + courseId + "/news/" + id;
+		else
+			path = "/notice/" + id;
+		
+		return path;
+	}
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
+import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
@@ -252,13 +253,16 @@ public class UserController {
 	}
 	
 	/**
-	 * 알림 확인 시 삭제 
+	 * 알림 확인 시 해당 게시글로 리다이렉트 하고, 알림은 삭제 
 	 * 
 	 * @author 이지홍
 	 */
-	@DeleteMapping("/notification/{notificationId}")
-	public void readNotification(@PathVariable Long notificationId) {
+	@PostMapping("/notification/{notificationId}")
+	public String readNotification(@PathVariable Long notificationId) {
+		String path = notificationService.getNotification(notificationId);
 		notificationService.readNotification(notificationId);
+
+		return "redirect:" + path;
 	}
 	
 }
