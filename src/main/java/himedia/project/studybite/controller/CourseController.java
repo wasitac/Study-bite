@@ -1,8 +1,8 @@
 package himedia.project.studybite.controller;
 
-import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +25,12 @@ import himedia.project.studybite.domain.ContentData;
 import himedia.project.studybite.domain.Course;
 import himedia.project.studybite.domain.FileBoard;
 import himedia.project.studybite.domain.News;
+import himedia.project.studybite.domain.Notification;
 import himedia.project.studybite.domain.Qna;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.domain.UserCourse;
 import himedia.project.studybite.service.CourseService;
+import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +42,12 @@ import lombok.extern.slf4j.Slf4j;
 public class CourseController {
 	private final CourseService courseService;
 	private final UserCourseService userCourseService;
+	private final NotificationService notificationService;
 
 	/**
+	 * 강의 개요
 	 * @author 신지은
 	 */
-	// 강의 개요
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -110,6 +114,7 @@ public class CourseController {
 	 * 강사 : 강의 공지 등록
 	 * 
 	 * @author 신지은
+	 * @author 이지홍(강의 공지 알림)
 	 */
 	@PostMapping("/{courseId}/news/add")
 	public String postNewsAdd(@PathVariable Long courseId, @ModelAttribute News news, @RequestParam MultipartFile file,
@@ -120,9 +125,18 @@ public class CourseController {
 		news.setCourseId(courseId);
 		news.setUserName(user.getUserName());
 		courseService.newsAdd(news);
+		
+		if(!file.isEmpty()) {
+			fileBoard.setNewsId(news.getNewsId());
+			courseService.upload(fileBoard, file, request);
+		}
 
-		fileBoard.setNewsId(news.getNewsId());
-		courseService.upload(fileBoard, file);
+		List<Long> toId = userCourseService.findInstructor(courseId);
+		List<Notification> notifications = new ArrayList<Notification>();
+		for (Long id : toId) {
+			notifications.add(new Notification(id, courseId, news.getNewsId(), 2, news.getTitle()));
+		}
+		notificationService.sendNotification(notifications);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/news/" + news.getNewsId();
@@ -130,11 +144,12 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
-	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화)
+	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, @SessionAttribute(name = "user", required = false) User user, Model model) {
-
+	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, 
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+		
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		if (pageNum == null) {
@@ -206,10 +221,20 @@ public class CourseController {
 	/**
 	 * 강사 : 강의 공지 수정
 	 * @author 신지은
+	 * @throws Exception 
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @ModelAttribute News news, Model model) {
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, 
+			@ModelAttribute News news, FileBoard fileBoard, Model model) throws Exception {
+		
 		courseService.newsUpdate(news);
+		
+		//fileBoard.setNewsId(news.getNewsId());
+		
+		//courseService.findNewsFile(55L);
+		
+		//courseService.upload(fileBoard, file);
+		
 		return "redirect:/course/{courseId}/news/{newsId}";
 	}
 	
@@ -217,7 +242,7 @@ public class CourseController {
 	 * 강사 : 강의 공지 삭제
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/news/{newsId}/delete")
+	@DeleteMapping("/{courseId}/news/{newsId}")
 	public String newsDelete(@ModelAttribute News news) {
 		courseService.newsDelete(news);
 		return "redirect:/course/{courseId}/news";
@@ -225,7 +250,7 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 목록
-	 * @author 김민혜
+	 * @author 김민혜, 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
@@ -265,11 +290,15 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 등록), 신지은(파일 업로드 기능)
+	 * 질의 응답 질문 등록
+	 * 
+	 * @author 김민혜(질의 응답 등록)
+	 * @author 신지은(파일 업로드 기능)
+	 * @author 이지홍(알림 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
-									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, Model model)
+									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, HttpServletRequest request, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		qna.setCourseId(courseId);
@@ -277,13 +306,11 @@ public class CourseController {
 		courseService.question(qna);
 
 		fileBoard.setQnaId(qna.getQnaId());;
-		courseService.upload(fileBoard, file);
+		courseService.upload(fileBoard, file, request);
 		
-        File filet = new File(".");
-        File rootPath = filet.getAbsoluteFile();
-        System.out.println("현재 프로젝트의 경로 : "+rootPath );
-
-
+		List<Long> toId = userCourseService.findInstructor(courseId);
+		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
+		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
@@ -361,7 +388,7 @@ public class CourseController {
 	 * 질의 응답 삭제
 	 * @author 신지은
 	 */
-	@PostMapping("/{courseId}/qna/{qnaId}/delete")
+	@DeleteMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDelete(@ModelAttribute Qna qna) {
 		courseService.qnaDelete(qna);
 		return "redirect:/course/{courseId}/qna";

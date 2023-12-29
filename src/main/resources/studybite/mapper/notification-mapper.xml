@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="himedia.project.studybite.repository.NotificationRepository">
+    <insert id="addNewsNotification" useGeneratedKeys="true" keyProperty="notificationId" parameterType="java.util.List">
+    		insert into notification (userId, courseId, id, category, title) values
+    	<foreach collection="list" item="item" separator=",">
+    		(#{item.userId}, #{item.courseId}, #{item.id}, #{item.category}, #{item.title})
+    	</foreach>
+    </insert>
+</mapper>

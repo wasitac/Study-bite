@@ -37,6 +37,6 @@ public interface UserCourseRepository {
     Integer findAttendanceCount(@Param("userId") Long userId, @Param("courseId") Long courseId);
     
     // 코스아이디로 유저아이디 조회 - 이지홍
-    @Select("select userId from userCourse where courseId = #{courseId} limit 1")
-    Long findUserByCourse(Long courseId);
+    @Select("select distinct userId from userCourse where courseId = #{courseId}")
+    List<Long> findUserByCourse(Long courseId);
 }

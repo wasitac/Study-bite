@@ -30,4 +30,8 @@ public interface BoardRepository {
 	 */
 	@Select("select * from fileBoard where newsId = #{newsId}")
 	Optional<FileBoard> findNewsFile(@Param("newsId")Long newsId);
+	
+	/**
+	 * 
+	 */
 }

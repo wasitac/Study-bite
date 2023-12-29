@@ -1,7 +1,9 @@
 package himedia.project.studybite.service;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +24,9 @@ import himedia.project.studybite.repository.CourseRepository;
 import himedia.project.studybite.repository.NewsRepository;
 import himedia.project.studybite.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -104,6 +108,25 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void newsDelete(News news) {
+		
+		try {
+			FileBoard fileboard = boardRepository.findNewsFile(news.getNewsId()).get();		
+			File file = new File(fileboard.getFilepath());
+			
+			if(file.exists()) {
+				if(file.delete()) {
+					log.info("파일 삭제 성공");
+				}else {
+					log.info("파일 삭제 실패");
+				}
+			}else{
+				log.info("파일이 존재하지 않습니다.");
+			}
+		} catch (NoSuchElementException e) {
+			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
+		}
+		
+		
 		newsRepository.newsDelete(news);
 	}
 
@@ -162,11 +185,16 @@ public class CourseService {
 	 * 
 	 * @author 신지은
 	 */
-	public void upload(FileBoard fileBoard, MultipartFile file) throws Exception {
+	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
+		
 		// 1. 파일 저장 경로 설정 :
-//		String classpath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-//		String projectPath = new File(classpath).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getAbsolutePath();
-		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		String filePath = request.getServletContext().getRealPath("/resources/files/");
+		//String projectPath = request.getServletContext().getRealPath("/");
+		//String[] path = projectPath.split("\\\\");
+		//String filePath = path[0] + "\\" + path[1] + "\\" + path[2] + "\\Study-bite\\src\\main\\webapp\\resources\\files\\";
+		
+		
+//		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		// 랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용

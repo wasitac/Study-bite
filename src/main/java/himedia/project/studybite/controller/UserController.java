@@ -68,11 +68,10 @@ public class UserController {
 		return "redirect:/home";
 	}
 
-/**
- * 	로그아웃
- * @author 이지홍
- */
-
+	/**
+ 	* 로그아웃
+ 	* @author 이지홍
+ 	*/
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
@@ -103,12 +102,11 @@ public class UserController {
 		model.addAttribute("courses", courses);
 		model.addAttribute("newses", newses);
 		model.addAttribute("user", user);
-		
+
 		if(user.getRole() == 2)
-			return "/home/instructor";
-
+			return "redirect:/course";
+		
 		return "/home/home";
-
 	}
 	
 

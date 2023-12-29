@@ -12,7 +12,7 @@
 				</a></li>
 			</c:when>
 			<c:when test="${user.role == 2}">
-				<li><a href="/studybite/home" class="nav-link link-body-emphasis"> <img id="image" src="/studybite/resources/img/homeIcon/ibook.png" class="img ms-2 me-2" width="24" height="24"> 담당과목
+				<li><a href="/studybite/course" class="nav-link link-body-emphasis"> <img id="image" src="/studybite/resources/img/homeIcon/ibook.png" class="img ms-2 me-2" width="24" height="24"> 담당과목
 				</a></li>
 			</c:when>
 		</c:choose>
@@ -22,4 +22,4 @@
 		</a></li>
 	</ul>
 </div>
-<script type="text/javascript" src="/studybite/resources/js/basic.js"></script>
+<script type="text/javascript" src="/studybite/resources/js/active.js"></script>
