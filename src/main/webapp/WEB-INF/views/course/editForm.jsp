@@ -42,8 +42,10 @@
 							<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" id="file-input"  class="w-50 h-50"
 								style="margin: 10px 0 0 78px;">
 							<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
+								<button type="button" class="btn btn-primary"><label for="inputGroupFile04">첨부파일</label></button>
+								<input class="fileName" value="${fileBoard.originName}" placeholder="선택된 파일 없음">
 								<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
-									aria-label="Upload" >
+									aria-label="Upload" style="display: none">
 								<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">기존 파일 삭제</button>
 							</div>
 							<hr class="row mt-5">
@@ -100,6 +102,11 @@
 						console.log('submit 버튼 클릭함');
 					});
 			}
+			$("#inputGroupFile04").on('change', function(){
+				  var filePath = $("#inputGroupFile04").val().split("\\");
+				  var fileName = filePath[2];
+				  $(".fileName").val(fileName);
+				});
 		</script>
 	</body>
 </html>
