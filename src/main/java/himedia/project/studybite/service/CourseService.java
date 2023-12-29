@@ -23,7 +23,9 @@ import himedia.project.studybite.repository.CourseRepository;
 import himedia.project.studybite.repository.NewsRepository;
 import himedia.project.studybite.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -105,6 +107,19 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void newsDelete(News news) {
+		FileBoard fileboard = boardRepository.findNewsFile(news.getNewsId()).get();		
+		File file = new File(fileboard.getFilepath());
+		
+		if(file.exists()) {
+			if(file.delete()) {
+				log.info("파일 삭제 성공");
+			}else {
+				log.info("파일 삭제 실패");
+			}
+		}else {
+			log.info("파일이 존재하지 않습니다.");
+		}
+		
 		newsRepository.newsDelete(news);
 	}
 
