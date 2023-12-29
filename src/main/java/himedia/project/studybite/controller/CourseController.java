@@ -1,9 +1,11 @@
 package himedia.project.studybite.controller;
 
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +48,7 @@ public class CourseController {
 
 	/**
 	 * 강의 개요
+	 * 
 	 * @author 신지은
 	 */
 	@GetMapping("/{courseId}")
@@ -58,6 +61,7 @@ public class CourseController {
 
 	/**
 	 * 강의 목차
+	 * 
 	 * @author 신지은(강의 목차 조회), 송창민(수강한 날짜, 퍼센트 표시)
 	 */
 	@GetMapping("/{courseId}/contents")
@@ -80,6 +84,7 @@ public class CourseController {
 
 	/**
 	 * 강의 콘텐츠 시청
+	 * 
 	 * @author 신지은(강의 콘텐츠 데이터 조회), 송창민(콘텐츠 수강 시 현재 날짜 저장)
 	 */
 	@GetMapping("/{courseId}/contents/{contentsId}")
@@ -98,6 +103,7 @@ public class CourseController {
 		model.addAttribute("contentData", contentData.get());
 		return "course/content";
 	}
+
 	/**
 	 * 강사 : 강의 공지 등록 폼
 	 * 
@@ -125,8 +131,8 @@ public class CourseController {
 		news.setCourseId(courseId);
 		news.setUserName(user.getUserName());
 		courseService.newsAdd(news);
-		
-		if(!file.isEmpty()) {
+
+		if (!file.isEmpty()) {
 			fileBoard.setNewsId(news.getNewsId());
 			courseService.upload(fileBoard, file, request);
 		}
@@ -144,12 +150,13 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
+	 * 
 	 * @author 김민혜(공지 목록 조회), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
-	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, 
+	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum,
 			@SessionAttribute(name = "user", required = false) User user, Model model) {
-		
+
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		if (pageNum == null) {
@@ -165,7 +172,7 @@ public class CourseController {
 
 		if (newsCnt % 10 != 0)
 			num = num + 1;
-		
+
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("news", news);
 		model.addAttribute("newsCnt", newsCnt);
@@ -178,11 +185,12 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 상세
+	 * 
 	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
-	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId, 
-							@SessionAttribute(name = "user", required = false) User user, Model model) {
+	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId,
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
 		courseService.newsViewCnt(newsId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
@@ -190,18 +198,19 @@ public class CourseController {
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
-		if (!fileBoardInfo.isEmpty())
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "/course/newsDesc";
 	}
-	
+
 	/**
 	 * 강사 : 강의 공지 수정 폼
+	 * 
 	 * @author 신지은
 	 */
 	@GetMapping("/{courseId}/news/{newsId}/editForm")
-	public String newsEditForm(@PathVariable Long courseId, @PathVariable Long newsId, 
-			HttpServletRequest request, Model model) {
+	public String newsEditForm(@PathVariable Long courseId, @PathVariable Long newsId, HttpServletRequest request,
+			FileBoard fileBoard, Model model) {
 
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		News news = courseService.findNewsDesc(newsId).get();
@@ -210,36 +219,58 @@ public class CourseController {
 		log.info(request.getRequestURI());
 
 		model.addAttribute("requestURI", request.getRequestURI());
+		// editForm에서 form의 modelAttribute가 될 값
+		model.addAttribute("select", news);
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
-		model.addAttribute("select", news);
-		if (!fileBoardInfo.isEmpty())
+
+		if (fileBoardInfo.isPresent())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "course/editForm";
 	}
-	
+
 	/**
 	 * 강사 : 강의 공지 수정
+	 * 
 	 * @author 신지은
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, 
-			@ModelAttribute News news, FileBoard fileBoard, Model model) throws Exception {
-		
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @ModelAttribute News news,
+			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
+
 		courseService.newsUpdate(news);
 		
-		//fileBoard.setNewsId(news.getNewsId());
-		
-		//courseService.findNewsFile(55L);
-		
-		//courseService.upload(fileBoard, file);
-		
+		try {
+			FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();		
+			File newFile = new File(fileboard.getFilepath());
+			
+			if(newFile.exists()) 
+				newFile.delete();
+			
+			courseService.fileDelete(fileboard);
+
+		} catch (NoSuchElementException e) {
+			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
+		}
+		courseService.upload(fileBoard, file, request);
+
 		return "redirect:/course/{courseId}/news/{newsId}";
 	}
 	
 	/**
 	 * 강사 : 강의 공지 삭제
+	 * 
+	 * @author 신지은
+	 */
+//	@PostMapping("/{courseId}/news/{newsId}/file")
+//	public String fileDelete() {
+//		return
+//	}
+
+	/**
+	 * 강사 : 강의 공지 삭제
+	 * 
 	 * @author 신지은
 	 */
 	@DeleteMapping("/{courseId}/news/{newsId}")
@@ -250,10 +281,12 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 목록
+	 * 
 	 * @author 김민혜, 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/qna")
-	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum, Model model) {
+	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum,
+			Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		if (pageNum == null) {
@@ -280,6 +313,7 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 등록 폼
+	 * 
 	 * @author 김민혜
 	 */
 	@GetMapping("/{courseId}/qna/add")
@@ -297,31 +331,36 @@ public class CourseController {
 	 * @author 이지홍(알림 기능)
 	 */
 	@PostMapping("/{courseId}/qna/add")
-	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
-									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, HttpServletRequest request, Model model)
-			throws Exception {
+	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna,
+			@RequestParam MultipartFile file, @SessionAttribute(name = "user", required = false) User user,
+			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		qna.setCourseId(courseId);
 		qna.setUserName(user.getUserName());
 		courseService.question(qna);
 
-		fileBoard.setQnaId(qna.getQnaId());;
-		courseService.upload(fileBoard, file, request);
-		
+		if (!file.isEmpty()) {
+			fileBoard.setQnaId(qna.getQnaId());
+			;
+			courseService.upload(fileBoard, file, request);
+		}
+
 		List<Long> toId = userCourseService.findInstructor(courseId);
 		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
 		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
-		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
+		return "redirect:/course/{courseId}/qna/" + qna.getQnaId();
 	}
-	
+
 	/**
 	 * 질의 응답 답변 등록
+	 * 
 	 * @author 김민혜
 	 */
 	@PostMapping("/{courseId}/qna/answer")
-	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request, Model model) {
+	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request,
+			Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 
 		qna.setCourseId(courseId);
@@ -335,8 +374,9 @@ public class CourseController {
 	 * @author 김민혜(질의 응답 상세, 조회수 증가), 신지은(저장한 파일 조회 기능, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
-	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId, 
-							@SessionAttribute(name = "user", required = false) User user, Model model) {
+	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId,
+			@SessionAttribute(name = "user", required = false) User user, Model model) {
+		
 		courseService.qnaViewCnt(qnaId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
@@ -346,18 +386,18 @@ public class CourseController {
 		model.addAttribute("qna", qna);
 		if (!fileBoardInfo.isEmpty())
 			model.addAttribute("fileBoard", fileBoardInfo.get());
-		//유저이름이 일치하는 경우 수정 삭제 버튼 표시
-		model.addAttribute("user", user);		
+		model.addAttribute("user", user);
 		return "/course/qnaDesc";
 	}
 
 	/**
 	 * 질의 응답 수정 폼
+	 * 
 	 * @author 신지은
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}/editForm")
-	public String qnaEditForm(@PathVariable Long courseId, @PathVariable Long qnaId, 
-			HttpServletRequest request, Model model) {
+	public String qnaEditForm(@PathVariable Long courseId, @PathVariable Long qnaId, HttpServletRequest request,
+			Model model) {
 
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Qna qna = courseService.findQnaDesc(qnaId).get();
@@ -373,19 +413,36 @@ public class CourseController {
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "course/editForm";
 	}
-	
 	/**
 	 * 질의 응답 수정
+	 * 
 	 * @author 신지은
+	 * @throws Exception 
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}")
-	public String qnaEdit(@PathVariable Long courseId, @ModelAttribute Qna qna, Model model) {
+	public String qnaEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @ModelAttribute Qna qna, 
+			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
 		courseService.qnaUpdate(qna);
+		
+		try {
+			FileBoard fileboard = courseService.findNewsFile(qna.getQnaId()).get();		
+			File newFile = new File(fileboard.getFilepath());
+			
+			if(newFile.exists()) 
+				newFile.delete();
+			
+			courseService.fileDelete(fileboard);
+
+		} catch (NoSuchElementException e) {
+			log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
+		}
+		courseService.upload(fileBoard, file, request);
 		return "redirect:/course/{courseId}/qna/{qnaId}";
 	}
-	
+
 	/**
 	 * 질의 응답 삭제
+	 * 
 	 * @author 신지은
 	 */
 	@DeleteMapping("/{courseId}/qna/{qnaId}")
@@ -395,12 +452,14 @@ public class CourseController {
 	}
 
 	/**
-	 *  출결 확인
+	 * 출결 확인
+	 * 
 	 * @author 송창민
 	 */
 	@GetMapping("/{courseId}/attendance")
 	public String attendance(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user,
 			Model model) {
+		
 		List<UserCourse> userCourses = userCourseService.findUserCourse(user.getUserId(), courseId);
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
 		Integer attCount = userCourseService.findAttendanceCount(user.getUserId(), courseId);

@@ -27,7 +27,6 @@
 		</div>
 		<h4 style="color: #2563EB" class="mt-4" id="smallTitle">질문 수정</h4>
 		<div class="contatiner">
-
 			<form:form modelAttribute="select" action="${context}course/${courseId}/qna/${qnaId}" method="post" enctype="multipart/form-data" id="editForm">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label>
@@ -37,13 +36,14 @@
 					<label class="col-1">내용</label>
 					<form:textarea class="form-control col" rows="10" path="description" required="true" value="${description}" />
 				</div>
-
-				<input type="file" name="file" id="file">
-
+				<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-50 h-50" style="margin:10px 0 0 78px;">
+				<div style="margin: 10px 0 0 78px">
+					<input type="file" name="file" id="file" accept=".pdf, image/*">
+				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="update btn btn-primary me-1">수정하기</button>
-					<button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
+					<button type="button" class="btn btn-primary" onclick="history.back()" onsubmit="취소하겠습니까?">취소</button>
 				</div>
 			</form:form>
 			<div class="row mt-5">

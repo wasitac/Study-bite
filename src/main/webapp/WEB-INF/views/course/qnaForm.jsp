@@ -32,7 +32,7 @@
 					<label class="col-1">내용</label>
 					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 				</div>
-				<input type="file" name="file" id="file" multiple="multiple">
+				<input type="file" name="file" id="file" accept=".pdf, image/*">
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary me-1">작성하기</button>

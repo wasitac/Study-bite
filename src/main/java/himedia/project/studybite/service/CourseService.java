@@ -10,6 +10,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import himedia.project.studybite.domain.Content;
@@ -177,9 +179,34 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public void qnaDelete(Qna qna) {
+		try {
+			FileBoard fileboard = boardRepository.findQnaFile(qna.getQnaId()).get();		
+			File file = new File(fileboard.getFilepath());
+			
+			if(file.exists()) {
+				if(file.delete()) {
+					log.info("파일 삭제 성공");
+				}else {
+					log.info("파일 삭제 실패");
+				}
+			}else{
+				log.info("파일이 존재하지 않습니다.");
+			}
+		} catch (NoSuchElementException e) {
+			log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
+		}
 		qnaRepository.qnaDelete(qna);
 	};
-
+	
+	/**
+	 * 파일 삭제
+	 * 
+	 * @author 신지은
+	 */
+	public int fileDelete(FileBoard fileBoard) {
+		return boardRepository.fileDelete(fileBoard);
+	}
+	
 	/**
 	 * 파일 업로드
 	 * 
@@ -189,12 +216,6 @@ public class CourseService {
 		
 		// 1. 파일 저장 경로 설정 :
 		String filePath = request.getServletContext().getRealPath("/resources/files/");
-		//String projectPath = request.getServletContext().getRealPath("/");
-		//String[] path = projectPath.split("\\\\");
-		//String filePath = path[0] + "\\" + path[1] + "\\" + path[2] + "\\Study-bite\\src\\main\\webapp\\resources\\files\\";
-		
-		
-//		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		// 랜덤으로 이름 생성
 		UUID uuid = UUID.randomUUID();
 		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
@@ -206,8 +227,19 @@ public class CourseService {
 
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
-
-		boardRepository.save(fileBoard);
+		
+		if(fileBoard.getId()!=null) 
+			boardRepository.fileUpdate(fileBoard);
+		else
+			boardRepository.save(fileBoard);
+	}
+	
+	/**
+	 * 강의 공지 파일 조회 
+	 * @author 신지은
+	 */
+	public Optional<FileBoard> findNewsFile(Long newsId) {
+		return boardRepository.findNewsFile(newsId);
 	}
 
 	/**
@@ -219,13 +251,6 @@ public class CourseService {
 		return boardRepository.findQnaFile(qnaId);
 	}
 
-	/**
-	 * 강의 공지 파일 조회 
-	 * @author 신지은
-	 */
-	public Optional<FileBoard> findNewsFile(Long newsId) {
-		return boardRepository.findNewsFile(newsId);
-	}
 	
 	// 강의 공지 조회수
 	public Long newsViewCnt(Long newsId) {
