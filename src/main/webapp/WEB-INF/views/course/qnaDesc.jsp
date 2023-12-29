@@ -52,6 +52,7 @@
 			</c:if>
 		</form:form>
 
+		<!-- 교육자와 학습자, 답변 존재 여부를 판별해서 질의 답변 기능 동작 -->
 		<c:choose>
 			<c:when test="${user.role == 3 and not empty qna.answer}">
 				<h4 class="blue600 info">답변</h4>
@@ -80,12 +81,14 @@
 						<label for="answer" class="form-label">답변 입력</label>
 						<textarea name="answer" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 						<input type="hidden" id="qnaId" name="qnaId" value="${qna.qnaId}">
-						<button type="submit" class="btn btn-primary mt-2" style="float: right">답변하기</button>
+						<button type="submit" class="btn btn-primary my-2" style="float: right">답변하기</button>
 					</div>
 				</form>
 			</c:when>
 		</c:choose>
-		<%@ include file="../common/footer.jsp"%>
+		<div>
+			<%-- <%@ include file="../common/footer.jsp"%> --%>
+		</div>
 	</div>
 	<div class="w-25">
 		<%@ include file="../common/rightbar.jsp"%>

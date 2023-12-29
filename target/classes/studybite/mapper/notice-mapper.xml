@@ -11,3 +11,4 @@
 		SELECT COUNT(noticeId) FROM notice WHERE title LIKE CONCAT('%',#{search},'%')
 	</select>
 </mapper>
+

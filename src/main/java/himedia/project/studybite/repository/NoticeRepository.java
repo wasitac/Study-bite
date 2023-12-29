@@ -39,9 +39,12 @@ public interface NoticeRepository {
 	@Select("select count(noticeId) from notice")
 	int cntNotice();
 	
-	// 글 검색
+	/* 글 검색 */
 	List<Notice> search(@Param("search") String search, @Param("pageNum") Integer pageNum);
 	
-	// 검색된 글 개수
+	/* 검색된 글 개수 */
 	int cntSearchNotice(String search);
 }
+
+
+
