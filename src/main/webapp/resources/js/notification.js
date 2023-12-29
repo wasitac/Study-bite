@@ -6,7 +6,16 @@
  	3: 질의응답
  	이지홍
  */
- function path(category, courseId, id){
+ function path(){
+ 	var notificationId = '${notification.notificationId}';
+ 	var category = '${notification.category}';
+ 	var courseId = '${notification.courseId}';
+ 	
+ 	var id = '${notification.id}';
+ 	$(".delete").click(
+ 		() => $('#notifications').attr('action', '/studybite/notification/' + notificationId).submit(););
+ 
+ 
     var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 
  	if(category == 1)
@@ -15,5 +24,4 @@
  		location.href = "http://localhost:8080/studybite/course/" + courseId + "/news/" + id; 	
  	else
  		location.href = "http://localhost:8080/studybite/course/" + courseId + "/qna/" + id;
-
 }

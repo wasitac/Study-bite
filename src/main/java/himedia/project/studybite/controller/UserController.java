@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import himedia.project.studybite.domain.Notice;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
+import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;
 import himedia.project.studybite.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
-	
+	private final NotificationService notificationService;
 	/**
 	 * 로그인 화면
 	 * @author 이지홍
@@ -248,4 +250,15 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "/home/noticeDesc";
 	}
+	
+	/**
+	 * 알림 확인 시 삭제 
+	 * 
+	 * @author 이지홍
+	 */
+	@DeleteMapping("/notification/{notificationId}")
+	public void readNotification(@PathVariable Long notificationId) {
+		notificationService.readNotification(notificationId);
+	}
+	
 }

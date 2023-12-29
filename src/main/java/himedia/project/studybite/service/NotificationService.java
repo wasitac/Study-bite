@@ -26,11 +26,12 @@ public class NotificationService {
 	public void sendNotification(Notification notification) {
 			notificationRepository.addQnaNotification(notification);
 	}
+
 	public void sendNotification(List<Notification> notifications) {
 			notificationRepository.addNewsNotification(notifications);
 	}
 
 	public void readNotification(Long notificationId) {
 		notificationRepository.deleteNotification(notificationId);
-	}
+	} 
 }
