@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -228,7 +229,8 @@ public class CourseController {
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "course/editForm";
 	}
-
+	
+	
 	/**
 	 * 강사 : 강의 공지 수정
 	 * 
@@ -241,19 +243,22 @@ public class CourseController {
 
 		courseService.newsUpdate(news);
 		
-		try {
-			FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();		
-			File newFile = new File(fileboard.getFilepath());
-			
-			if(newFile.exists()) 
-				newFile.delete();
-			
-			courseService.fileDelete(fileboard);
-
-		} catch (NoSuchElementException e) {
-			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
+		if(!file.isEmpty()) {
+			try {
+				FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();		
+				File newFile = new File(fileboard.getFilepath());
+				
+				if(newFile.exists()) 
+					newFile.delete();
+				
+				courseService.fileDelete(fileboard);
+				
+			} catch (NoSuchElementException e) {
+				log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
+			}
+			courseService.upload(fileBoard, file, request);
 		}
-		courseService.upload(fileBoard, file, request);
+		
 
 		return "redirect:/course/{courseId}/news/{newsId}";
 	}

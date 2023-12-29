@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<!DOCTYPE html>
 	<html>
-
 	<head>
 		<meta charset="UTF-8">
 		<%@ include file="../common/config.jsp" %>
@@ -10,7 +9,6 @@
 				integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 			<title id="title">질문 수정</title>
 	</head>
-
 	<body>
 		<div class="w-25">
 			<%@ include file="../common/leftbar.jsp" %>
@@ -44,7 +42,7 @@
 							<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
 								<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
 									aria-label="Upload" >
-								<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">기존 파일 삭제</button>
+								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton" onclick="deleteFile()">기존 파일 삭제</button>
 							</div>
 							<hr class="row mt-5">
 							<div class="d-flex justify-content-end mt-1">
@@ -62,15 +60,27 @@
 		</div>
 		<script src="${resPath}/js/courseBar.js"></script>
 		<script type="text/javascript">
+		//기존 파일 삭제 누르면 이미지 안보이고 파일 삭제 메서드 실행
+		    document.addEventListener('DOMContentLoaded', function () {
+	
+		        var deleteFileButton = document.getElementById('deleteFileButton');
+		        var fileInputImage = document.getElementById('file-input');
+		        var fileInputImage = document.getElementById('file-input');
+	
+		        deleteFileButton.addEventListener('click', function () {
+		            fileInputImage.remove();
+		        });
+		    });
+		    
+		
+			
+		
+			$("#deleteFileButton").click(() => confirm("기존 파일을 삭제하시겠습니까?"))
+			$("#cancel").click(() => confirm("취소하시겠습니까?"))
 
 			var title = document.getElementById("title");
 			var bigTitle = document.getElementById("bigTitle");
 			var smallTitle = document.getElementById("smallTitle");
-
-			console.log("자바스크립트 실행 됨 ");
-
-			$("#original-file-delete").click(() => confirm("기존 파일을 삭제하시겠습니까?"))
-			$("#cancel").click(() => confirm("취소하시겠습니까?"))
 
 			// 조건에 따라 텍스트 변경
 			if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}/editForm") {
