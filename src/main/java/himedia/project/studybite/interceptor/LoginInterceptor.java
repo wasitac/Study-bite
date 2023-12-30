@@ -24,7 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		Optional<User> user = Optional.empty();
 		if (session != null)
-			user = Optional.ofNullable((User) (session.getAttribute("user")));
+			user = Optional.ofNullable((User)(session.getAttribute("user")));
 
 		if (user.isEmpty()) {
 			response.sendRedirect(request.getContextPath() + "/");

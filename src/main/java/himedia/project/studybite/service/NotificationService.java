@@ -1,6 +1,9 @@
 package himedia.project.studybite.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +13,6 @@ import himedia.project.studybite.mapper.NotificationMapper;
 import lombok.RequiredArgsConstructor;
 
 /**
- * notificationInterceptor에서 주입받아 사용하는 service
  * @author 이지홍
  */
 @Service
@@ -35,18 +37,21 @@ public class NotificationService {
 		notificationMapper.deleteNotification(notificationId);
 	} 
 	
-	public String getNotification(Long notificationId) {
-		Notification n = notificationMapper.findNotificationById(notificationId);
-		Integer category = n.getCategory();
-		Long courseId = n.getCourseId();
+	public Optional<Notification> getNotification(Long notificationId) {
+		return notificationMapper.findNotificationById(notificationId);
+	}
+	
+	public String getPath(Notification notification) {
+		Integer category = notification.getCategory();
+		Long courseId = notification.getCourseId();
 		String path = "";
 		
 		if(category == 3)
-			path = "/course/" + courseId + "/qna/" + n.getQnaId();
+			path = "/course/" + courseId + "/qna/" + notification.getQnaId();
 		else if(category == 2)
-			path = "/course/" + courseId + "/news/" + n.getNewsId();
+			path = "/course/" + courseId + "/news/" + notification.getNewsId();
 		else
-			path = "/notice/" + n.getNoticeId();
+			path = "/notice/" + notification.getNoticeId();
 		
 		return path;
 	}

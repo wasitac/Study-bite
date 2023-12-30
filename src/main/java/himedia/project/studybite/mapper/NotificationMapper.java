@@ -1,11 +1,11 @@
 package himedia.project.studybite.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +23,7 @@ public interface NotificationMapper {
 
 	// 특정 알림 찾기
 	@Select("select * from notification where notificationId = #{notificationId}")
-	Notification findNotificationById(Long notificationId);
+	Optional<Notification> findNotificationById(Long notificationId);
 
 	// 알림 확인 시 삭제
 	@Delete("delete from notification where notificationId = #{notificationId}")
