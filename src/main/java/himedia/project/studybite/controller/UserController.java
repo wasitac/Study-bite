@@ -256,8 +256,17 @@ public class UserController {
 	 * @author 이지홍
 	 */
 	@PostMapping("/notification/{notificationId}")
-	public String readNotification(@PathVariable Long notificationId) {
-		String path = notificationService.getNotification(notificationId);
+	public String readNotification(@PathVariable Long notificationId, HttpServletRequest request) {
+		Optional<Notification> notification = notificationService.getNotification(notificationId);
+		
+		if(notification.isEmpty()) {
+			request.setAttribute("msg", "유효하지 않은 알림입니다");
+			request.setAttribute("url", "/home");
+			return "/common/alert";
+		}
+		
+		Notification n = notification.get();
+		String path = notificationService.getPath(n);
 		
 		notificationService.readNotification(notificationId);
 
