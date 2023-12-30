@@ -44,14 +44,10 @@
 							<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
 								<button type="button" class="btn btn-primary"><label for="inputGroupFile04">첨부파일</label></button>
 								<input class="fileName" value="${fileBoard.originName}" placeholder="선택된 파일 없음">
-								<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
-									<!-- -->
-								aria-label="Upload" >
-								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton" onclick="deleteFile()">기존
-									파일 삭제</button>
-								<!--  -->
-								aria-label="Upload" style="display: none">
-								<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">기존 파일 삭제</button>
+								<input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
+									aria-label="Upload" style="display: none">
+								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton" onclick="deleteFile()">기존파일 삭제</button>
+								<!-- <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">기존 파일 삭제</button> -->
 							</div>
 							<hr class="row mt-5">
 							<div class="d-flex justify-content-end mt-1">

@@ -39,7 +39,7 @@
 			<c:if test="${not empty fileBoard}">
 				<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
 				<div>
-					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운받기</a>
+					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">파일 다운로드</a>
 				</div>
 			</c:if>
 
