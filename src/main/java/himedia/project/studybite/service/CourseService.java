@@ -42,7 +42,6 @@ public class CourseService {
 
 	/**
 	 * 강의의 강좌 목록 가져오기
-	 * 
 	 * @author 신지은
 	 */
 	public List<Content> contentsInfo(Long courseId) {
@@ -51,7 +50,6 @@ public class CourseService {
 
 	/**
 	 * 강좌명 가져오기
-	 * 
 	 * @author 신지은
 	 */
 	public Optional<Content> findContentName(Long contentId) {
@@ -60,7 +58,6 @@ public class CourseService {
 
 	/**
 	 * 강의 영상 주소 가져오기
-	 * 
 	 * @author 신지은
 	 */
 	public Optional<ContentData> findContentUrl(Long contentId) {
@@ -69,7 +66,6 @@ public class CourseService {
 
 	/**
 	 * 강의 공지 목록
-	 * 
 	 * @author 김민혜
 	 */
 	public List<News> findNewsPage(Long courseId, Integer pageNum) {
@@ -78,7 +74,6 @@ public class CourseService {
 
 	/**
 	 * 강사 : 강의 공지 등록
-	 * 
 	 * @author 신지은
 	 */
 	public void newsAdd(News news) {
@@ -87,7 +82,6 @@ public class CourseService {
 
 	/**
 	 * 강의 공지 상세
-	 * 
 	 * @author 김민혜
 	 */
 	public Optional<News> findNewsDesc(Long newsId) {
@@ -156,7 +150,6 @@ public class CourseService {
 
 	/**
 	 * 질의 응답 상세
-	 * 
 	 * @author 김민혜
 	 */
 	public Optional<Qna> findQnaDesc(Long qnaId) {
@@ -165,7 +158,6 @@ public class CourseService {
 
 	/**
 	 * 질의 응답 등록
-	 * 
 	 * @author 김민혜
 	 */
 	public void question(Qna qna) {
@@ -179,7 +171,6 @@ public class CourseService {
 
 	/**
 	 * 질의응답 수정
-	 * 
 	 * @author 신지은
 	 */
 	public int qnaUpdate(Qna qna) {
@@ -188,7 +179,6 @@ public class CourseService {
 
 	/**
 	 * 질문 삭제
-	 * 
 	 * @author 신지은
 	 */
 	public void qnaDelete(Qna qna) {
@@ -197,7 +187,6 @@ public class CourseService {
 
 	/**
 	 * 파일 업로드
-	 * 
 	 * @author 신지은
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
@@ -227,7 +216,6 @@ public class CourseService {
 
 	/**
 	 * 질의응답 파일 조회
-	 * 
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findQnaFile(Long qnaId) {
