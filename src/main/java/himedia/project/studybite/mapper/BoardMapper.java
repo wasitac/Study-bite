@@ -11,7 +11,6 @@ import himedia.project.studybite.domain.FileBoard;
 /**
  * @author 신지은
  */
-@Repository
 public interface BoardMapper {
 	/**
 	 * 질문 파일 저장

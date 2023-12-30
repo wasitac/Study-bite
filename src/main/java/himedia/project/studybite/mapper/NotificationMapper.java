@@ -14,7 +14,6 @@ import himedia.project.studybite.domain.Notification;
 /**
  * @author 이지홍
  */
-@Repository
 public interface NotificationMapper {
 
 	// 알림목록 조회

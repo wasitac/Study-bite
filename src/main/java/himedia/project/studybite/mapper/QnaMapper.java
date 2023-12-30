@@ -16,7 +16,6 @@ import himedia.project.studybite.domain.Qna;
 /**
  * @author 김민혜
  */
-@Repository
 public interface QnaMapper {
 	/**
 	 * @author 김민혜

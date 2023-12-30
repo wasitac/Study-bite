@@ -15,8 +15,6 @@ import himedia.project.studybite.domain.UserCourse;
 * UserCourse 테이블을 사용하는 Repository입니다.
 * @author 송창민
 */
-
-@Repository
 public interface UsercourseMapper {
     // 유저 아이디로 유저가 수강한 수강목록 전체 조회
     List<Course> findCourseById(Long userId);

@@ -9,13 +9,11 @@ import org.springframework.stereotype.Repository;
 import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
 import himedia.project.studybite.dto.UserLogin;
+
 /**
  * @author 이지홍
  */
-
-@Repository
 public interface UserMapper {
-	//컬럼명하고 도메인 필드명이 달라서 자동으로 연결이 안되는것 같음
 	// 로그인
 	@Select ("select * from user where email like #{email} and password like #{password}")
 	Optional<User> login(UserLogin userLogin);

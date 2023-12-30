@@ -13,7 +13,6 @@ import himedia.project.studybite.domain.Notice;
 /**
  * @author 김민혜
  */
-@Repository
 public interface NoticeMapper {
 	/* 공지사항 목록 */
 	@Select("select * from notice order by noticeId desc limit #{pageNum}, 10")

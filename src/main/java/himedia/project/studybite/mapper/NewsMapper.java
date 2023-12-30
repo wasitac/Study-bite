@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import himedia.project.studybite.domain.News;
 import himedia.project.studybite.domain.Notice;
 
-@Repository
 public interface NewsMapper {
 	/**
 	 * 강의 공지 목록
