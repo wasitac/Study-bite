@@ -33,19 +33,20 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
 	private final UserService userService;
 	private final UserCourseService userCourseService;
 	private final NotificationService notificationService;
+	
 	/**
-	 * 로그인 화면
+	 * 세션에 유저정보가 있다면 대시보드로, 없다면 로그인 화면으로 이동
 	 * @author 이지홍
 	 */
-	
 	@GetMapping("/")
-	public String index(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession(false);
+	public String index(@SessionAttribute(name = "user", required = false) User user, Model model) {
+		if(user != null)
+			return "redirect:/home";
+
 		model.addAttribute("userLogin", new UserLogin());
 		return "/index";
 	}
