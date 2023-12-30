@@ -213,6 +213,12 @@ public class CourseService {
 		String fileName = uuid + "_" + file.getOriginalFilename();
 		// 3. 파일 생성
 		File saveFile = new File(filePath, fileName); // 파일을 생성하면 경로는 filePath, 이름은 name으로 저장
+		//4. 파일 저장 폴더 없을 시, 생성
+	    if (saveFile.mkdirs() == true)  
+	      System.out.println("디렉토리가 생성되었습니다."); 
+	    else  
+	      System.out.println("디렉토리를 생성하지 못했습니다."); 
+	    
 		// 5. 서버로 전송
 		file.transferTo(saveFile); // 예외 처리 필요
 		

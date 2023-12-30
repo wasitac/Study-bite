@@ -1,6 +1,11 @@
 package himedia.project.studybite.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,10 +14,11 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -268,16 +274,6 @@ public class CourseController {
 	 * 
 	 * @author 신지은
 	 */
-//	@PostMapping("/{courseId}/news/{newsId}/file")
-//	public String fileDelete() {
-//		return
-//	}
-
-	/**
-	 * 강사 : 강의 공지 삭제
-	 * 
-	 * @author 신지은
-	 */
 	@DeleteMapping("/{courseId}/news/{newsId}")
 	public String newsDelete(@ModelAttribute News news) {
 		courseService.newsDelete(news);
@@ -475,4 +471,46 @@ public class CourseController {
 		model.addAttribute("attPercentage", attPercentage);
 		return "/course/attendance";
 	}
+	
+	/**
+	 * 파일 다운로드
+	 * @author 신지은 
+	 */
+	@GetMapping("/{sort}/{id}/filedown")
+	public void fileDown(@PathVariable Long id, @PathVariable String sort, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		FileBoard fileBoard = new FileBoard();
+		log.info("sort >>>>> {}", sort);
+		log.info("id >>>>> {}", id);
+		
+		if(sort.equals("qna")) {
+			fileBoard =  courseService.findQnaFile(id).get();
+			log.info("courseService.findQnaFile(id) 실행");
+		}
+		else if(sort.equals("news")) {
+			fileBoard = courseService.findNewsFile(id).get();
+			log.info("courseService.findQnaFile(id) 실행");
+		}
+		log.info("fileBoard originName>>>>> {}", fileBoard.getOriginName());
+		
+		response.reset();
+		response.setContentType("application/octer-stream");
+		String fileName = URLEncoder.encode(fileBoard.getOriginName() , "UTF-8");
+		//응답 헤더 설정
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		
+		
+		//응답 바디에 파일 데이터 싣기
+		String filePath = request.getServletContext().getRealPath("/resources/files/") + fileBoard.getFilename();
+		File file = new File(filePath);
+		
+		if(file.exists()) {
+			InputStream is = new FileInputStream(file);
+			OutputStream os = response.getOutputStream();
+			FileCopyUtils.copy(is, os);
+			os.flush();
+			os.close();
+			is.close();
+		}
+	}
+	
 }

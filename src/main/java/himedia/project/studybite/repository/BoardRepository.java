@@ -25,13 +25,13 @@ public interface BoardRepository {
 	 * Qna 저장한 파일 조회
 	 */
 	@Select("select * from fileBoard where qnaId = #{qnaId}")
-	Optional<FileBoard> findQnaFile(@Param("qnaId")Long qnaId);
+	Optional<FileBoard> findQnaFile(@Param("qnaId") Long qnaId);
 	
 	/**
 	 * News(강의 공지) 저장한 파일 조회
 	 */
 	@Select("select * from fileBoard where newsId = #{newsId}")
-	Optional<FileBoard> findNewsFile(@Param("newsId")Long newsId);
+	Optional<FileBoard> findNewsFile(@Param("newsId") Long newsId);
 	
 	/**
 	 * 저장한 파일 수정
