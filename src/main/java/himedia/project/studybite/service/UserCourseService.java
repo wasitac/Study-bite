@@ -44,7 +44,7 @@ public class UserCourseService {
         return usercourseMapper.findAttendanceCount(userId, courseId);
     }
     
-    public List<Long> findInstructor(Long courseId) {
+    public List<Long> findCourseMember(Long courseId) {
     	return usercourseMapper.findUserByCourse(courseId);
     }
 }

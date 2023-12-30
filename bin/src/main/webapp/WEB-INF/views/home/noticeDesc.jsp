@@ -9,8 +9,11 @@
 <body>
 	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
 		<div class="my-1 text-left">
-			<h1 style="color: #2563EB">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notices'" style="background-color: white"><img src="../resources/img/back.png" class="rounded-circle me-3" width="32" height="32"></button>공지 사항
+			<h1 class="blue600">
+				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notices'" style="background-color: white">
+					<img src="../resources/img/back.png" class="rounded-circle me-3" width="32" height="32">
+				</button>
+				공지 사항
 			</h1>
 		</div>
 		<hr class="my-5">
@@ -18,6 +21,7 @@
 		<hr class="my-5">
 
 		<div class="list-group">
+			<!-- @이지홍 c:if 뭔가요-->
 			<a href="/" class="list-group-item list-group-item-action <c:if></c:if>"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
 					<c:when>
                 다음글이 없습니다.

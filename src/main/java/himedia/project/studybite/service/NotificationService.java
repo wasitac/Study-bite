@@ -38,16 +38,15 @@ public class NotificationService {
 	public String getNotification(Long notificationId) {
 		Notification n = notificationMapper.findNotificationById(notificationId);
 		Integer category = n.getCategory();
-		Long id = n.getId();
 		Long courseId = n.getCourseId();
 		String path = "";
 		
 		if(category == 3)
-			path = "/course/" + courseId + "/qna/" + id;
+			path = "/course/" + courseId + "/qna/" + n.getQnaId();
 		else if(category == 2)
-			path = "/course/" + courseId + "/news/" + id;
+			path = "/course/" + courseId + "/news/" + n.getNewsId();
 		else
-			path = "/notice/" + id;
+			path = "/notice/" + n.getNoticeId();
 		
 		return path;
 	}

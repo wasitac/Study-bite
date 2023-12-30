@@ -25,7 +25,19 @@
 					<div>
 						<h5>${notification.title}</h5>
 						<p>
-							<small class="white600">${notification.category}</small>
+							<small class="white600">
+								<c:choose>
+									<c:when test="${notification.category == 3}">
+										QnA
+									</c:when>
+									<c:when test="${notification.category == 2}">
+										강의 공지
+									</c:when>
+									<c:otherwise>
+										전체 공지
+									</c:otherwise>									
+								</c:choose>
+							</small>
 						</p>
 					</div>
 				</button>

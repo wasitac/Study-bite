@@ -37,7 +37,7 @@ public interface NotificationMapper {
 	 * 
 	 * @author 이지홍
 	 */
-	@Insert("insert into notification(userId, courseId, id, category, title) values(#{userId}, #{courseId}, #{id}, #{category}, #{title})")
+	@Insert("insert into notification(userId, courseId, qnaId, newsId, noticeId, category, title) values(#{userId}, #{courseId}, #{qnaId}, #{newsId}, #{noticeId}, #{category}, #{title})")
 	@Options(useGeneratedKeys = true, keyProperty = "notificationId")
 	void addQnaNotification(Notification notification);
 	

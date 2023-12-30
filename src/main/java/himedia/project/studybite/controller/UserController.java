@@ -111,7 +111,6 @@ public class UserController {
 		
 		return "/home/home";
 	}
-	
 
 	/**
 	 * 	수강과목
@@ -254,12 +253,12 @@ public class UserController {
 	
 	/**
 	 * 알림 확인 시 해당 게시글로 리다이렉트 하고, 알림은 삭제 
-	 * 
 	 * @author 이지홍
 	 */
 	@PostMapping("/notification/{notificationId}")
 	public String readNotification(@PathVariable Long notificationId) {
 		String path = notificationService.getNotification(notificationId);
+		
 		notificationService.readNotification(notificationId);
 
 		return "redirect:" + path;

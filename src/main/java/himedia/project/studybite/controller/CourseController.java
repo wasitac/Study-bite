@@ -131,11 +131,11 @@ public class CourseController {
 			courseService.upload(fileBoard, file, request);
 		}
 
-		List<Long> toId = userCourseService.findInstructor(courseId);
+		List<Long> member = userCourseService.findCourseMember(courseId);
 		List<Notification> notifications = new ArrayList<Notification>();
-//		for (Long id : toId) {
-		for (int i = 1; i < toId.size(); i++) {
-			notifications.add(new Notification(toId.get(i), courseId, news.getNewsId(), 2, news.getTitle()));
+
+		for (int i = 1; i < member.size(); i++) {
+			notifications.add(new Notification(member.get(i), courseId, news.getNewsId(), 2, news.getTitle()));
 		}
 		notificationService.sendNotification(notifications);
 
@@ -288,7 +288,9 @@ public class CourseController {
 	@GetMapping("/{courseId}/qna/add")
 	public String qnaQuestion(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+		
 		model.addAttribute("courseInfo", courseInfo.get());
+		
 		return "/course/qnaForm";
 	}
 
@@ -297,13 +299,15 @@ public class CourseController {
 	 * 
 	 * @author 김민혜(질의 응답 등록)
 	 * @author 신지은(파일 업로드 기능)
-	 * @author 이지홍(알림 기능)
+	 * @author 이지홍(질문 알림)
 	 */
 	@PostMapping("/{courseId}/qna/add")
 	public String postQnaQuestion(@PathVariable Long courseId, @ModelAttribute Qna qna, @RequestParam MultipartFile file, 
 									@SessionAttribute(name = "user", required = false) User user, FileBoard fileBoard, HttpServletRequest request, Model model)
 			throws Exception {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
+
+		qna.setUserId(user.getUserId());
 		qna.setCourseId(courseId);
 		qna.setUserName(user.getUserName());
 		courseService.question(qna);
@@ -311,8 +315,8 @@ public class CourseController {
 		fileBoard.setQnaId(qna.getQnaId());;
 		courseService.upload(fileBoard, file, request);
 		
-		List<Long> toId = userCourseService.findInstructor(courseId);
-		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
+		List<Long> member = userCourseService.findCourseMember(courseId);
+		Notification notification = new Notification(member.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
 		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
@@ -326,9 +330,27 @@ public class CourseController {
 	@PostMapping("/{courseId}/qna/answer")
 	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-
+		// qna 객체에 qnaId랑 answer밖에 안받아오는데 dto를 하나 만드는게 좋지 않을까요
+		// qna에 userId가 당연히 들어있을줄 알고 사용했는데 아무것도 없어요
+		// 없어도 될거같아요 @이지홍
 		qna.setCourseId(courseId);
 		courseService.answer(qna);
+
+		/**
+		 * veiw에서 받아온 qnaId로 해당 질문을 조회하고, 질문한 유저에게 알림 전송
+		 * @author 이지홍
+		 */
+		Optional<Qna> findQna = courseService.findQnaDesc(qna.getQnaId());
+		
+		if(findQna.isEmpty()) {
+			request.setAttribute("msg", "해당 질문이 존재하지 않습니다");
+			request.setAttribute("url", "/{courseId}/qna");
+			return "/common/alert";
+		}
+		
+		Qna q = findQna.get();
+		Notification notification = new Notification(q.getUserId(), courseId, q.getQnaId(), 3, q.getTitle());
+		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "redirect:/course/" + courseId + "/qna/" + qna.getQnaId();
