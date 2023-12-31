@@ -6,8 +6,7 @@ import lombok.Setter;
 /**
  * @author 이지홍
  */
-@Setter
-@Getter
+@Setter @Getter
 public class PasswordUpdate {
 	private Long userId;
 	private String password;
