@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.Course;
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.UserCourse;
+import himedia.project.studybite.dto.Course;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.UserCourse;
 
 /**
 * UserCourse 테이블을 사용하는 Repository입니다.

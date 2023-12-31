@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import himedia.project.studybite.domain.Content;
-import himedia.project.studybite.domain.ContentData;
-import himedia.project.studybite.domain.Course;
-import himedia.project.studybite.domain.FileBoard;
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.dto.Content;
+import himedia.project.studybite.dto.ContentData;
+import himedia.project.studybite.dto.Course;
+import himedia.project.studybite.dto.FileBoard;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.Qna;
 import himedia.project.studybite.mapper.BoardMapper;
 import himedia.project.studybite.mapper.ContentMapper;
 import himedia.project.studybite.mapper.CourseMapper;

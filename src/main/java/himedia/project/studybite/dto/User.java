@@ -1,4 +1,4 @@
-package himedia.project.studybite.domain;
+package himedia.project.studybite.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

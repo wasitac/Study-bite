@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.User;
 import himedia.project.studybite.dto.PasswordUpdate;
+import himedia.project.studybite.dto.User;
 import himedia.project.studybite.dto.UserLogin;
 
 /**

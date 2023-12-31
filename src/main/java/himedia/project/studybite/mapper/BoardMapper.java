@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.FileBoard;
+import himedia.project.studybite.dto.FileBoard;
 /**
  * @author 신지은
  */

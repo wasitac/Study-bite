@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.Qna;
+import himedia.project.studybite.dto.Qna;
 
 /**
  * @author 김민혜

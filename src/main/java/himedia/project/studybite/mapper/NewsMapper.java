@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Notice;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.Notice;
 
 public interface NewsMapper {
 	/**

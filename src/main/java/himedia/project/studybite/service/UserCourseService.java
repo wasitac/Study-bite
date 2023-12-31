@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import himedia.project.studybite.domain.Course;
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.UserCourse;
+import himedia.project.studybite.dto.Course;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.UserCourse;
 import himedia.project.studybite.mapper.UsercourseMapper;
 import lombok.RequiredArgsConstructor;
 

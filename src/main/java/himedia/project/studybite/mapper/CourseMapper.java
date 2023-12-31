@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.Course;
+import himedia.project.studybite.dto.Course;
 
 public interface CourseMapper {
 	/**
