@@ -128,7 +128,6 @@ public class CourseService {
 			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
 		}
 		
-		
 		newsRepository.newsDelete(news);
 	}
 
@@ -222,6 +221,7 @@ public class CourseService {
 		// 5. 서버로 전송
 		file.transferTo(saveFile); // 예외 처리 필요
 		
+		fileBoard.setFiletype(file.getContentType());
 		fileBoard.setOriginName(file.getOriginalFilename());
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
@@ -250,19 +250,14 @@ public class CourseService {
 	}
 
 	/**
-	 * 강의 공지 파일 삭제
+	 * 파일 삭제
 	 * @author 신지은
 	 */
-	public int newsFileDelete(FileBoard fileBoard) {
-		return boardRepository.newsFileDelete(fileBoard);
-	}
-	
-	/**
-	 * 질의 응답 파일 삭제
-	 * @author 신지은
-	 */
-	public int qnaFileDelete(FileBoard fileBoard) {
-		return boardRepository.qnaFileDelete(fileBoard);
+	public int fileDelete(FileBoard fileBoard) {
+		if (fileBoard.getNewsId() == null) 
+			return boardRepository.qnaFileDelete(fileBoard);
+		else
+			return boardRepository.newsFileDelete(fileBoard);
 	}
 	
 	// 강의 공지 조회수

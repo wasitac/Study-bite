@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<!DOCTYPE html>
 	<html>
-
 	<head>
 		<meta charset="UTF-8">
-		<%@ include file="../common/config.jsp" %>
 			<link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 			<script src="https://code.jquery.com/jquery-3.7.1.min.js"
 				integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+			<%@ include file="../common/config.jsp" %>
 			<title id="title">질문 수정</title>
 	</head>
-
 	<body>
 		<div class="w-25">
 			<%@ include file="../common/leftbar.jsp" %>
@@ -39,8 +37,10 @@
 								<form:textarea class="form-control col" rows="10" path="description" required="true"
 									value="${description}" />
 							</div>
-							<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" id="file-input" class="w-50 h-50"
+							<c:if test="${not empty fileBoard and not fileBoard.filetype=='application/pdf'}">
+								<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" id="file-input" class="w-50 h-50"
 								style="margin: 10px 0 0 78px;">
+							</c:if>
 							<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
 								<button type="button" class="btn btn-primary"><label for="inputGroupFile04">첨부파일</label></button>
 								<input class="fileName" value="${fileBoard.originName}" placeholder="선택된 파일 없음" readonly="readonly">
@@ -65,7 +65,7 @@
 		</div>
 		<script src="${resPath}/js/courseBar.js"></script>
 		<script type="text/javascript">
-			//기존 파일 삭제 누르면 이미지 안보이고 파일 삭제 메서드 실행
+			//기존 파일 삭제 누르면 이미지 안 보이게
 			document.addEventListener('DOMContentLoaded', function () {
 
 				var deleteFileButton = document.getElementById('deleteFileButton');
@@ -75,7 +75,7 @@
 				deleteFileButton.addEventListener('click', function () {
 		            var result = confirm("기존 파일을 삭제하시겠습니까?");
 		            
-		            // Set the value of the hidden input field
+		            // 확인창에서 선택한 값 넣기
 		           document.getElementById("confirmResult").value = result;
 		            
 		            console.log(result);
@@ -103,7 +103,7 @@
 							.submit();
 						console.log('submit 버튼 클릭함');
 					});
-			} else {
+			} else if ('${requestURI}' == "${context}course/${courseId}/news/${newsId}/editForm"){
 				title.innerHTML = "강의 공지 수정";
 				bigTitle.innerHTML = "강의 공지 목록";
 				smallTitle.innerHTML = "강의 공지 수정";

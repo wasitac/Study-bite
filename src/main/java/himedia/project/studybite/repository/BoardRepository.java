@@ -18,7 +18,7 @@ public interface BoardRepository {
 	/**
 	 * 파일 저장
 	 */
-	@Insert("insert into fileBoard(filename, originName, filepath, qnaId, newsId) values(#{filename}, #{originName}, #{filepath}, #{qnaId}, #{newsId})")
+	@Insert("insert into fileBoard(filename, originName, filepath, filetype, qnaId, newsId) values(#{filename}, #{originName}, #{filepath}, #{filetype}, #{qnaId}, #{newsId})")
 	void fileSave(FileBoard fileBoard);
 	
 	/**

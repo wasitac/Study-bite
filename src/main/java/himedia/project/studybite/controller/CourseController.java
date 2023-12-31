@@ -254,7 +254,7 @@ public class CourseController {
 			File newFile = new File(fileboard.getFilepath());
 			if(newFile.exists()) {
 				newFile.delete();
-				courseService.newsFileDelete(fileBoard);
+				courseService.fileDelete(fileBoard);
 			}	
 		}
 		//새로운 파일 업로드, 기존파일 삭제
@@ -266,7 +266,7 @@ public class CourseController {
 				if(newFile.exists()) 
 					newFile.delete();
 				
-				courseService.newsFileDelete(fileboard);
+				courseService.fileDelete(fileboard);
 				
 			} catch (NoSuchElementException e) {
 				log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
@@ -439,7 +439,7 @@ public class CourseController {
 			File newFile = new File(fileboard.getFilepath());
 			if(newFile.exists()) {
 				newFile.delete();
-				courseService.qnaFileDelete(fileBoard);
+				courseService.fileDelete(fileBoard);
 			}	
 		}
 		//새로운 파일 업로드, 기존파일 삭제
@@ -451,7 +451,7 @@ public class CourseController {
 				if(newFile.exists()) 
 					newFile.delete();
 				
-				courseService.qnaFileDelete(fileBoard);
+				courseService.fileDelete(fileBoard);
 				
 			} catch (NoSuchElementException e) {
 				log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");

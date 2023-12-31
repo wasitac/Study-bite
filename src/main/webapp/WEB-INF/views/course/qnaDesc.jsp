@@ -36,13 +36,17 @@
 				<div>${qna.description}</div>
 			</div>
 			<hr class="my-5">
-			<c:if test="${not empty fileBoard}">
-				<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
-				<div>
-					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">파일 다운로드</a>
-				</div>
-			</c:if>
-
+			<c:choose>
+				<c:when test="${not empty fileBoard and filetype ne'application/pdf'}">
+					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+					<div>
+						<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+					</div>
+				</c:when>
+				<c:when test="${not empty fileBoard and filetype eq'application/pdf'}">
+					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+				</c:when>
+			</c:choose>
 			<c:if test="${user.userName eq qna.userName}">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'" class="btn btn-primary">수정</button>
