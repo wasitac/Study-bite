@@ -244,11 +244,21 @@ public class CourseController {
 	 * @throws Exception
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @ModelAttribute News news,
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, @ModelAttribute News news,
 			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
 
 		courseService.newsUpdate(news);
 		
+		//기존 파일만 삭제
+		if(confirmResult.equals("true")) {
+			FileBoard fileboard = courseService.findQnaFile(news.getNewsId()).get();
+			File newFile = new File(fileboard.getFilepath());
+			if(newFile.exists()) {
+				newFile.delete();
+				courseService.newsFileDelete(fileBoard);
+			}	
+		}
+		//새로운 파일 업로드, 기존파일 삭제
 		if(!file.isEmpty()) {
 			try {
 				FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();		
@@ -257,14 +267,13 @@ public class CourseController {
 				if(newFile.exists()) 
 					newFile.delete();
 				
-				courseService.fileDelete(fileboard);
+				courseService.newsFileDelete(fileboard);
 				
 			} catch (NoSuchElementException e) {
 				log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
 			}
 			courseService.upload(fileBoard, file, request);
 		}
-		
 
 		return "redirect:/course/{courseId}/news/{newsId}";
 	}
@@ -421,23 +430,37 @@ public class CourseController {
 	 * @throws Exception 
 	 */
 	@PostMapping("/{courseId}/qna/{qnaId}")
-	public String qnaEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @ModelAttribute Qna qna, 
+	public String qnaEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, @ModelAttribute Qna qna, 
 			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
+		
 		courseService.qnaUpdate(qna);
 		
-		try {
-			FileBoard fileboard = courseService.findNewsFile(qna.getQnaId()).get();		
+		//기존 파일만 삭제
+		if(confirmResult.equals("true")) {
+			FileBoard fileboard = courseService.findQnaFile(qna.getQnaId()).get();
 			File newFile = new File(fileboard.getFilepath());
-			
-			if(newFile.exists()) 
+			if(newFile.exists()) {
 				newFile.delete();
-			
-			courseService.fileDelete(fileboard);
-
-		} catch (NoSuchElementException e) {
-			log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
+				courseService.qnaFileDelete(fileBoard);
+			}	
 		}
-		courseService.upload(fileBoard, file, request);
+		//새로운 파일 업로드, 기존파일 삭제
+		if(!file.isEmpty()) {
+			try {
+				FileBoard fileboard = courseService.findQnaFile(qna.getQnaId()).get();		
+				File newFile = new File(fileboard.getFilepath());
+				
+				if(newFile.exists()) 
+					newFile.delete();
+				
+				courseService.qnaFileDelete(fileBoard);
+				
+			} catch (NoSuchElementException e) {
+				log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
+			}
+			courseService.upload(fileBoard, file, request);
+		}
+		
 		return "redirect:/course/{courseId}/qna/{qnaId}";
 	}
 
@@ -454,6 +477,7 @@ public class CourseController {
 
 	/**
 	 * 출결 확인
+	 * 
 	 * 
 	 * @author 송창민
 	 */
@@ -479,8 +503,6 @@ public class CourseController {
 	@GetMapping("/{sort}/{id}/filedown")
 	public void fileDown(@PathVariable Long id, @PathVariable String sort, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		FileBoard fileBoard = new FileBoard();
-		log.info("sort >>>>> {}", sort);
-		log.info("id >>>>> {}", id);
 		
 		if(sort.equals("qna")) {
 			fileBoard =  courseService.findQnaFile(id).get();

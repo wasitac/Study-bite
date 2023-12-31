@@ -250,12 +250,19 @@ public class CourseService {
 	}
 
 	/**
-	 * 파일 삭제
-	 * 
+	 * 강의 공지 파일 삭제
 	 * @author 신지은
 	 */
-	public int fileDelete(FileBoard fileBoard) {
-		return boardRepository.fileDelete(fileBoard);
+	public int newsFileDelete(FileBoard fileBoard) {
+		return boardRepository.newsFileDelete(fileBoard);
+	}
+	
+	/**
+	 * 질의 응답 파일 삭제
+	 * @author 신지은
+	 */
+	public int qnaFileDelete(FileBoard fileBoard) {
+		return boardRepository.qnaFileDelete(fileBoard);
 	}
 	
 	// 강의 공지 조회수

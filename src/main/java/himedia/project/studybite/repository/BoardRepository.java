@@ -41,9 +41,15 @@ public interface BoardRepository {
 	int fileUpdate(FileBoard fileBoard);
 	
 	/**
-	 * 저장한 파일 삭제
+	 * 저장한 강의 공지 파일 삭제
 	 */
 	@Delete("delete from fileBoard where newsId = #{newsId}")
-	int fileDelete(FileBoard fileBoard);
+	int newsFileDelete(FileBoard fileBoard);
+	
+	/**
+	 * 저장한 질의 응답 파일 삭제
+	 */
+	@Delete("delete from fileBoard where qnaId = #{qnaId}")
+	int qnaFileDelete(FileBoard fileBoard);
 	
 }
