@@ -239,7 +239,6 @@ public class CourseController {
 	
 	/**
 	 * 강사 : 강의 공지 수정
-	 * 
 	 * @author 신지은
 	 * @throws Exception
 	 */
@@ -251,7 +250,7 @@ public class CourseController {
 		
 		//기존 파일만 삭제
 		if(confirmResult.equals("true")) {
-			FileBoard fileboard = courseService.findQnaFile(news.getNewsId()).get();
+			FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();
 			File newFile = new File(fileboard.getFilepath());
 			if(newFile.exists()) {
 				newFile.delete();
@@ -425,7 +424,6 @@ public class CourseController {
 	}
 	/**
 	 * 질의 응답 수정
-	 * 
 	 * @author 신지은
 	 * @throws Exception 
 	 */

@@ -46,7 +46,7 @@
 								<input class="fileName" value="${fileBoard.originName}" placeholder="선택된 파일 없음" readonly="readonly">
 								<input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
 									aria-label="Upload" style="display: none">
-								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton" onclick="deleteFile()">기존파일 삭제</button>
+								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton">기존파일 삭제</button>
 								 <input type="hidden" id="confirmResult" name="confirmResult" value="">
 							</div>
 							<hr class="row mt-5">
@@ -73,23 +73,17 @@
 				var fileInputImage = document.getElementById('file-input');
 
 				deleteFileButton.addEventListener('click', function () {
-					fileInputImage.remove();
-				});
-			});
-
-		    $(document).ready(function () {
-		        $("#deleteFileButton").on("click", function () {
-		            // Show confirmation dialog
-		            var result = confirm("Are you sure you want to proceed?");
+		            var result = confirm("기존 파일을 삭제하시겠습니까?");
 		            
 		            // Set the value of the hidden input field
 		           document.getElementById("confirmResult").value = result;
 		            
 		            console.log(result);
-		        });
-		    });
+		            
+					fileInputImage.remove();
+				});
+			});
 
-			//$("#deleteFileButton").click(() => confirm("기존 파일을 삭제하시겠습니까?"))
 			$("#cancel").click(() => confirm("취소하시겠습니까?"))
 
 			var title = document.getElementById("title");
