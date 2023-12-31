@@ -259,7 +259,7 @@ public class CourseController {
 				courseService.fileDelete(fileBoard);
 			}	
 		}
-		//새로운 파일 업로드, 기존파일 삭제
+		//기존파일 삭제 후, 새로운 파일 업로드
 		if(!file.isEmpty()) {
 			try {
 				FileBoard fileboard = courseService.findNewsFile(news.getNewsId()).get();		
@@ -445,6 +445,7 @@ public class CourseController {
 			model.addAttribute("fileBoard", fileBoardInfo.get());
 		return "course/editForm";
 	}
+	
 	/**
 	 * 질의 응답 수정
 	 * @author 신지은
@@ -465,7 +466,7 @@ public class CourseController {
 				courseService.fileDelete(fileBoard);
 			}	
 		}
-		//새로운 파일 업로드, 기존파일 삭제
+		// 기존 파일 삭제 후, 새로운 파일 업로드
 		if(!file.isEmpty()) {
 			try {
 				FileBoard fileboard = courseService.findQnaFile(qna.getQnaId()).get();		
