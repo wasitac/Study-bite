@@ -36,7 +36,7 @@ public interface BoardMapper {
 	 * 저장한 파일 수정
 	 */
 	@Update("update fileBoard set filename=#{filename}, originName = #{originName}, "
-			+ "filepath=#{filepath}, qnaId =#{qnaId}, newsId=#{newsId} where id=#{id}")
+			+ "filepath=#{filepath}, filetype = #{filetype}, qnaId =#{qnaId}, newsId=#{newsId} where id=#{id}")
 	int fileUpdate(FileBoard fileBoard);
 	
 	/**

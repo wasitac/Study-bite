@@ -37,13 +37,16 @@ public class CourseService {
 	private final QnaMapper qnaMapper;
 	private final BoardMapper boardMapper;
 
-	// 강의 타이틀 강의 분류, 강의명, 교육자 조회
+	/**
+	 *  강의 타이틀 강의 분류, 강의명, 교육자 조회
+	 *   @author 신지은
+	 */
 	public Optional<Course> courseInfo(Long courseId) {
 		return courseMapper.courseInfo(courseId);
 	}
 
 	/**
-	 * 강의의 강좌 목록 가져오기
+	 * 강의 강좌 목록 가져오기
 	 * @author 신지은
 	 */
 	public List<Content> contentsInfo(Long courseId) {
@@ -230,9 +233,9 @@ public class CourseService {
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
-		if(fileBoard.getId()!=null) 
-			boardMapper.fileUpdate(fileBoard);
-		else
+//		if(fileBoard.getId()!=null) 
+//			boardMapper.fileUpdate(fileBoard);
+//		else
 			boardMapper.fileSave(fileBoard);
 	}
 	
