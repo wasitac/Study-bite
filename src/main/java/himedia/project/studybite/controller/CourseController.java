@@ -137,6 +137,7 @@ public class CourseController {
 		for (int i = 1; i < member.size(); i++) {
 			notifications.add(new Notification(member.get(i), courseId, news.getNewsId(), 2, news.getTitle()));
 		}
+		log.info(member.get(1).toString());
 		notificationService.sendNotification(notifications);
 
 		model.addAttribute("courseInfo", courseInfo.get());
