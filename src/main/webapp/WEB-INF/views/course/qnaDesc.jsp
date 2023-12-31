@@ -40,13 +40,17 @@
 							<div>${qna.description}</div>
 						</div>
 						<hr class="my-5">
-						<c:if test="${not empty fileBoard}">
-							<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
-							<div>
-								<a href="/studybite/resources/files/${fileBoard.filename}">첨부파일 다운받기</a>
-							</div>
-						</c:if>
-
+						<c:choose>
+							<c:when test="${not empty fileBoard and filetype ne'application/pdf'}">
+								<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+								<div>
+									<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+								</div>
+							</c:when>
+							<c:when test="${not empty fileBoard and filetype eq'application/pdf'}">
+								<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+							</c:when>
+						</c:choose>
 						<c:if test="${user.userName eq qna.userName}">
 							<div class="d-flex justify-content-end mt-1">
 								<button type="button" onclick="location.href='${context}course/${courseId}/qna/${qnaId}/editForm'"
@@ -107,10 +111,22 @@
 					console.log('choice  ' + choice);
 					//확인창에서 확인을 클릭하면,
 					if (choice) {
-						$('#deleteForm').attr('action', '/studybite/course/' + courseId + '/qna/' + id).submit();
+						$('#deleteForm').attr('action',
+								'/studybite/course/' + courseId + '/qna/' + id)
+								.submit();
 					}
 				});
-		</script>
-	</body>
 
-	</html>
+		function editClick() {
+			$('#editAnswer').show();
+			$('#editBtn').hide();
+		};
+
+		function delClick() {
+			if (confirm("답변을 삭제하겠습니까?")) {
+				$('#deleteAnswer').submit();
+			}
+		}
+	</script>
+</body>
+</html>

@@ -38,10 +38,14 @@
 				<div>${news.description}</div>
 			</div>
 			<hr class="my-5">
-			<c:if test="${not empty fileBoard}">
-				<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-50 h-50">
-				<a href="""></a>
-			</c:if>
+			<c:choose>
+				<c:when test="${not empty fileBoard and not fileBoard.filetype=='application/pdf'}">
+					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+				</c:when>
+				<c:when test="${not empty fileBoard}">
+					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+				</c:when>
+			</c:choose>
 			<c:if test=" ${user.userName eq news.userName}">
 				<div class="position-absolute end-0 mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
