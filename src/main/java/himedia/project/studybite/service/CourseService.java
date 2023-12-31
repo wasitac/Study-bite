@@ -121,8 +121,7 @@ public class CourseService {
 			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
 		}
 		
-		
-		return newsMapper.newsDelete(news);
+		newsMapper.newsDelete(news);
 	}
 	
 	/**
@@ -185,7 +184,7 @@ public class CourseService {
 	 */
 	public void qnaDelete(Qna qna) {
 		try {
-			FileBoard fileboard = boardRepository.findQnaFile(qna.getQnaId()).get();		
+			FileBoard fileboard = boardMapper.findQnaFile(qna.getQnaId()).get();		
 			File file = new File(fileboard.getFilepath());
 			
 			if(file.exists()) {
@@ -242,7 +241,7 @@ public class CourseService {
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findNewsFile(Long newsId) {
-		return boardRepository.findNewsFile(newsId);
+		return boardMapper.findNewsFile(newsId);
 	}
 
 	/**
