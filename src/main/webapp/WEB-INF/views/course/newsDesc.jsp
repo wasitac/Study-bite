@@ -40,9 +40,9 @@
 			<hr class="my-5">
 			<c:if test="${not empty fileBoard}">
 				<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" class="w-50 h-50">
-				<a href="""></a>
+				<a href=""></a>
 			</c:if>
-			<c:if test=" ${user.userName eq news.userName}">
+			<c:if test="${user.userName eq news.userName}">
 				<div class="position-absolute end-0 mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
 					<form:button type="button" class="delete btn btn-primary" id="${newsId}">삭제</form:button>
