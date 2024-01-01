@@ -240,15 +240,14 @@ public class CourseController {
 		return "course/editForm";
 	}
 	
-	
 	/**
 	 * 강사 : 강의 공지 수정
 	 * @author 신지은
 	 * @throws Exception
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, @ModelAttribute News news,
-			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, 
+			@ModelAttribute News news, FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
 
 		courseService.newsUpdate(news);
 		
