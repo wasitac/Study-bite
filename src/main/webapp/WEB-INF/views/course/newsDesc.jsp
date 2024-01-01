@@ -16,7 +16,7 @@
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-		<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
+			<div id="container" class="mainview container mt-5 min-vh-100 w-50">
 			<%@ include file="../common/courseTitle.jsp"%>
 			<%@ include file="../common/courseBar.jsp"%>
 			<div class="my-1 text-left">
@@ -54,14 +54,14 @@
 					</c:when>
 				</c:choose>
 				<c:if test="${user.userName eq news.userName}">
-					<div class="position-absolute end-0 mt-1">
+					<div class="d-flex justify-content-end mt-1">
 						<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
-						<form:button type="button" class="delete btn btn-primary" id="${newsId}">삭제</form:button>
+						<form:button type="button" class="delete btn btn-primary mx-1" id="${newsId}">삭제</form:button>
 					</div>
 				</c:if>
 			</form:form>
 		<!-- 이전글 다음글 -->
-		<div class="prevnext list-group mt-5">
+		<div class="prevnext list-group">
 			<a href="/studybite/course/${courseId}/news/${next.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
 					<c:when test="${empty next}">
                 다음글이 없습니다.
