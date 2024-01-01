@@ -41,7 +41,7 @@
 						</div>
 						<hr class="my-5">
 						<c:choose>
-							<c:when test="${not empty fileBoard and filetype ne'application/pdf'}">
+							<c:when test="${filetype ne'application/pdf'}">
 								<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
 								<div>
 									<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>

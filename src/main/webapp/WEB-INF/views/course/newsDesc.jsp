@@ -39,15 +39,18 @@
 			</div>
 			<hr class="my-5">
 			<c:choose>
-				<c:when test="${fileBoard.filetype ne 'application/pdf' and fileBoard.filetype ne null}">
-					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+				<c:when test="${fileBoard.filetype eq 'application/pdf'}">
+					<div>${fileBoard.originName}</div>
 					<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
 				</c:when>
 				<c:when test="${not empty fileBoard}">
-					<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+					<div>
+						<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+					</div>					
 				</c:when>
 			</c:choose>
-			<c:if test=" ${user.userName eq news.userName}">
+			<c:if test="${user.userName eq news.userName}">
 				<div class="position-absolute end-0 mt-1">
 					<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
 					<form:button type="button" class="delete btn btn-primary" id="${newsId}">삭제</form:button>
