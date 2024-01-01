@@ -27,13 +27,15 @@
 		<div class="contatiner">
 			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" value="" placeholder="제목을 입력해주세요." required>
+					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" value="" placeholder="제목을 입력해주세요.(100자 이내)" required>
+					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
-					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
+					<textarea id="description" name="description" class="description form-control col" rows="10" maxlength="1000" placeholder="내용을 입력해주세요.(1000자 이내)" required></textarea>
+					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
-				<input type="file" name="file" id="file" accept=".pdf, image/*">
+				<input type="file" name="file" id="file" multiple="multiple">
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary me-1">작성하기</button>
@@ -49,5 +51,28 @@
 		<%@ include file="../common/rightbar.jsp"%>
 	</div>
 	<script src="${resPath}/js/courseBar.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#title').on('keyup', function() {
+				$('#titleCnt').html("(" + $(this).val().length + " / 100)");
+
+				if ($(this).val().length > 100) {
+					$(this).val($(this).val().substring(0, 100));
+					$('#titleCnt').html("(100 / 100)");
+					alert('제목은 최대 100자 까지 입력 가능합니다.');
+				}
+			});
+		});
+		$(document).ready(function() {
+			$('#description').on('keyup', function() {
+				$('#descCnt').html("(" + $(this).val().length + " / 1000)");
+
+				if ($(this).val().length > 1000) {
+					$(this).val($(this).val().substring(0, 1000));
+					$('#descCnt').html("(1000 / 1000)");
+				}
+			});
+		});
+	</script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -7,58 +8,60 @@
 <meta charset="UTF-8">
 <%@ include file="../common/config.jsp"%>
 <title>수강과목-강의 공지 상세</title>
+<link rel="stylesheet" href="${resPath}/css/prevNext.css">
+<link rel="stylesheet" href="${resPath}/css/footer.css">
 </head>
 
 <body>
 	<div class="w-25">
 		<%@ include file="../common/leftbar.jsp"%>
 	</div>
-	<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
-		<%@ include file="../common/courseTitle.jsp"%>
-		<%@ include file="../common/courseBar.jsp"%>
-		<div class="my-1 text-left">
-			<h3 class="blue600 info">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${news.courseId}/news'" style="background-color: white">
-					<img src="/studybite/resources/img/back.png" width="30" height="30">
-				</button>
-				강의 공지 목록
-			</h3>
-		</div>
-		<form:form modelAttribute="news" method="delete" id="deleteForm">
-			<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
-				<h3 class="text-center my-4">${news.title}</h3>
-				<div class="d-flex mt-2">
-					<div>작성자 : ${news.userName}</div>
-					<div class="ms-auto me-3">작성일 : ${news.date}</div>
-					<div>조회수 : ${news.views}</div>
-				</div>
+		<div id="container" class="mainview container mt-5 ms-5 me-5 position-absolute min-vh-100 w-50" style="">
+			<%@ include file="../common/courseTitle.jsp"%>
+			<%@ include file="../common/courseBar.jsp"%>
+			<div class="my-1 text-left">
+				<h3 class="blue600 info">
+					<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${news.courseId}/news'" style="background-color: white">
+						<img src="/studybite/resources/img/back.png" width="30" height="30">
+					</button>
+					강의 공지 목록
+				</h3>
 			</div>
-			<hr class="m-0">
-			<div class="mt-3">
-				<div>${news.description}</div>
-			</div>
-			<hr class="my-5">
-			<c:choose>
-				<c:when test="${fileBoard.filetype eq 'application/pdf'}">
-					<div>${fileBoard.originName}</div>
-					<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
-				</c:when>
-				<c:when test="${not empty fileBoard}">
-					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
-					<div>
-						<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
-					</div>					
-				</c:when>
-			</c:choose>
-			<c:if test="${user.userName eq news.userName}">
-				<div class="position-absolute end-0 mt-1">
-					<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
-					<form:button type="button" class="delete btn btn-primary" id="${newsId}">삭제</form:button>
+			<form:form modelAttribute="news" method="delete" id="deleteForm">
+				<div class="card mb-2 border-0 p-4 " style="background-color: rgba(239, 244, 255, 0.5);">
+					<h3 class="text-center my-4">${news.title}</h3>
+					<div class="d-flex mt-2">
+						<div>작성자 : ${news.userName}</div>
+						<div class="ms-auto me-3">작성일 : ${news.date}</div>
+						<div>조회수 : ${news.views}</div>
+					</div>
 				</div>
-			</c:if>
-		</form:form>
+				<hr class="m-0">
+				<div class="mt-3">
+					<div>${news.description}</div>
+				</div>
+				<hr class="my-5">
+				<c:choose>
+					<c:when test="${fileBoard.filetype eq 'application/pdf'}">
+						<div>${fileBoard.originName}</div>
+						<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+					</c:when>
+					<c:when test="${not empty fileBoard}">
+						<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+						<div>
+							<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+						</div>
+					</c:when>
+				</c:choose>
+				<c:if test="${user.userName eq news.userName}">
+					<div class="position-absolute end-0 mt-1">
+						<button type="button" onclick="location.href='${context}course/${courseId}/news/${newsId}/editForm'" class="btn btn-primary">수정</button>
+						<form:button type="button" class="delete btn btn-primary" id="${newsId}">삭제</form:button>
+					</div>
+				</c:if>
+			</form:form>
 		<!-- 이전글 다음글 -->
-		<div class="list-group">
+		<div class="prevnext list-group mt-5">
 			<a href="/studybite/course/${courseId}/news/${next.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
 					<c:when test="${empty next}">
                 다음글이 없습니다.

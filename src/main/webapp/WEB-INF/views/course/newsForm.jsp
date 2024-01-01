@@ -6,6 +6,7 @@
 <%@ include file="../common/config.jsp"%>
 <link href="${resPath}/css/courseTitle.css" rel="stylesheet">
 <title>강의 공지 등록</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="w-25">
@@ -27,10 +28,12 @@
 			<form action="/studybite/course/${courseInfo.courseId}/news/add" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
+					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
 					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
+					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 
 				<input type="file" name="file" id="file" accept=".pdf, image/*">
@@ -46,9 +49,32 @@
 			</div>
 		</div>
 		<div class="w-25">
-			<%@ include file="../common/rightbar.jsp" %>
+			<%@ include file="../common/rightbar.jsp"%>
 		</div>
 		<script src="${resPath}/js/courseBar.js"></script>
-	</body>
+	<script>
+		$(document).ready(function() {
+			$('#title').on('keyup', function() {
+				$('#titleCnt').html("(" + $(this).val().length + " / 100)");
 
-	</html>
+				if ($(this).val().length > 100) {
+					$(this).val($(this).val().substring(0, 100));
+					$('#titleCnt').html("(100 / 100)");
+					alert('제목은 최대 100자 까지 입력 가능합니다.');
+				}
+			});
+		});
+		$(document).ready(function() {
+			$('#description').on('keyup', function() {
+				$('#descCnt').html("(" + $(this).val().length + " / 1000)");
+
+				if ($(this).val().length > 1000) {
+					$(this).val($(this).val().substring(0, 1000));
+					$('#descCnt').html("(1000 / 1000)");
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
