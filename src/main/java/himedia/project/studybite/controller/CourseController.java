@@ -159,6 +159,7 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 목록
+	 * 
 	 * @author 김민혜(공지 목록 조회, 페이지네이션), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
@@ -355,12 +356,11 @@ public class CourseController {
 
 		if (!file.isEmpty()) {
 			fileBoard.setQnaId(qna.getQnaId());
-			;
 			courseService.upload(fileBoard, file, request);
 		}
 
-		List<Long> toId = userCourseService.findInstructor(courseId);
-		Notification notification = new Notification(toId.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
+		List<Long> member = userCourseService.findCourseMember(courseId);
+		Notification notification = new Notification(member.get(0), courseId, qna.getQnaId(), 3, qna.getTitle());
 		notificationService.sendNotification(notification);
 
 		model.addAttribute("courseInfo", courseInfo.get());
