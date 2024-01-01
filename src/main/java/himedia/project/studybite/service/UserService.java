@@ -3,7 +3,9 @@ package himedia.project.studybite.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import himedia.project.studybite.dto.Notice;
@@ -17,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class UserService {
 	private final UserMapper userMapper;
 	private final NoticeMapper noticeMapper;
@@ -42,13 +43,28 @@ public class UserService {
 	 * 
 	 * @author 이지홍
 	 */
-	public Boolean updatePassword(PasswordUpdate passwordUpdate) {
+	public String updatePassword(PasswordUpdate passwordUpdate, HttpServletRequest request) {
 		// 유저가 입력한 현재 비밀번호가 일치하면 유저아이디를 리턴, 비밀번호를 변경합니다
-		if (userMapper.checkPassword(passwordUpdate).isEmpty())
-			return false;
-
-		userMapper.updatePassword(passwordUpdate);
-		return true;
+		String msg = "";
+		String url = "mypage/update";
+		
+		if (userMapper.checkPassword(passwordUpdate).isEmpty()) {
+			msg = "비밀번호가 일치하지 않습니다";
+		} else if (passwordUpdate.getPassword().equals(passwordUpdate.getNewPassword())) {		
+			msg = "기존 비밀번호와 같은비밀번호 입니다. 다른 비밀번호로 변경해주세요"; 
+		} else {
+			userMapper.updatePassword(passwordUpdate);
+			msg = "비밀번호가 변경되었습니다. 다시 로그인해 주세요";
+			HttpSession session = request.getSession();
+			session.invalidate();
+			url = "";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("url", url);
+		return "/common/alert";
+		
+		
 	}
 
 	/**

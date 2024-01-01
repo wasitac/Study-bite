@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="${resPath}/css/rightbar.css" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -21,12 +22,12 @@
 	<div class="scroll">
 		<form action="#" class="notification" method="post">
 			<c:forEach var="notification" items="${notifications}">
-				<button type="submit" class="read text-start w-100 mb-2 p-2 bg-blue50 border border-0 rounded" id="${notification.notificationId}">
+				<button type="submit" class="read text-start w-100 mb-2 p-2 bg-blue50 border border-0 rounded" 
+					id="${notification.notificationId}">
 					<div>
 						<h5>${notification.title}</h5>
 						<p>
-							<small class="white600">
-								<c:choose>
+							<small class="white600"> <c:choose>
 									<c:when test="${notification.category == 3}">
 										QnA
 									</c:when>
@@ -35,7 +36,7 @@
 									</c:when>
 									<c:otherwise>
 										전체 공지
-									</c:otherwise>									
+									</c:otherwise>
 								</c:choose>
 							</small>
 						</p>
@@ -47,11 +48,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-	 $(".read").click(
- 		 function() {
-			var notificationId =$(this).attr("id");
- 			console.log('submit 버튼 클릭함');		 
- 			$('.notification').attr('action', '/studybite/notification/' + notificationId).submit();
- 		 });
+	$(".read").click(
+			function() {
+				var notificationId = $(this).attr("id");
+				$('.notification').attr('action',
+						'/studybite/notification/' + notificationId).submit();
+			});
 </script>
-<script src="${resPath}/js/notification.js"></script>

@@ -13,14 +13,12 @@ import himedia.project.studybite.dto.Notification;
 import himedia.project.studybite.dto.User;
 import himedia.project.studybite.service.NotificationService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 요청때 마다 알림을 갱신하기 위한 인터셉터
  * @author 이지홍
  */
 @RequiredArgsConstructor
-@Slf4j
 public class NotificationInterceptor implements HandlerInterceptor {
 	private final NotificationService notificationService;
 	@Override
@@ -29,14 +27,11 @@ public class NotificationInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession(false);
 		Optional<User> user = Optional.ofNullable((User)(session.getAttribute("user")));
 
-		if(user.isEmpty()) {
-			log.info("notification >> user없음");
-			return false;
-			}
-
-		List<Notification> notifications = notificationService.getNotifications(user.get());
-		session.setAttribute("notifications", notifications);
-//		log.info("알림 인터셉터" + notifications.get(1).getUserId());
+		if(user.isPresent()) {			
+			List<Notification> notifications = notificationService.getNotifications(user.get());
+			session.setAttribute("notifications", notifications);
+		}
+		
 		return true;
 	}
 }
