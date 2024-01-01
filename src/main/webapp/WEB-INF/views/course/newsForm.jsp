@@ -36,7 +36,7 @@
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 				<div class="input-group my-3">
-				  <input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
+					<input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
 				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
@@ -48,10 +48,11 @@
 				<%@ include file="../common/footer.jsp"%>
 			</div>
 		</div>
-		<div class="w-25">
-			<%@ include file="../common/rightbar.jsp"%>
-		</div>
-		<script src="${resPath}/js/courseBar.js"></script>
+	</div>
+	<div class="w-25">
+		<%@ include file="../common/rightbar.jsp"%>
+	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#title').on('keyup', function() {
@@ -76,5 +77,4 @@
 		});
 	</script>
 </body>
-
 </html>

@@ -27,12 +27,14 @@
 		<div class="contatiner">
 			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" value="" placeholder="제목을 입력해주세요.(100자 이내)" required>
+					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" 
+						placeholder="제목을 입력해주세요.(100자 이내)" required>
 					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
-					<textarea id="description" name="description" class="description form-control col" rows="10" maxlength="1000" placeholder="내용을 입력해주세요.(1000자 이내)" required></textarea>
+					<textarea id="description" name="description" class="description form-control col" rows="10" maxlength="1000" 
+						placeholder="내용을 입력해주세요.(1000자 이내)" required></textarea>
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 				<div class="input-group my-3">
