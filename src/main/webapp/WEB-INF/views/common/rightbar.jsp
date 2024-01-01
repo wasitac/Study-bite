@@ -21,7 +21,7 @@
 	<div class="scroll">
 		<form action="#" class="notification" method="post">
 			<c:forEach var="notification" items="${notifications}">
-				<button type="submit" class="read w-100 mb-3 bg-blue50" id="${notification.notificationId}">
+				<button type="submit" class="read text-start w-100 mb-2 p-2 bg-blue50 border border-0 rounded" id="${notification.notificationId}">
 					<div>
 						<h5>${notification.title}</h5>
 						<p>
@@ -42,7 +42,7 @@
 					</div>
 				</button>
 			</c:forEach>
-			<span class="container text-center">더이상 알림이 없습니다</span>
+			<div class="container text-center mt-5 white600">알림이 없습니다</div>
 		</form>
 	</div>
 </div>
