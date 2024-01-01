@@ -21,7 +21,7 @@
 	<div class="scroll">
 		<form action="#" class="notification" method="post">
 			<c:forEach var="notification" items="${notifications}">
-				<button type="submit" class="read" id="${notification.notificationId}">
+				<button type="submit" class="read w-100 mb-3 bg-blue50" id="${notification.notificationId}">
 					<div>
 						<h5>${notification.title}</h5>
 						<p>
