@@ -1,12 +1,16 @@
-package himedia.project.studybite.domain;
+package himedia.project.studybite.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * @author 이지홍
  */
 @Setter @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notification {
 	private Long notificationId;
 	private Long userId;
@@ -31,5 +35,4 @@ public class Notification {
 		else
 			this.noticeId = descId;
 	}
-	
 }

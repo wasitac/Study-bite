@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.Notification;
+import himedia.project.studybite.dto.Notification;
 
 /**
  * @author 이지홍

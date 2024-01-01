@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.User;
 
 /**
  * 저장된 유저정보가 없으면 로그인 화면으로 이동

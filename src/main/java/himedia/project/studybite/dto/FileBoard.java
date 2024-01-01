@@ -1,4 +1,4 @@
-package himedia.project.studybite.domain;
+package himedia.project.studybite.dto;
 
 import lombok.Getter;
 import lombok.Setter;

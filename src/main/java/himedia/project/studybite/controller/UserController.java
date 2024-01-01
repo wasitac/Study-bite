@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import himedia.project.studybite.domain.Course;
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Notice;
-import himedia.project.studybite.domain.Notification;
-import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.Course;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.Notice;
+import himedia.project.studybite.dto.Notification;
 import himedia.project.studybite.dto.PasswordUpdate;
+import himedia.project.studybite.dto.User;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;

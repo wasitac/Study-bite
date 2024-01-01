@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import himedia.project.studybite.domain.Notification;
-import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.Notification;
+import himedia.project.studybite.dto.User;
 import himedia.project.studybite.mapper.NotificationMapper;
 import lombok.RequiredArgsConstructor;
 

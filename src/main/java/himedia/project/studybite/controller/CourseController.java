@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import himedia.project.studybite.domain.Content;
-import himedia.project.studybite.domain.ContentData;
-import himedia.project.studybite.domain.Course;
-import himedia.project.studybite.domain.FileBoard;
-import himedia.project.studybite.domain.News;
-import himedia.project.studybite.domain.Notification;
-import himedia.project.studybite.domain.Qna;
-import himedia.project.studybite.domain.User;
-import himedia.project.studybite.domain.UserCourse;
+import himedia.project.studybite.dto.Content;
+import himedia.project.studybite.dto.ContentData;
+import himedia.project.studybite.dto.Course;
+import himedia.project.studybite.dto.FileBoard;
+import himedia.project.studybite.dto.News;
+import himedia.project.studybite.dto.Notification;
+import himedia.project.studybite.dto.Qna;
+import himedia.project.studybite.dto.User;
+import himedia.project.studybite.dto.UserCourse;
 import himedia.project.studybite.service.CourseService;
 import himedia.project.studybite.service.NotificationService;
 import himedia.project.studybite.service.UserCourseService;
@@ -137,6 +137,7 @@ public class CourseController {
 		for (int i = 1; i < member.size(); i++) {
 			notifications.add(new Notification(member.get(i), courseId, news.getNewsId(), 2, news.getTitle()));
 		}
+
 		notificationService.sendNotification(notifications);
 
 		model.addAttribute("courseInfo", courseInfo.get());

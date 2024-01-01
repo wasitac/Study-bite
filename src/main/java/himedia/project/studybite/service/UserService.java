@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import himedia.project.studybite.domain.Notice;
-import himedia.project.studybite.domain.User;
+import himedia.project.studybite.dto.Notice;
 import himedia.project.studybite.dto.PasswordUpdate;
+import himedia.project.studybite.dto.User;
 import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.mapper.NoticeMapper;
 import himedia.project.studybite.mapper.UserMapper;

@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import himedia.project.studybite.domain.Content;
-import himedia.project.studybite.domain.ContentData;
+import himedia.project.studybite.dto.Content;
+import himedia.project.studybite.dto.ContentData;
 /**
  * @author 신지은
  */	
