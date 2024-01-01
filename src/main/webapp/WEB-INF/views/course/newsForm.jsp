@@ -35,9 +35,9 @@
 					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
-
-				<input type="file" name="file" id="file" accept=".pdf, image/*">
-
+				<div class="input-group my-3">
+					<input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
+				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary">작성하기</button>
@@ -48,10 +48,11 @@
 				<%@ include file="../common/footer.jsp"%>
 			</div>
 		</div>
-		<div class="w-25">
-			<%@ include file="../common/rightbar.jsp"%>
-		</div>
-		<script src="${resPath}/js/courseBar.js"></script>
+	</div>
+	<div class="w-25">
+		<%@ include file="../common/rightbar.jsp"%>
+	</div>
+	<script src="${resPath}/js/courseBar.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#title').on('keyup', function() {
@@ -76,5 +77,4 @@
 		});
 	</script>
 </body>
-
 </html>

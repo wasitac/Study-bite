@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -13,11 +14,13 @@ import himedia.project.studybite.dto.FileBoard;
 /**
  * @author 신지은
  */
+@Mapper
 public interface BoardMapper {
 	/**
 	 * 파일 저장
 	 */
-	@Insert("insert into fileBoard(filename, originName, filepath, filetype, qnaId, newsId) values(#{filename}, #{originName}, #{filepath}, #{filetype}, #{qnaId}, #{newsId})")
+	@Insert("insert into fileBoard(filename, originName, filepath, filetype, qnaId, newsId) "
+			+ "values(#{filename}, #{originName}, #{filepath}, #{filetype}, #{qnaId}, #{newsId})")
 	void fileSave(FileBoard fileBoard);
 	
 	/**
@@ -31,13 +34,6 @@ public interface BoardMapper {
 	 */
 	@Select("select * from fileBoard where newsId = #{newsId}")
 	Optional<FileBoard> findNewsFile(@Param("newsId") Long newsId);
-	
-	/**
-	 * 저장한 파일 수정
-	 */
-	@Update("update fileBoard set filename=#{filename}, originName = #{originName}, "
-			+ "filepath=#{filepath}, filetype = #{filetype}, qnaId =#{qnaId}, newsId=#{newsId} where id=#{id}")
-	int fileUpdate(FileBoard fileBoard);
 	
 	/**
 	 * 저장한 강의 공지 파일 삭제

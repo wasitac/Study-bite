@@ -6,5 +6,5 @@
 	var msg = "<c:out value='${msg}'/>";
 	var url = "<c:out value='${context}${url}'/>";
 	alert(msg);
-	location.href = url;
+	location.replace(url);
 </script>

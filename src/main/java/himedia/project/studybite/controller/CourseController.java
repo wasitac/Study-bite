@@ -240,15 +240,14 @@ public class CourseController {
 		return "course/editForm";
 	}
 	
-	
 	/**
 	 * 강사 : 강의 공지 수정
 	 * @author 신지은
 	 * @throws Exception
 	 */
 	@PostMapping("/{courseId}/news/{newsId}")
-	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, @ModelAttribute News news,
-			FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
+	public String newsEdit(@PathVariable Long courseId, @RequestParam MultipartFile file, @RequestParam String confirmResult, 
+			@ModelAttribute News news, FileBoard fileBoard, HttpServletRequest request, Model model) throws Exception {
 
 		courseService.newsUpdate(news);
 		
@@ -372,21 +371,14 @@ public class CourseController {
 	 * 질의 응답 답변 등록
 	 * 
 	 * @author 김민혜
+	 * @author 이지홍(답변 알림)
 	 */
 	@PostMapping("/{courseId}/qna/answer")
 	public String postQnaAnswer(@PathVariable Long courseId, @ModelAttribute Qna qna, HttpServletRequest request,
 			Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-		// qna 객체에 qnaId랑 answer밖에 안받아오는데 dto를 하나 만드는게 좋지 않을까요
-		// qna에 userId가 당연히 들어있을줄 알고 사용했는데 아무것도 없어요
-		// 없어도 될거같아요 @이지홍
 		qna.setCourseId(courseId);
 		courseService.answer(qna);
-
-		/**
-		 * veiw에서 받아온 qnaId로 해당 질문을 조회하고, 질문한 유저에게 알림 전송
-		 * @author 이지홍
-		 */
 		Optional<Qna> findQna = courseService.findQnaDesc(qna.getQnaId());
 		
 		if(findQna.isEmpty()) {

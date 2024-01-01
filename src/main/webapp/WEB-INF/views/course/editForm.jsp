@@ -108,8 +108,6 @@
 				bigTitle.innerHTML = "강의 공지 목록";
 				smallTitle.innerHTML = "강의 공지 수정";
 
-				$('#editForm').attr('modelAttribute', 'news');
-
 				$(".update").click(
 					function () {
 						$('#editForm').attr('action',

@@ -27,15 +27,19 @@
 		<div class="contatiner">
 			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" value="" placeholder="제목을 입력해주세요.(100자 이내)" required>
+					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" 
+						placeholder="제목을 입력해주세요.(100자 이내)" required>
 					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
-					<textarea id="description" name="description" class="description form-control col" rows="10" maxlength="1000" placeholder="내용을 입력해주세요.(1000자 이내)" required></textarea>
+					<textarea id="description" name="description" class="description form-control col" rows="10" maxlength="1000" 
+						placeholder="내용을 입력해주세요.(1000자 이내)" required></textarea>
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
-				<input type="file" name="file" id="file" multiple="multiple">
+				<div class="input-group my-3">
+				  <input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
+				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary me-1">작성하기</button>

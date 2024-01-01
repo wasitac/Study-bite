@@ -41,14 +41,15 @@
 						</div>
 						<hr class="my-5">
 						<c:choose>
-							<c:when test="${filetype ne'application/pdf'}">
+							<c:when test="${fileBoard.filetype eq'application/pdf'}">
+								<div>${fileBoard.originName}</div>
+								<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+							</c:when>
+							<c:when test="${not empty fileBoard}">
 								<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
 								<div>
 									<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
 								</div>
-							</c:when>
-							<c:when test="${not empty fileBoard and filetype eq'application/pdf'}">
-								<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
 							</c:when>
 						</c:choose>
 						<c:if test="${user.userName eq qna.userName}">
