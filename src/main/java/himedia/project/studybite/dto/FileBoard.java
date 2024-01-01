@@ -10,8 +10,9 @@ import lombok.Setter;
 public class FileBoard {
 	private Long id;
 	private String filename;
+	private String originName;
 	private String filepath;
+	private String filetype;
 	private Long qnaId;
 	private Long newsId;
-	private Long noticeId;
 }
