@@ -206,6 +206,7 @@ public class CourseController {
 
 		model.addAttribute("courseInfo", courseInfo.get());
 		model.addAttribute("news", news);
+		model.addAttribute("user", user);
 		model.addAttribute("prev", courseService.prev(courseId, newsId));
 		model.addAttribute("next", courseService.next(courseId, newsId));
 		if (!fileBoardInfo.isEmpty())

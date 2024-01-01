@@ -233,10 +233,7 @@ public class CourseService {
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
 		
-//		if(fileBoard.getId()!=null) 
-//			boardMapper.fileUpdate(fileBoard);
-//		else
-			boardMapper.fileSave(fileBoard);
+		boardMapper.fileSave(fileBoard);
 	}
 	
 	/**

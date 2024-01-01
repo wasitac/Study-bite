@@ -39,11 +39,12 @@
 			</div>
 			<hr class="my-5">
 			<c:choose>
-				<c:when test="${not empty fileBoard and not fileBoard.filetype=='application/pdf'}">
+				<c:when test="${fileBoard.filetype ne 'application/pdf' and fileBoard.filetype ne null}">
 					<img alt="첨부파일" src="${resPath}/files/${fileBoard.filename}" class="w-50 h-50">
+					<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
 				</c:when>
 				<c:when test="${not empty fileBoard}">
-					<a href="${context}course/qna/${qnaId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
+					<a href="${context}course/news/${newsId}/filedown?fileName=${fileBoard.originName}">첨부파일 다운로드</a>
 				</c:when>
 			</c:choose>
 			<c:if test=" ${user.userName eq news.userName}">
