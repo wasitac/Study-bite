@@ -12,7 +12,6 @@ import himedia.project.studybite.dto.News;
 import himedia.project.studybite.dto.UserCourse;
 
 /**
-* UserCourse 테이블을 사용하는 Repository입니다.
 * @author 송창민
 */
 public interface UsercourseMapper {

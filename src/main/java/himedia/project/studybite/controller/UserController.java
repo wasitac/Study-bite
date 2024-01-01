@@ -163,15 +163,12 @@ public class UserController {
 	public String postMypageUpdate(@SessionAttribute(name = "user", required = false) User user,
 			@ModelAttribute PasswordUpdate passwordUpdate, HttpServletRequest request, Model model) {
 		Long userId = user.getUserId();
+		String msg = "";
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동
-		if (userService.updatePassword(passwordUpdate))
-			return "redirect:/";
-
-		request.setAttribute("msg", "비밀번호가 일치하지 않습니다");
-		request.setAttribute("url", "mypage/update");
-		return "/common/alert";
+		String path = userService.updatePassword(passwordUpdate, request);
+		return path;
 	}
 
 	/**
