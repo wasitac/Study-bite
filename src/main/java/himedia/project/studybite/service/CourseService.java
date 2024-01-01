@@ -211,22 +211,20 @@ public class CourseService {
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
 		
-		// 1. 파일 저장 경로 설정 :
 		String filePath = request.getServletContext().getRealPath("/resources/files/");
-		// 랜덤으로 이름 생성
+		
 		UUID uuid = UUID.randomUUID();
-		// 2. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
+		
 		String fileName = uuid + "_" + file.getOriginalFilename();
-		// 3. 파일 생성
-		File saveFile = new File(filePath, fileName); // 파일을 생성하면 경로는 filePath, 이름은 name으로 저장
-		//4. 파일 저장 폴더 없을 시, 생성
+		
+		File saveFile = new File(filePath, fileName); 
+		
 	    if (saveFile.mkdirs() == true)  
 	      System.out.println("디렉토리가 생성되었습니다."); 
 	    else  
 	      System.out.println("디렉토리를 생성하지 못했습니다."); 
 	    
-		// 5. 서버로 전송
-		file.transferTo(saveFile); // 예외 처리 필요
+		file.transferTo(saveFile); 
 		
 		fileBoard.setFiletype(file.getContentType());
 		fileBoard.setOriginName(file.getOriginalFilename());
