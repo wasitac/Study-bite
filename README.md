@@ -20,7 +20,7 @@ Windows 10
 Spring Tool Suite 3 3.9.18.RELEASE
 
 
-###Front-end
+### Front-end
 
 HTML
 
@@ -35,7 +35,7 @@ XML
 Bootstrap 5.3
 
             
-###Back-end   
+### Back-end   
 
 Java 11
 
@@ -48,10 +48,14 @@ MyBatis-spring 2.1.2
 lombok 1.18.30
 
             
-Web Server: Tomcat v8.5
+### Web Server
+
+Tomcat v8.5
 
 
-Database  : MySQL 8.0.22
+### Database
+
+MySQL 8.0.22
 
 
 
