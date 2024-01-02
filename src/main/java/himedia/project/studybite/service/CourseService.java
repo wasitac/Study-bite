@@ -211,7 +211,7 @@ public class CourseService {
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
 		
-		String filePath = request.getServletContext().getRealPath("/resources/files/");
+		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
 		
 		UUID uuid = UUID.randomUUID();
 		
