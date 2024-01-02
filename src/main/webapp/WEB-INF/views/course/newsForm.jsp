@@ -36,7 +36,7 @@
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 				<div class="input-group my-3">
-					<input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
+					<input type="file" name="file" id="file" class="form-control" accept="image/*, .pdf">
 				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">

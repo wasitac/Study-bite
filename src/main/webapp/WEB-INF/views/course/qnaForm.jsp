@@ -25,7 +25,7 @@
 		</div>
 		<h4 class="mt-4 blue600">질문 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data">
+			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data" id="qnaForm">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" 
 						placeholder="제목을 입력해주세요.(100자 이내)" required>
@@ -38,11 +38,11 @@
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 				<div class="input-group my-3">
-				  <input type="file" name="file" id="file" class="form-control" accept=".pdf, image/*">
+				  <input type="file" name="file" id="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg">
 				</div>
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
-					<button type="submit" class="btn btn-primary me-1">작성하기</button>
+					<button type="submit" class="btn btn-primary me-1" onclick="validateAndSubmit()">작성하기</button>
 					<button type="button" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" class="btn btn-primary">취소</button>
 				</div>
 			</form>
@@ -77,6 +77,21 @@
 				}
 			});
 		});
+		
+	    function validateAndSubmit() {
+	        var fileInput = document.getElementById('file');
+	        var file = fileInput.files[0];
+
+	        if (file) {
+	            var allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
+	            var fileExtension = file.name.split('.').pop().toLowerCase();
+
+	            if (!allowedExtensions.includes(fileExtension)) {
+	                alert('허용된 파일 형식이 아닙니다. (pdf, png, jpg, jpeg만 가능)');
+	                return;
+	            }
+	        }
+	    }
 	</script>
 </body>
 </html>
