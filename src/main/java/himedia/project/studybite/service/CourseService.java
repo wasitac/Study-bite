@@ -220,9 +220,9 @@ public class CourseService {
 		File saveFile = new File(filePath, fileName); 
 		
 	    if (saveFile.mkdirs() == true)  
-	      System.out.println("디렉토리가 생성되었습니다."); 
+	    	log.info("디렉토리가 생성되었습니다."); 
 	    else  
-	      System.out.println("디렉토리를 생성하지 못했습니다."); 
+	      log.info("디렉토리를 생성하지 못했습니다."); 
 	    
 		file.transferTo(saveFile); 
 		
