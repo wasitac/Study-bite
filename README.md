@@ -11,27 +11,48 @@
 
 ## 개발환경
 
-OS        : Windows 10
+###OS         
 
-IDE       : Spring Tool Suite 3 3.9.18.RELEASE
+Windows 10
 
-Front-end : HTML, CSS, JavaScript, JSP, XML,
+###IDE
 
-            Bootstrap 5.3
-            
-Back-end  : Java 11
+Spring Tool Suite 3 3.9.18.RELEASE
 
-            Spring Framework 5.2.25.RELEASE
+
+###Front-end
+
+HTML
+
+CSS
+
+JavaScript
+
+JSP
+
+XML
+
+Bootstrap 5.3
+
             
-            MyBatis 3.5.14
+###Back-end   
+
+Java 11
+
+Spring Framework 5.2.25.RELEASE
             
-            MyBatis-spring 2.1.2
+MyBatis 3.5.14
             
-            lombok 1.18.30
+MyBatis-spring 2.1.2
+            
+lombok 1.18.30
+
             
 Web Server: Tomcat v8.5
 
+
 Database  : MySQL 8.0.22
+
 
 
 ## 폴더 구조
