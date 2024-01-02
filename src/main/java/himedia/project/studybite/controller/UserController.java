@@ -56,6 +56,8 @@ public class UserController {
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		Optional<User> user = userService.login(userLogin);
+		request.getSession().invalidate();
+		
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
@@ -63,10 +65,8 @@ public class UserController {
 		}
 		
 		User userInfo = user.get();
-		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", userInfo);
-		
 		return "redirect:/home";
 	}
 

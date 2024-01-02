@@ -69,7 +69,8 @@ public class CourseController {
 	/**
 	 * 강의 목차
 	 * 
-	 * @author 신지은(강의 목차 조회), 송창민(수강한 날짜, 퍼센트 표시)
+	 * @author 신지은(강의 목차 조회), 
+	 * 	       송창민(수강한 날짜, 퍼센트 표시)
 	 */
 	@GetMapping("/{courseId}/contents")
 	public String contenList(@PathVariable Long courseId, @SessionAttribute(name = "user", required = false) User user,
@@ -92,7 +93,8 @@ public class CourseController {
 	/**
 	 * 강의 콘텐츠 시청
 	 * 
-	 * @author 신지은(강의 콘텐츠 데이터 조회), 송창민(콘텐츠 수강 시 현재 날짜 저장)
+	 * @author 신지은(강의 콘텐츠 데이터 조회)
+	 *         송창민(콘텐츠 수강 시 현재 날짜 저장)
 	 */
 	@GetMapping("/{courseId}/contents/{contentsId}")
 	public String content(@PathVariable Long courseId, @PathVariable Long contentsId,
@@ -161,7 +163,9 @@ public class CourseController {
 	/**
 	 * 강의 공지 목록
 	 * 
-	 * @author 김민혜(공지 목록 조회, 페이지네이션), 신지은(유저 확인 후 공지 등록버튼 활성화), 송창민(목록 번호 일정하게 표시)
+	 * @author 김민혜(공지 목록 조회, 페이지네이션), 
+	 *         신지은(유저 확인 후 공지 등록버튼 활성화), 
+	 *         송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/news")
 	public String news(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum,
@@ -195,7 +199,8 @@ public class CourseController {
 
 	/**
 	 * 강의 공지 상세
-	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가, 이전글/다음글), 신지은(강의 공지 첨부파일 조회, 수정 삭제)
+	 * @author 김민혜(강의 공지 상세 조회, 조회수 증가, 이전글/다음글)
+	 *         신지은(강의 공지 첨부파일 조회, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/news/{newsId}")
 	public String newsDesc(@PathVariable Long courseId, @PathVariable Long newsId,
@@ -294,7 +299,8 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 목록
-	 * @author 김민혜(목록 조회, 페이지네이션), 송창민(목록 번호 일정하게 표시)
+	 * @author 김민혜(목록 조회, 페이지네이션)
+	 *         송창민(목록 번호 일정하게 표시)
 	 */
 	@GetMapping("/{courseId}/qna")
 	public String qna(@PathVariable Long courseId, @RequestParam(name = "page", required = false) Integer pageNum,
@@ -325,7 +331,6 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 등록 폼
-	 * 
 	 * @author 김민혜
 	 */
 	@GetMapping("/{courseId}/qna/add")
@@ -397,7 +402,8 @@ public class CourseController {
 	}
 
 	/**
-	 * @author 김민혜(질의 응답 상세, 조회수 증가), 신지은(저장한 파일 조회 기능, 수정 삭제)
+	 * @author 김민혜(질의 응답 상세, 조회수 증가)
+	 * 		   신지은(저장한 파일 조회 기능, 수정 삭제)
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}")
 	public String qnaDesc(@PathVariable Long courseId, @PathVariable Long qnaId,
@@ -418,7 +424,6 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 수정 폼
-	 * 
 	 * @author 신지은
 	 */
 	@GetMapping("/{courseId}/qna/{qnaId}/editForm")
@@ -482,7 +487,6 @@ public class CourseController {
 
 	/**
 	 * 질의 응답 삭제
-	 * 
 	 * @author 신지은
 	 */
 	@DeleteMapping("/{courseId}/qna/{qnaId}")
@@ -493,8 +497,6 @@ public class CourseController {
 
 	/**
 	 * 출결 확인
-	 * 
-	 * 
 	 * @author 송창민
 	 */
 	@GetMapping("/{courseId}/attendance")
