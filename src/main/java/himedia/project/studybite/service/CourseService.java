@@ -211,7 +211,7 @@ public class CourseService {
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
 		
-		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
+		String filePath = request.getServletContext().getRealPath("/resources/files/");
 		
 		UUID uuid = UUID.randomUUID();
 		
@@ -219,10 +219,8 @@ public class CourseService {
 		
 		File saveFile = new File(filePath, fileName); 
 		
-	    if (saveFile.mkdirs() == true)  
-	    	log.info("디렉토리가 생성되었습니다."); 
-	    else  
-	      log.info("디렉토리를 생성하지 못했습니다."); 
+	    if (!saveFile.mkdirs())  
+	    	log.info("디렉토리를 생성하지 못했습니다."); 
 	    
 		file.transferTo(saveFile); 
 		
