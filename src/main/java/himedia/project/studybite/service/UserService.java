@@ -15,7 +15,6 @@ import himedia.project.studybite.dto.UserLogin;
 import himedia.project.studybite.mapper.NoticeMapper;
 import himedia.project.studybite.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor

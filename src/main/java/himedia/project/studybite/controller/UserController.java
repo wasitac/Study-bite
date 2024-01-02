@@ -163,7 +163,6 @@ public class UserController {
 	public String postMypageUpdate(@SessionAttribute(name = "user", required = false) User user,
 			@ModelAttribute PasswordUpdate passwordUpdate, HttpServletRequest request, Model model) {
 		Long userId = user.getUserId();
-		String msg = "";
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동
