@@ -29,16 +29,11 @@ Spring Tool Suite 3 3.9.18.RELEASE
 ### Front-end
 
 
-HTML
-
-CSS
-
-JavaScript
-
-JSP
-
-XML
-
+HTML, 
+CSS, 
+JavaScript, 
+JSP, 
+XML, 
 Bootstrap 5.3
 
 
@@ -46,14 +41,10 @@ Bootstrap 5.3
 ### Back-end   
 
 
-Java 11
-
-Spring Framework 5.2.25.RELEASE
-            
-MyBatis 3.5.14
-            
-MyBatis-spring 2.1.2
-            
+Java 11, 
+Spring Framework 5.2.25.RELEASE,    
+MyBatis 3.5.14, 
+MyBatis-spring 2.1.2, 
 lombok 1.18.30
 
 
