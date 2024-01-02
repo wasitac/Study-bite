@@ -23,7 +23,8 @@ public interface NewsMapper {
 	 * 강사 : 강의 공지 등록
 	 * @author 신지은
 	 */
-	@Insert ("insert into news(courseId, userName, title, description, views, date) values (#{courseId}, #{userName}, #{title}, #{description}, 0 , now())")
+	@Insert ("insert into news(courseId, userName, title, description, views, date) "
+			+ "values (#{courseId}, #{userName}, #{title}, #{description}, 0 , now())")
 	@Options(useGeneratedKeys = true, keyProperty = "newsId")
 	void newsAdd(News news);
 	

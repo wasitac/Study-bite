@@ -9,7 +9,7 @@ import lombok.Setter;
  * @author 신지은
  */
 @Setter @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 public class ContentData {
 	private Long contentId ;
 	private String contentUrl;

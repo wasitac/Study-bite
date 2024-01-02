@@ -17,7 +17,7 @@
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-3 text-left">
 			<h3 class="blue600" id="smallTitle">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='${context}course/${courseInfo.courseId}/news'" style="background-color: white">
 					<img src="/studybite/resources/img/back.png" width="30" height="30">
 				</button>
 				강의 공지 목록
@@ -41,7 +41,8 @@
 				<hr class="row mt-5">
 				<div class="d-flex justify-content-end mt-1">
 					<button type="submit" class="btn btn-primary">작성하기</button>
-					<button type="button" class="btn btn-primary mx-1">취소</button>
+					<button type="button" class="btn btn-primary mx-1" 
+						onclick="location.href='${context}course/${courseInfo.courseId}/news'">취소</button>
 				</div>
 			</form>
 			<div class="row mt-5">

@@ -43,7 +43,7 @@
 							</c:if>
 							<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
 								<button type="button" class="btn btn-primary"><label for="inputGroupFile04">첨부파일</label></button>
-								<input class="fileName" value="${fileBoard.originName}" placeholder="선택된 파일 없음" readonly="readonly">
+								<input class="fileName" id="fileNameInput" value="${fileBoard.originName}" placeholder="선택된 파일 없음" readonly="readonly">
 								<input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04"
 									aria-label="Upload" style="display: none">
 								<button class="btn btn-outline-secondary" type="button" id="deleteFileButton">기존파일 삭제</button>
@@ -70,17 +70,22 @@
 
 				var deleteFileButton = document.getElementById('deleteFileButton');
 				var fileInputImage = document.getElementById('file-input');
-				var fileInputImage = document.getElementById('file-input');
-
+				var fileNameInput = document.getElementById('fileNameInput');
+					
 				deleteFileButton.addEventListener('click', function () {
-		            var result = confirm("기존 파일을 삭제하시겠습니까?");
-		            
-		            // 확인창에서 선택한 값 넣기
-		           document.getElementById("confirmResult").value = result;
-		            
-		            console.log(result);
-		            
-					fileInputImage.remove();
+					
+					if (fileNameInput.value.trim() == "") {
+			            alert("기존 파일이 없습니다.");
+			        } else {
+			            var result = confirm("기존 파일을 삭제하시겠습니까?");
+			            
+			            // 확인창에서 선택한 값 넣기
+			           document.getElementById("confirmResult").value = result;
+			            
+			            console.log(result);
+			            
+						fileInputImage.remove();
+			        }
 				});
 			});
 
@@ -107,8 +112,6 @@
 				title.innerHTML = "강의 공지 수정";
 				bigTitle.innerHTML = "강의 공지 목록";
 				smallTitle.innerHTML = "강의 공지 수정";
-
-				$('#editForm').attr('modelAttribute', 'news');
 
 				$(".update").click(
 					function () {
