@@ -9,52 +9,19 @@
 팀원 : 김민혜, 송창민, 신지은
 
 
+## 개발환경
+OS        : Windows 10
+IDE       : Spring Tool Suite 3 3.9.18.RELEASE
+Front-end : HTML, CSS, JavaScript, JSP, XML
+            Bootstrap 5.3
+Back-end  : Java 11
+            Spring Framework 5.2.25.RELEASE
+            MyBatis 3.5.14
+            MyBatis-spring 2.1.2
+            lombok 1.18.30
+Web Server: Tomcat v8.5
+Database  : MySQL 8.0.22
 
-## 개발 환경
-
-### 프로젝트 관리
-
-notion, google drive
-
-### 버전관리
-
-github
-
-
-### 기술스택
-- IDE
-    STS3
-
-- 프론트엔드
-    
-    HTML, CSS, JS, Bootstrap, XML
-    
-- 백엔드
-    
-    Java, Spring Framework, mybatis, Tomcat
-    
-- DB
-    
-    mysql
-    
-
-### IDE
-
-STS3
-
-- 버전
-    
-    java11
-    
-    springframework5.2.25.RELEASE
-    
-    Tomcat v8.5
-    
-    mybatis 3.5.14
-    
-    mybatis-spring 2.1.2
-    
-    mysql 8.0.22
 
 ## 폴더 구조
 ### backend
@@ -67,7 +34,7 @@ STS3
 |               |       CourseController.java
 |               |       UserController.java
 |               |
-|               +---domain
+|               +---dto
 |               |       Content.java
 |               |       ContentData.java
 |               |       Course.java
@@ -75,22 +42,20 @@ STS3
 |               |       News.java
 |               |       Notice.java
 |               |       Notification.java
+|               |       PasswordUpdate.java
 |               |       Qna.java
 |               |       User.java
 |               |       UserCourse.java
-|               |
-|               +---dto
-|               |       PasswordUpdate.java
 |               |       UserLogin.java
 |               |
 |               +---interceptor
 |               |       LoginInterceptor.java
 |               |       NotificationInterceptor.java
 |               |
-|               +---repository
+|               +---mapper
 |               |       BoardMapper.java
-|               |       contentMapper.java
-|               |       courseMapper.java
+|               |       ContentMapper.java
+|               |       CourseMapper.java
 |               |       NewsMapper.java
 |               |       NoticeMapper.java
 |               |       NotificationMapper.java
@@ -114,9 +79,9 @@ STS3
 |       \---mapper
 |               news-mapper.xml
 |               notice-mapper.xml
+|               notification-mapper.xml
 |               qna-mapper.xml
 |               user-course-mapper.xml
-|               user-mapper.xml
 |
 \---webapp
     +---META-INF
@@ -130,20 +95,20 @@ STS3
     |
     +---resources
     |   +---css
+    |   |       blog.css
     |   |       bootstrap.min.css
     |   |       color.css
     |   |       courseTitle.css
+    |   |       footer.css
     |   |       leftbar.css
+    |   |       prevNext.css
     |   |       rightbar.css
     |   |       sign-in.css
-    |   |
-    |   +---files
     |   |
     |   +---img
     |   |   |   back.png
     |   |   |   bellIcon.png
     |   |   |   bluePerson.png
-    |   |   |   GYiqyk9.jpeg
     |   |   |   iconOne.png
     |   |   |   logo.png
     |   |   |   logoSmall.png
@@ -185,16 +150,16 @@ STS3
     |   |   |
     |   |   \---thumbnail
     |   |           computationalThinking.png
-    |   |           computerArchitecture.jpg
+    |   |           computerArchitecture.png
     |   |           dataBase.png
-    |   |           dataStructure.jpg
+    |   |           dataStructure.png
     |   |           economic.png
     |   |           python.png
     |   |
     |   \---js
-    |           basic.js
+    |           active.js
+    |           course.js
     |           courseBar.js
-    |           notification.js
     |
     \---WEB-INF
         |   web.xml
@@ -223,15 +188,14 @@ STS3
             |       attendance.jsp
             |       content.jsp
             |       contentList.jsp
+            |       editForm.jsp
             |       info.jsp
-            |       NewFile.jsp
+            |       instructor.jsp
             |       news.jsp
-            |       newsAdd.jsp
             |       newsDesc.jsp
             |       newsForm.jsp
             |       qna.jsp
             |       qnaDesc.jsp
-            |       qnaEditForm.jsp
             |       qnaForm.jsp
             |
             \---home
