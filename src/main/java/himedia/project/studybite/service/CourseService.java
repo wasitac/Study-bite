@@ -36,8 +36,9 @@ public class CourseService {
 	private final BoardMapper boardMapper;
 
 	/**
-	 *  강의 타이틀 강의 분류, 강의명, 교육자 조회
-	 *   @author 신지은
+	 * 강의 타이틀 강의 분류, 강의명, 교육자 조회
+	 * 
+	 * @author 신지은
 	 */
 	public Optional<Course> courseInfo(Long courseId) {
 		return courseMapper.courseInfo(courseId);
@@ -45,6 +46,7 @@ public class CourseService {
 
 	/**
 	 * 강의 강좌 목록 가져오기
+	 * 
 	 * @author 신지은
 	 */
 	public List<Content> contentsInfo(Long courseId) {
@@ -53,6 +55,7 @@ public class CourseService {
 
 	/**
 	 * 강좌명 가져오기
+	 * 
 	 * @author 신지은
 	 */
 	public Optional<Content> findContentName(Long contentId) {
@@ -61,6 +64,7 @@ public class CourseService {
 
 	/**
 	 * 강의 영상 주소 가져오기
+	 * 
 	 * @author 신지은
 	 */
 	public Optional<ContentData> findContentUrl(Long contentId) {
@@ -69,6 +73,7 @@ public class CourseService {
 
 	/**
 	 * 강의 공지 목록
+	 * 
 	 * @author 김민혜
 	 */
 	public List<News> findNewsPage(Long courseId, Integer pageNum) {
@@ -77,6 +82,7 @@ public class CourseService {
 
 	/**
 	 * 강사 : 강의 공지 등록
+	 * 
 	 * @author 신지은
 	 */
 	public void newsAdd(News news) {
@@ -85,48 +91,52 @@ public class CourseService {
 
 	/**
 	 * 강의 공지 상세
+	 * 
 	 * @author 김민혜
 	 */
 	public Optional<News> findNewsDesc(Long newsId) {
 		return newsMapper.findNewsDesc(newsId);
 	}
-	
+
 	/**
 	 * 강사 : 강의 공지 수정
+	 * 
 	 * @author 신지은
 	 */
 	public int newsUpdate(News news) {
 		return newsMapper.newsUpdate(news);
 	}
-	
+
 	/**
 	 * 강사 : 강의 공지 삭제
+	 * 
 	 * @author 신지은
 	 */
 	public void newsDelete(News news) {
-		
+
 		try {
-			FileBoard fileboard = boardMapper.findNewsFile(news.getNewsId()).get();		
+			FileBoard fileboard = boardMapper.findNewsFile(news.getNewsId()).get();
 			File file = new File(fileboard.getFilepath());
-			
-			if(file.exists()) {
-				if(file.delete()) {
+
+			if (file.exists()) {
+				if (file.delete()) {
 					log.info("파일 삭제 성공");
-				}else {
+				} else {
 					log.info("파일 삭제 실패");
 				}
-			}else{
+			} else {
 				log.info("파일이 존재하지 않습니다.");
 			}
 		} catch (NoSuchElementException e) {
-			log.info(e +" " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
+			log.info(e + " " + news.getNewsId() + "번 공지의 첨부파일이 없습니다.");
 		}
-		
+
 		newsMapper.newsDelete(news);
 	}
-	
+
 	/**
 	 * 이전글
+	 * 
 	 * @author 김민혜
 	 */
 	public News prev(Long courseId, Long newsId) {
@@ -135,6 +145,7 @@ public class CourseService {
 
 	/**
 	 * 다음글
+	 * 
 	 * @author 김민혜
 	 */
 	public News next(Long courseId, Long newsId) {
@@ -152,6 +163,7 @@ public class CourseService {
 
 	/**
 	 * 질의 응답 상세
+	 * 
 	 * @author 김민혜
 	 */
 	public Optional<Qna> findQnaDesc(Long qnaId) {
@@ -160,6 +172,7 @@ public class CourseService {
 
 	/**
 	 * 질의 응답 등록
+	 * 
 	 * @author 김민혜
 	 */
 	public void question(Qna qna) {
@@ -173,6 +186,7 @@ public class CourseService {
 
 	/**
 	 * 질의응답 수정
+	 * 
 	 * @author 신지은
 	 */
 	public int qnaUpdate(Qna qna) {
@@ -181,59 +195,58 @@ public class CourseService {
 
 	/**
 	 * 질문 삭제
+	 * 
 	 * @author 신지은
 	 */
 	public void qnaDelete(Qna qna) {
 		try {
-			FileBoard fileboard = boardMapper.findQnaFile(qna.getQnaId()).get();		
+			FileBoard fileboard = boardMapper.findQnaFile(qna.getQnaId()).get();
 			File file = new File(fileboard.getFilepath());
-			
-			if(file.exists()) {
-				if(file.delete()) {
+
+			if (file.exists()) {
+				if (file.delete()) {
 					log.info("파일 삭제 성공");
-				}else {
+				} else {
 					log.info("파일 삭제 실패");
 				}
-			}else{
+			} else {
 				log.info("파일이 존재하지 않습니다.");
 			}
 		} catch (NoSuchElementException e) {
-			log.info(e +" " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
+			log.info(e + " " + qna.getQnaId() + "번 공지의 첨부파일이 없습니다.");
 		}
 		qnaMapper.qnaDelete(qna);
 	};
-	
+
 	/**
 	 * 파일 업로드
+	 * 
 	 * @author 신지은
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
-		
-		String filePath = "D:\\fullstack\\workspace-LMS\\Study-bite\\src\\main\\webapp\\resources\\files";
-		
+		String filePath = request.getServletContext().getRealPath("/resources/files/");
 		UUID uuid = UUID.randomUUID();
-		
 		String fileName = uuid + "_" + file.getOriginalFilename();
-		
-		File saveFile = new File(filePath, fileName); 
-		
-	    if (saveFile.mkdirs() == true)  
-	    	log.info("디렉토리가 생성되었습니다."); 
-	    else  
-	      log.info("디렉토리를 생성하지 못했습니다."); 
-	    
-		file.transferTo(saveFile); 
-		
+		File saveFile = new File(filePath, fileName);
+
+		if (saveFile.mkdirs())
+			log.info("디렉토리가 생성되었습니다.");
+		else
+			log.info("디렉토리를 생성하지 못했습니다.");
+
+		file.transferTo(saveFile);
+
 		fileBoard.setFiletype(file.getContentType());
 		fileBoard.setOriginName(file.getOriginalFilename());
 		fileBoard.setFilename(fileName);
 		fileBoard.setFilepath(filePath + fileName);
-		
+
 		boardMapper.fileSave(fileBoard);
 	}
-	
+
 	/**
-	 * 강의 공지 파일 조회 
+	 * 강의 공지 파일 조회
+	 * 
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findNewsFile(Long newsId) {
@@ -242,6 +255,7 @@ public class CourseService {
 
 	/**
 	 * 질의응답 파일 조회
+	 * 
 	 * @author 신지은
 	 */
 	public Optional<FileBoard> findQnaFile(Long qnaId) {
@@ -250,15 +264,16 @@ public class CourseService {
 
 	/**
 	 * 파일 삭제
+	 * 
 	 * @author 신지은
 	 */
 	public int fileDelete(FileBoard fileBoard) {
-		if (fileBoard.getNewsId() == null) 
+		if (fileBoard.getNewsId() == null)
 			return boardMapper.qnaFileDelete(fileBoard);
 		else
 			return boardMapper.newsFileDelete(fileBoard);
 	}
-	
+
 	// 강의 공지 조회수
 	public Long newsViewCnt(Long newsId) {
 		return newsMapper.newsViewCnt(newsId);
