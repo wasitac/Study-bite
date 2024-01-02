@@ -56,6 +56,7 @@ public class UserController {
 	@PostMapping("/")
 	public String login(@ModelAttribute UserLogin userLogin, HttpServletRequest request, Model model) {
 		Optional<User> user = userService.login(userLogin);
+		request.getSession().invalidate();
 		if (user.isEmpty()) {
 			request.setAttribute("msg", "로그인 정보가 일치하지 않습니다");
 			request.setAttribute("url", "");
@@ -63,7 +64,6 @@ public class UserController {
 		}
 		
 		User userInfo = user.get();
-		request.getSession().invalidate();
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", userInfo);
 		
@@ -163,7 +163,6 @@ public class UserController {
 	public String postMypageUpdate(@SessionAttribute(name = "user", required = false) User user,
 			@ModelAttribute PasswordUpdate passwordUpdate, HttpServletRequest request, Model model) {
 		Long userId = user.getUserId();
-		String msg = "";
 		passwordUpdate.setUserId(userId);
 
 		// 비밀번호 변경에 성공하면 다시 로그인화면으로 이동

@@ -103,6 +103,7 @@ public class CourseController {
 		Optional<ContentData> contentData = courseService.findContentUrl(contentsId);
 		LocalDate now = LocalDate.now();
 		Date date = Date.valueOf(now);
+		
 		userCourseService.updateDate(date, contentsId, userId);
 
 		model.addAttribute("courseInfo", courseInfo.get());

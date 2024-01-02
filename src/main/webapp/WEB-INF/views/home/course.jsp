@@ -30,20 +30,22 @@
 					<h1 class="card-title fw-bold blue600">${courseCount}</h1>
 				</div>
 			</div>
-			<div class="card mb-3 border-0 bg-blue50" style="width: 215px; height: 135px">
-				<div class="card-body">
-					<p class="card-text">
-						<small class="text-body-secondary">수료한 강의</small>
-					</p>
-					<h1 class="card-title fw-bold blue600">${finishedCount}</h1>
+			<c:if test="${user.role == 3}">
+				<div class="card mb-3 border-0 bg-blue50" style="width: 215px; height: 135px">
+					<div class="card-body">
+						<p class="card-text">
+							<small class="text-body-secondary">수료한 강의</small>
+						</p>
+						<h1 class="card-title fw-bold blue600">${finishedCount}</h1>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 		<p class="my-3 blue600">수강중인 강의</p>
 		<div class="row mb-2">
 			<c:forEach var="course" items="${courses}">
 				<div class="col-md-6" >
-					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-blue50" onclick="location.href='/studybite/course/${course.courseId}'" style="cursor: pointer;">
+					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-blue50" onclick="location.href='/studybite/course/${course.courseId}'" style="cursor: pointer; height: 190px">
 						<div class="col p-2 d-flex flex-column position-static ">
 							<div class="d-flex">
 								<button class="btn bg-primary text-white me-auto p-2" type="button" style="border-radius: 12px">${course.sort}</button>
@@ -58,8 +60,8 @@
 							</div>
 						</div>
 						<div class="d-flex flex-row mb-2">
-							<div class="w-50 h-50 p-2" >
-								<img src="${course.thumbnail}" class="img-fluid rounded" alt="...">
+							<div class="p-2" >
+								<img src="${course.thumbnail}" class="img-fluid rounded" alt="..." style="max-height: 100px">
 							</div>
 							<div class="p-2">
 								<h5 class="mb-0">${course.courseName}</h5>
