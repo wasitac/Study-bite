@@ -9,8 +9,8 @@ import lombok.Setter;
 /**
  * @author 김민혜
  */
-@NoArgsConstructor
 @Setter @Getter
+@NoArgsConstructor
 public class Qna {
 	private Long qnaId;
 	private Long courseId;
