@@ -7,7 +7,7 @@
 			<script src="https://code.jquery.com/jquery-3.7.1.min.js"
 				integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 			<%@ include file="../common/config.jsp" %>
-			<title id="title">질문 수정</title>
+			<title id="title">게시글 수정</title>
 	</head>
 	<body>
 		<div class="w-25">
@@ -69,8 +69,35 @@
 			<%@ include file="../common/rightbar.jsp" %>
 		</div>
 		<script src="${resPath}/js/courseBar.js"></script>
-		<script src="${resPath}/js/editForm.js"></script>
 		<script type="text/javascript">
+		// 조건에 따라 텍스트 변경
+		if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}/editForm") {
+			document.title = "질문 수정";
+			bigTitle.innerHTML = "질의 응답 목록";
+			smallTitle.innerHTML = "질문 수정";
+
+			$(".update").click(
+				function () {
+					$('#editForm').attr('action',
+						'${context}course/${courseId}/qna/${qnaId}')
+						.submit();
+					console.log('submit 버튼 클릭함');
+				});
+		} else if ('${requestURI}' == "${context}course/${courseId}/news/${newsId}/editForm"){
+			document.title  = "강의 공지 수정";
+			bigTitle.innerHTML = "강의 공지 목록";
+			smallTitle.innerHTML = "강의 공지 수정";
+
+			$(".update").click(
+				function () {
+					$('#editForm').attr('action',
+						'${context}course/${courseId}/news/${newsId}')
+						.submit();
+					
+					console.log('submit 버튼 클릭함');
+				});
+		}
+		
 		$(document).ready(function() {
 			$('.title').on('keyup', function() {
 				$('#titleCnt').html("(" + $(this).val().length + " / 100)");
@@ -92,33 +119,38 @@
 				}
 			});
 		});
-		// 조건에 따라 텍스트 변경
-		if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}/editForm") {
-			title.innerHTML = "질문 수정";
-			bigTitle.innerHTML = "질의 응답 목록";
-			smallTitle.innerHTML = "질문 수정";
+		
+		document.addEventListener('DOMContentLoaded', function () {
 
-			$(".update").click(
-				function () {
-					$('#editForm').attr('action',
-						'${context}course/${courseId}/qna/${qnaId}')
-						.submit();
-					console.log('submit 버튼 클릭함');
-				});
-		} else if ('${requestURI}' == "${context}course/${courseId}/news/${newsId}/editForm"){
-			title.innerHTML = "강의 공지 수정";
-			bigTitle.innerHTML = "강의 공지 목록";
-			smallTitle.innerHTML = "강의 공지 수정";
+			var deleteFileButton = document.getElementById('deleteFileButton');
+			var fileInputImage = document.getElementById('file-input');
+			var fileNameInput = document.getElementById('fileNameInput');
 
-			$(".update").click(
-				function () {
-					$('#editForm').attr('action',
-						'${context}course/${courseId}/news/${newsId}')
-						.submit();
-					
-					console.log('submit 버튼 클릭함');
-				});
-		}
+			deleteFileButton.addEventListener('click', function () {
+
+				if (fileNameInput.value.trim() == "") {
+					alert("기존 파일이 없습니다.");
+				} else {
+					var result = confirm("기존 파일을 삭제하시겠습니까?");
+
+					// 확인창에서 선택한 값 넣기
+					document.getElementById("confirmResult").value = result;
+
+					console.log(result);
+					fileNameInput.value = ""
+					fileInputImage.remove();
+				}
+			});
+		});
+
+
+		$("#cancel").click(() => confirm("취소하시겠습니까?"))
+
+		$("#inputGroupFile04").on('change', function () {
+			var filePath = $("#inputGroupFile04").val().split("\\");
+			var fileName = filePath[2];
+			$(".fileName").val(fileName);
+		});
 		</script>
 	</body>
 

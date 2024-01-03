@@ -25,27 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
-$(document).ready(function () {
-	$('#title').on('keyup', function () {
-		$('#titleCnt').html("(" + $(this).val().length + " / 100)");
-
-		if ($(this).val().length > 100) {
-			$(this).val($(this).val().substring(0, 100));
-			$('#titleCnt').html("(100 / 100)");
-			alert('제목은 최대 100자 까지 입력 가능합니다.');
-		}
-	});
-});
-$(document).ready(function () {
-	$('#description').on('keyup', function () {
-		$('#descCnt').html("(" + $(this).val().length + " / 1000)");
-
-		if ($(this).val().length > 1000) {
-			$(this).val($(this).val().substring(0, 1000));
-			$('#descCnt').html("(1000 / 1000)");
-		}
-	});
-});
 
 $("#cancel").click(() => confirm("취소하시겠습니까?"))
 
