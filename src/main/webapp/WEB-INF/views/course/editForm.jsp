@@ -29,8 +29,9 @@
 				<form:form modelAttribute="select" action="${context}course/${courseId}/qna/${qnaId}" method="post"
 					enctype="multipart/form-data" id="editForm">
 					<div class="row">
-						<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" 
-							placeholder="제목을 입력해주세요.(100자 이내)" value="${select.title}" required>
+						<label class="col-1 mt-2">제목</label> 
+						<form:input path="title" class="title form-control mt-1 mb-2 col" 
+							placeholder="제목을 입력해주세요.(100자 이내)" value="${select.title}" />
 						<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 					</div>
 					<div class="form-group row">
@@ -70,6 +71,27 @@
 		<script src="${resPath}/js/courseBar.js"></script>
 		<script src="${resPath}/js/editForm.js"></script>
 		<script type="text/javascript">
+		$(document).ready(function() {
+			$('.title').on('keyup', function() {
+				$('#titleCnt').html("(" + $(this).val().length + " / 100)");
+
+				if ($(this).val().length > 100) {
+					$(this).val($(this).val().substring(0, 100));
+					$('#titleCnt').html("(100 / 100)");
+					alert('제목은 최대 100자 까지 입력 가능합니다.');
+				}
+			});
+		});
+		$(document).ready(function() {
+			$('#description').on('keyup', function() {
+				$('#descCnt').html("(" + $(this).val().length + " / 1000)");
+
+				if ($(this).val().length > 1000) {
+					$(this).val($(this).val().substring(0, 1000));
+					$('#descCnt').html("(1000 / 1000)");
+				}
+			});
+		});
 		// 조건에 따라 텍스트 변경
 		if ('${requestURI}' == "${context}course/${courseId}/qna/${qnaId}/editForm") {
 			title.innerHTML = "질문 수정";
