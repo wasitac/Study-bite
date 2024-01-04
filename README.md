@@ -1,73 +1,30 @@
 # Study bite
 
-**스프링 프레임워크와 마이바티스를 활용한 MVC Model2 기반 웹 애플리케이션 개발**
-
+**스프링 프레임워크와 마이바티스를 활용한 MVC Model2 기반 웹 애플리케이션 개발**<br>
 주제 : LMS(학습관리 시스템)
 
+<br>
 
-## 팀원별 업무 분담
+## **개발환경**<br>
+|**OS**|Windows 10|
+|**IDE**|Spring Tool Suite 3 3.9.18.RELEASE|
+|**Front-end**|HTML<br>CSS<br>JavaScript<br>JSP<br>XML<br>Bootstrap 5.3|
+|**Back-end**|Java 11<br>Spring Framework 5.2.25.RELEASE<br>MyBatis 3.5.14<br>MyBatis-spring 2.1.2<br>lombok 1.18.30|
+|**Web Server**|Tomcat v8.5|
+|**Database**|MySQL 8.0.22|
+
+<br>
+
+
+## **팀원별 업무 분담**<br>
 |    |**이지홍(팀장)**|**김민혜(팀원)**|**송창민(팀원)**|**신지은(팀원)**|
 |----|---|---|---|---|
 |**Front**|**페이지**<br>- 로그인<br>- 내 정보<br>- 비밀번호 변경<br>- 강사 대시보드<br>**컴포넌트**<br>- leftbar(학습자)- rightbar(알림)|**페이지**<br>-공지사항<br>- 질의 응답 목록/상세/등록<br>- 질의 응답 답변 등록<br>- 강의 공지 목록<br>**컴포넌트**<br>- courseBar- 페이지네이션|**페이지**<br>- 학습자 대시보드<br>- 수강과목<br>- 출결관리<br>**컴포넌트**<br>- leftbar(강사)<br>- rightbar|**페이지**<br>- 강의 개요<br>- 강의 수강<br>- 강사 공지 작성/수정<br>- 질의 응답 수정/삭제<br>**컴포넌트**<br>- courseTitle|
 |**Back**|- 로그인/로그아웃<br>- 로그인 인증<br>- 비밀번호 변경<br>- 알림<br>|- 공지사항<br>- 새 소식<br>- 질문/답변<br>- 페이지네이션<br>- 검색<br>|- 대시보드<br>- 코스 목록<br>- 수강 여부<br>- 수료한 강의<br>- 강의공지<br>- 게시글 목록 넘버링<br>|- 코스 개요<br>- 콘텐츠 목차<br>- 콘텐츠 수강<br>- 게시글 파일 업로드/다운로드<br>- 게시글 수정/삭제 <br>- 강의 공지<br>|
 
+<br>
 
-
-## 개발환경
-
-
-### OS         
-
-
-Windows 10
-
-
-
-### IDE
-
-
-Spring Tool Suite 3 3.9.18.RELEASE
-
-
-
-### Front-end
-
-
-HTML, 
-CSS, 
-JavaScript, 
-JSP, 
-XML, 
-Bootstrap 5.3
-
-
-            
-### Back-end   
-
-
-Java 11, 
-Spring Framework 5.2.25.RELEASE,    
-MyBatis 3.5.14, 
-MyBatis-spring 2.1.2, 
-lombok 1.18.30
-
-
-            
-### Web Server
-
-
-Tomcat v8.5
-
-
-
-### Database
-
-
-MySQL 8.0.22
-
-
-
-## 폴더 구조
+## **폴더 구조**<br>
 ### backend
 ```
 +---java
