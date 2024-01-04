@@ -24,14 +24,14 @@
 
 ## **주요 기능**
 ### **대시보드**
-<img src="https://github.com/wasitac/Study-bite/assets/67859497/0a3a190d-4e0f-4375-a664-60289f235095" width="400" border="1px solid"><br>
+<img src="https://github.com/wasitac/Study-bite/assets/67859497/0a3a190d-4e0f-4375-a664-60289f235095" width="600" border="1px solid"><br>
 ### **출결 확인** 
-<img src="https://github.com/wasitac/Study-bite/assets/67859497/408fb84f-2c0a-4f83-b885-2272ab602a8a" width="400" border="1px solid"><br>
-<img src="https://github.com/wasitac/Study-bite/assets/67859497/f3a1ddb7-69d7-4b81-874a-90352f91ef84" width="400" border="1px solid"><br>
+<img src="https://github.com/wasitac/Study-bite/assets/67859497/408fb84f-2c0a-4f83-b885-2272ab602a8a" width="600" border="1px solid"><br>
+<img src="https://github.com/wasitac/Study-bite/assets/67859497/f3a1ddb7-69d7-4b81-874a-90352f91ef84" width="600" border="1px solid"><br>
 ### **비밀번호 수정**
-<img src="https://github.com/wasitac/Study-bite/assets/67859497/8a9742ff-8ebb-4f6c-bf25-8908cfc07ab9" width="400" border="1px solid"><br>
+<img src="https://github.com/wasitac/Study-bite/assets/67859497/8a9742ff-8ebb-4f6c-bf25-8908cfc07ab9" width="600" border="1px solid"><br>
 ### **질의 응답**
-<img src="https://github.com/wasitac/Study-bite/assets/67859497/8f5a90cb-772a-4ef3-846d-f3000089e718" width="400" border="1px solid"><br>
+<img src="https://github.com/wasitac/Study-bite/assets/67859497/8f5a90cb-772a-4ef3-846d-f3000089e718" width="600" border="1px solid"><br>
 
 ## **폴더 구조**<br>
 ```
