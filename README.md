@@ -1,9 +1,10 @@
-# Study bite
-
-**스프링 프레임워크와 마이바티스를 활용한 MVC Model2 기반 웹 애플리케이션 개발**<br>
-주제 : LMS(학습관리 시스템)
-
+# **Study bite**
 <br>
+
+### **스프링 프레임워크와 마이바티스를 활용한 MVC Model2 기반 웹 애플리케이션 개발**<br>
+#### 주제 : LMS(학습관리 시스템)<br>
+<br>
+### 프로젝트 기간: 2023.12.12 ~ 2024.01.04<br>
 
 ## **개발환경**<br>
 |   |    |
@@ -14,9 +15,7 @@
 **Back-end**|Java 11<br>Spring Framework 5.2.25.RELEASE<br>MyBatis 3.5.14<br>MyBatis-spring 2.1.2<br>lombok 1.18.30|
 **Web Server**|Tomcat 8.5|
 **Database**|MySQL 8.0.22|
-
 <br>
-
 
 ## **팀원별 업무 분담**<br>
 |    |**이지홍(팀장)**|**김민혜(팀원)**|**송창민(팀원)**|**신지은(팀원)**|
@@ -27,7 +26,6 @@
 <br>
 
 ## **폴더 구조**<br>
-### backend
 ```
 +---java
 |   \---himedia
