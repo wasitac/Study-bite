@@ -6,14 +6,14 @@
 <br>
 
 ## **개발환경**<br>
-|    |    |
-|----|----|
-|**OS**|Windows 10|
-|**IDE**|Spring Tool Suite 3 3.9.18.RELEASE|
-|**Front-end**|HTML<br>CSS<br>JavaScript<br>JSP<br>XML<br>Bootstrap 5.3|
-|**Back-end**|Java 11<br>Spring Framework 5.2.25.RELEASE<br>MyBatis 3.5.14<br>MyBatis-spring 2.1.2<br>lombok 1.18.30|
-|**Web Server**|Tomcat v8.5|
-|**Database**|MySQL 8.0.22|
+|   |    |
+----|----|
+**OS**|Windows 10|
+**IDE**|Spring Tool Suite 3 3.9.18.RELEASE|
+**Front-end**|HTML<br>CSS<br>JavaScript<br>JSP<br>XML<br>Bootstrap 5.3|
+**Back-end**|Java 11<br>Spring Framework 5.2.25.RELEASE<br>MyBatis 3.5.14<br>MyBatis-spring 2.1.2<br>lombok 1.18.30|
+**Web Server**|Tomcat 8.5|
+**Database**|MySQL 8.0.22|
 
 <br>
 
