@@ -40,11 +40,6 @@
 							placeholder="내용을 입력해주세요.(1000자 이내)" required="required" value="${description}" />
 						<div id="descCnt" class="col-2">(0/1000)</div>
 					</div>
-					<c:if test="${not empty fileBoard and not fileBoard.filetype=='application/pdf'}">
-						<img alt="첨부파일" src="/studybite/resources/files/${fileBoard.filename}" id="file-input" class="w-50 h-50"
-						style="margin: 10px 0 0 78px;">
-					</c:if>
-					
 					<div class="filebox input-group w-75" style="margin: 10px 0 0 78px">
 						<button type="button" class="btn btn-primary"><label for="inputGroupFile04">첨부파일</label></button>
 						<input class="fileName" id="fileNameInput" value="${fileBoard.originName}" placeholder="선택된 파일 없음" readonly="readonly">
@@ -123,7 +118,6 @@
 		document.addEventListener('DOMContentLoaded', function () {
 
 			var deleteFileButton = document.getElementById('deleteFileButton');
-			var fileInputImage = document.getElementById('file-input');
 			var fileNameInput = document.getElementById('fileNameInput');
 
 			deleteFileButton.addEventListener('click', function () {
@@ -138,7 +132,6 @@
 
 					console.log(result);
 					fileNameInput.value = ""
-					fileInputImage.remove();
 				}
 			});
 		});
