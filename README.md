@@ -23,7 +23,15 @@
 <br>
 
 ## **주요 기능**
-###****
+### **대시보드**
+![대시보드2](https://github.com/wasitac/Study-bite/assets/67859497/0a3a190d-4e0f-4375-a664-60289f235095)
+### **출결 확인**
+![출결1](https://github.com/wasitac/Study-bite/assets/67859497/408fb84f-2c0a-4f83-b885-2272ab602a8a)
+![출결2](https://github.com/wasitac/Study-bite/assets/67859497/f3a1ddb7-69d7-4b81-874a-90352f91ef84)
+### **비밀번호 수정**
+![비밀번호2](https://github.com/wasitac/Study-bite/assets/67859497/8a9742ff-8ebb-4f6c-bf25-8908cfc07ab9)
+### **질의 응답**
+![질의응답](https://github.com/wasitac/Study-bite/assets/67859497/8f5a90cb-772a-4ef3-846d-f3000089e718)
 
 ## **폴더 구조**<br>
 ```
