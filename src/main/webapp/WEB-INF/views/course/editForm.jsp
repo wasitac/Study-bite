@@ -110,7 +110,7 @@
 			});
 		});
 		$(document).ready(function() {
-			$('#description').on('keyup', function() {
+			$('.description').on('keyup', function() {
 				$('#descCnt').html("(" + $(this).val().length + " / 1000)");
 
 				if ($(this).val().length > 1000) {

@@ -27,12 +27,12 @@
 		<div class="contatiner">
 			<form action="/studybite/course/${courseInfo.courseId}/news/add" method="post" enctype="multipart/form-data">
 				<div class="row">
-					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
+					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="title form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-1">내용</label>
-					<textarea class="form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
+					<textarea class="description form-control col" rows="10" name="description" placeholder="내용을 입력해주세요" required></textarea>
 					<div id="descCnt" class="col-2">(0/1000)</div>
 				</div>
 				<div class="input-group my-3">
@@ -56,7 +56,7 @@
 	<script src="${resPath}/js/courseBar.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#title').on('keyup', function() {
+			$('.title').on('keyup', function() {
 				$('#titleCnt').html("(" + $(this).val().length + " / 100)");
 
 				if ($(this).val().length > 100) {
@@ -67,7 +67,7 @@
 			});
 		});
 		$(document).ready(function() {
-			$('#description').on('keyup', function() {
+			$('.description').on('keyup', function() {
 				$('#descCnt').html("(" + $(this).val().length + " / 1000)");
 
 				if ($(this).val().length > 1000) {
