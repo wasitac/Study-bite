@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: studybite-container
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - 9999:8080
+    depends_on:
+      - database
+
+  database:
+    container_name: studybite-db
+    image: mysql:8.0
+    hostname: docker-mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: studybite
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: 1111

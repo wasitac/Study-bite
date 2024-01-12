@@ -1,0 +1,8 @@
+## base image
+FROM tomcat:8.5.98-jre11-temurin-jammy
+
+## war 파일을 webapps 복사
+COPY target/studybite-1.0.0-BUILD-SNAPSHOT.war /usr/local/tomcat/webapps
+
+## tomcat 실행
+ENTRYPOINT ["catalina.sh", "run"]
