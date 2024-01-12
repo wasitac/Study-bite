@@ -35,7 +35,6 @@
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<!-- 나중에 forEach로 돌리기 -->
 					<c:forEach var="notice" items="${notices}">
 						<tr class="table">
 							<td>${notice.noticeId}</td>

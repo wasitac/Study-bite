@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="himedia.project.studybite.repository.NoticeRepository">
+<mapper namespace="himedia.project.studybite.mapper.NoticeMapper">
 	<select id="search" parameterType="map" resultType="Notice">
 		SELECT * FROM notice WHERE title LIKE CONCAT('%',#{search},'%') ORDER BY noticeId DESC Limit #{pageNum},10
 	</select>
@@ -11,3 +11,4 @@
 		SELECT COUNT(noticeId) FROM notice WHERE title LIKE CONCAT('%',#{search},'%')
 	</select>
 </mapper>
+

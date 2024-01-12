@@ -31,5 +31,5 @@
 	</bean>
 
 	<mybatis:scan
-		base-package="himedia.project.studybite.repository" />
+		base-package="himedia.project.studybite.mapper" />
 </beans>

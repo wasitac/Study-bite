@@ -22,4 +22,4 @@
 		</a></li>
 	</ul>
 </div>
-<script type="text/javascript" src="/studybite/resources/js/basic.js"></script>
+<script type="text/javascript" src="/studybite/resources/js/active.js"></script>

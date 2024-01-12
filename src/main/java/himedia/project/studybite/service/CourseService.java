@@ -225,7 +225,7 @@ public class CourseService {
 	 */
 	public void upload(FileBoard fileBoard, MultipartFile file, HttpServletRequest request) throws Exception {
 		
-		String filePath = request.getServletContext().getRealPath("/resources/files/");
+		String filePath = request.getSession().getServletContext().getRealPath("/resources/files/");
 		
 		UUID uuid = UUID.randomUUID();
 		String fileName = uuid + "_" + file.getOriginalFilename();

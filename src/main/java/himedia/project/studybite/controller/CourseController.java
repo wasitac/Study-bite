@@ -540,7 +540,7 @@ public class CourseController {
 		
 		
 		//응답 바디에 파일 데이터 싣기
-		String filePath = request.getServletContext().getRealPath("/resources/files/") + fileBoard.getFilename();
+		String filePath = request.getSession().getServletContext().getRealPath("/resources/files/") + fileBoard.getFilename();
 		File file = new File(filePath);
 		
 		if(file.exists()) {
