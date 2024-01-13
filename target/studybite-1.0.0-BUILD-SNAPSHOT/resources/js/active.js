@@ -8,18 +8,11 @@ document.querySelectorAll(".nav-link").forEach((link) => {
         link.setAttribute("aria-current", "page");
         
         const parent = document.querySelector(".active img");
-        var image = parent.src;
-        console.log("image : " + image);
+        var imagePath = parent.src;
         
-        var srcSplit = image.split(".");
-        var srcConcated = image;
-        
-        // 파일이름 끝에 c가 붙어있으면 추가하지 않고 그대로 사용 - 이지홍
-        if(srcSplit[0].slice(-1) !== "c")
-        	 srcConcated = srcSplit[0] + "c." + srcSplit[1];
-        
-        console.log(srcSplit[0].slice(-1) !== "c");   
-        console.log("srcConcated : " + srcConcated);   
-        parent.src = srcConcated;
+        if(imagePath.indexOf("c.png") == -1)
+        	imagePath = imagePath.replace('.png', 'c.png');
+        	
+        parent.src = imagePath;
     }
 });

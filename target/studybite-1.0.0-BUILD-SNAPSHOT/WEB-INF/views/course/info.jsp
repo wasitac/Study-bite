@@ -15,7 +15,7 @@
 			<h3 class="blue600 info">강의 개요</h3>
 		</div>
 		<div class="infoImage">
-			<img alt="강의 개요" src="${courseInfo.outline}" class="w-100">
+			<img alt="강의 개요" src="${resPath}${courseInfo.outline}" class="w-100">
 		</div>
 		<%@ include file="../common/footer.jsp" %>
 	</div>

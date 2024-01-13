@@ -25,7 +25,7 @@
 		</div>
 		<h4 class="mt-4 blue600">질문 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseId}/qna/add" method="post" enctype="multipart/form-data" id="qnaForm">
+			<form action="${context}/course/${courseId}/qna/add" method="post" enctype="multipart/form-data" id="qnaForm">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" id="title" name="title" class="form-control mt-1 mb-2 col" 
 						placeholder="제목을 입력해주세요.(100자 이내)" required>

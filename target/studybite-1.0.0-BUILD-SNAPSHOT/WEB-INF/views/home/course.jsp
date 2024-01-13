@@ -61,7 +61,7 @@
 						</div>
 						<div class="d-flex flex-row mb-2">
 							<div class="p-2" >
-								<img src="${course.thumbnail}" class="img-fluid rounded" alt="..." style="max-height: 100px">
+								<img src="${resPath}${course.thumbnail}" class="img-fluid rounded" alt="..." style="max-height: 100px">
 							</div>
 							<div class="p-2">
 								<h5 class="mb-0">${course.courseName}</h5>
@@ -81,7 +81,7 @@
 					<div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='${context}course/${course.courseId}'">
 						<div class="row g-0">
 							<div class="col-md-4 d-flex align-items-center">
-								<img src="${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
+								<img src="${resPath}${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">

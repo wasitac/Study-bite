@@ -16,7 +16,7 @@
 		</div>
 		<hr class="my-5">
 		<div>
-			<form action="/studybite/notice/search" method="get" id="search" class="d-flex mb-2" style="width: 40%; float: right">
+			<form action="${context}/notice/search" method="get" id="search" class="d-flex mb-2" style="width: 40%; float: right">
 				<input name="search" class="form-control me-2" type="text" placeholder="제목으로 검색">
 				<button type="submit" class="btn btn-outline-primary">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
