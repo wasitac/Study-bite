@@ -18,7 +18,7 @@
 		<div class="my-3 text-left">
 			<h3 class="blue600" id="smallTitle">
 				<button class="btn border-0" type="submit" onclick="location.href='${context}course/${courseInfo.courseId}/news'" style="background-color: white">
-					<img src="/studybite/resources/img/back.png" width="30" height="30">
+					<img src="${resPath}/img/back.png" width="30" height="30">
 				</button>
 				강의 공지 목록
 			</h3>

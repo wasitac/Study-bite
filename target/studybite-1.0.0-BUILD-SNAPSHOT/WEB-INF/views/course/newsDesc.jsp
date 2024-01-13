@@ -21,8 +21,8 @@
 			<%@ include file="../common/courseBar.jsp"%>
 			<div class="my-1 text-left">
 				<h3 class="blue600 info">
-					<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${news.courseId}/news'" style="background-color: white">
-						<img src="/studybite/resources/img/back.png" width="30" height="30">
+					<button class="btn border-0" type="submit" onclick="location.href='${context}course/${news.courseId}/news'" style="background-color: white">
+						<img src="${resPath}/img/back.png" width="30" height="30">
 					</button>
 					강의 공지 목록
 				</h3>
@@ -62,7 +62,7 @@
 			</form:form>
 		<!-- 이전글 다음글 -->
 		<div class="prevnext list-group">
-			<a href="/studybite/course/${courseId}/news/${next.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
+			<a href="${context}course/${courseId}/news/${next.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">다음글</span> │ <c:choose>
 					<c:when test="${empty next}">
                 다음글이 없습니다.
             </c:when>
@@ -70,7 +70,7 @@
 						<span style="color: blue;">${next.title}</span>
 					</c:otherwise>
 				</c:choose>
-			</a> <a href="/studybite/course/${courseId}/news/${prev.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">이전글</span> │ <c:choose>
+			</a> <a href="${context}course/${courseId}/news/${prev.newsId}" class="list-group-item list-group-item-action"> <span style="font-weight: bold;">이전글</span> │ <c:choose>
 					<c:when test="${empty prev}">
                 이전글이 없습니다.
             </c:when>

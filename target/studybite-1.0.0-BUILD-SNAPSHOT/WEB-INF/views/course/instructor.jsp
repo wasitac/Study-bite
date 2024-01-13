@@ -34,7 +34,7 @@
 		<p class="my-3 blue600">담당 과목</p>
 		<div class="row row-cols-2 g-3">
 			<c:forEach var="course" items="${courses}">
-				<div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='/studybite/course/${course.courseId}'">
+				<div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='${context}course/${course.courseId}'">
 					<div class="row g-0">
 						<div class="col-md-4 d-flex align-items-center">
 							<img src="${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
@@ -46,7 +46,7 @@
 								<p class="card-text">
 									<div class="d-flex ">
 										<small class="text-body-secondary p-2 flex-grow-1" >${course.instructor}</small>
-										<button class="btn bg-primary mx-1 p-2" type="button"  onclick="location.href='/studybite/home'">
+										<button class="btn bg-primary mx-1 p-2" type="button"  onclick="location.href='${context}home'">
 											<img src="${resPath}/img/homeIcon/ibellc.png" style="width: 20px;">
 										</button>
 										<button class="btn bg-primary mx-1 p-2" type="button">

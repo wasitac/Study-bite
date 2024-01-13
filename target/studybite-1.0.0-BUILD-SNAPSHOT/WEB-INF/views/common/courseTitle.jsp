@@ -5,7 +5,7 @@
 	<div class="d-flex">
 		<h1 class="me-auto">${courseInfo.courseName}</h1>
 		<h2>
-			<img alt="" src="/studybite/resources/img/bluePerson.png" width="50" height="50"> ${courseInfo.instructor}
+			<img alt="" src="${resPath}/img/bluePerson.png" width="50" height="50"> ${courseInfo.instructor}
 		</h2>
 	</div>
 </div>

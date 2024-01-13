@@ -45,12 +45,12 @@
 		<div class="row mb-2">
 			<c:forEach var="course" items="${courses}">
 				<div class="col-md-6" >
-					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-blue50" onclick="location.href='/studybite/course/${course.courseId}'" style="cursor: pointer; height: 190px">
+					<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-blue50" onclick="location.href='${context}course/${course.courseId}'" style="cursor: pointer; height: 190px">
 						<div class="col p-2 d-flex flex-column position-static ">
 							<div class="d-flex">
 								<button class="btn bg-primary text-white me-auto p-2" type="button" style="border-radius: 12px">${course.sort}</button>
 								<c:if test="${user.role == 2}">
-									<button class="btn bg-primary p-2" type="button" onclick="goToNews(event, ${course.courseId})">
+									<button class="btn bg-primary p-2 mx-1" type="button" onclick="goToNews(event, ${course.courseId})">
 										<img src="${resPath}/img/homeIcon/ibellc.png" style="width: 20px;">
 									</button>
 									<button class="btn bg-primary p-2" type="button" onclick="goToQna(event, ${course.courseId})">
@@ -61,7 +61,7 @@
 						</div>
 						<div class="d-flex flex-row mb-2">
 							<div class="p-2" >
-								<img src="${course.thumbnail}" class="img-fluid rounded" alt="..." style="max-height: 100px">
+								<img src="${resPath}${course.thumbnail}" class="img-fluid rounded" alt="..." style="max-height: 100px">
 							</div>
 							<div class="p-2">
 								<h5 class="mb-0">${course.courseName}</h5>
@@ -78,10 +78,10 @@
 			<p class="my-3 blue600">수료한 강의</p>
 			<div class="row row-cols-2 g-3">
 				<c:forEach var="course" items="${finishedCourse}">
-					<div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='/studybite/course/${course.courseId}'">
+					<div class="card mb-3 col" style="max-width: 540px; cursor: pointer;" onclick="location.href='${context}course/${course.courseId}'">
 						<div class="row g-0">
 							<div class="col-md-4 d-flex align-items-center">
-								<img src="${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
+								<img src="${resPath}${course.thumbnail}" class="img-fluid rounded w-100" alt="...">
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
@@ -100,7 +100,7 @@
 	</div>
 	<div class="w-25">
 		<%@include file="../common/rightbar.jsp"%>
-		<script type="text/javascript" src="/studybite/resources/js/course.js"></script>
+		<script type="text/javascript" src="${resPath}/js/course.js"></script>
 	</div>
 </body>
 </html>

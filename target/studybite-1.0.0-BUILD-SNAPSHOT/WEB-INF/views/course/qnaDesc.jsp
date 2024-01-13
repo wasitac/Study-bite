@@ -18,8 +18,8 @@
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h4 class="blue600 info" id="smallTitle">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
-					<img src="/studybite/resources/img/back.png" width="30" height="30">
+				<button class="btn border-0" type="submit" onclick="location.href='${context}course/${courseInfo.courseId}/qna'" style="background-color: white">
+					<img src="${resPath}/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
 			</h4>

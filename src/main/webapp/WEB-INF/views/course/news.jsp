@@ -33,7 +33,7 @@
 					<c:forEach var="news" items="${news}" varStatus="status">
 						<tr class="table">
 							<td>${newsCnt - (pageNum) - status.index}</td>
-							<td><a href="/studybite/course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
+							<td><a href="${context}course/${news.courseId}/news/${news.newsId}" style="text-decoration: none">${news.title}</a></td>
 							<td>${courseInfo.instructor}</td>
 							<td>${news.date}</td>
 							<td>${news.views}</td>
@@ -48,7 +48,7 @@
 		</div>
 		<c:if test="${user.role eq 2}">
 			<div class="d-flex justify-content-end mt-1">
-				<button type="button" class="btn btn-primary" onclick="location.href='/studybite/course/${courseId}/news/add'">작성하기</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='${context}course/${courseId}/news/add'">작성하기</button>
 			</div>
 		</c:if>
 		<%@ include file="../common/footer.jsp"%>

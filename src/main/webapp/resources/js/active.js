@@ -18,8 +18,6 @@ document.querySelectorAll(".nav-link").forEach((link) => {
         if(srcSplit[0].slice(-1) !== "c")
         	 srcConcated = srcSplit[0] + "c." + srcSplit[1];
         
-        console.log(srcSplit[0].slice(-1) !== "c");   
-        console.log("srcConcated : " + srcConcated);   
         parent.src = srcConcated;
     }
 });

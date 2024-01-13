@@ -18,14 +18,14 @@
 		<div class="my-3 text-left">
 			<h3 class="blue600" id="smallTitle">
 				<button class="btn border-0" type="submit" onclick="location.href='${context}course/${courseInfo.courseId}/news'" style="background-color: white">
-					<img src="/studybite/resources/img/back.png" width="30" height="30">
+					<img src="${resPath}/img/back.png" width="30" height="30">
 				</button>
 				강의 공지 목록
 			</h3>
 		</div>
 		<h4 class="blue600" class="mt-4">강의 공지 작성</h4>
 		<div class="contatiner">
-			<form action="/studybite/course/${courseInfo.courseId}/news/add" method="post" enctype="multipart/form-data">
+			<form action="${context}/course/${courseInfo.courseId}/news/add" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<label class="col-1 mt-2">제목</label> <input type="text" name="title" class="title form-control mt-1 mb-2 col" placeholder="제목을 입력해주세요." required>
 					<div id="titleCnt" class="col-2 mt-2">(0/100)</div>

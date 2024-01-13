@@ -18,8 +18,8 @@
 		<%@ include file="../common/courseBar.jsp"%>
 		<div class="my-1 text-left">
 			<h4 class="blue600 info" id="smallTitle">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/course/${courseInfo.courseId}/qna'" style="background-color: white">
-					<img src="/studybite/resources/img/back.png" width="30" height="30">
+				<button class="btn border-0" type="submit" onclick="location.href='${context}course/${courseInfo.courseId}/qna'" style="background-color: white">
+					<img src="${resPath}/img/back.png" width="30" height="30">
 				</button>
 				질의 응답 목록
 			</h4>
@@ -77,7 +77,7 @@
 				<div class="card mb-2 border-0 p-3" style="background-color: rgba(239, 244, 255, 0.5)">
 					<div>${qna.answer}</div>
 				</div>
-				<form:form modelAttribute="qna" action="/studybite/course/${courseInfo.courseId}/qna/answer" id="editAnswer" style="display: none">
+				<form:form modelAttribute="qna" action="${context}/course/${courseInfo.courseId}/qna/answer" id="editAnswer" style="display: none">
 					<div class="my-3">
 						<label for="answer" class="form-label">답변 입력</label>
 						<form:textarea path="answer" class="form-control" id="exampleFormControlTextarea1" rows="3" />
@@ -89,14 +89,14 @@
 				</form:form>
 				<div class="d-flex justify-content-end mt-1">
 					<button type="button" class="btn btn-primary" id="editBtn" onclick="editClick()">답변 수정</button>
-					<form:form modelAttribute="qna" action="/studybite/course/${courseInfo.courseId}/qna/answer" id="deleteAnswer">
+					<form:form modelAttribute="qna" action="${context}/course/${courseInfo.courseId}/qna/answer" id="deleteAnswer">
 						<form:hidden path="qnaId" value="${qna.qnaId}" />
 						<form:button type="button" class="btn btn-primary ms-1" id="deleteBtn" onclick="delClick()">답변 삭제</form:button>
 					</form:form>
 				</div>
 			</c:when>
 			<c:when test="${user.role == 2 and empty qna.answer}">
-				<form action="/studybite/course/${courseInfo.courseId}/qna/answer" method="post" enctype="multipart/form-data">
+				<form action="${context}/course/${courseInfo.courseId}/qna/answer" method="post" enctype="multipart/form-data">
 					<div class="my-3">
 						<label for="answer" class="form-label">답변 입력</label>
 						<textarea name="answer" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>

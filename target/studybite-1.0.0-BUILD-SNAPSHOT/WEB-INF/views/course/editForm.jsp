@@ -19,7 +19,7 @@
 			<div class="my-3 text-left">
 				<h3 class="blue600" id="bigTitle">
 					<button class="btn border-0" type="submit" onclick="history.back()" style="background-color: white">
-						<img src="/studybite/resources/img/back.png" width="30" height="30">
+						<img src="${resPath}/img/back.png" width="30" height="30">
 					</button>
 					질의 응답 목록
 				</h3>

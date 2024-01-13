@@ -10,7 +10,7 @@
 	<div id="container" class="container mt-5" style="width: 1000px; min-height: 500px">
 		<div class="my-1 text-left">
 			<h1 class="blue600">
-				<button class="btn border-0" type="submit" onclick="location.href='/studybite/notices'" style="background-color: white">
+				<button class="btn border-0" type="submit" onclick="location.href='${context}notices'" style="background-color: white">
 					<img src="../resources/img/back.png" class="rounded-circle me-3" width="32" height="32">
 				</button>
 				공지 사항

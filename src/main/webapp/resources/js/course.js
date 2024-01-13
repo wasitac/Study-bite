@@ -1,14 +1,12 @@
-/**
- * 
- */
- 
- function goToNews(e, courseId){
+var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+
+function goToNews(e, courseId){
  	e.stopPropagation();
- 	location.href='/studybite/course/' + courseId + '/news/add';
- }
+ 	location.href = context + '/course/' + courseId + '/news/add';
+ };
  
- function goToQna(e, courseId){
+function goToQna(e, courseId){
  	e.stopPropagation();
- 	location.href='/studybite/course/' + courseId + '/qna';
- }
+ 	location.href = context + '/course/' + courseId + '/qna';
+ };
  
