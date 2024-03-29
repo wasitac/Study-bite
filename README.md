@@ -3,7 +3,7 @@
 ### 주제 : LMS(학습관리 시스템)<br>
 #### 프로젝트 기간: 2023.12.12 ~ 2024.01.04<br>
 #### 배포: https://m.site.naver.com/1l57d<br>
-학생 id: edcqaz19@naver.com/pw: 1111
+학생 id: edcqaz19@naver.com/pw: 1111<br>
 강사 id: hong@gmail.com / PW : 1111
 
 #### 산출물: https://drive.google.com/drive/folders/1MCcwADfoYAukfyV_YaAiUIOK2xAHi0NO?usp=drive_link
