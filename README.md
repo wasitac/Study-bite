@@ -2,7 +2,7 @@
 ### **스프링 프레임워크와 마이바티스를 활용한 MVC Model2 기반 웹 애플리케이션 개발**
 ### 주제 : LMS(학습관리 시스템)<br>
 #### 프로젝트 기간: 2023.12.12 ~ 2024.01.04<br>
-#### 배포: https://m.site.naver.com/1l57d<br>
+#### 배포: http://3.39.21.183:9999/studybite-1.0.0-BUILD-SNAPSHOT/<br>
 학생 id: edcqaz19@naver.com/pw: 1111<br>
 강사 id: hong@gmail.com / PW : 1111
 
