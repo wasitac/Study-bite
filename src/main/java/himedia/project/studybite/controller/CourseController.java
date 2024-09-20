@@ -61,7 +61,6 @@ public class CourseController {
 	@GetMapping("/{courseId}")
 	public String courseInfo(@PathVariable Long courseId, Model model) {
 		Optional<Course> courseInfo = courseService.courseInfo(courseId);
-
 		model.addAttribute("courseInfo", courseInfo.get());
 		return "course/info";
 	}

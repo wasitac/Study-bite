@@ -8,7 +8,7 @@
 <link href="${resPath}/css/sign-in.css" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center justify-content-center bg-blue50">
-	<form:form modelAttribute="userLogin">
+	<form:form modelAttribute="userLogin">			
 		<img class="mb-4 cropping" src="${resPath}/img/logoSmall.png" alt="studybite" width="300">
 		<div class="form-floating my-1">
 			<form:input path="email" cssClass="form-control" placeholder="name@example.com" />
