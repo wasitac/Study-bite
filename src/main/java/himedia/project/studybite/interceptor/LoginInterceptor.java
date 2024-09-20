@@ -19,11 +19,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-		System.out.println(uri);
 		
         // 정적 리소스 경로에 대해 세션 검사 생략
-        if (uri.startsWith("/studybite/resources/")) {
-            return true; // 세션 검사 생략하고 다음 필터로 진행
+        if (uri.contains("/resources")) {
+            return true;
         }
 		HttpSession session = request.getSession();
 		Optional<User> user = Optional.ofNullable((User)(session.getAttribute("user")));
