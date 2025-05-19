@@ -4,9 +4,6 @@
 ### 프로젝트 목적 : 직관적이고 간단해 학습에 집중 할 수 있는 환경의 LMS<br>
 #### 프로젝트 기간 : 2023.12.12 ~ 2024.01.04<br>
 #### 작업인원: 4명<br>
-#### 배포: https://m.site.naver.com/1uUtW<br>
-학생 id: edcqaz19@naver.com/pw: 1111<br>
-강사 id: hong@gmail.com / PW : 1111
 
 #### 산출물: https://drive.google.com/drive/folders/1MCcwADfoYAukfyV_YaAiUIOK2xAHi0NO?usp=drive_link
 
